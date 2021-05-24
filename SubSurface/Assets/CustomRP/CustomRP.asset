@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9479a2163b172e440be960306b942dd6, type: 3}
+  m_Name: CustomRP
+  m_EditorClassIdentifier: 
+  useDynameicBatching: 1
+  useGPUInstancing: 1
+  useSRPBatcher: 1
+  useLightPerObject: 1
+  shadows:
+    maxDistance: 100
+    distanceFade: 0.1
+    directional:
+      atlasSize: 2048
+      filter: 2
+      cascadeCount: 4
+      cascadeRatio1: 0.125
+      cascadeRatio2: 0.125
+      cascadeRatio3: 0.5
+      cascadeFade: 0.1
+      cascadeBlendM: 2
+    other:
+      atlasSize: 1024
+      filter: 2
+  cameraBuffer:
+    allowHDR: 1
+    copyDepth: 1
+    copyDepthReflection: 0
+    copyColor: 1
+    copyColorReflection: 0
+    renderScale: 1
+    bicubicResampling: 1
+    fxaa:
+      enabled: 1
+      fixedThreshold: 0.0312
+      relativeThreshold: 0.063
+      subpixelBlending: 0.75
+      quailty: 2
+  postFXSettings: {fileID: 11400000, guid: 6fdf34521c8e58e4b9307ef4d8e88aeb, type: 2}
+  colorLUTResolution: 32
+  cameraRendererShader: {fileID: 4800000, guid: dbf4f90b065b67743aed1efe568b12b0,
+    type: 3}
