@@ -124,7 +124,12 @@ public class PostFXSettings : ScriptableObject
     
     
 
-    public BloomSettings Bloom => bloom;
+    //public BloomSettings Bloom => bloom;
+    public BloomSettings Bloom
+    {
+        get { return bloom; }
+        set { bloom = value; }
+    }
     public ColorAdjustmentsSettings ColorAdjustments => colorAdjustments;
     public WhiteBalanceSettings WhiteBalance => whiteBalance;
     public SplitToneSettings SplitTone => splitTone;

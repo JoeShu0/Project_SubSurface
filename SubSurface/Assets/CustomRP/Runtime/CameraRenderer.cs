@@ -43,7 +43,8 @@ public partial class CameraRenderer
     Vector2Int bufferSize;
     public const float renderScaleMin = 0.1f, renderScaleMax = 2f;
 
-    
+    //Need safety Check here
+    OceanRenderer oceanRenderer = GameObject.FindGameObjectWithTag("Ocean").GetComponent<OceanRenderer>();
 
     //Constructor
     public CameraRenderer(Shader shader)
@@ -260,6 +261,10 @@ public partial class CameraRenderer
 
         context.DrawRenderers(
             cullingResults, ref drawingSettings, ref filteringSettings);
+
+        //Test draw plane
+        oceanRenderer.Setup(context, camera);
+        oceanRenderer.Render();
 
         //we are drawing in order like opaque->skybox->tranparent
         context.DrawSkybox(camera);
