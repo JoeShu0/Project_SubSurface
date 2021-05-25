@@ -53,8 +53,11 @@ public class OceanRenderSetting : ScriptableObject
     {
         InitLODRTs();
         InitTiles();
-        oceanShader = Shader.Find("Custom_RP/OceanShader");
-        oceanMaterial = new Material(oceanShader);
+        if (!oceanMaterial)
+        {
+            oceanShader = Shader.Find("Custom_RP/OceanShader");
+            oceanMaterial = new Material(oceanShader);
+        }
         IsInit = true;
     }
 
