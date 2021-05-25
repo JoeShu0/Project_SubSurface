@@ -160,6 +160,8 @@ public partial class CameraRenderer
         //makes it wired, but they are not supported who cares~
         DrawUnsupportedShaders();
 
+        
+
         DrawGizmosBeforeFX();
 
         if (postFXStack.IsActive)
@@ -290,6 +292,8 @@ public partial class CameraRenderer
         filteringSettings.renderQueueRange = RenderQueueRange.transparent;
         context.DrawRenderers(
             cullingResults, ref drawingSettings, ref filteringSettings);
+        //
+        context.DrawWireOverlay(camera);
     }
 
 

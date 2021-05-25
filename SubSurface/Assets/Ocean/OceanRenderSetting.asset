@@ -7,10 +7,46 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54842dcfdb126294aa53420009e01ed7, type: 3}
   m_Name: OceanRenderSetting
   m_EditorClassIdentifier: 
   TestMaterial: {fileID: 2100000, guid: bfef74b07b0b41747bd52f68008e82fa, type: 2}
   TestMesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  IsInit: 1
+  oceanShader: {fileID: 4800000, guid: e62ca091f6177664fbda9069ec5ace25, type: 3}
+  oceanMaterial: {fileID: 0}
+  LODCount: 8
+  GridSize: 0.2
+  GridCountPerTile: 80
+  RTSize: 512
+  WaveCount: 128
+  TileMeshes:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  LODDisplaceMaps:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  LODNormalMaps:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
