@@ -44,7 +44,8 @@ public partial class CameraRenderer
     public const float renderScaleMin = 0.1f, renderScaleMax = 2f;
 
     //Need safety Check here
-    OceanRenderer oceanRenderer = GameObject.FindGameObjectWithTag("Ocean").GetComponent<OceanRenderer>();
+    //OceanRenderer oceanRenderer = GameObject.FindGameObjectWithTag("Ocean").GetComponent<OceanRenderer>();
+    OceanRenderer oceanRenderer = new OceanRenderer();
 
     //Constructor
     public CameraRenderer(Shader shader)
@@ -263,7 +264,7 @@ public partial class CameraRenderer
             cullingResults, ref drawingSettings, ref filteringSettings);
 
         //Test draw plane
-        oceanRenderer.Setup(context, camera);
+        oceanRenderer.Setup(context, camera, material);
         oceanRenderer.Render();
 
         //we are drawing in order like opaque->skybox->tranparent
