@@ -15,7 +15,7 @@ MonoBehaviour:
   TestMaterial: {fileID: 2100000, guid: bfef74b07b0b41747bd52f68008e82fa, type: 2}
   TestMesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
   IsInit: 1
-  oceanShader: {fileID: 4800000, guid: e62ca091f6177664fbda9069ec5ace25, type: 3}
+  oceanShader: {fileID: 4800000, guid: 36e0b36d9215e6943acb44f0b8fa26a5, type: 3}
   oceanMaterial: {fileID: 0}
   LODCount: 8
   GridSize: 0.2

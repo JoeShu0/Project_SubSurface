@@ -58,6 +58,15 @@ public class OceanRenderSetting : ScriptableObject
         IsInit = true;
     }
 
+    private void OnValidate()
+    {
+        if (!IsInit)
+        {
+            //Incase we need to regenerate the mesh an the rendertexture
+            Awake();
+        }
+    }
+
     void InitLODRTs()
     {
         LODDisplaceMaps = new RenderTexture[LODCount];

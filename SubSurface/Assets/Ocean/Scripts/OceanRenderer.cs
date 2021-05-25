@@ -8,64 +8,32 @@ using static OceanRenderSetting;
 public class OceanRenderer :MonoBehaviour
 {
     public OceanRenderSetting ORS;
+    public bool hasOceanLOD = false;
 
-
+    private GameObject[] OceanLODS;
     private void Awake()
     {
-        //ORS.LODDisplaceMaps = new RenderTexture[ORS.LODCount];
+        //ORS.LODDisplaceMaps = new RenderTexture[ORS.LODCount]
 
-        if (ORS)
-        {
-            Debug.Log("Awake and ORS is here");
-            
-            //Generate all LODs and Material for these LODs 
-            GameObject[] LODS = new GameObject[ORS.LODCount];
-            for (int i = 0; i < ORS.LODCount - 1; i++)
-            {
-                LODS[i] = BuildLOD(ORS.TileMeshes, ORS.GridSize, ORS.GridCountPerTile, i, ORS.oceanMaterial, gameObject);
-            }
-            //Gen the outer LOD
-            int lastLODIndex = ORS.LODCount - 1;
-            LODS[lastLODIndex] = BuildLOD(ORS.TileMeshes, ORS.GridSize, ORS.GridCountPerTile, lastLODIndex, ORS.oceanMaterial, gameObject, true);
-      
-            
-
-            ORS.IsInit = true;
-        }
-
-        
+        CreateOceanLODs();
     }
 
     private void OnEnable()
     {
-        if (ORS)
-        {
-            Debug.Log("Awake and ORS is here");
-
-            //Generate all LODs and Material for these LODs 
-            GameObject[] LODS = new GameObject[ORS.LODCount];
-            for (int i = 0; i < ORS.LODCount - 1; i++)
-            {
-                LODS[i] = BuildLOD(ORS.TileMeshes, ORS.GridSize, ORS.GridCountPerTile, i, ORS.oceanMaterial, gameObject);
-            }
-            //Gen the outer LOD
-            int lastLODIndex = ORS.LODCount - 1;
-            LODS[lastLODIndex] = BuildLOD(ORS.TileMeshes, ORS.GridSize, ORS.GridCountPerTile, lastLODIndex, ORS.oceanMaterial, gameObject, true);
-
-
-
-            ORS.IsInit = true;
-        }
     }
 
     private void Update()
     {
 #if UNITY_EDITOR
+        /*
         if (ORS && !ORS.IsInit)
         {
             Debug.Log("");
             Awake();
         }
+        */
+        if(!hasOceanLOD)
+            CreateOceanLODs();
 #endif
     }
 
@@ -274,6 +242,43 @@ public class OceanRenderer :MonoBehaviour
 
         LOD.transform.localScale = new Vector3(LODScale, 1, LODScale);
         return LOD;
+    }
+
+    void CreateOceanLODs()
+    {
+        if (hasOceanLOD)
+        {
+            return;
+        }
+        else
+        {
+            GameObject[] children =  new GameObject[transform.childCount];
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                children[i] = transform.GetChild(i).gameObject;
+            }
+            Debug.Log(children.Length);
+            foreach (GameObject go in children)
+            {
+                Object.DestroyImmediate(go);
+            }
+            
+            OceanLODS = new GameObject[ORS.LODCount];
+            for (int i = 0; i < ORS.LODCount - 1; i++)
+            {
+                OceanLODS[i] = BuildLOD(ORS.TileMeshes,
+                    ORS.GridSize, ORS.GridCountPerTile, i,
+                    ORS.oceanMaterial, gameObject);
+            }
+            //Gen the outer LOD
+            int lastLODIndex = ORS.LODCount - 1;
+            OceanLODS[lastLODIndex] = BuildLOD(ORS.TileMeshes,
+                ORS.GridSize, ORS.GridCountPerTile,
+                lastLODIndex, ORS.oceanMaterial, gameObject, true);
+            
+            hasOceanLOD = true;
+        }
+
     }
 
 }

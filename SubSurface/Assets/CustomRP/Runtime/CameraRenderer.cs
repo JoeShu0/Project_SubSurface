@@ -292,7 +292,8 @@ public partial class CameraRenderer
         filteringSettings.renderQueueRange = RenderQueueRange.transparent;
         context.DrawRenderers(
             cullingResults, ref drawingSettings, ref filteringSettings);
-        //
+        
+        //Draw wireframe Overlay after all staff is drawn
         context.DrawWireOverlay(camera);
     }
 
