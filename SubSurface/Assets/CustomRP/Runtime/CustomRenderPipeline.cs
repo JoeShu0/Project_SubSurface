@@ -12,6 +12,8 @@ public partial class CustomRenderPipeline : RenderPipeline
     PostFXSettings postFXSettings;
     int colorLUTResolution;
 
+    OceanRenderSetting oceanRenderSetting;
+
 
     public CustomRenderPipeline(
         CameraBufferSettings cameraBufferSettings,
@@ -22,7 +24,8 @@ public partial class CustomRenderPipeline : RenderPipeline
         ShadowSettings shadowsetting,
         PostFXSettings postFXSettings,
         int colorLUTResolution,
-        Shader cameraRendererShader)
+        Shader cameraRendererShader,
+        OceanRenderSetting oceanRenderSetting)
     {
         this.useDynameicBatching = useDynameicBatching;
         this.useGPUInstancing = useGPUInstancing;
@@ -33,6 +36,7 @@ public partial class CustomRenderPipeline : RenderPipeline
         this.postFXSettings = postFXSettings;
         this.cameraBufferSettings = cameraBufferSettings;
         this.colorLUTResolution = colorLUTResolution;
+        this.oceanRenderSetting = oceanRenderSetting;
         renderer = new CameraRenderer(cameraRendererShader);
         //
         InitializeForEditor();
@@ -45,7 +49,7 @@ public partial class CustomRenderPipeline : RenderPipeline
             renderer.Render(context, camera, cameraBufferSettings,
                 useDynameicBatching, useGPUInstancing, 
                 useLightPerObject, shadowsetting,
-                postFXSettings, colorLUTResolution);
+                postFXSettings, colorLUTResolution, oceanRenderSetting);
         }
     }
 

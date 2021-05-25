@@ -28,6 +28,9 @@ public partial class CustomRenderPipelineAsset : RenderPipelineAsset
     [SerializeField]
     PostFXSettings postFXSettings = default;
 
+    [SerializeField]
+    OceanRenderSetting oceanRenderSetting = default;
+
     public enum ColorLUTResolution { _16 = 16, _32 = 32, _64 = 64}
     [SerializeField]
     ColorLUTResolution colorLUTResolution = ColorLUTResolution._32;
@@ -40,7 +43,7 @@ public partial class CustomRenderPipelineAsset : RenderPipelineAsset
             useDynameicBatching, useGPUInstancing, 
             useSRPBatcher, useLightPerObject, 
             shadows, postFXSettings, (int)colorLUTResolution,
-            cameraRendererShader);
+            cameraRendererShader, oceanRenderSetting);
         //throw new System.NotImplementedException();
     }
 }

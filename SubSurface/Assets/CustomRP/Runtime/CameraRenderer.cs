@@ -45,7 +45,7 @@ public partial class CameraRenderer
 
     //Need safety Check here
     //OceanRenderer oceanRenderer = GameObject.FindGameObjectWithTag("Ocean").GetComponent<OceanRenderer>();
-    OceanRenderer oceanRenderer = new OceanRenderer();
+    //OceanRenderer oceanRenderer = new OceanRenderer();
 
     //Constructor
     public CameraRenderer(Shader shader)
@@ -63,10 +63,12 @@ public partial class CameraRenderer
     public void Render(ScriptableRenderContext IN_context, 
         Camera IN_camera, CameraBufferSettings cameraBufferSettings, bool useDynameicBatching, 
         bool useGPUInstancing, bool useLightPerObject,
-        ShadowSettings shadowSetting, PostFXSettings postFXSettings, int colorLUTResolution)
+        ShadowSettings shadowSetting, PostFXSettings postFXSettings, int colorLUTResolution,
+        OceanRenderSetting oceanRenderSetting)
     {
         this.context = IN_context;
         this.camera = IN_camera;
+        
 
         //setup custom camera settings
         //for per camera blend, PostFX settings
@@ -130,6 +132,7 @@ public partial class CameraRenderer
 
 
         ExecuteBuffer();
+
         //get transfer DirLight data to GPU
         //Setup shadow RT and shadow rendering
         lighting.Setup(context, cullingResults, shadowSetting, useLightPerObject,
@@ -149,6 +152,9 @@ public partial class CameraRenderer
         //Setup rendertarget for normal oject rendering
         Setup();
         DrawVisibleGeometry(useDynameicBatching, useGPUInstancing, useLightPerObject, cameraSettings.RenderingLayerMask);
+
+       
+
 
         //this makes the Legacy shader draw upon the tranparent object
         //makes it wired, but they are not supported who cares~
@@ -223,6 +229,9 @@ public partial class CameraRenderer
         buffer.SetGlobalTexture(depthTextureId, missingTexture);
         buffer.SetGlobalTexture(colorTextureId, missingTexture);
 
+
+        //buffer.SetGlobalTe
+
         //Excute the Profile injection
         ExecuteBuffer();
         //buffer.Clear();
@@ -263,9 +272,7 @@ public partial class CameraRenderer
         context.DrawRenderers(
             cullingResults, ref drawingSettings, ref filteringSettings);
 
-        //Test draw plane
-        oceanRenderer.Setup(context, camera, material);
-        oceanRenderer.Render();
+        
 
         //we are drawing in order like opaque->skybox->tranparent
         context.DrawSkybox(camera);
