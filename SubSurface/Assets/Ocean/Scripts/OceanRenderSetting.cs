@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Rendering/Custom Ocean Setting")]
@@ -61,6 +62,7 @@ public class OceanRenderSetting : ScriptableObject
         IsInit = true;
     }
 
+
     private void OnValidate()
     {
         if (!IsInit)
@@ -74,11 +76,16 @@ public class OceanRenderSetting : ScriptableObject
     {
         LODDisplaceMaps = new RenderTexture[LODCount];
         LODNormalMaps = new RenderTexture[LODCount];
+        string RTPath;
         for (int i = 0; i < LODDisplaceMaps.Length; i++)
         {
-            if (LODDisplaceMaps[i] != null)
-                LODDisplaceMaps[i].Release();
-            LODDisplaceMaps[i] = new RenderTexture(RTSize, RTSize, 0, RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear);
+            RTPath = string.Format("Assets/Ocean/OceanAssets/DisplacementMap_LOD{0}.renderTexture", i);
+            AssetDatabase.DeleteAsset(RTPath);
+
+            RenderTexture RT = new RenderTexture(RTSize, RTSize, 0, RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear);
+            AssetDatabase.CreateAsset(RT, RTPath);
+            RT = (RenderTexture)AssetDatabase.LoadAssetAtPath(RTPath,typeof(RenderTexture));
+            LODDisplaceMaps[i] = RT;
             LODDisplaceMaps[i].enableRandomWrite = true;
             LODDisplaceMaps[i].antiAliasing = 1;
             //LODDisplaceMaps[i].bindTextureMS = true;
@@ -86,9 +93,13 @@ public class OceanRenderSetting : ScriptableObject
             LODDisplaceMaps[i].filterMode = FilterMode.Trilinear;
             LODDisplaceMaps[i].Create();
 
-            if (LODNormalMaps[i] != null)
-                LODNormalMaps[i].Release();
-            LODNormalMaps[i] = new RenderTexture(RTSize, RTSize, 0, RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear);
+            RTPath = string.Format("Assets/Ocean/OceanAssets/NormalMap_LOD{0}.renderTexture", i);
+            AssetDatabase.DeleteAsset(RTPath);
+
+            RT = new RenderTexture(RTSize, RTSize, 0, RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear);
+            AssetDatabase.CreateAsset(RT, RTPath);
+            RT = (RenderTexture)AssetDatabase.LoadAssetAtPath(RTPath, typeof(RenderTexture));
+            LODNormalMaps[i] = RT;
             LODNormalMaps[i].enableRandomWrite = true;
             LODNormalMaps[i].wrapMode = TextureWrapMode.Clamp;
             LODNormalMaps[i].filterMode = FilterMode.Trilinear;
@@ -101,7 +112,13 @@ public class OceanRenderSetting : ScriptableObject
         //generate all th tile types 
         for (int i = 0; i < (int)TileType.Count; i++)
         {
-            TileMeshes[i] = GenerateTile((OceanRenderSetting.TileType)i, GridSize, GridCountPerTile);
+            Mesh TileMesh = GenerateTile((OceanRenderSetting.TileType)i, GridSize, GridCountPerTile);
+            string MeshPath = string.Format("Assets/Ocean/OceanAssets/TileMesh_{0}.asset", ((OceanRenderSetting.TileType)i).ToString());
+            AssetDatabase.DeleteAsset(MeshPath);
+            AssetDatabase.CreateAsset(TileMesh, MeshPath);
+
+            TileMeshes[i] = (Mesh)AssetDatabase.LoadAssetAtPath(MeshPath, typeof(Mesh));
+            //Debug.Log(((OceanRenderSetting.TileType)i).ToString());
         }
     }
 
