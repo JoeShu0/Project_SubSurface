@@ -26,9 +26,12 @@ Varyings OceanPassVertex(Attributes input)
 	//Get World and ScreenSpace position
 	float3 positionWS = TransformObjectToWorld(input.positionOS);
 	
+	//Snap tp 2*unit grid(Should be scaled by whole ocean)
+	positionWS = SnapToWorldPosition(positionWS,  1);
+	//Transition at the edge of LODs
+	positionWS = TransitionLOD(positionWS, 1);
 
-	positionWS = SnapToWorldPosition(positionWS, INPUT_PROP(_GridSize), 1);
-	
+
 	float3 localPos = mul(unity_WorldToObject, float4(positionWS, 1.0)).xyz;
 	float4 SrcPos = TransformObjectToHClip(localPos);
 

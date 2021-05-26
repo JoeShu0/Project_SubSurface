@@ -21,6 +21,9 @@ Material:
     m_TexEnvs: []
     m_Floats:
     - _GridSize: 0.2
+    - _LODSize: 64
     m_Colors:
     - _BaseColor: {r: 0, g: 0, b: 0, a: 0}
+    - _CenterPos: {r: 0, g: 0, b: 0.8, a: 0}
+    - _TransitionParam: {r: 27.2, g: 27.2, b: 3.2, a: 3.2}
   m_BuildTextureStacks: []
