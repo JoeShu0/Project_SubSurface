@@ -11,6 +11,14 @@ public class OceanRenderer :MonoBehaviour
     public bool hasOceanLOD = false;
 
     private GameObject[] OceanLODS;
+
+    int 
+        baseColorId = Shader.PropertyToID("_BaseColor"),
+        gridSizeId = Shader.PropertyToID("_GridSize"),
+        transitionParams = Shader.PropertyToID("_TransitionParam"),
+        centerPosId = Shader.PropertyToID("_CenterPos"),
+        lodSizeId = Shader.PropertyToID("_LODSize");
+
     private void Awake()
     {
         //ORS.LODDisplaceMaps = new RenderTexture[ORS.LODCount]
@@ -46,6 +54,8 @@ public class OceanRenderer :MonoBehaviour
         GameObject LOD = new GameObject("LOD_" + LODIndex.ToString());
         LOD.transform.parent = parent.transform;
         float LODScale = Mathf.Pow(2.0f, LODIndex);
+
+        MaterialPropertyBlock block = new MaterialPropertyBlock();
 
         float TileSize = GridSize * (float)GridCount;
         float LODSize = TileSize * 4.0f * Mathf.Pow(2, LODIndex);
@@ -100,6 +110,7 @@ public class OceanRenderer :MonoBehaviour
         TileMat.SetVector("_CenterPos", LOD.transform.position);
         TileMat.SetFloat("_LODSize", LODSize);
         */
+        block.SetColor(baseColorId, new Vector4(0.25f, 0.25f, 0.25f, 1.0f) * LODIndex);
 
         for (int i = 0; i < TileCount; i++)
         {
@@ -113,6 +124,7 @@ public class OceanRenderer :MonoBehaviour
 
 
             CTile.GetComponent<MeshRenderer>().sharedMaterial = oceanMaterial;
+            CTile.GetComponent<MeshRenderer>().SetPropertyBlock(block);
         }
 
         LOD.transform.localScale = new Vector3(LODScale, 1, LODScale);

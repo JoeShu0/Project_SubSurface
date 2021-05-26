@@ -1,6 +1,13 @@
 #ifndef CUSTOM_OCEAN_PASS_INCLUDED
 #define CUSTOM_OCEAN_PASS_INCLUDED
 
+//short cut unity access per material property
+#define INPUT_PROP(name) UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, name)
+
+UNITY_INSTANCING_BUFFER_START(UnityPerMaterial)
+	UNITY_DEFINE_INSTANCED_PROP(float4, _BaseColor)
+UNITY_INSTANCING_BUFFER_END(UnityPerMaterial)
+
 
 struct Attributes
 {
@@ -37,7 +44,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	//Setup the instance ID for Input
 	UNITY_SETUP_INSTANCE_ID(input);
 
-	return float4(1.0,0.5,0.5,1.0);
+	return INPUT_PROP(_BaseColor);
 }
 
 #endif
