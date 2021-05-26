@@ -6,8 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Rendering/Custom Ocean Setting")]
 public class OceanRenderSetting : ScriptableObject
 {
-    [SerializeField]
-    public Material TestMaterial;
 
     [SerializeField]
     public Mesh TestMesh;
@@ -15,7 +13,6 @@ public class OceanRenderSetting : ScriptableObject
     public bool IsInit = false;
 
     public Shader oceanShader;
-    public Material oceanMaterial;
 
     //Count for LOD rings
     public int LODCount = 8;
@@ -54,10 +51,9 @@ public class OceanRenderSetting : ScriptableObject
     {
         InitLODRTs();
         InitTiles();
-        if (!oceanMaterial)
+        if (!oceanShader)
         {
             oceanShader = Shader.Find("Custom_RP/OceanShader");
-            oceanMaterial = new Material(oceanShader);
         }
         IsInit = true;
     }

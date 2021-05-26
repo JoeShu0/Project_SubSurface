@@ -1,13 +1,6 @@
 #ifndef CUSTOM_OCEAN_PASS_INCLUDED
 #define CUSTOM_OCEAN_PASS_INCLUDED
 
-//short cut unity access per material property
-#define INPUT_PROP(name) UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, name)
-
-UNITY_INSTANCING_BUFFER_START(UnityPerMaterial)
-	UNITY_DEFINE_INSTANCED_PROP(float4, _BaseColor)
-UNITY_INSTANCING_BUFFER_END(UnityPerMaterial)
-
 
 struct Attributes
 {
@@ -31,11 +24,17 @@ Varyings OceanPassVertex(Attributes input)
 	UNITY_TRANSFER_INSTANCE_ID(input, output);
 
 	//Get World and ScreenSpace position
-	output.positionWS = TransformObjectToWorld(input.positionOS);
-	output.positionCS_SS = TransformWorldToHClip(output.positionWS);
+	float3 positionWS = TransformObjectToWorld(input.positionOS);
+	
 
-	//float3 SnapedPosition= SnapToWorldPosition(output.positionWS);
+	positionWS = SnapToWorldPosition(positionWS, _GridSize, 1);
+	
+	float3 localPos = mul(unity_WorldToObject, float4(positionWS, 1.0)).xyz;
+	float4 SrcPos = TransformObjectToHClip(localPos);
 
+	//output.positionCS_SS = TransformWorldToHClip(output.positionWS);
+	output.positionWS = positionWS;
+	output.positionCS_SS = SrcPos;
 	return output;
 }
 
@@ -43,7 +42,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 {
 	//Setup the instance ID for Input
 	UNITY_SETUP_INSTANCE_ID(input);
-
+	//return float4(1.0, 0.0, 0.0, 1.0);
 	return INPUT_PROP(_BaseColor);
 }
 

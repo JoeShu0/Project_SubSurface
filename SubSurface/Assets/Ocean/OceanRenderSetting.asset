@@ -12,11 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54842dcfdb126294aa53420009e01ed7, type: 3}
   m_Name: OceanRenderSetting
   m_EditorClassIdentifier: 
-  TestMaterial: {fileID: 2100000, guid: bfef74b07b0b41747bd52f68008e82fa, type: 2}
   TestMesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
   IsInit: 1
   oceanShader: {fileID: 4800000, guid: 36e0b36d9215e6943acb44f0b8fa26a5, type: 3}
-  oceanMaterial: {fileID: 2100000, guid: f4b6329d7b50bfe45b9eeb9fc660483b, type: 2}
   LODCount: 8
   GridSize: 0.2
   GridCountPerTile: 80

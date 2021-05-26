@@ -3,19 +3,23 @@
     Properties
     {
         _BaseColor("Color", Color) = (0.5,0.5,0.5,1.0)
+        //_GridSize("GridSize", Float) = 1
+        //_TransitionParam("GridSize", ) = 1
     }
     SubShader
     {
         HLSLINCLUDE
         #include "../../CustomRP/ShaderLib/Common.hlsl"
-        //#include "LitInput.hlsl"
+        #include "OceanInput.hlsl"
         ENDHLSL
+        Tags{"Queue" = "Transparent-250"}
 
         Pass
         {
             Tags
             {
                 "LightMode" = "CustomLit"//indicate we are using custom lighting model
+                
             }
             
             //for Alpha blend type We will use One OneMinusSrcAlpha

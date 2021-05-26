@@ -11,6 +11,7 @@ public class OceanRenderer :MonoBehaviour
     public bool hasOceanLOD = false;
 
     private GameObject[] OceanLODS;
+    public Material[] OceanMATS;
 
     int 
         baseColorId = Shader.PropertyToID("_BaseColor"),
@@ -43,10 +44,52 @@ public class OceanRenderer :MonoBehaviour
         if(!hasOceanLOD)
             CreateOceanLODs();
 #endif
+
+        UpdateOceanMaterial();
+    }
+
+    void CreateOceanLODs()
+    {
+        if (hasOceanLOD)
+        {
+            return;
+        }
+        else
+        {
+            //delete all children
+            GameObject[] children = new GameObject[transform.childCount];
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                children[i] = transform.GetChild(i).gameObject;
+            }
+            foreach (GameObject go in children)
+            {
+                Object.DestroyImmediate(go);
+            }
+
+            OceanLODS = new GameObject[ORS.LODCount];
+            OceanMATS = new Material[ORS.LODCount];
+            for (int i = 0; i < ORS.LODCount - 1; i++)
+            {
+                OceanLODS[i] = BuildLOD(ORS.TileMeshes,
+                    ORS.GridSize, ORS.GridCountPerTile, i,
+                    ORS.oceanShader, ref OceanMATS[i], gameObject);
+                //OceanMATS.Add(LODMat);
+            }
+            //Gen the outer LOD
+            int lastLODIndex = ORS.LODCount - 1;
+            OceanLODS[lastLODIndex] = BuildLOD(ORS.TileMeshes,
+                ORS.GridSize, ORS.GridCountPerTile,
+                lastLODIndex,
+                ORS.oceanShader, ref OceanMATS[lastLODIndex], gameObject, true);
+
+            hasOceanLOD = true;
+        }
+
     }
 
     private GameObject BuildLOD(Mesh[] in_TileMeshes, float GridSize, int GridCount,
-                                int LODIndex, Material oceanMaterial, GameObject parent,
+                                int LODIndex, Shader oceanShader, ref Material LODMat, GameObject parent,
                                 bool bIsLastLOD = false)
     {
         //Build th LOD gameobject using tiles, each LOD have 4 tile along XZ axis
@@ -54,8 +97,6 @@ public class OceanRenderer :MonoBehaviour
         GameObject LOD = new GameObject("LOD_" + LODIndex.ToString());
         LOD.transform.parent = parent.transform;
         float LODScale = Mathf.Pow(2.0f, LODIndex);
-
-        MaterialPropertyBlock block = new MaterialPropertyBlock();
 
         float TileSize = GridSize * (float)GridCount;
         float LODSize = TileSize * 4.0f * Mathf.Pow(2, LODIndex);
@@ -104,13 +145,16 @@ public class OceanRenderer :MonoBehaviour
                                     180,    90,     90,     90 };
 
         }
-        /*
-        TileMat.SetFloat("_GridSize", GridSize * LODScale);
-        TileMat.SetVector("_TransitionParam", new Vector4(TileSize * 1.25f, TileSize * 1.25f, 0.5f * TileSize, 0.5f * TileSize) * LODScale);
-        TileMat.SetVector("_CenterPos", LOD.transform.position);
-        TileMat.SetFloat("_LODSize", LODSize);
-        */
-        block.SetColor(baseColorId, new Vector4(0.25f, 0.25f, 0.25f, 1.0f) * LODIndex);
+        
+        //create material for LOD
+        LODMat = new Material(oceanShader);
+        //Set the persistent properties
+        LODMat.SetFloat(gridSizeId, GridSize * LODScale);
+        LODMat.SetVector(transitionParams, new Vector4(TileSize * 1.25f, TileSize * 1.25f, 0.5f * TileSize, 0.5f * TileSize) * LODScale);
+        LODMat.SetVector(centerPosId, LOD.transform.position);
+        LODMat.SetFloat(lodSizeId, LODSize);
+        LODMat.SetColor(baseColorId, new Vector4(0.25f, 0.25f, 0.25f, 1.0f) * LODIndex);
+        //block.SetColor(baseColorId, new Vector4(0.25f, 0.25f, 0.25f, 1.0f) * LODIndex);
 
         for (int i = 0; i < TileCount; i++)
         {
@@ -123,49 +167,19 @@ public class OceanRenderer :MonoBehaviour
             CTile.transform.localRotation = Quaternion.Euler(0, TilesRotate[i], 0);
 
 
-            CTile.GetComponent<MeshRenderer>().sharedMaterial = oceanMaterial;
-            CTile.GetComponent<MeshRenderer>().SetPropertyBlock(block);
+            CTile.GetComponent<MeshRenderer>().sharedMaterial = LODMat;
+            //CTile.GetComponent<MeshRenderer>().SetPropertyBlock(block);
         }
 
         LOD.transform.localScale = new Vector3(LODScale, 1, LODScale);
         return LOD;
     }
 
-    void CreateOceanLODs()
-    {
-        if (hasOceanLOD)
-        {
-            return;
-        }
-        else
-        {
-            GameObject[] children =  new GameObject[transform.childCount];
-            for (int i = 0; i < transform.childCount; i++)
-            {
-                children[i] = transform.GetChild(i).gameObject;
-            }
-            Debug.Log(children.Length);
-            foreach (GameObject go in children)
-            {
-                Object.DestroyImmediate(go);
-            }
-            
-            OceanLODS = new GameObject[ORS.LODCount];
-            for (int i = 0; i < ORS.LODCount - 1; i++)
-            {
-                OceanLODS[i] = BuildLOD(ORS.TileMeshes,
-                    ORS.GridSize, ORS.GridCountPerTile, i,
-                    ORS.oceanMaterial, gameObject);
-            }
-            //Gen the outer LOD
-            int lastLODIndex = ORS.LODCount - 1;
-            OceanLODS[lastLODIndex] = BuildLOD(ORS.TileMeshes,
-                ORS.GridSize, ORS.GridCountPerTile,
-                lastLODIndex, ORS.oceanMaterial, gameObject, true);
-            
-            hasOceanLOD = true;
-        }
+ 
 
+    void UpdateOceanMaterial()
+    {
+        //for (int i=0; i<)
     }
 
 }
