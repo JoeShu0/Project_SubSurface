@@ -27,7 +27,7 @@ Varyings OceanPassVertex(Attributes input)
 	float3 positionWS = TransformObjectToWorld(input.positionOS);
 	
 
-	positionWS = SnapToWorldPosition(positionWS, _GridSize, 1);
+	positionWS = SnapToWorldPosition(positionWS, INPUT_PROP(_GridSize), 1);
 	
 	float3 localPos = mul(unity_WorldToObject, float4(positionWS, 1.0)).xyz;
 	float4 SrcPos = TransformObjectToHClip(localPos);

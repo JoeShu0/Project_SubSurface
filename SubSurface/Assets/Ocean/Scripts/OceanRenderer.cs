@@ -20,6 +20,7 @@ public class OceanRenderer :MonoBehaviour
         centerPosId = Shader.PropertyToID("_CenterPos"),
         lodSizeId = Shader.PropertyToID("_LODSize");
 
+
     private void Awake()
     {
         //ORS.LODDisplaceMaps = new RenderTexture[ORS.LODCount]
@@ -154,6 +155,10 @@ public class OceanRenderer :MonoBehaviour
         LODMat.SetVector(centerPosId, LOD.transform.position);
         LODMat.SetFloat(lodSizeId, LODSize);
         LODMat.SetColor(baseColorId, new Vector4(0.25f, 0.25f, 0.25f, 1.0f) * LODIndex);
+        string MatPath = string.Format("Assets/Ocean/OceanAssets/Material_LOD{0}.asset", LODIndex);
+        LODMat.enableInstancing = true;
+        AssetDatabase.DeleteAsset(MatPath);
+        AssetDatabase.CreateAsset(LODMat, MatPath);
         //block.SetColor(baseColorId, new Vector4(0.25f, 0.25f, 0.25f, 1.0f) * LODIndex);
 
         for (int i = 0; i < TileCount; i++)
