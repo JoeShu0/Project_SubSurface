@@ -152,7 +152,7 @@ public class OceanRenderer :MonoBehaviour
         LODMat = new Material(oceanShader);
         //Set the persistent properties
         LODMat.SetFloat(gridSizeId, GridSize * LODScale);
-        LODMat.SetVector(transitionParams, new Vector4(TileSize * 1.25f, TileSize * 1.25f, 0.5f * TileSize, 0.5f * TileSize) * LODScale);
+        LODMat.SetVector(transitionParams, new Vector4(TileSize * 1.7f, TileSize * 1.7f, 0.2f * TileSize, 0.2f * TileSize) * LODScale);
         LODMat.SetVector(centerPosId, LOD.transform.position);
         LODMat.SetFloat(lodSizeId, LODSize);
         LODMat.SetColor(baseColorId, new Vector4(0.25f, 0.25f, 0.25f, 1.0f) * LODIndex);
@@ -185,7 +185,10 @@ public class OceanRenderer :MonoBehaviour
 
     void UpdateOceanMaterial()
     {
-        //for (int i=0; i<)
+        for (int i = 0; i < OceanMATS.Length; i++)
+        {
+            OceanMATS[i].SetVector(centerPosId, transform.position);
+        }
     }
 
 }
