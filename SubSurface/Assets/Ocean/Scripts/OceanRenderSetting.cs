@@ -7,9 +7,7 @@ using UnityEngine;
 public class OceanRenderSetting : ScriptableObject
 {
 
-    [SerializeField]
-    public Mesh TestMesh;
-
+    [Tooltip("Tick this box will regenerate All RTs and Meshtiles based on Settings")]
     public bool IsInit = false;
 
     public Shader oceanShader;

@@ -8,10 +8,11 @@ using static OceanRenderSetting;
 public class OceanRenderer :MonoBehaviour
 {
     public OceanRenderSetting ORS;
+    [Tooltip("Tick this box will regenerate All LOD meshes and Materials")]
     public bool hasOceanLOD = false;
 
     private GameObject[] OceanLODS;
-    public Material[] OceanMATS;
+    private Material[] OceanMATS;
 
     int 
         baseColorId = Shader.PropertyToID("_BaseColor"),
