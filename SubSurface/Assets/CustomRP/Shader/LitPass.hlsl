@@ -28,6 +28,7 @@ struct Varyings
 		float4 tangentWS : VAR_TANGENT;
 	#endif
 	float3 positionWS : VAR_POSITION;
+	float depth01 : VAR_DEPTH01;
 	GI_VARYINGS_DATA//this is to have the lightmap UV
 	UNITY_VERTEX_INPUT_INSTANCE_ID
 };
@@ -61,6 +62,9 @@ Varyings LitPassVertex(Attributes input)
 		output.tangentWS = float4(TransformObjectToWorldDir(input.tangentOS.xyz), input.tangentOS.w);
 	#endif
 
+	//#define COMPUTE_DEPTH_01 -(mul( UNITY_MATRIX_MV, v.vertex ).z * _ProjectionParams.w)
+	output.depth01 = 1+TransformWorldToView(output.positionWS).z * _ProjectionParams.w;
+
 	return output;
 }
 
@@ -68,6 +72,9 @@ float4 LitPassFragment(Varyings input) : SV_TARGET
 {
 	//Setup the instance ID for Input
 	UNITY_SETUP_INSTANCE_ID(input);
+	//ocean depth comparasion
+	float OceanDepth10 = LOAD_TEXTURE2D(_CameraOceanDepthTexture, input.positionCS_SS.xy).a;
+	float OceanDepthDelta = input.depth01 - OceanDepth10;
 
 	//use the new packed config instead of UV
 	InputConfig config = GetInputConfig(input.positionCS_SS, input.baseUV, input.detailUV);
@@ -132,17 +139,19 @@ float4 LitPassFragment(Varyings input) : SV_TARGET
 	return float4(color, 1.0f);
 #endif
 */	 
-	float OceanDepth10 = LOAD_TEXTURE2D(_CameraOceanDepthTexture, input.positionCS_SS.xy).a;
+	
 	
 	//float depth10 = 1 - (input.positionCS_SS.w - _ProjectionParams.y) / (_ProjectionParams.z - _ProjectionParams.y);
-	//return float4(depth10, 0.0, 0.0, 1.0);
+	//return float4(-OceanDepthDelta*100000, 0.0, 0.0, 1.0);
 
-	//if (OceanDepth10 > depth10)
+	//if (OceanDepthDelta < 0)
 	//{
-	//	return float4(1.0, 0.0, 0.0, GetFinalAlpha(surface.alpha));
+		//return float4(1.0, 0.0, 0.0, GetFinalAlpha(surface.alpha));
 	//}
+
+	float4 OceanDelta01 = clamp(-OceanDepthDelta*10000, 0.0, 1.0);
 	
-	return float4(color, GetFinalAlpha(surface.alpha));
+	return lerp(float4(color, GetFinalAlpha(surface.alpha)),float4(1.0, 0.0, 0.0,GetFinalAlpha(surface.alpha)), OceanDelta01);
 }
 
 #endif

@@ -24,6 +24,5 @@ Material:
     - _LODSize: 256
     m_Colors:
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 2}
-    - _CenterPos: {r: 0, g: 0, b: 0.8, a: 0}
     - _TransitionParam: {r: 108.8, g: 108.8, b: 12.8, a: 12.8}
   m_BuildTextureStacks: []

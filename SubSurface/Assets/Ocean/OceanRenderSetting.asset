@@ -30,7 +30,7 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 8a25397d3ffca8e4aba98e944b4c6c67, type: 2}
   - {fileID: 4300000, guid: 71a52387fb7cd244fa8b82b831206fc6, type: 2}
   LODDisplaceMaps:
-  - {fileID: 8400000, guid: 069d5a5b662a2cd40abbeaea3ca3a374, type: 2}
+  - {fileID: 8400000, guid: f95467a0c63bb54449c3c372ce585b89, type: 2}
   - {fileID: 8400000, guid: 9eeec9b89a823d84bbbd7604c58c8367, type: 2}
   - {fileID: 8400000, guid: 74718baeac4bdb04ca0874d9d464c34f, type: 2}
   - {fileID: 8400000, guid: cbad188ec1b48a74ca6b5ed2a8e030ab, type: 2}

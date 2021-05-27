@@ -36,7 +36,8 @@ Varyings OceanPassVertex(Attributes input)
 	float3 localPos = mul(unity_WorldToObject, float4(positionWS, 1.0)).xyz;
 	//float4 SrcPos = TransformObjectToHClip(localPos);
 	float4 SrcPos = TransformWorldToHClip(positionWS);
-	float depth01 = TransformWorldToView(positionWS).z * _ProjectionParams.w;
+	//#define COMPUTE_DEPTH_01 -(mul( UNITY_MATRIX_MV, v.vertex ).z * _ProjectionParams.w)
+	float depth01 = 1+TransformWorldToView(positionWS).z * _ProjectionParams.w;
 
 	//output.positionCS_SS = TransformWorldToHClip(output.positionWS);
 	output.positionWS = positionWS;
@@ -68,7 +69,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 		//OrthographicDepthBufferToLinear(bufferDepth) :
 		//LinearEyeDepth(bufferDepth, _ZBufferParams);
 	return float4(INPUT_PROP(_BaseColor).rgb, 0.5);
-	//return float4(OceanDepth, 0.0, 0.0, 1.0);
+	//return float4(input.depth01, 0.0, 0.0, 1.0);
 }
 
 #endif
