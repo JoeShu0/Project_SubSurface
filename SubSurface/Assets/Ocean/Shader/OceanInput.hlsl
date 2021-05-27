@@ -5,15 +5,19 @@
 #define INPUT_PROP(name) UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, name)
 
 UNITY_INSTANCING_BUFFER_START(UnityPerMaterial)
-	UNITY_DEFINE_INSTANCED_PROP(float4, _BaseColor)
+    UNITY_DEFINE_INSTANCED_PROP(float4, _BaseColor)
     UNITY_DEFINE_INSTANCED_PROP(float, _GridSize)
     UNITY_DEFINE_INSTANCED_PROP(float4, _TransitionParam)
-    UNITY_DEFINE_INSTANCED_PROP(float4, _CenterPos)
+    //UNITY_DEFINE_INSTANCED_PROP(float4, _CenterPos)
     UNITY_DEFINE_INSTANCED_PROP(float, _LODSize)
 UNITY_INSTANCING_BUFFER_END(UnityPerMaterial)
+//specify the buffer, use the Shader.setglobal~ to set buffers 
+CBUFFER_START(_OceanData)
+    float4 _CenterPos;
+CBUFFER_END
 
-
-
+TEXTURE2D(_CameraOceanDepthTexture);
+SAMPLER(sampler_CameraOceanDepthTexture);
 
 float3 SnapToWorldPosition(float3 positionWS, float oceanScale)
 {
@@ -30,7 +34,7 @@ float3 TransitionLOD(float3 positionWS, float oceanScale)
 {
     float3 TransitionPosition = positionWS;
     float4 transitionParams = INPUT_PROP(_TransitionParam) * oceanScale;
-    float3 centerPos = INPUT_PROP(_CenterPos).xyz;
+    float3 centerPos = _CenterPos.xyz;
     float Grid4 = INPUT_PROP(_GridSize) * 4.0f * oceanScale;
 
     float DistX = abs(positionWS.x - centerPos.x) - abs(transitionParams.x);

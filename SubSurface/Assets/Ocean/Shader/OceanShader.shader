@@ -5,7 +5,7 @@
         _BaseColor("Color", Color) = (0.5,0.5,0.5,1.0)
         _GridSize("GridSize", Float) = 1
         _TransitionParam("TransitionParams", Vector) = (1.0,1.0,1.0,1.0)
-        _CenterPos("LODCenterPosition", Vector) = (0.0,0.0,0.0,0.0)
+        //_CenterPos("LODCenterPosition", Vector) = (0.0,0.0,0.0,0.0)
         _LODSize("GridSize", Float) = 1
     }
     SubShader
@@ -20,12 +20,12 @@
         {
             Tags
             {
-                "LightMode" = "CustomLit"//indicate we are using custom lighting model
-                
+                //"LightMode" = "CustomLit"//indicate we are using custom lighting model
+                "LightMode" = "OceanShading"
             }
             
             //for Alpha blend type We will use One OneMinusSrcAlpha
-            Blend One Zero
+            Blend SrcAlpha OneMinusSrcAlpha
             ZWrite Off
             HLSLPROGRAM
             #pragma target 3.5
@@ -41,6 +41,36 @@
 
             #pragma vertex OceanPassVertex
             #pragma fragment OceanPassFragment
+            #include "./OceanPass.hlsl"
+            ENDHLSL
+        }
+
+        Pass
+        {
+            Tags
+            {
+                "LightMode" = "OceanDepthShading"//indicate we are using custom lighting model
+                //"LightMode" = "OceanShading"
+            }
+
+            //for Alpha blend type We will use One OneMinusSrcAlpha
+            Blend One Zero
+            ZWrite Off
+            Cull Off
+            HLSLPROGRAM
+            #pragma target 3.5
+            #pragma shader_feature _PREMULTIPLY_ALPHA
+
+            //make unity complie 2 shader with and without GPU instancing
+            #pragma multi_compile_instancing
+
+
+
+            //per object lights
+            #pragma multi_compile _ _LIGHTS_PER_OBJECT
+
+            #pragma vertex OceanPassVertex
+            #pragma fragment OceanDepthPassFragment
             #include "./OceanPass.hlsl"
             ENDHLSL
         }

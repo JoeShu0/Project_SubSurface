@@ -12,14 +12,20 @@ public class OceanRenderer :MonoBehaviour
     public bool hasOceanLOD = false;
 
     private GameObject[] OceanLODS;
-    private Material[] OceanMATS;
+    //private Material[] OceanMATS;
 
-    int 
-        baseColorId = Shader.PropertyToID("_BaseColor"),
-        gridSizeId = Shader.PropertyToID("_GridSize"),
-        transitionParams = Shader.PropertyToID("_TransitionParam"),
-        centerPosId = Shader.PropertyToID("_CenterPos"),
-        lodSizeId = Shader.PropertyToID("_LODSize");
+
+    int baseColorId = Shader.PropertyToID("_BaseColor");
+
+    int gridSizeId = Shader.PropertyToID("_GridSize");
+    int transitionParams = Shader.PropertyToID("_TransitionParam");
+    int centerPosId = Shader.PropertyToID("_CenterPos");
+    int lodSizeId = Shader.PropertyToID("_LODSize");
+
+    int lodDisplaceMapId = Shader.PropertyToID("_DisplaceMap");
+    int lodNormalMapId = Shader.PropertyToID("_NormalMap");
+    int lodNextDisplaceMapId = Shader.PropertyToID("_NextDisplaceMap");
+    int lodNextNormalMapId = Shader.PropertyToID("_NextNormalMap");
 
 
     private void Awake()
@@ -70,12 +76,12 @@ public class OceanRenderer :MonoBehaviour
             }
 
             OceanLODS = new GameObject[ORS.LODCount];
-            OceanMATS = new Material[ORS.LODCount];
+
             for (int i = 0; i < ORS.LODCount - 1; i++)
             {
                 OceanLODS[i] = BuildLOD(ORS.TileMeshes,
                     ORS.GridSize, ORS.GridCountPerTile, i,
-                    ORS.oceanShader, ref OceanMATS[i], gameObject);
+                     ref ORS.OceanMats[i], gameObject);
                 //OceanMATS.Add(LODMat);
             }
             //Gen the outer LOD
@@ -83,20 +89,25 @@ public class OceanRenderer :MonoBehaviour
             OceanLODS[lastLODIndex] = BuildLOD(ORS.TileMeshes,
                 ORS.GridSize, ORS.GridCountPerTile,
                 lastLODIndex,
-                ORS.oceanShader, ref OceanMATS[lastLODIndex], gameObject, true);
+                 ref ORS.OceanMats[lastLODIndex], gameObject, true);
+
+            //We can set global init params in here
+            //Shader.SetGlobalVector(baseColorId, new Vector4(0f, 0.25f, 0.25f, 1.0f));
 
             hasOceanLOD = true;
         }
 
     }
 
+    //this function should later be move to ORS, There is nothing depending on the render(beside regen trigger)
     private GameObject BuildLOD(Mesh[] in_TileMeshes, float GridSize, int GridCount,
-                                int LODIndex, Shader oceanShader, ref Material LODMat, GameObject parent,
+                                int LODIndex, ref Material LODMat, GameObject parent,
                                 bool bIsLastLOD = false)
     {
         //Build th LOD gameobject using tiles, each LOD have 4 tile along XZ axis
         //1st LOD is solid, other LODs are just rings, the Last LOD has the skrit 
         GameObject LOD = new GameObject("LOD_" + LODIndex.ToString());
+        LOD.transform.position = parent.transform.position;
         LOD.transform.parent = parent.transform;
         float LODScale = Mathf.Pow(2.0f, LODIndex);
 
@@ -148,18 +159,26 @@ public class OceanRenderer :MonoBehaviour
 
         }
         
+
         //create material for LOD
-        LODMat = new Material(oceanShader);
-        //Set the persistent properties
+        //LODMat = new Material(oceanShader);
+
+        //Set the persistent properties(this part should later be moved to )
         LODMat.SetFloat(gridSizeId, GridSize * LODScale);
         LODMat.SetVector(transitionParams, new Vector4(TileSize * 1.7f, TileSize * 1.7f, 0.2f * TileSize, 0.2f * TileSize) * LODScale);
-        LODMat.SetVector(centerPosId, LOD.transform.position);
+        //LODMat.SetVector(centerPosId, LOD.transform.position);
         LODMat.SetFloat(lodSizeId, LODSize);
         LODMat.SetColor(baseColorId, new Vector4(0.25f, 0.25f, 0.25f, 1.0f) * LODIndex);
-        string MatPath = string.Format("Assets/Ocean/OceanAssets/Material_LOD{0}.asset", LODIndex);
-        LODMat.enableInstancing = true;
-        AssetDatabase.DeleteAsset(MatPath);
-        AssetDatabase.CreateAsset(LODMat, MatPath);
+        LODMat.SetTexture(lodDisplaceMapId, ORS.LODDisplaceMaps[LODIndex]);
+        LODMat.SetTexture(lodNormalMapId, ORS.LODNormalMaps[LODIndex]);
+        LODMat.SetTexture(lodNextDisplaceMapId, ORS.LODDisplaceMaps[Mathf.Min(LODIndex, ORS.LODCount)]);
+        LODMat.SetTexture(lodNextNormalMapId, ORS.LODNormalMaps[Mathf.Min(LODIndex, ORS.LODCount)]);
+
+        //RT assets are refernce and mantained in ORS
+        //string MatPath = string.Format("Assets/Ocean/OceanAssets/Material_LOD{0}.asset", LODIndex);
+        //LODMat.enableInstancing = true;
+        //AssetDatabase.DeleteAsset(MatPath);
+        //AssetDatabase.CreateAsset(LODMat, MatPath);
         //block.SetColor(baseColorId, new Vector4(0.25f, 0.25f, 0.25f, 1.0f) * LODIndex);
 
         for (int i = 0; i < TileCount; i++)
@@ -185,10 +204,13 @@ public class OceanRenderer :MonoBehaviour
 
     void UpdateOceanMaterial()
     {
-        for (int i = 0; i < OceanMATS.Length; i++)
+        Shader.SetGlobalVector(centerPosId, transform.position);
+        /*
+        for (int i = 0; i < ORS.OceanMats.Length; i++)
         {
-            OceanMATS[i].SetVector(centerPosId, transform.position);
+            ORS.OceanMats[i].SetVector(centerPosId, transform.position);
         }
+        */
     }
 
 }

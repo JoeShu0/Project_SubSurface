@@ -17,6 +17,9 @@ SAMPLER(sampler_DetailMap);
 
 TEXTURE2D(_NormalMap);
 
+TEXTURE2D(_CameraOceanDepthTexture);
+SAMPLER(sampler_CameraOceanDepthTexture);
+
 UNITY_INSTANCING_BUFFER_START(UnityPerMaterial)
 	UNITY_DEFINE_INSTANCED_PROP(float4, _BaseMap_ST)
 	UNITY_DEFINE_INSTANCED_PROP(float4, _DetailMap_ST)

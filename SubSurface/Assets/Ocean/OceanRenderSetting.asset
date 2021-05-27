@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54842dcfdb126294aa53420009e01ed7, type: 3}
   m_Name: OceanRenderSetting
   m_EditorClassIdentifier: 
-  TestMesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
   IsInit: 1
   oceanShader: {fileID: 4800000, guid: 36e0b36d9215e6943acb44f0b8fa26a5, type: 3}
   LODCount: 8
@@ -48,3 +47,12 @@ MonoBehaviour:
   - {fileID: 8400000, guid: 033d11368d7982f4fb7d2474b108920e, type: 2}
   - {fileID: 8400000, guid: c8bca05077c5c67408d28f4e6d129123, type: 2}
   - {fileID: 8400000, guid: 5794c4a1e182b26418b7b5a814103350, type: 2}
+  OceanMats:
+  - {fileID: 2100000, guid: 457c11d740c9c2c48830f1cdcf5ec1d5, type: 2}
+  - {fileID: 2100000, guid: debd5e6e51fdc0d42aa6f82037c6ca36, type: 2}
+  - {fileID: 2100000, guid: bdd21b3af46ad9942897ba0ff89a70ad, type: 2}
+  - {fileID: 2100000, guid: c32ff1dc35f24ad4aacc356d5e5eb14f, type: 2}
+  - {fileID: 2100000, guid: 1720db9b8c139fa4a8c6ad35110f00cc, type: 2}
+  - {fileID: 2100000, guid: 58cf3042d02f82e4fb58627c92864ee4, type: 2}
+  - {fileID: 2100000, guid: 887e8adeda474f14e8c1f6f3326b133e, type: 2}
+  - {fileID: 2100000, guid: e84b17e7463e05144ab3627ed9cdcbf9, type: 2}

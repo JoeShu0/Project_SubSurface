@@ -131,7 +131,16 @@ float4 LitPassFragment(Varyings input) : SV_TARGET
 	//Not Clipped Alpha to 1.0
 	return float4(color, 1.0f);
 #endif
-*/
+*/	 
+	float OceanDepth10 = LOAD_TEXTURE2D(_CameraOceanDepthTexture, input.positionCS_SS.xy).a;
+	
+	//float depth10 = 1 - (input.positionCS_SS.w - _ProjectionParams.y) / (_ProjectionParams.z - _ProjectionParams.y);
+	//return float4(depth10, 0.0, 0.0, 1.0);
+
+	//if (OceanDepth10 > depth10)
+	//{
+	//	return float4(1.0, 0.0, 0.0, GetFinalAlpha(surface.alpha));
+	//}
 	
 	return float4(color, GetFinalAlpha(surface.alpha));
 }

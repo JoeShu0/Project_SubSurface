@@ -16,7 +16,9 @@ public partial class CameraRenderer
     CullingResults cullingResults;
 
     static ShaderTagId unlitShaderTagId = new ShaderTagId("SRPDefaultUnlit");
-    static ShaderTagId LitShaderTadId = new ShaderTagId("CustomLit");
+    static ShaderTagId LitShaderTagId = new ShaderTagId("CustomLit");
+    static ShaderTagId OceanShaderTagId = new ShaderTagId("OceanShading");
+    static ShaderTagId OceanDepthShaderTagId = new ShaderTagId("OceanDepthShading");
 
     //static int frameBufferId = Shader.PropertyToID("_CameraFrameBuffer");
     static int colorAttachmentId = Shader.PropertyToID("_CameraColorAttachment");
@@ -24,6 +26,8 @@ public partial class CameraRenderer
     static int colorTextureId = Shader.PropertyToID("_CameraColorTexture");
     static int depthTextureId = Shader.PropertyToID("_CameraDepthTexture");
     static int sourceTextureId = Shader.PropertyToID("_SourceTexture");
+
+    static int oceanDepthTextureId = Shader.PropertyToID("_CameraOceanDepthTexture");
 
     static int srcBlendId = Shader.PropertyToID("_CameraSrcBlend");
     static int dstBlendId = Shader.PropertyToID("_CameraDstBlend");
@@ -149,11 +153,18 @@ public partial class CameraRenderer
 
         buffer.EndSample(SampleName);
 
+        
+
         //Setup rendertarget for normal oject rendering
         Setup();
+
+        //Draw ocean depth to RT
+        DrawOceanSurfaceDepth(useDynameicBatching, useGPUInstancing, useLightPerObject, cameraSettings.RenderingLayerMask);
+
+
         DrawVisibleGeometry(useDynameicBatching, useGPUInstancing, useLightPerObject, cameraSettings.RenderingLayerMask);
 
-       
+        
 
 
         //this makes the Legacy shader draw upon the tranparent object
@@ -231,7 +242,7 @@ public partial class CameraRenderer
         buffer.SetGlobalTexture(depthTextureId, missingTexture);
         buffer.SetGlobalTexture(colorTextureId, missingTexture);
 
-
+        buffer.SetGlobalTexture(oceanDepthTextureId, missingTexture);
         //buffer.SetGlobalTe
 
         //Excute the Profile injection
@@ -239,6 +250,56 @@ public partial class CameraRenderer
         //buffer.Clear();
 
         
+    }
+    
+    
+
+    //Draw the depth of the ocean in camera view on to a texture
+    void DrawOceanSurfaceDepth(bool useDynameicBatching, bool useGPUInstancing, bool useLightPerObject,
+        int renderingLayerMask)
+    {
+        buffer.GetTemporaryRT(oceanDepthTextureId, 
+            camera.pixelWidth, camera.pixelHeight, 1, 
+            FilterMode.Point, RenderTextureFormat.ARGBFloat);
+
+        buffer.SetRenderTarget(oceanDepthTextureId);
+        ExecuteBuffer();
+        //per Object light data stuff
+        PerObjectData lightPerObjectFlags = useLightPerObject ?
+            PerObjectData.LightData | PerObjectData.LightIndices :
+            PerObjectData.None;
+
+        var sortingSettings = new SortingSettings(camera)
+        {
+            criteria = SortingCriteria.CommonTransparent
+        };
+
+        var drawingSettings = new DrawingSettings(OceanDepthShaderTagId, sortingSettings)
+        {
+            enableDynamicBatching = useDynameicBatching,
+            enableInstancing = useGPUInstancing,
+            perObjectData = PerObjectData.Lightmaps |//lightmap UV
+                PerObjectData.LightProbe |//lighting Probe coefficient
+                PerObjectData.LightProbeProxyVolume |// LPPV data
+                PerObjectData.ShadowMask |//shadowmask texture
+                PerObjectData.OcclusionProbe |//for using lightmap on dynamic assets
+                PerObjectData.OcclusionProbeProxyVolume |//same above for LPPV
+                PerObjectData.ReflectionProbes |//send reflection probes to GPU
+                lightPerObjectFlags
+        };
+        var filteringSettings = new FilteringSettings(RenderQueueRange.transparent, 
+            renderingLayerMask: (uint)renderingLayerMask);
+
+        context.DrawRenderers(
+            cullingResults, ref drawingSettings, ref filteringSettings);
+
+
+        buffer.SetRenderTarget(colorAttachmentId,
+                RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store,
+                depthAttachmentId,
+                RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store);
+        ExecuteBuffer();
+
     }
 
     void DrawVisibleGeometry(bool useDynameicBatching, bool useGPUInstancing, bool useLightPerObject,
@@ -266,7 +327,8 @@ public partial class CameraRenderer
                 PerObjectData.ReflectionProbes |//send reflection probes to GPU
                 lightPerObjectFlags
         };
-        drawingSettings.SetShaderPassName(1, LitShaderTadId);
+        drawingSettings.SetShaderPassName(1, LitShaderTagId);
+        drawingSettings.SetShaderPassName(2, OceanShaderTagId);
 
         //filter object queue as well as RenderingLayerMask
         var filteringSettings = new FilteringSettings(RenderQueueRange.opaque, renderingLayerMask:(uint)renderingLayerMask);
@@ -278,6 +340,8 @@ public partial class CameraRenderer
 
         //we are drawing in order like opaque->skybox->tranparent
         context.DrawSkybox(camera);
+
+        //Draw Ocean Shading Here
 
         //copy the depth and color of all opaque and sky
         //so if the opaque object tries to sample the _CameraDepthTexture or _CameraColorTexture, 
@@ -295,6 +359,8 @@ public partial class CameraRenderer
         
         //Draw wireframe Overlay after all staff is drawn
         context.DrawWireOverlay(camera);
+
+        buffer.ReleaseTemporaryRT(oceanDepthTextureId);
     }
 
 
@@ -362,7 +428,7 @@ public partial class CameraRenderer
             buffer.GetTemporaryRT(
                 colorTextureId, bufferSize.x, bufferSize.y,
                 0, FilterMode.Bilinear, useHDR ?
-                    RenderTextureFormat.DefaultHDR : RenderTextureFormat.Default
+                    RenderTextureFormat.DefaultHDR : RenderTextureFormat.DefaultHDR
             );
             if (copyTextureSupported)
             {

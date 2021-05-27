@@ -38,17 +38,25 @@ public class OceanRenderSetting : ScriptableObject
         Count
     }
 
+    public struct WaveData
+    {
+        
+    }
+
     //All th tile types
     public Mesh[] TileMeshes = new Mesh[(int)TileType.Count];
     //anim wave render texture
     public RenderTexture[] LODDisplaceMaps;
     public RenderTexture[] LODNormalMaps;
+    //All ocean Materials
+    public Material[] OceanMats;
 
 
     private void Awake()
     {
         InitLODRTs();
         InitTiles();
+        InitMaterials();
         if (!oceanShader)
         {
             oceanShader = Shader.Find("Custom_RP/OceanShader");
@@ -63,6 +71,25 @@ public class OceanRenderSetting : ScriptableObject
         {
             //Incase we need to regenerate the mesh an the rendertexture
             Awake();
+        }
+    }
+
+
+    private void InitOceanWaves()
+    {
+        
+    }
+    void InitMaterials()
+    {
+        OceanMats = new Material[LODCount];
+
+        for(int i=0;i< LODCount; i++)
+        {
+            OceanMats[i] = new Material(oceanShader);
+            string MatPath = string.Format("Assets/Ocean/OceanAssets/Material_LOD{0}.asset", i);
+            OceanMats[i].enableInstancing = true;
+            AssetDatabase.DeleteAsset(MatPath);
+            AssetDatabase.CreateAsset(OceanMats[i], MatPath);
         }
     }
 
@@ -115,6 +142,8 @@ public class OceanRenderSetting : ScriptableObject
             //Debug.Log(((OceanRenderSetting.TileType)i).ToString());
         }
     }
+
+
 
     Mesh GenerateTile(OceanRenderSetting.TileType type, float GridSize, int GridCount)
     {
