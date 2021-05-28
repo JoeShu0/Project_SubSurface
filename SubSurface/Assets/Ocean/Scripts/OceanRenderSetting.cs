@@ -54,6 +54,11 @@ public class OceanRenderSetting : ScriptableObject
 
     private void Awake()
     {
+        
+    }
+
+    private void Initialization()
+    {
         InitLODRTs();
         InitTiles();
         InitMaterials();
@@ -70,7 +75,7 @@ public class OceanRenderSetting : ScriptableObject
         if (!IsInit)
         {
             //Incase we need to regenerate the mesh an the rendertexture
-            Awake();
+            Initialization();
         }
     }
 
@@ -86,7 +91,7 @@ public class OceanRenderSetting : ScriptableObject
         for(int i=0;i< LODCount; i++)
         {
             OceanMats[i] = new Material(oceanShader);
-            string MatPath = string.Format("Assets/Ocean/OceanAssets/Material_LOD{0}.asset", i);
+            string MatPath = string.Format("Assets/Ocean/OceanAssets/Material_LOD{0}.mat", i);
             OceanMats[i].enableInstancing = true;
             AssetDatabase.DeleteAsset(MatPath);
             AssetDatabase.CreateAsset(OceanMats[i], MatPath);
