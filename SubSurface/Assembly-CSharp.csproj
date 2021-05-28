@@ -84,6 +84,7 @@
      <None Include="Assets\CustomRP\Shader\Particles_Unlit.shader" />
      <None Include="Assets\CustomRP\Shader\Post FX Stack.shader" />
      <None Include="Assets\CustomRP\Shader\LitPass.hlsl" />
+     <None Include="Assets\Ocean\Shader\OceanShapeShader.compute" />
      <None Include="Assets\CustomRP\ShaderLib\Common.hlsl" />
      <None Include="Assets\CustomRP\Shader\UnlitPass.hlsl" />
      <None Include="Assets\CustomRP\Shader\ShadowCasterPass.hlsl" />

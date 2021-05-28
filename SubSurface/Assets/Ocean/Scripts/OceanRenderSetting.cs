@@ -10,7 +10,10 @@ public class OceanRenderSetting : ScriptableObject
     [Tooltip("Tick this box will regenerate All RTs and Meshtiles based on Settings")]
     public bool IsInit = false;
 
+    //Shader to render ocean
     public Shader oceanShader;
+    //Shader to render the displacement and normal maps
+    public ComputeShader shapeShader; 
 
     //Count for LOD rings
     public int LODCount = 8;
@@ -23,6 +26,17 @@ public class OceanRenderSetting : ScriptableObject
     //WaveCount should be mul of 4 Since we are packing it into vectors
     //And We are getting each LOD to compute diff wave length so we fix the WaveCount to 64=8*8
     public int WaveCount = 128;
+
+    //wind angle causing the waves(degrees)
+    public float AnimeWindAngle = 0.0f;
+    //Wave dir distribute(degrees)
+    public float WaveDirAngleRange = 90.0f;
+    //Wave Length range in meters
+    public Vector2 WaveLengthRange = new Vector2(128.0f, 0.25f);
+
+    //tweaker for wave datas
+    [Range(0.0f, 3.0f)]
+    public float[] WaveAmplitudeTweak = new float[8];
 
     public enum TileType
     {
@@ -38,19 +52,32 @@ public class OceanRenderSetting : ScriptableObject
         Count
     }
 
+    [System.Serializable]
     public struct WaveData
     {
         public float WaveLength;
         public float Amplitude;
-        public float DirAngleDegs;
+        public float WaveSpeed;
+        public float DirAngleDeg;
     }
+    [Tooltip("Tick this box will regenerate All WaveDatas")]
+    public bool RegenerateWaveDatas = true;
+    [SerializeField]
     public WaveData[] SpectrumWaves;
 
+    [Tooltip("Tick this box will regenerate All Meshtiles ")]
+    public bool RegenerateTileMeshes = true;
     //All th tile types
     public Mesh[] TileMeshes = new Mesh[(int)TileType.Count];
+
+    [Tooltip("Tick this box will regenerate All RT based on settings ")]
+    public bool RegenerateRenderTextures = true;
     //anim wave render texture
     public RenderTexture[] LODDisplaceMaps;
     public RenderTexture[] LODNormalMaps;
+
+    [Tooltip("Tick this box will regenerate All Materials for LODs ")]
+    public bool RegenerateMODMaterials = true;
     //All ocean Materials
     public Material[] OceanMats;
 
@@ -65,11 +92,18 @@ public class OceanRenderSetting : ScriptableObject
         InitLODRTs();
         InitTiles();
         InitMaterials();
+
         if (!oceanShader)
         {
             oceanShader = Shader.Find("Custom_RP/OceanShader");
         }
+        if (!shapeShader)
+        {
+            //shapeShader = (ComputeShader)Resources.Load("OceanShapeShader");
+        }
         IsInit = true;
+
+        InitOceanWaves();
     }
 
 
@@ -80,12 +114,33 @@ public class OceanRenderSetting : ScriptableObject
             //Incase we need to regenerate the mesh an the rendertexture
             Initialization();
         }
+        if (RegenerateWaveDatas)
+        {
+            InitOceanWaves();
+            RegenerateWaveDatas = false;
+        }
+        if (RegenerateTileMeshes)
+        {
+            InitTiles();
+            RegenerateTileMeshes = false;
+        }
+        if (RegenerateRenderTextures)
+        {
+            InitLODRTs();
+            RegenerateRenderTextures = false;
+        }
+        if (RegenerateMODMaterials)
+        {
+            InitMaterials();
+            RegenerateMODMaterials = false;
+        }
     }
 
 
-    private void InitOceanWaves(int WaveCount, ref WaveData[] SpectrumWaves, 
-        Vector2 WaveLengthRange, float WaveDirAngleRange, float windAngle)
+    private void InitOceanWaves()
     {
+        
+        
         SpectrumWaves = new WaveData[WaveCount];
         
         int GroupCount = Mathf.FloorToInt(Mathf.Log(Mathf.FloorToInt(WaveLengthRange.x), 2)) + 1;
@@ -105,14 +160,15 @@ public class OceanRenderSetting : ScriptableObject
                 //Debug.Log(index);
                 if (index < WaveCount)
                 {
-                    WaveData 
-                    SpectrumWaves[index]
+                    WaveData newWaveData = new WaveData();
 
-                    WaveLengths[index] = Mathf.Lerp(Min_WaveLength, Max_WaveLength, UnityEngine.Random.Range(0.1f, 1.0f));
-                    Amplitudes[index] = WaveLengths[index] * 0.005f * AnimWaveAmpMul[i];
-                    DirAngleDegs[index] = UnityEngine.Random.Range(-1.0f, 1.0f) * WaveWindAngle + WindAngle;
+                    newWaveData.WaveLength = Mathf.Lerp(Min_WaveLength, Max_WaveLength, UnityEngine.Random.Range(0.1f, 1.0f));
+                    newWaveData.Amplitude = newWaveData.WaveLength * 0.005f;
+                    newWaveData.DirAngleDeg = UnityEngine.Random.Range(-1.0f, 1.0f) * WaveDirAngleRange + AnimeWindAngle;
                     //DirX[index] = (float)Mathf.Cos(Mathf.Deg2Rad * DirAngleDegs[index]);
                     //DirZ[index] = (float)Mathf.Sin(Mathf.Deg2Rad * DirAngleDegs[index]);
+                    newWaveData.WaveSpeed = Mathf.Sqrt(9.8f / 2.0f / 3.14159f * newWaveData.WaveLength);
+                    SpectrumWaves[index] = newWaveData;
                 }
 
             }
@@ -123,11 +179,14 @@ public class OceanRenderSetting : ScriptableObject
             Debug.Log("waves not filled");
             for (int n = index + 1; n < WaveCount; n++)
             {
-                WaveLengths[n] = Mathf.Lerp(WaveLengthRange.x, WaveLengthRange.x, UnityEngine.Random.Range(0.0f, 1.0f));
-                Amplitudes[n] = 0.0f;
-                DirAngleDegs[n] = 0.0f;
+                SpectrumWaves[n].WaveLength = Mathf.Lerp(WaveLengthRange.x, WaveLengthRange.x, UnityEngine.Random.Range(0.0f, 1.0f));
+                SpectrumWaves[n].Amplitude = 0.0f;
+                SpectrumWaves[n].DirAngleDeg = 0.0f;
+                SpectrumWaves[n].WaveSpeed = 0.0f;
             }
         }
+
+        
     }
 
     void InitMaterials()

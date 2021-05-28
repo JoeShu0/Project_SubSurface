@@ -11,9 +11,12 @@ public class OceanRenderer :MonoBehaviour
     [Tooltip("Tick this box will regenerate All LOD meshes and Materials")]
     public bool hasOceanLOD = false;
 
+    private int threadGroupX, threadGroupY;
+
     private GameObject[] OceanLODS;
     //private Material[] OceanMATS;
-
+    //temp solution
+    private int KIndex = 0;
 
     int baseColorId = Shader.PropertyToID("_BaseColor");
 
@@ -33,6 +36,8 @@ public class OceanRenderer :MonoBehaviour
         //ORS.LODDisplaceMaps = new RenderTexture[ORS.LODCount]
 
         CreateOceanLODs();
+
+        threadGroupX = threadGroupY = Mathf.CeilToInt(ORS.RTSize / 32.0f);
     }
 
     private void OnEnable()
@@ -54,6 +59,11 @@ public class OceanRenderer :MonoBehaviour
 #endif
 
         UpdateOceanMaterial();
+    }
+
+    private void FixedUpdate()
+    {
+        RenderDisAandNormalMapsForLODs();
     }
 
     void CreateOceanLODs()
@@ -213,4 +223,52 @@ public class OceanRenderer :MonoBehaviour
         */
     }
 
+
+    void RenderDisAandNormalMapsForLODs()
+    {
+        if (!ORS.shapeShader)
+        {
+            Debug.LogError("No Shapeshader in Ocean rendeing settings!!");
+            return;
+        }
+
+        //new ComputeBuffer with the stride is 20 ??
+        ComputeBuffer shapeWaveBufer = new ComputeBuffer(ORS.WaveCount, 20);
+
+        ORS.shapeShader.SetFloats("CenterPos", new float[]
+            { transform.position.x, transform.position.y, transform.position.z}
+            );
+
+        for (int i = ORS.LODCount-1; i>0; i--)
+        {
+
+            ORS.shapeShader.SetInt("WaveCount", ORS.WaveCount);
+            //WaveBuffer.SetData(WDs);
+            shapeWaveBufer.SetData(ORS.SpectrumWaves);
+            ORS.shapeShader.SetBuffer(KIndex, "WavesBuffer", shapeWaveBufer);
+
+            ORS.shapeShader.SetFloat("LODSize", ORS.GridSize * ORS.GridCountPerTile * 4 * Mathf.Pow(2, i) * 1);//times ocean scale
+            ORS.shapeShader.SetInt("LODIndex", i);
+            ORS.shapeShader.SetFloat("_Time", Time.time);
+            ORS.shapeShader.SetFloat("_deltaTime", Time.deltaTime);
+
+            if (i != ORS.LODCount - 1)
+            {
+                ORS.shapeShader.SetTexture(KIndex, "BaseDisplace", ORS.LODDisplaceMaps[i + 1]);
+                ORS.shapeShader.SetTexture(KIndex, "BaseNormal", ORS.LODNormalMaps[i + 1]);
+            }
+            else
+            {
+                ORS.shapeShader.SetTexture(KIndex, "BaseDisplace", ORS.LODDisplaceMaps[i]);
+                ORS.shapeShader.SetTexture(KIndex, "BaseNormal", ORS.LODNormalMaps[i]);
+            }
+            ORS.shapeShader.SetTexture(KIndex, "Displace", ORS.LODDisplaceMaps[i]);
+            ORS.shapeShader.SetTexture(KIndex, "Normal", ORS.LODNormalMaps[i]);
+
+            //ORS.shapeShader.SetTexture(KIndex, "NoiseFoam", WaterFoamNoise);
+
+            ORS.shapeShader.Dispatch(KIndex, threadGroupX, threadGroupY, 1);
+        }
+        shapeWaveBufer.Release();
+    }
 }
