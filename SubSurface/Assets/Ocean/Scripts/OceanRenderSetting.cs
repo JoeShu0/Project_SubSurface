@@ -40,8 +40,11 @@ public class OceanRenderSetting : ScriptableObject
 
     public struct WaveData
     {
-        
+        public float WaveLength;
+        public float Amplitude;
+        public float DirAngleDegs;
     }
+    public WaveData[] SpectrumWaves;
 
     //All th tile types
     public Mesh[] TileMeshes = new Mesh[(int)TileType.Count];
@@ -80,10 +83,53 @@ public class OceanRenderSetting : ScriptableObject
     }
 
 
-    private void InitOceanWaves()
+    private void InitOceanWaves(int WaveCount, ref WaveData[] SpectrumWaves, 
+        Vector2 WaveLengthRange, float WaveDirAngleRange, float windAngle)
     {
+        SpectrumWaves = new WaveData[WaveCount];
         
+        int GroupCount = Mathf.FloorToInt(Mathf.Log(Mathf.FloorToInt(WaveLengthRange.x), 2)) + 1;
+        int WavePerGroup = Mathf.FloorToInt(WaveCount / GroupCount);
+
+        int index = 0;
+
+        //float G_MaxWL = Mathf.Pow(2, GroupCount - 1);
+
+        for (int i = 0; i < GroupCount; i++)
+        {
+            float Max_WaveLength = Mathf.Pow(2, i);
+            float Min_WaveLength = i == 0 ? WaveLengthRange.y : Mathf.Pow(2, i - 1);
+            for (int n = 0; n < WavePerGroup; n++)
+            {
+                index = i * WavePerGroup + n;
+                //Debug.Log(index);
+                if (index < WaveCount)
+                {
+                    WaveData 
+                    SpectrumWaves[index]
+
+                    WaveLengths[index] = Mathf.Lerp(Min_WaveLength, Max_WaveLength, UnityEngine.Random.Range(0.1f, 1.0f));
+                    Amplitudes[index] = WaveLengths[index] * 0.005f * AnimWaveAmpMul[i];
+                    DirAngleDegs[index] = UnityEngine.Random.Range(-1.0f, 1.0f) * WaveWindAngle + WindAngle;
+                    //DirX[index] = (float)Mathf.Cos(Mathf.Deg2Rad * DirAngleDegs[index]);
+                    //DirZ[index] = (float)Mathf.Sin(Mathf.Deg2Rad * DirAngleDegs[index]);
+                }
+
+            }
+        }
+
+        if (index < WaveCount - 1)
+        {
+            Debug.Log("waves not filled");
+            for (int n = index + 1; n < WaveCount; n++)
+            {
+                WaveLengths[n] = Mathf.Lerp(WaveLengthRange.x, WaveLengthRange.x, UnityEngine.Random.Range(0.0f, 1.0f));
+                Amplitudes[n] = 0.0f;
+                DirAngleDegs[n] = 0.0f;
+            }
+        }
     }
+
     void InitMaterials()
     {
         OceanMats = new Material[LODCount];
