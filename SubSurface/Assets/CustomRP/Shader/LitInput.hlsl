@@ -37,7 +37,10 @@ UNITY_INSTANCING_BUFFER_START(UnityPerMaterial)
 	UNITY_DEFINE_INSTANCED_PROP(float, _DetailNormalScale)
 UNITY_INSTANCING_BUFFER_END(UnityPerMaterial)
 // the error assert 0==m_CurrentBuildInBindMask may cased by the GPU instance option os not on in the material
-
+CBUFFER_START(_OceanData)
+    float4 _CenterPos;
+    float4 _CamProjectionParams;
+CBUFFER_END
 //combine the data to tide up the data feeding into the Getter functions
 struct InputConfig
 {

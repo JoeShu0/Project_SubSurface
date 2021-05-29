@@ -22,7 +22,6 @@ public class OceanRenderer :MonoBehaviour
 
     int gridSizeId = Shader.PropertyToID("_GridSize");
     int transitionParams = Shader.PropertyToID("_TransitionParam");
-    int centerPosId = Shader.PropertyToID("_CenterPos");
     int lodSizeId = Shader.PropertyToID("_LODSize");
 
     int lodDisplaceMapId = Shader.PropertyToID("_DisplaceMap");
@@ -30,6 +29,9 @@ public class OceanRenderer :MonoBehaviour
     int lodNextDisplaceMapId = Shader.PropertyToID("_NextDisplaceMap");
     int lodNextNormalMapId = Shader.PropertyToID("_NextNormalMap");
 
+    //Global params
+    int centerPosId = Shader.PropertyToID("_CenterPos");
+    int CameraProjParamsId = Shader.PropertyToID("_CamProjectionParams");
 
     private void Awake()
     {
@@ -54,11 +56,13 @@ public class OceanRenderer :MonoBehaviour
             Awake();
         }
         */
+
+
         if(!hasOceanLOD)
             CreateOceanLODs();
 #endif
 
-        UpdateOceanMaterial();
+        UpdateShaderGlobalParams();
     }
 
     private void FixedUpdate()
@@ -212,9 +216,10 @@ public class OceanRenderer :MonoBehaviour
 
  
 
-    void UpdateOceanMaterial()
+    void UpdateShaderGlobalParams()
     {
         Shader.SetGlobalVector(centerPosId, transform.position);
+        //Shader.SetGlobalVector(CameraProjParamsId, new Vector4(1.0, ))
         /*
         for (int i = 0; i < ORS.OceanMats.Length; i++)
         {

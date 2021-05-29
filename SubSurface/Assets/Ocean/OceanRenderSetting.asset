@@ -34,518 +34,518 @@ MonoBehaviour:
   - 0.79
   RegenerateWaveDatas: 0
   SpectrumWaves:
-  - WaveLength: 0.408479
-    Amplitude: 0.002042395
-    WaveSpeed: 0.7981934
-    DirAngleDeg: -3.1391394
-  - WaveLength: 0.3461529
-    Amplitude: 0.0017307645
-    WaveSpeed: 0.7347799
-    DirAngleDeg: -9.337553
-  - WaveLength: 0.9400427
-    Amplitude: 0.004700213
-    WaveSpeed: 1.2108687
-    DirAngleDeg: -77.1534
-  - WaveLength: 0.91729265
-    Amplitude: 0.0045864633
-    WaveSpeed: 1.1961268
-    DirAngleDeg: 72.9693
-  - WaveLength: 0.82813793
-    Amplitude: 0.0041406895
-    WaveSpeed: 1.1365136
-    DirAngleDeg: -53.478764
-  - WaveLength: 0.43248853
-    Amplitude: 0.0021624425
-    WaveSpeed: 0.82131654
-    DirAngleDeg: 9.521123
-  - WaveLength: 0.7719264
-    Amplitude: 0.003859632
-    WaveSpeed: 1.0972642
-    DirAngleDeg: 59.845963
-  - WaveLength: 0.47316882
-    Amplitude: 0.002365844
-    WaveSpeed: 0.8590755
-    DirAngleDeg: -29.402344
-  - WaveLength: 0.6543853
-    Amplitude: 0.0032719267
-    WaveSpeed: 1.0102761
-    DirAngleDeg: 78.19854
-  - WaveLength: 0.65079767
-    Amplitude: 0.0032539882
-    WaveSpeed: 1.0075028
-    DirAngleDeg: 44.94234
-  - WaveLength: 0.712897
-    Amplitude: 0.0035644849
-    WaveSpeed: 1.0544759
-    DirAngleDeg: 49.167915
-  - WaveLength: 0.51425105
-    Amplitude: 0.0025712552
-    WaveSpeed: 0.89559335
-    DirAngleDeg: 68.19139
-  - WaveLength: 0.69682014
-    Amplitude: 0.0034841006
-    WaveSpeed: 1.0425181
-    DirAngleDeg: 1.9240773
-  - WaveLength: 0.83554906
-    Amplitude: 0.004177745
-    WaveSpeed: 1.1415876
-    DirAngleDeg: 36.339874
-  - WaveLength: 0.4336627
-    Amplitude: 0.0021683136
-    WaveSpeed: 0.82243073
-    DirAngleDeg: 26.395744
-  - WaveLength: 0.7754977
-    Amplitude: 0.0038774882
-    WaveSpeed: 1.0997995
-    DirAngleDeg: -8.382922
-  - WaveLength: 1.1713631
-    Amplitude: 0.0058568153
-    WaveSpeed: 1.3516649
-    DirAngleDeg: 14.8092375
-  - WaveLength: 1.2174617
-    Amplitude: 0.0060873083
-    WaveSpeed: 1.3780054
-    DirAngleDeg: 77.542145
-  - WaveLength: 1.3299468
-    Amplitude: 0.0066497335
-    WaveSpeed: 1.4402584
-    DirAngleDeg: -83.15863
-  - WaveLength: 1.7041926
-    Amplitude: 0.008520963
-    WaveSpeed: 1.6303567
-    DirAngleDeg: 11.838251
-  - WaveLength: 1.6735722
-    Amplitude: 0.008367861
-    WaveSpeed: 1.6156434
-    DirAngleDeg: 29.962997
-  - WaveLength: 1.8436477
-    Amplitude: 0.009218238
-    WaveSpeed: 1.6957517
-    DirAngleDeg: 35.960094
-  - WaveLength: 1.8184731
-    Amplitude: 0.009092365
-    WaveSpeed: 1.6841342
-    DirAngleDeg: 84.385666
-  - WaveLength: 1.7127926
-    Amplitude: 0.008563963
-    WaveSpeed: 1.6344652
-    DirAngleDeg: 56.041862
-  - WaveLength: 1.1536025
-    Amplitude: 0.0057680123
-    WaveSpeed: 1.3413786
-    DirAngleDeg: 65.923416
-  - WaveLength: 1.292872
-    Amplitude: 0.00646436
-    WaveSpeed: 1.4200416
-    DirAngleDeg: 15.240022
-  - WaveLength: 1.3666209
-    Amplitude: 0.0068331044
-    WaveSpeed: 1.4599813
-    DirAngleDeg: -76.49832
-  - WaveLength: 1.2379119
-    Amplitude: 0.0061895596
-    WaveSpeed: 1.3895308
-    DirAngleDeg: 72.89856
-  - WaveLength: 1.9552867
-    Amplitude: 0.009776434
-    WaveSpeed: 1.7463388
-    DirAngleDeg: 62.067688
-  - WaveLength: 1.8175762
-    Amplitude: 0.009087881
-    WaveSpeed: 1.6837189
-    DirAngleDeg: 12.839552
-  - WaveLength: 1.7512076
-    Amplitude: 0.008756038
-    WaveSpeed: 1.6526926
-    DirAngleDeg: -50.830437
-  - WaveLength: 1.3141644
-    Amplitude: 0.0065708216
-    WaveSpeed: 1.4316871
-    DirAngleDeg: 39.964634
-  - WaveLength: 2.39309
-    Amplitude: 0.01196545
-    WaveSpeed: 1.9319807
-    DirAngleDeg: -28.83878
-  - WaveLength: 3.2166367
-    Amplitude: 0.016083183
-    WaveSpeed: 2.2398777
-    DirAngleDeg: -77.33418
-  - WaveLength: 3.8554378
-    Amplitude: 0.019277189
-    WaveSpeed: 2.4522238
-    DirAngleDeg: 34.364952
-  - WaveLength: 3.8292108
-    Amplitude: 0.019146053
-    WaveSpeed: 2.4438689
-    DirAngleDeg: -85.534615
-  - WaveLength: 2.3792067
-    Amplitude: 0.011896033
-    WaveSpeed: 1.9263685
-    DirAngleDeg: -73.23212
-  - WaveLength: 3.7132835
-    Amplitude: 0.018566417
-    WaveSpeed: 2.4065912
-    DirAngleDeg: -10.003814
-  - WaveLength: 2.9581804
-    Amplitude: 0.014790902
-    WaveSpeed: 2.1480064
-    DirAngleDeg: -17.710035
-  - WaveLength: 2.4953187
-    Amplitude: 0.012476593
-    WaveSpeed: 1.9728147
-    DirAngleDeg: -9.607748
-  - WaveLength: 3.20158
-    Amplitude: 0.0160079
-    WaveSpeed: 2.2346292
-    DirAngleDeg: -67.988525
-  - WaveLength: 3.154005
-    Amplitude: 0.015770026
-    WaveSpeed: 2.217964
-    DirAngleDeg: -57.449203
-  - WaveLength: 3.2500563
-    Amplitude: 0.01625028
-    WaveSpeed: 2.2514832
-    DirAngleDeg: -24.388264
-  - WaveLength: 3.058916
-    Amplitude: 0.01529458
-    WaveSpeed: 2.1842737
-    DirAngleDeg: 72.59517
-  - WaveLength: 2.8697834
-    Amplitude: 0.014348917
-    WaveSpeed: 2.1156695
-    DirAngleDeg: 84.2793
-  - WaveLength: 2.801354
-    Amplitude: 0.014006769
-    WaveSpeed: 2.0902936
-    DirAngleDeg: 57.73828
-  - WaveLength: 2.7666998
-    Amplitude: 0.013833499
-    WaveSpeed: 2.0773244
-    DirAngleDeg: 38.875893
-  - WaveLength: 3.3580167
-    Amplitude: 0.016790083
-    WaveSpeed: 2.2885725
-    DirAngleDeg: -34.269073
-  - WaveLength: 7.423813
-    Amplitude: 0.037119064
-    WaveSpeed: 3.402803
-    DirAngleDeg: 86.8881
-  - WaveLength: 7.7156
-    Amplitude: 0.038578
-    WaveSpeed: 3.4690306
-    DirAngleDeg: -77.37563
-  - WaveLength: 6.434674
-    Amplitude: 0.03217337
-    WaveSpeed: 3.16801
-    DirAngleDeg: -55.190765
-  - WaveLength: 6.279071
-    Amplitude: 0.031395353
-    WaveSpeed: 3.1294713
-    DirAngleDeg: -66.87861
-  - WaveLength: 5.478167
-    Amplitude: 0.027390834
-    WaveSpeed: 2.9230814
-    DirAngleDeg: 50.89041
-  - WaveLength: 7.170332
-    Amplitude: 0.035851657
-    WaveSpeed: 3.3442051
-    DirAngleDeg: 40.815968
-  - WaveLength: 7.9686995
-    Amplitude: 0.039843496
-    WaveSpeed: 3.5254698
-    DirAngleDeg: 89.58218
-  - WaveLength: 7.7515836
-    Amplitude: 0.038757917
-    WaveSpeed: 3.4771106
-    DirAngleDeg: -33.24125
-  - WaveLength: 6.479528
-    Amplitude: 0.03239764
-    WaveSpeed: 3.1790323
-    DirAngleDeg: 4.625448
-  - WaveLength: 5.499189
-    Amplitude: 0.027495943
-    WaveSpeed: 2.9286845
-    DirAngleDeg: 52.699486
-  - WaveLength: 5.590014
-    Amplitude: 0.027950069
-    WaveSpeed: 2.9527707
-    DirAngleDeg: -86.77491
-  - WaveLength: 6.6970053
-    Amplitude: 0.033485025
-    WaveSpeed: 3.2319422
-    DirAngleDeg: -10.046643
-  - WaveLength: 6.661606
-    Amplitude: 0.03330803
-    WaveSpeed: 3.2233891
-    DirAngleDeg: 19.152443
-  - WaveLength: 6.380655
-    Amplitude: 0.031903274
-    WaveSpeed: 3.1546843
-    DirAngleDeg: -33.343666
-  - WaveLength: 6.2617435
-    Amplitude: 0.031308718
-    WaveSpeed: 3.1251502
-    DirAngleDeg: -39.00128
-  - WaveLength: 4.539634
-    Amplitude: 0.022698171
-    WaveSpeed: 2.6609316
-    DirAngleDeg: -56.23805
-  - WaveLength: 10.03746
-    Amplitude: 0.0501873
-    WaveSpeed: 3.956719
-    DirAngleDeg: -40.946484
-  - WaveLength: 10.790817
-    Amplitude: 0.053954083
-    WaveSpeed: 4.1025176
-    DirAngleDeg: -84.23679
-  - WaveLength: 15.161142
-    Amplitude: 0.07580571
-    WaveSpeed: 4.8628316
-    DirAngleDeg: 12.799598
-  - WaveLength: 14.315309
-    Amplitude: 0.07157654
-    WaveSpeed: 4.7252374
-    DirAngleDeg: -66.00921
-  - WaveLength: 13.906923
-    Amplitude: 0.069534615
-    WaveSpeed: 4.657349
-    DirAngleDeg: -47.71976
-  - WaveLength: 11.764267
-    Amplitude: 0.05882133
-    WaveSpeed: 4.2835684
-    DirAngleDeg: 32.171055
-  - WaveLength: 8.987966
-    Amplitude: 0.044939827
-    WaveSpeed: 3.7441564
-    DirAngleDeg: -0.33402085
-  - WaveLength: 12.449574
-    Amplitude: 0.062247872
-    WaveSpeed: 4.4065685
-    DirAngleDeg: 31.867708
-  - WaveLength: 13.861738
-    Amplitude: 0.06930869
-    WaveSpeed: 4.649777
-    DirAngleDeg: -76.47965
-  - WaveLength: 9.943161
-    Amplitude: 0.049715806
-    WaveSpeed: 3.938089
-    DirAngleDeg: -22.677551
-  - WaveLength: 15.564553
-    Amplitude: 0.07782277
-    WaveSpeed: 4.9271026
-    DirAngleDeg: -83.86173
-  - WaveLength: 10.917432
-    Amplitude: 0.05458716
-    WaveSpeed: 4.126516
-    DirAngleDeg: -26.940119
-  - WaveLength: 12.862607
-    Amplitude: 0.06431303
-    WaveSpeed: 4.479069
-    DirAngleDeg: 30.272911
-  - WaveLength: 9.275007
-    Amplitude: 0.046375036
-    WaveSpeed: 3.8034737
-    DirAngleDeg: 28.333973
-  - WaveLength: 11.534469
-    Amplitude: 0.05767234
-    WaveSpeed: 4.241525
-    DirAngleDeg: -37.341766
-  - WaveLength: 14.711168
-    Amplitude: 0.07355584
-    WaveSpeed: 4.7901254
-    DirAngleDeg: 56.328106
-  - WaveLength: 20.49075
-    Amplitude: 0.102453746
-    WaveSpeed: 5.653302
-    DirAngleDeg: 41.474136
-  - WaveLength: 28.248009
-    Amplitude: 0.14124005
-    WaveSpeed: 6.6376934
-    DirAngleDeg: 71.80109
-  - WaveLength: 28.890842
-    Amplitude: 0.14445421
-    WaveSpeed: 6.712795
-    DirAngleDeg: -89.84226
-  - WaveLength: 28.430843
-    Amplitude: 0.14215422
-    WaveSpeed: 6.65914
-    DirAngleDeg: -18.683142
-  - WaveLength: 25.240242
-    Amplitude: 0.12620121
-    WaveSpeed: 6.274369
-    DirAngleDeg: -2.512275
-  - WaveLength: 31.355225
-    Amplitude: 0.15677612
-    WaveSpeed: 6.993237
-    DirAngleDeg: -30.444178
-  - WaveLength: 18.887114
-    Amplitude: 0.094435565
-    WaveSpeed: 5.427578
-    DirAngleDeg: 37.12027
-  - WaveLength: 29.6123
-    Amplitude: 0.1480615
-    WaveSpeed: 6.796094
-    DirAngleDeg: -13.198132
-  - WaveLength: 22.016033
-    Amplitude: 0.11008016
-    WaveSpeed: 5.8599353
-    DirAngleDeg: -47.054916
-  - WaveLength: 29.26656
-    Amplitude: 0.1463328
-    WaveSpeed: 6.756303
-    DirAngleDeg: 10.884608
-  - WaveLength: 18.579817
-    Amplitude: 0.092899084
-    WaveSpeed: 5.383243
-    DirAngleDeg: -11.687297
-  - WaveLength: 26.467823
-    Amplitude: 0.1323391
-    WaveSpeed: 6.425137
-    DirAngleDeg: -45.647312
-  - WaveLength: 26.612968
-    Amplitude: 0.13306484
-    WaveSpeed: 6.44273
-    DirAngleDeg: -55.307407
-  - WaveLength: 31.259438
-    Amplitude: 0.15629718
-    WaveSpeed: 6.982547
-    DirAngleDeg: 76.5393
-  - WaveLength: 20.95017
-    Amplitude: 0.10475085
-    WaveSpeed: 5.7163267
-    DirAngleDeg: -12.035361
-  - WaveLength: 26.410353
-    Amplitude: 0.13205177
-    WaveSpeed: 6.4181576
-    DirAngleDeg: -5.8799925
-  - WaveLength: 63.919373
-    Amplitude: 0.31959686
-    WaveSpeed: 9.984803
-    DirAngleDeg: -47.3005
-  - WaveLength: 39.31016
-    Amplitude: 0.1965508
-    WaveSpeed: 7.830251
-    DirAngleDeg: -34.989662
-  - WaveLength: 49.251293
-    Amplitude: 0.24625646
-    WaveSpeed: 8.7646
-    DirAngleDeg: 40.726315
-  - WaveLength: 55.23812
-    Amplitude: 0.2761906
-    WaveSpeed: 9.282024
-    DirAngleDeg: -66.28556
-  - WaveLength: 43.498703
-    Amplitude: 0.2174935
-    WaveSpeed: 8.236855
-    DirAngleDeg: 7.806591
-  - WaveLength: 57.43125
-    Amplitude: 0.28715625
-    WaveSpeed: 9.464495
-    DirAngleDeg: 2.4713123
-  - WaveLength: 41.65335
-    Amplitude: 0.20826675
-    WaveSpeed: 8.0602455
-    DirAngleDeg: 0.9839308
-  - WaveLength: 38.832325
-    Amplitude: 0.19416162
-    WaveSpeed: 7.782515
-    DirAngleDeg: 43.074493
-  - WaveLength: 46.818207
-    Amplitude: 0.23409103
-    WaveSpeed: 8.545366
-    DirAngleDeg: 80.48303
-  - WaveLength: 41.051094
-    Amplitude: 0.20525546
-    WaveSpeed: 8.001762
-    DirAngleDeg: 65.03363
-  - WaveLength: 35.57247
-    Amplitude: 0.17786236
-    WaveSpeed: 7.448697
-    DirAngleDeg: -24.911274
-  - WaveLength: 63.245125
-    Amplitude: 0.31622562
-    WaveSpeed: 9.932002
-    DirAngleDeg: -28.724882
-  - WaveLength: 57.330986
-    Amplitude: 0.28665492
-    WaveSpeed: 9.456229
-    DirAngleDeg: -89.05972
-  - WaveLength: 36.59477
-    Amplitude: 0.18297383
-    WaveSpeed: 7.5549707
-    DirAngleDeg: -64.91156
-  - WaveLength: 35.35467
-    Amplitude: 0.17677335
-    WaveSpeed: 7.4258585
-    DirAngleDeg: 34.67757
-  - WaveLength: 45.689217
-    Amplitude: 0.22844608
-    WaveSpeed: 8.441704
-    DirAngleDeg: 74.224815
-  - WaveLength: 113.97961
-    Amplitude: 0.569898
-    WaveSpeed: 13.333275
-    DirAngleDeg: 28.319748
-  - WaveLength: 123.17622
-    Amplitude: 0.6158811
-    WaveSpeed: 13.860749
-    DirAngleDeg: -50.56745
-  - WaveLength: 108.42787
-    Amplitude: 0.54213935
-    WaveSpeed: 13.004502
-    DirAngleDeg: -87.995186
-  - WaveLength: 88.20798
-    Amplitude: 0.4410399
-    WaveSpeed: 11.729438
-    DirAngleDeg: -63.193336
-  - WaveLength: 114.6409
-    Amplitude: 0.57320446
-    WaveSpeed: 13.371899
-    DirAngleDeg: -54.145454
-  - WaveLength: 120.49587
-    Amplitude: 0.60247934
-    WaveSpeed: 13.709113
-    DirAngleDeg: 51.06293
-  - WaveLength: 97.99357
-    Amplitude: 0.48996782
-    WaveSpeed: 12.362948
-    DirAngleDeg: -41.98347
-  - WaveLength: 107.68413
-    Amplitude: 0.5384206
-    WaveSpeed: 12.959825
-    DirAngleDeg: -84.72424
-  - WaveLength: 74.79491
-    Amplitude: 0.37397453
-    WaveSpeed: 10.800883
-    DirAngleDeg: -3.7325728
-  - WaveLength: 75.66221
-    Amplitude: 0.37831104
-    WaveSpeed: 10.863325
-    DirAngleDeg: 83.06848
-  - WaveLength: 103.62099
-    Amplitude: 0.5181049
-    WaveSpeed: 12.712974
-    DirAngleDeg: -19.836449
-  - WaveLength: 92.288666
-    Amplitude: 0.4614433
-    WaveSpeed: 11.9976845
-    DirAngleDeg: -31.756079
-  - WaveLength: 73.80476
-    Amplitude: 0.3690238
-    WaveSpeed: 10.729154
-    DirAngleDeg: -24.006533
-  - WaveLength: 76.20819
-    Amplitude: 0.38104096
-    WaveSpeed: 10.902451
-    DirAngleDeg: 84.60968
-  - WaveLength: 125.436615
-    Amplitude: 0.6271831
-    WaveSpeed: 13.9873495
-    DirAngleDeg: 15.626946
-  - WaveLength: 109.578384
-    Amplitude: 0.5478919
-    WaveSpeed: 13.073315
-    DirAngleDeg: -33.96538
+  - WaveLength: 0.7062392
+    Amplitude: 0.0035311962
+    WaveSpeed: 1.0495405
+    DirAngleDeg: 22.780535
+  - WaveLength: 0.5404818
+    Amplitude: 0.002702409
+    WaveSpeed: 0.91815037
+    DirAngleDeg: 68.9347
+  - WaveLength: 0.6463188
+    Amplitude: 0.0032315939
+    WaveSpeed: 1.00403
+    DirAngleDeg: 51.354603
+  - WaveLength: 0.76696557
+    Amplitude: 0.0038348278
+    WaveSpeed: 1.0937327
+    DirAngleDeg: 29.522364
+  - WaveLength: 0.93986416
+    Amplitude: 0.0046993205
+    WaveSpeed: 1.2107538
+    DirAngleDeg: -74.77284
+  - WaveLength: 0.82216704
+    Amplitude: 0.004110835
+    WaveSpeed: 1.132409
+    DirAngleDeg: 48.586266
+  - WaveLength: 0.51559186
+    Amplitude: 0.0025779593
+    WaveSpeed: 0.89676017
+    DirAngleDeg: -11.307775
+  - WaveLength: 0.587773
+    Amplitude: 0.002938865
+    WaveSpeed: 0.95747644
+    DirAngleDeg: -32.914276
+  - WaveLength: 0.92480433
+    Amplitude: 0.0046240217
+    WaveSpeed: 1.2010144
+    DirAngleDeg: -59.631664
+  - WaveLength: 0.57640815
+    Amplitude: 0.0028820406
+    WaveSpeed: 0.94817466
+    DirAngleDeg: -10.131659
+  - WaveLength: 0.73159087
+    Amplitude: 0.0036579543
+    WaveSpeed: 1.0682119
+    DirAngleDeg: -30.581936
+  - WaveLength: 0.5413136
+    Amplitude: 0.002706568
+    WaveSpeed: 0.9188566
+    DirAngleDeg: 2.2426808
+  - WaveLength: 0.4447594
+    Amplitude: 0.002223797
+    WaveSpeed: 0.8328866
+    DirAngleDeg: 79.45901
+  - WaveLength: 0.8566399
+    Amplitude: 0.0042831996
+    WaveSpeed: 1.1559057
+    DirAngleDeg: -3.5456336
+  - WaveLength: 0.5761219
+    Amplitude: 0.0028806096
+    WaveSpeed: 0.9479392
+    DirAngleDeg: 9.098578
+  - WaveLength: 0.7449961
+    Amplitude: 0.0037249802
+    WaveSpeed: 1.077954
+    DirAngleDeg: 35.062454
+  - WaveLength: 1.5620829
+    Amplitude: 0.0078104143
+    WaveSpeed: 1.5609008
+    DirAngleDeg: 26.791962
+  - WaveLength: 1.1776986
+    Amplitude: 0.005888493
+    WaveSpeed: 1.3553153
+    DirAngleDeg: 24.868582
+  - WaveLength: 1.6627774
+    Amplitude: 0.008313887
+    WaveSpeed: 1.6104244
+    DirAngleDeg: -60.176884
+  - WaveLength: 1.9161186
+    Amplitude: 0.009580593
+    WaveSpeed: 1.728759
+    DirAngleDeg: 70.157875
+  - WaveLength: 1.4280925
+    Amplitude: 0.0071404623
+    WaveSpeed: 1.4924557
+    DirAngleDeg: -56.05263
+  - WaveLength: 1.8702261
+    Amplitude: 0.009351131
+    WaveSpeed: 1.707931
+    DirAngleDeg: -69.88963
+  - WaveLength: 1.5700629
+    Amplitude: 0.0078503145
+    WaveSpeed: 1.5648828
+    DirAngleDeg: 25.364468
+  - WaveLength: 1.6882691
+    Amplitude: 0.008441346
+    WaveSpeed: 1.622722
+    DirAngleDeg: -50.24816
+  - WaveLength: 1.8185226
+    Amplitude: 0.009092613
+    WaveSpeed: 1.6841573
+    DirAngleDeg: -82.16598
+  - WaveLength: 1.5846981
+    Amplitude: 0.00792349
+    WaveSpeed: 1.5721593
+    DirAngleDeg: 54.569115
+  - WaveLength: 1.3727485
+    Amplitude: 0.006863742
+    WaveSpeed: 1.4632508
+    DirAngleDeg: 78.61125
+  - WaveLength: 1.579811
+    Amplitude: 0.007899054
+    WaveSpeed: 1.5697331
+    DirAngleDeg: 29.481209
+  - WaveLength: 1.1354322
+    Amplitude: 0.0056771613
+    WaveSpeed: 1.3307728
+    DirAngleDeg: -23.457687
+  - WaveLength: 1.9703908
+    Amplitude: 0.009851954
+    WaveSpeed: 1.7530708
+    DirAngleDeg: 49.66681
+  - WaveLength: 1.8239164
+    Amplitude: 0.009119582
+    WaveSpeed: 1.686653
+    DirAngleDeg: -24.129421
+  - WaveLength: 1.4348524
+    Amplitude: 0.007174262
+    WaveSpeed: 1.4959838
+    DirAngleDeg: 14.997593
+  - WaveLength: 3.9576697
+    Amplitude: 0.019788349
+    WaveSpeed: 2.484523
+    DirAngleDeg: -15.807663
+  - WaveLength: 2.2602777
+    Amplitude: 0.011301388
+    WaveSpeed: 1.8776047
+    DirAngleDeg: 44.62453
+  - WaveLength: 3.2891111
+    Amplitude: 0.016445555
+    WaveSpeed: 2.2649705
+    DirAngleDeg: 72.36319
+  - WaveLength: 3.133993
+    Amplitude: 0.015669964
+    WaveSpeed: 2.210916
+    DirAngleDeg: -43.61513
+  - WaveLength: 2.3628988
+    Amplitude: 0.011814494
+    WaveSpeed: 1.9197551
+    DirAngleDeg: 13.602973
+  - WaveLength: 2.9007387
+    Amplitude: 0.014503693
+    WaveSpeed: 2.1270494
+    DirAngleDeg: 58.687614
+  - WaveLength: 3.905881
+    Amplitude: 0.019529404
+    WaveSpeed: 2.4682138
+    DirAngleDeg: 57.083954
+  - WaveLength: 3.6660056
+    Amplitude: 0.018330028
+    WaveSpeed: 2.3912218
+    DirAngleDeg: -65.873314
+  - WaveLength: 3.621701
+    Amplitude: 0.018108504
+    WaveSpeed: 2.3767285
+    DirAngleDeg: 88.36293
+  - WaveLength: 2.9589555
+    Amplitude: 0.014794777
+    WaveSpeed: 2.148288
+    DirAngleDeg: -2.7730715
+  - WaveLength: 2.454296
+    Amplitude: 0.012271481
+    WaveSpeed: 1.956531
+    DirAngleDeg: 27.805214
+  - WaveLength: 2.884062
+    Amplitude: 0.01442031
+    WaveSpeed: 2.1209264
+    DirAngleDeg: -34.75912
+  - WaveLength: 3.7242122
+    Amplitude: 0.018621061
+    WaveSpeed: 2.41013
+    DirAngleDeg: 84.3951
+  - WaveLength: 2.3391445
+    Amplitude: 0.011695722
+    WaveSpeed: 1.910081
+    DirAngleDeg: -43.54325
+  - WaveLength: 2.8955219
+    Amplitude: 0.014477609
+    WaveSpeed: 2.125136
+    DirAngleDeg: 36.27301
+  - WaveLength: 3.04918
+    Amplitude: 0.0152459
+    WaveSpeed: 2.1807947
+    DirAngleDeg: -53.35525
+  - WaveLength: 5.6896777
+    Amplitude: 0.028448388
+    WaveSpeed: 2.9789767
+    DirAngleDeg: 12.541484
+  - WaveLength: 7.493602
+    Amplitude: 0.03746801
+    WaveSpeed: 3.4187598
+    DirAngleDeg: 70.67307
+  - WaveLength: 7.5090895
+    Amplitude: 0.037545446
+    WaveSpeed: 3.4222908
+    DirAngleDeg: 33.387726
+  - WaveLength: 6.241745
+    Amplitude: 0.031208724
+    WaveSpeed: 3.1201558
+    DirAngleDeg: -0.2671802
+  - WaveLength: 4.7380257
+    Amplitude: 0.023690129
+    WaveSpeed: 2.718454
+    DirAngleDeg: 15.465263
+  - WaveLength: 4.7740197
+    Amplitude: 0.023870097
+    WaveSpeed: 2.7287602
+    DirAngleDeg: 53.01618
+  - WaveLength: 7.937283
+    Amplitude: 0.039686415
+    WaveSpeed: 3.5185134
+    DirAngleDeg: -31.086834
+  - WaveLength: 6.397376
+    Amplitude: 0.03198688
+    WaveSpeed: 3.1588151
+    DirAngleDeg: 25.500639
+  - WaveLength: 5.219658
+    Amplitude: 0.026098289
+    WaveSpeed: 2.8532794
+    DirAngleDeg: 17.99023
+  - WaveLength: 4.5910764
+    Amplitude: 0.022955382
+    WaveSpeed: 2.6759658
+    DirAngleDeg: -22.718815
+  - WaveLength: 5.2555814
+    Amplitude: 0.026277907
+    WaveSpeed: 2.8630812
+    DirAngleDeg: 26.162994
+  - WaveLength: 5.644908
+    Amplitude: 0.028224539
+    WaveSpeed: 2.9672334
+    DirAngleDeg: 1.7381895
+  - WaveLength: 4.5570974
+    Amplitude: 0.022785487
+    WaveSpeed: 2.6660447
+    DirAngleDeg: -9.7007885
+  - WaveLength: 7.129052
+    Amplitude: 0.03564526
+    WaveSpeed: 3.334565
+    DirAngleDeg: 7.017914
+  - WaveLength: 6.518305
+    Amplitude: 0.03259152
+    WaveSpeed: 3.1885307
+    DirAngleDeg: 38.08949
+  - WaveLength: 5.727999
+    Amplitude: 0.028639995
+    WaveSpeed: 2.988992
+    DirAngleDeg: 80.68471
+  - WaveLength: 10.497568
+    Amplitude: 0.05248784
+    WaveSpeed: 4.046389
+    DirAngleDeg: -11.834818
+  - WaveLength: 9.658294
+    Amplitude: 0.048291467
+    WaveSpeed: 3.8812666
+    DirAngleDeg: -65.71206
+  - WaveLength: 10.351124
+    Amplitude: 0.05175562
+    WaveSpeed: 4.0180655
+    DirAngleDeg: 60.12283
+  - WaveLength: 15.215281
+    Amplitude: 0.0760764
+    WaveSpeed: 4.871506
+    DirAngleDeg: 34.601265
+  - WaveLength: 14.488967
+    Amplitude: 0.072444834
+    WaveSpeed: 4.753812
+    DirAngleDeg: 38.30355
+  - WaveLength: 13.305477
+    Amplitude: 0.06652738
+    WaveSpeed: 4.555526
+    DirAngleDeg: -79.88595
+  - WaveLength: 15.268956
+    Amplitude: 0.07634478
+    WaveSpeed: 4.8800917
+    DirAngleDeg: 59.230236
+  - WaveLength: 10.48478
+    Amplitude: 0.0524239
+    WaveSpeed: 4.0439234
+    DirAngleDeg: -64.145584
+  - WaveLength: 13.294842
+    Amplitude: 0.06647421
+    WaveSpeed: 4.5537047
+    DirAngleDeg: -60.227802
+  - WaveLength: 9.656559
+    Amplitude: 0.048282795
+    WaveSpeed: 3.880918
+    DirAngleDeg: 66.092896
+  - WaveLength: 12.744566
+    Amplitude: 0.06372283
+    WaveSpeed: 4.4584694
+    DirAngleDeg: -4.6967945
+  - WaveLength: 10.331301
+    Amplitude: 0.051656503
+    WaveSpeed: 4.0142164
+    DirAngleDeg: -54.18914
+  - WaveLength: 11.122846
+    Amplitude: 0.055614226
+    WaveSpeed: 4.165156
+    DirAngleDeg: 1.1703122
+  - WaveLength: 12.839575
+    Amplitude: 0.064197876
+    WaveSpeed: 4.475057
+    DirAngleDeg: -17.828955
+  - WaveLength: 14.468056
+    Amplitude: 0.07234028
+    WaveSpeed: 4.75038
+    DirAngleDeg: 67.661064
+  - WaveLength: 10.820383
+    Amplitude: 0.054101914
+    WaveSpeed: 4.108134
+    DirAngleDeg: 48.11898
+  - WaveLength: 29.253407
+    Amplitude: 0.14626703
+    WaveSpeed: 6.7547846
+    DirAngleDeg: 35.19691
+  - WaveLength: 18.320822
+    Amplitude: 0.091604106
+    WaveSpeed: 5.345591
+    DirAngleDeg: -45.970253
+  - WaveLength: 24.954247
+    Amplitude: 0.12477123
+    WaveSpeed: 6.2387204
+    DirAngleDeg: 52.807888
+  - WaveLength: 23.797798
+    Amplitude: 0.11898899
+    WaveSpeed: 6.0924454
+    DirAngleDeg: 12.443872
+  - WaveLength: 17.919292
+    Amplitude: 0.08959646
+    WaveSpeed: 5.2866883
+    DirAngleDeg: -66.98703
+  - WaveLength: 17.85223
+    Amplitude: 0.08926115
+    WaveSpeed: 5.2767863
+    DirAngleDeg: 81.95011
+  - WaveLength: 20.546658
+    Amplitude: 0.102733284
+    WaveSpeed: 5.6610093
+    DirAngleDeg: -1.391412
+  - WaveLength: 17.756804
+    Amplitude: 0.08878402
+    WaveSpeed: 5.2626643
+    DirAngleDeg: -37.8807
+  - WaveLength: 18.770725
+    Amplitude: 0.09385362
+    WaveSpeed: 5.410829
+    DirAngleDeg: 56.639736
+  - WaveLength: 22.055185
+    Amplitude: 0.110275924
+    WaveSpeed: 5.8651433
+    DirAngleDeg: -39.91347
+  - WaveLength: 18.989124
+    Amplitude: 0.09494562
+    WaveSpeed: 5.4422154
+    DirAngleDeg: 67.249504
+  - WaveLength: 23.232952
+    Amplitude: 0.11616476
+    WaveSpeed: 6.0197086
+    DirAngleDeg: 29.680378
+  - WaveLength: 21.394978
+    Amplitude: 0.106974885
+    WaveSpeed: 5.776692
+    DirAngleDeg: 19.241577
+  - WaveLength: 24.27967
+    Amplitude: 0.12139835
+    WaveSpeed: 6.153818
+    DirAngleDeg: 68.8819
+  - WaveLength: 28.273212
+    Amplitude: 0.14136606
+    WaveSpeed: 6.640654
+    DirAngleDeg: 10.916558
+  - WaveLength: 25.06976
+    Amplitude: 0.12534879
+    WaveSpeed: 6.2531433
+    DirAngleDeg: -14.548334
+  - WaveLength: 58.757423
+    Amplitude: 0.29378712
+    WaveSpeed: 9.573145
+    DirAngleDeg: -34.649647
+  - WaveLength: 47.13095
+    Amplitude: 0.23565476
+    WaveSpeed: 8.57386
+    DirAngleDeg: -34.69007
+  - WaveLength: 56.118523
+    Amplitude: 0.28059262
+    WaveSpeed: 9.355702
+    DirAngleDeg: 84.57415
+  - WaveLength: 61.54891
+    Amplitude: 0.30774453
+    WaveSpeed: 9.797911
+    DirAngleDeg: 78.34102
+  - WaveLength: 48.671394
+    Amplitude: 0.24335697
+    WaveSpeed: 8.712849
+    DirAngleDeg: 22.741869
+  - WaveLength: 37.587143
+    Amplitude: 0.18793571
+    WaveSpeed: 7.656723
+    DirAngleDeg: -20.154194
+  - WaveLength: 44.116776
+    Amplitude: 0.22058387
+    WaveSpeed: 8.295168
+    DirAngleDeg: -29.515125
+  - WaveLength: 56.395798
+    Amplitude: 0.281979
+    WaveSpeed: 9.378787
+    DirAngleDeg: -65.88934
+  - WaveLength: 63.176155
+    Amplitude: 0.31588078
+    WaveSpeed: 9.926585
+    DirAngleDeg: 35.942993
+  - WaveLength: 37.001713
+    Amplitude: 0.18500856
+    WaveSpeed: 7.5968614
+    DirAngleDeg: 2.4033988
+  - WaveLength: 53.669014
+    Amplitude: 0.26834506
+    WaveSpeed: 9.149241
+    DirAngleDeg: -45.0527
+  - WaveLength: 54.76893
+    Amplitude: 0.27384463
+    WaveSpeed: 9.24252
+    DirAngleDeg: 12.710334
+  - WaveLength: 35.964596
+    Amplitude: 0.17982298
+    WaveSpeed: 7.489639
+    DirAngleDeg: -54.936962
+  - WaveLength: 47.629944
+    Amplitude: 0.23814972
+    WaveSpeed: 8.619127
+    DirAngleDeg: -71.89241
+  - WaveLength: 62.697495
+    Amplitude: 0.31348747
+    WaveSpeed: 9.888909
+    DirAngleDeg: -28.973211
+  - WaveLength: 40.17302
+    Amplitude: 0.20086509
+    WaveSpeed: 7.915722
+    DirAngleDeg: -82.39474
+  - WaveLength: 98.90875
+    Amplitude: 0.49454376
+    WaveSpeed: 12.420545
+    DirAngleDeg: 72.511765
+  - WaveLength: 118.24902
+    Amplitude: 0.5912451
+    WaveSpeed: 13.580697
+    DirAngleDeg: 75.37076
+  - WaveLength: 113.977
+    Amplitude: 0.56988496
+    WaveSpeed: 13.333123
+    DirAngleDeg: 6.731883
+  - WaveLength: 105.45307
+    Amplitude: 0.52726537
+    WaveSpeed: 12.824868
+    DirAngleDeg: -50.1289
+  - WaveLength: 127.732574
+    Amplitude: 0.6386629
+    WaveSpeed: 14.114779
+    DirAngleDeg: -18.808325
+  - WaveLength: 83.149284
+    Amplitude: 0.41574642
+    WaveSpeed: 11.388133
+    DirAngleDeg: 74.22063
+  - WaveLength: 96.744286
+    Amplitude: 0.4837214
+    WaveSpeed: 12.283891
+    DirAngleDeg: -27.454393
+  - WaveLength: 76.4389
+    Amplitude: 0.38219452
+    WaveSpeed: 10.918941
+    DirAngleDeg: -7.126404
+  - WaveLength: 107.67265
+    Amplitude: 0.5383633
+    WaveSpeed: 12.959134
+    DirAngleDeg: -10.637588
+  - WaveLength: 118.301
+    Amplitude: 0.591505
+    WaveSpeed: 13.583681
+    DirAngleDeg: 52.92891
+  - WaveLength: 90.32254
+    Amplitude: 0.45161268
+    WaveSpeed: 11.869197
+    DirAngleDeg: -32.905266
+  - WaveLength: 71.910614
+    Amplitude: 0.35955307
+    WaveSpeed: 10.590581
+    DirAngleDeg: -66.37506
+  - WaveLength: 95.21886
+    Amplitude: 0.47609428
+    WaveSpeed: 12.186662
+    DirAngleDeg: -57.682793
+  - WaveLength: 72.65397
+    Amplitude: 0.36326984
+    WaveSpeed: 10.645179
+    DirAngleDeg: 12.583884
+  - WaveLength: 115.71997
+    Amplitude: 0.5785999
+    WaveSpeed: 13.434684
+    DirAngleDeg: 0.37021995
+  - WaveLength: 117.795425
+    Amplitude: 0.5889771
+    WaveSpeed: 13.554625
+    DirAngleDeg: 41.425537
   RegenerateTileMeshes: 0
   TileMeshes:
   - {fileID: 4300000, guid: 6301127261b292c4fa343e3e44c1b96b, type: 2}

@@ -13,10 +13,7 @@ CBUFFER_START(UnityPerDraw)
 	real4 unity_LightData;//number of lights in Y
 	real4 unity_LightIndices[2];//up to 8 lights index
 
-	float4 unity_OrthoParams;
-	float4 _ProjectionParams;
-	float4 _ScreenParams;//xy is the screen dimensions
-	float4 _ZBufferParams;//conversion factors for depth raw to linear
+	
 
 	//object layer mask
 	float4 unity_RenderingLayer;
@@ -48,5 +45,10 @@ float3 _WorldSpaceCameraPos;
 float4x4 unity_MatrixV;
 float4x4 unity_MatrixVP;
 float4x4 glstate_matrix_projection;
+
+float4 unity_OrthoParams;
+float4 _ProjectionParams;// this input is not supported in SRP batcher
+float4 _ScreenParams;//xy is the screen dimensions
+float4 _ZBufferParams;//conversion factors for depth raw to linear
 
 #endif
