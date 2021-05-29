@@ -7,6 +7,12 @@
         _TransitionParam("TransitionParams", Vector) = (1.0,1.0,1.0,1.0)
         //_CenterPos("LODCenterPosition", Vector) = (0.0,0.0,0.0,0.0)
         _LODSize("GridSize", Float) = 1
+
+        _DispTex("LODDispTexture", 2D) = "white" {}
+        _NextDispTex("NextLODDispTexture", 2D) = "white" {}
+
+        _NormalTex("LODNTexture", 2D) = "white" {}
+        _NextLODNTex("NextLODNTexture", 2D) = "white" {}
     }
     SubShader
     {

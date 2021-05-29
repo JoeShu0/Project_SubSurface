@@ -36,8 +36,8 @@ public class OceanRenderer :MonoBehaviour
     private void Awake()
     {
         //ORS.LODDisplaceMaps = new RenderTexture[ORS.LODCount]
-
-        CreateOceanLODs();
+        //ORS.Initialization()
+        //CreateOceanLODs();
 
         threadGroupX = threadGroupY = Mathf.CeilToInt(ORS.RTSize / 32.0f);
     }
@@ -60,6 +60,8 @@ public class OceanRenderer :MonoBehaviour
 
         if(!hasOceanLOD)
             CreateOceanLODs();
+
+        RenderDisAandNormalMapsForLODs();
 #endif
 
         UpdateShaderGlobalParams();
@@ -67,7 +69,7 @@ public class OceanRenderer :MonoBehaviour
 
     private void FixedUpdate()
     {
-        RenderDisAandNormalMapsForLODs();
+        //RenderDisAandNormalMapsForLODs();
     }
 
     void CreateOceanLODs()
@@ -244,7 +246,7 @@ public class OceanRenderer :MonoBehaviour
             { transform.position.x, transform.position.y, transform.position.z}
             );
 
-        for (int i = ORS.LODCount-1; i>0; i--)
+        for (int i = ORS.LODCount-1; i>=0; i--)
         {
 
             ORS.shapeShader.SetInt("WaveCount", ORS.WaveCount);
@@ -256,7 +258,7 @@ public class OceanRenderer :MonoBehaviour
             ORS.shapeShader.SetInt("LODIndex", i);
             ORS.shapeShader.SetFloat("_Time", Time.time);
             ORS.shapeShader.SetFloat("_deltaTime", Time.deltaTime);
-
+            /*
             if (i != ORS.LODCount - 1)
             {
                 ORS.shapeShader.SetTexture(KIndex, "BaseDisplace", ORS.LODDisplaceMaps[i + 1]);
@@ -266,7 +268,14 @@ public class OceanRenderer :MonoBehaviour
             {
                 ORS.shapeShader.SetTexture(KIndex, "BaseDisplace", ORS.LODDisplaceMaps[i]);
                 ORS.shapeShader.SetTexture(KIndex, "BaseNormal", ORS.LODNormalMaps[i]);
-            }
+            }*/
+            RenderTexture Temp = new RenderTexture(ORS.RTSize, ORS.RTSize, 0, RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear);
+            //Temp.enableRandomWrite = true;
+            Temp.antiAliasing = 1;
+            Temp.wrapMode = TextureWrapMode.Clamp;
+            Temp.filterMode = FilterMode.Trilinear;
+
+            Debug.Log(ORS.LODDisplaceMaps[i].enableRandomWrite);
             ORS.shapeShader.SetTexture(KIndex, "Displace", ORS.LODDisplaceMaps[i]);
             ORS.shapeShader.SetTexture(KIndex, "Normal", ORS.LODNormalMaps[i]);
 
@@ -274,6 +283,7 @@ public class OceanRenderer :MonoBehaviour
 
             ORS.shapeShader.Dispatch(KIndex, threadGroupX, threadGroupY, 1);
         }
+
         shapeWaveBufer.Release();
     }
 }

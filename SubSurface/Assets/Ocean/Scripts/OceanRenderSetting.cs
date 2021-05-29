@@ -57,8 +57,8 @@ public class OceanRenderSetting : ScriptableObject
     {
         public float WaveLength;
         public float Amplitude;
-        public float WaveSpeed;
-        public float DirAngleDeg;
+        public float Speed;
+        public Vector2 Direction;
     }
     [Tooltip("Tick this box will regenerate All WaveDatas")]
     public bool RegenerateWaveDatas = true;
@@ -81,13 +81,17 @@ public class OceanRenderSetting : ScriptableObject
     //All ocean Materials
     public Material[] OceanMats;
 
+    static int displaceTexId = Shader.PropertyToID("_DispTex");
+    static int displaceTexNextId = Shader.PropertyToID("_NextDispTex");
+    static int normalTexId = Shader.PropertyToID("_NormalTex");
+    static int normalTexNextId = Shader.PropertyToID("_NextLODNTex");
 
     private void Awake()
     {
-        
+        //InitLODRTs();
     }
 
-    private void Initialization()
+    public void Initialization()
     {
         InitLODRTs();
         InitTiles();
@@ -164,10 +168,14 @@ public class OceanRenderSetting : ScriptableObject
 
                     newWaveData.WaveLength = Mathf.Lerp(Min_WaveLength, Max_WaveLength, UnityEngine.Random.Range(0.1f, 1.0f));
                     newWaveData.Amplitude = newWaveData.WaveLength * 0.005f;
-                    newWaveData.DirAngleDeg = UnityEngine.Random.Range(-1.0f, 1.0f) * WaveDirAngleRange + AnimeWindAngle;
+                    float DirAngleDeg = UnityEngine.Random.Range(-1.0f, 1.0f) * WaveDirAngleRange + AnimeWindAngle;
+                    newWaveData.Direction = new Vector2(
+                        (float)Mathf.Cos(Mathf.Deg2Rad * DirAngleDeg), 
+                        (float)Mathf.Sin(Mathf.Deg2Rad * DirAngleDeg)
+                        );
                     //DirX[index] = (float)Mathf.Cos(Mathf.Deg2Rad * DirAngleDegs[index]);
                     //DirZ[index] = (float)Mathf.Sin(Mathf.Deg2Rad * DirAngleDegs[index]);
-                    newWaveData.WaveSpeed = Mathf.Sqrt(9.8f / 2.0f / 3.14159f * newWaveData.WaveLength);
+                    newWaveData.Speed = Mathf.Sqrt(9.8f / 2.0f / 3.14159f * newWaveData.WaveLength);
                     SpectrumWaves[index] = newWaveData;
                 }
 
@@ -181,8 +189,8 @@ public class OceanRenderSetting : ScriptableObject
             {
                 SpectrumWaves[n].WaveLength = Mathf.Lerp(WaveLengthRange.x, WaveLengthRange.x, UnityEngine.Random.Range(0.0f, 1.0f));
                 SpectrumWaves[n].Amplitude = 0.0f;
-                SpectrumWaves[n].DirAngleDeg = 0.0f;
-                SpectrumWaves[n].WaveSpeed = 0.0f;
+                SpectrumWaves[n].Direction = new Vector2(0.0f,1.0f);
+                SpectrumWaves[n].Speed = 0.0f;
             }
         }
 
@@ -198,6 +206,8 @@ public class OceanRenderSetting : ScriptableObject
             OceanMats[i] = new Material(oceanShader);
             string MatPath = string.Format("Assets/Ocean/OceanAssets/Material_LOD{0}.mat", i);
             OceanMats[i].enableInstancing = true;
+            OceanMats[i].SetTexture(displaceTexId, LODDisplaceMaps[i]);
+            OceanMats[i].SetTexture(displaceTexNextId, LODDisplaceMaps[Mathf.Min(i+1, LODCount-1)]);
             AssetDatabase.DeleteAsset(MatPath);
             AssetDatabase.CreateAsset(OceanMats[i], MatPath);
         }
@@ -214,8 +224,8 @@ public class OceanRenderSetting : ScriptableObject
             AssetDatabase.DeleteAsset(RTPath);
 
             RenderTexture RT = new RenderTexture(RTSize, RTSize, 0, RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear);
-            AssetDatabase.CreateAsset(RT, RTPath);
-            RT = (RenderTexture)AssetDatabase.LoadAssetAtPath(RTPath,typeof(RenderTexture));
+            
+            //RT = (RenderTexture)AssetDatabase.LoadAssetAtPath(RTPath,typeof(RenderTexture));
             LODDisplaceMaps[i] = RT;
             LODDisplaceMaps[i].enableRandomWrite = true;
             LODDisplaceMaps[i].antiAliasing = 1;
@@ -223,18 +233,21 @@ public class OceanRenderSetting : ScriptableObject
             LODDisplaceMaps[i].wrapMode = TextureWrapMode.Clamp;
             LODDisplaceMaps[i].filterMode = FilterMode.Trilinear;
             LODDisplaceMaps[i].Create();
+            AssetDatabase.CreateAsset(RT, RTPath);
 
             RTPath = string.Format("Assets/Ocean/OceanAssets/NormalMap_LOD{0}.renderTexture", i);
             AssetDatabase.DeleteAsset(RTPath);
 
             RT = new RenderTexture(RTSize, RTSize, 0, RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear);
-            AssetDatabase.CreateAsset(RT, RTPath);
-            RT = (RenderTexture)AssetDatabase.LoadAssetAtPath(RTPath, typeof(RenderTexture));
+            
+            //RT = (RenderTexture)AssetDatabase.LoadAssetAtPath(RTPath, typeof(RenderTexture));
             LODNormalMaps[i] = RT;
             LODNormalMaps[i].enableRandomWrite = true;
+            LODNormalMaps[i].antiAliasing = 1;
             LODNormalMaps[i].wrapMode = TextureWrapMode.Clamp;
             LODNormalMaps[i].filterMode = FilterMode.Trilinear;
             LODNormalMaps[i].Create();
+            AssetDatabase.CreateAsset(RT, RTPath);
         }
     }
 

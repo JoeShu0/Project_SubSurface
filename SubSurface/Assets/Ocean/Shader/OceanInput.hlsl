@@ -4,6 +4,16 @@
 //short cut unity access per material property
 #define INPUT_PROP(name) UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, name)
 
+TEXTURE2D(_DispTex);
+SAMPLER(sampler_DispTex);
+TEXTURE2D(_NextDispTex);
+SAMPLER(sampler_NextDispTex);
+TEXTURE2D(_NormalTex);
+SAMPLER(sampler_NormalTex);
+TEXTURE2D(_NextLODNTex);
+SAMPLER(sampler_NextLODNTex);
+
+
 UNITY_INSTANCING_BUFFER_START(UnityPerMaterial)
     UNITY_DEFINE_INSTANCED_PROP(float4, _BaseColor)
     UNITY_DEFINE_INSTANCED_PROP(float, _GridSize)
@@ -14,7 +24,7 @@ UNITY_INSTANCING_BUFFER_END(UnityPerMaterial)
 //specify the buffer, use the Shader.setglobal~ to set buffers 
 CBUFFER_START(_OceanData)
     float4 _CenterPos;
-    float4 _CamProjectionParams;
+    //float4 _CamProjectionParams;
 CBUFFER_END
 
 TEXTURE2D(_CameraOceanDepthTexture);
@@ -58,6 +68,19 @@ float3 TransitionLOD(float3 positionWS, float oceanScale)
     //TransitionPosition.x += POffset.x * Grid4 * TransiFactor;
     //TransitionPosition.z += POffset.y * Grid4 * TransiFactor;
     return TransitionPosition;
+}
+
+float3 GetOceanDisplacement(float2 UV, float2 UV_n)
+{
+    //sample displacement tex
+    float3 col = _DispTex.SampleLevel(sampler_DispTex, UV, 0).rgb;
+    float3 col_n = _NextDispTex.SampleLevel(sampler_DispTex, UV_n, 0).rgb;
+
+    float2 LODUVblend = clamp((abs(UV - 0.5f) / 0.5f - 0.75f)*5.0f, 0, 1);
+    float LODBlendFactor = max(LODUVblend.x, LODUVblend.y);
+    //LODBlendFactor = 0.0f;
+    col = lerp(col, col_n, LODBlendFactor);
+    return col;
 }
 
 #endif
