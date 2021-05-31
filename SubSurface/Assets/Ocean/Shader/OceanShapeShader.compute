@@ -11,15 +11,15 @@ SamplerState samplerBaseNormal;
 Texture2D<float4> NoiseFoam;
 SamplerState samplerNoiseFoam;
 
-RWTexture2D<float4> Displace;
-RWTexture2D<float4> Normal;
+RWTexture2D<float4> _DisplaceMap;
+RWTexture2D<float4> _NormalMap;
 float3 CenterPos;
-float LODSize;
-int LODIndex;
+float _LODSize;
+int _LODIndex;
 float _Time;
-float _deltaTime;
-int WaveCount;
-float _foamFadePow;
+float _DeltaTime;
+int _WaveCount;
+float _FoamFade;
 
 const int LODCount = 8;
 
@@ -30,7 +30,7 @@ struct Wave
     float Speed;
     float2 Direction;
 };
-StructuredBuffer<Wave> WavesBuffer;
+StructuredBuffer<Wave> _WavesBuffer;
 /*
 struct WaveBatched
 {
@@ -83,15 +83,15 @@ GerstnerOut GetWaveSum(float3 OriginalWPos, int2 coord)
         _Normal = float3(0.0f, 1.0f, 0.0f);
     }
     */
-    for (int i = 0; i < WaveCount; i++)
+    for (int i = 0; i < _WaveCount; i++)
     {
 
-        float _WaveLength = WavesBuffer[i].WaveLength;
+        float _WaveLength = _WavesBuffer[i].WaveLength;
         float k = 2 * PI / _WaveLength;
-        float _Amplitude = WavesBuffer[i].Amplitude;
+        float _Amplitude = _WavesBuffer[i].Amplitude;
         float _Steepness = _Amplitude * k;
-        float _Speed = WavesBuffer[i].Speed;
-        float2 _Direction = normalize(WavesBuffer[i].Direction);
+        float _Speed = _WavesBuffer[i].Speed;
+        float2 _Direction = normalize(_WavesBuffer[i].Direction);
         float f = k * (dot(OriginalWPos, float3(_Direction.x, 0, _Direction.y)) - _Time * _Speed);
 
         float Wx = _Amplitude * cos(f) * _Direction.x;
@@ -168,10 +168,14 @@ void CSMain(uint3 id : SV_DispatchThreadID)
 {
     // TODO: insert actual code here!
     uint width, height;
-    Displace.GetDimensions(width, height);
+    _DisplaceMap.GetDimensions(width, height);
 
     //D3D CoordSystem
-    float3 WPos = float3((id.x / float(width) - 0.5f) * LODSize, 0.0f, (id.y / float(height) - 0.5f) * LODSize) + CenterPos;
+    float3 WPos = float3(
+        (id.x / float(width) - 0.5f) * _LODSize,
+        0.0f,
+        (id.y / float(height) - 0.5f) * _LODSize
+        ) + CenterPos;
 
     //WavesBuffer[0].WaveLength
     GerstnerOut outputWaveVectors = GetWaveSum(WPos, id.xy);
@@ -183,12 +187,12 @@ void CSMain(uint3 id : SV_DispatchThreadID)
     float2 UV = float2(float(id.x + 0.5f) / 512.0f * 1.0f, float(id.y + 0.5f) / 512.0f * 1.0f) + _Time / 100.0f;
     float _FoamNoise = NoiseFoam.SampleLevel(samplerNoiseFoam, UV, 0).r;
 
-    float FoamMask = clamp(1.0f - Tangentout.z,0.0,1.0) * 0.1f +Normal[id.xy].a * 0.9f ;
+    float FoamMask = clamp(1.0f - Tangentout.z,0.0,1.0) * 0.1f + _NormalMap[id.xy].a * 0.9f ;
     //float FoamMask = (1.0f-Tangentout.z);
 
-    Displace[id.xy] = float4(Displacement, 0.0f);
+    _DisplaceMap[id.xy] = float4(Displacement, 0.0f);
 
-    Normal[id.xy] = float4(Normalout, FoamMask);
+    _NormalMap[id.xy] = float4(Normalout, FoamMask);
 
     //debug
     //Displace[id.xy] = _WaveLengths[10];

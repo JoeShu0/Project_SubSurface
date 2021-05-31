@@ -37,6 +37,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _GridSize: 3.2
+    - _LODIndex: 4
     - _LODSize: 1024
     - _OceanScale: 1
     m_Colors:

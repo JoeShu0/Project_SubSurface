@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using static OceanRenderSetting;
@@ -18,17 +19,24 @@ public class OceanRenderer :MonoBehaviour
     //temp solution
     private int KIndex = 0;
 
+    //Ocean Render Shader
     int baseColorId = Shader.PropertyToID("_BaseColor");
-
     int gridSizeId = Shader.PropertyToID("_GridSize");
     int lodIndexId = Shader.PropertyToID("_LODIndex");
     int transitionParams = Shader.PropertyToID("_TransitionParam");
     int lodSizeId = Shader.PropertyToID("_LODSize");
-
     int lodDisplaceMapId = Shader.PropertyToID("_DisplaceMap");
     int lodNormalMapId = Shader.PropertyToID("_NormalMap");
     int lodNextDisplaceMapId = Shader.PropertyToID("_NextDisplaceMap");
     int lodNextNormalMapId = Shader.PropertyToID("_NextNormalMap");
+
+    //Ocean RT render Shader
+    int waveCountId = Shader.PropertyToID("_WaveCount");
+    int waveBufferId = Shader.PropertyToID("_WavesBuffer");
+    //int lodSizeId = Shader.PropertyToID("_LODSize");
+    int timeId = Shader.PropertyToID("_Time");
+    int deltaTimeId = Shader.PropertyToID("_DeltaTime");
+    int foamFadeId = Shader.PropertyToID("_FoamFade");
 
     //Global params
     int centerPosId = Shader.PropertyToID("_CenterPos");
@@ -248,19 +256,21 @@ public class OceanRenderer :MonoBehaviour
             { transform.position.x, transform.position.y, transform.position.z}
             );
 
+        int WavePerLOD = ORS.WaveCount / ORS.LODCount;
         for (int i = ORS.LODCount-1; i>=0; i--)
         {
-
-            ORS.shapeShader.SetInt("WaveCount", ORS.WaveCount);
+            //each LOD now only calculate  WaveCount/LODCcount of waves
+            ORS.shapeShader.SetInt(waveCountId, WavePerLOD);
             //WaveBuffer.SetData(WDs);
-            shapeWaveBufer.SetData(ORS.SpectrumWaves);
-            ORS.shapeShader.SetBuffer(KIndex, "WavesBuffer", shapeWaveBufer);
+            WaveData[] WaveSubsets = ORS.SpectrumWaves.Skip(WavePerLOD * i).Take(WavePerLOD).ToArray();
+            shapeWaveBufer.SetData(WaveSubsets);
+            ORS.shapeShader.SetBuffer(KIndex, waveBufferId, shapeWaveBufer);
 
-            ORS.shapeShader.SetFloat("LODSize", ORS.GridSize * ORS.GridCountPerTile * 4 * Mathf.Pow(2, i) * 1);//times ocean scale
-            ORS.shapeShader.SetInt("LODIndex", i);
-            ORS.shapeShader.SetFloat("_Time", Time.time);
-            ORS.shapeShader.SetFloat("_deltaTime", Time.deltaTime);
-            ORS.shapeShader.SetFloat("_foamFadePow", ORS.FoamFadePow);
+            ORS.shapeShader.SetFloat(lodSizeId, ORS.GridSize * ORS.GridCountPerTile * 4 * Mathf.Pow(2, i) * 1);//times ocean scale
+            ORS.shapeShader.SetInt(lodIndexId, i);
+            ORS.shapeShader.SetFloat(timeId, Time.time);
+            ORS.shapeShader.SetFloat(deltaTimeId, Time.deltaTime);
+            ORS.shapeShader.SetFloat(foamFadeId, ORS.FoamFadePow);
             /*
             if (i != ORS.LODCount - 1)
             {
@@ -279,8 +289,8 @@ public class OceanRenderer :MonoBehaviour
             Temp.filterMode = FilterMode.Trilinear;
 
             //Debug.Log(ORS.LODDisplaceMaps[i].enableRandomWrite);
-            ORS.shapeShader.SetTexture(KIndex, "Displace", ORS.LODDisplaceMaps[i]);
-            ORS.shapeShader.SetTexture(KIndex, "Normal", ORS.LODNormalMaps[i]);
+            ORS.shapeShader.SetTexture(KIndex, lodDisplaceMapId, ORS.LODDisplaceMaps[i]);
+            ORS.shapeShader.SetTexture(KIndex, lodNormalMapId, ORS.LODNormalMaps[i]);
 
             //ORS.shapeShader.SetTexture(KIndex, "NoiseFoam", WaterFoamNoise);
 

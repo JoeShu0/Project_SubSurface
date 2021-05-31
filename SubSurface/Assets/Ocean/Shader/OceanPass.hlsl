@@ -92,7 +92,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	
 	float4 NormalFoam = GetOceanNormal(input.UV);
 	float3 normal = NormalFoam.xyz;
-	float3 foam = NormalFoam.w;
+	float foam = NormalFoam.w;
 
 	Surface surface;
 	surface.position = input.positionWS;
@@ -123,7 +123,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	//Basic lighting
 	float3 color = input.DebugColor;
 
-	return float4(color,1.0);
+	return float4(foam, 0.0,0.0,1.0);
 }
 
 #endif
