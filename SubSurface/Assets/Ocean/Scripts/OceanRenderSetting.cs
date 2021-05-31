@@ -65,6 +65,7 @@ public class OceanRenderSetting : ScriptableObject
         public float Speed;
         public Vector2 Direction;
     }
+
     [Tooltip("Tick this box will regenerate All WaveDatas")]
     public bool RegenerateWaveDatas = true;
     [SerializeField]

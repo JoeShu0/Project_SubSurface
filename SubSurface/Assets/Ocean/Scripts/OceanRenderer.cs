@@ -21,6 +21,7 @@ public class OceanRenderer :MonoBehaviour
     int baseColorId = Shader.PropertyToID("_BaseColor");
 
     int gridSizeId = Shader.PropertyToID("_GridSize");
+    int lodIndexId = Shader.PropertyToID("_LODIndex");
     int transitionParams = Shader.PropertyToID("_TransitionParam");
     int lodSizeId = Shader.PropertyToID("_LODSize");
 
@@ -31,7 +32,7 @@ public class OceanRenderer :MonoBehaviour
 
     //Global params
     int centerPosId = Shader.PropertyToID("_CenterPos");
-    int CameraProjParamsId = Shader.PropertyToID("_CamProjectionParams");
+    //int CameraProjParamsId = Shader.PropertyToID("_CamProjectionParams");
 
     private void Awake()
     {
@@ -60,8 +61,8 @@ public class OceanRenderer :MonoBehaviour
 
         if(!hasOceanLOD)
             CreateOceanLODs();
-
-        RenderDisAndNormalMapsForLODs();
+        if(!Application.isPlaying)
+            RenderDisAndNormalMapsForLODs();
 #endif
 
         UpdateShaderGlobalParams();
@@ -69,7 +70,7 @@ public class OceanRenderer :MonoBehaviour
 
     private void FixedUpdate()
     {
-        //RenderDisAandNormalMapsForLODs();
+        RenderDisAndNormalMapsForLODs();
     }
 
     void CreateOceanLODs()
@@ -184,6 +185,7 @@ public class OceanRenderer :MonoBehaviour
         LODMat.SetVector(transitionParams, new Vector4(TileSize * 1.7f, TileSize * 1.7f, 0.2f * TileSize, 0.2f * TileSize) * LODScale);
         //LODMat.SetVector(centerPosId, LOD.transform.position);
         LODMat.SetFloat(lodSizeId, LODSize);
+        LODMat.SetFloat(lodIndexId, LODIndex);
         LODMat.SetColor(baseColorId, new Vector4(0.25f, 0.25f, 0.25f, 1.0f) * LODIndex);
         LODMat.SetTexture(lodDisplaceMapId, ORS.LODDisplaceMaps[LODIndex]);
         LODMat.SetTexture(lodNormalMapId, ORS.LODNormalMaps[LODIndex]);
@@ -276,7 +278,7 @@ public class OceanRenderer :MonoBehaviour
             Temp.wrapMode = TextureWrapMode.Clamp;
             Temp.filterMode = FilterMode.Trilinear;
 
-            Debug.Log(ORS.LODDisplaceMaps[i].enableRandomWrite);
+            //Debug.Log(ORS.LODDisplaceMaps[i].enableRandomWrite);
             ORS.shapeShader.SetTexture(KIndex, "Displace", ORS.LODDisplaceMaps[i]);
             ORS.shapeShader.SetTexture(KIndex, "Normal", ORS.LODNormalMaps[i]);
 

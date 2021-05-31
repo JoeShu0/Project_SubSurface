@@ -121,9 +121,9 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	//return float4(INPUT_PROP(_BaseColor).rgb, 0.5);
 	
 	//Basic lighting
-	float color = foam;
+	float3 color = input.DebugColor;
 
-	return float4(color, color, color, 1.0);
+	return float4(color,1.0);
 }
 
 #endif
