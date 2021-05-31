@@ -19,6 +19,7 @@ int LODIndex;
 float _Time;
 float _deltaTime;
 int WaveCount;
+float _foamFadePow;
 
 const int LODCount = 8;
 
@@ -142,15 +143,12 @@ GerstnerOut GetWaveSum(float3 OriginalWPos, int2 coord)
     }
     */
 
-    //try recon binormal and tangent using x->tangent
-    /*
-    float3 _Binormal = normalize(cross(float3(1, 0, 0), _Normal));
-    float3 _Tangent = normalize(cross(_Normal, _Binormal));
-    */
+    //adding 1 is because we are calculating the D of offset
+    //D(x+ dx01 + dx02)'x = 1+dxx01+dxx02 
     float3 tangent = normalize(float3(1.0f, 0.0f, 0.0f) + float3(Dxx, Dzx, Dxy));
     float3 binormal = normalize(float3(0.0f, 0.0f, 1.0f) + float3(Dxy, Dzy, Dyy));
     float3 normal = normalize(cross(binormal, tangent));
-    //Jacobian Det from "OceanWaveRenderingwithWhitcpintheVisualSystemofaMaritimeSimulaor"
+    //Jacobian Det from "Ocean Wave Rendering with Whitcap in the Visual System of a Maritime Simulaor"
     float JacobianDet = (1 + Dxx) * (1 + Dyy) - (Dxy) * (Dxy);
     //float3 N_Normal = _Tangent * C_normal.x + _Binormal * C_normal.z + _Normal * C_normal.y;
 
@@ -185,8 +183,8 @@ void CSMain(uint3 id : SV_DispatchThreadID)
     float2 UV = float2(float(id.x + 0.5f) / 512.0f * 1.0f, float(id.y + 0.5f) / 512.0f * 1.0f) + _Time / 100.0f;
     float _FoamNoise = NoiseFoam.SampleLevel(samplerNoiseFoam, UV, 0).r;
 
-    float FoamMask = 0.15f * (0.6f - Tangentout.z) + Normal[id.xy].a * 0.9f;
-    //float FoamMask = (0.8f-Tangentout.z);
+    float FoamMask = clamp(1.0f - Tangentout.z,0.0,1.0) * 0.1f +Normal[id.xy].a * 0.9f ;
+    //float FoamMask = (1.0f-Tangentout.z);
 
     Displace[id.xy] = float4(Displacement, 0.0f);
 

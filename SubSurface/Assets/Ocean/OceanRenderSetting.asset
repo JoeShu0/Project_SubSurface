@@ -23,6 +23,7 @@ MonoBehaviour:
   AnimeWindAngle: 0
   WaveDirAngleRange: 90
   WaveLengthRange: {x: 128, y: 0.25}
+  FoamFadePow: 2
   WaveAmplitudeTweak:
   - 0.88
   - 0.88

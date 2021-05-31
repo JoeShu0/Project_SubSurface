@@ -61,7 +61,7 @@ public class OceanRenderer :MonoBehaviour
         if(!hasOceanLOD)
             CreateOceanLODs();
 
-        RenderDisAandNormalMapsForLODs();
+        RenderDisAndNormalMapsForLODs();
 #endif
 
         UpdateShaderGlobalParams();
@@ -231,7 +231,7 @@ public class OceanRenderer :MonoBehaviour
     }
 
 
-    void RenderDisAandNormalMapsForLODs()
+    void RenderDisAndNormalMapsForLODs()
     {
         if (!ORS.shapeShader)
         {
@@ -258,6 +258,7 @@ public class OceanRenderer :MonoBehaviour
             ORS.shapeShader.SetInt("LODIndex", i);
             ORS.shapeShader.SetFloat("_Time", Time.time);
             ORS.shapeShader.SetFloat("_deltaTime", Time.deltaTime);
+            ORS.shapeShader.SetFloat("_foamFadePow", ORS.FoamFadePow);
             /*
             if (i != ORS.LODCount - 1)
             {

@@ -34,6 +34,9 @@ public class OceanRenderSetting : ScriptableObject
     //Wave Length range in meters
     public Vector2 WaveLengthRange = new Vector2(128.0f, 0.25f);
 
+    //Foam fade Power
+    public float FoamFadePow = 1.0f;
+
     //tweaker for wave datas
     [Range(0.0f, 3.0f)]
     public float[] WaveAmplitudeTweak = new float[8];

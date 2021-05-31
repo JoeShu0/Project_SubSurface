@@ -121,7 +121,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	//return float4(INPUT_PROP(_BaseColor).rgb, 0.5);
 	
 	//Basic lighting
-	float color = dot(normal, normalize(float3(0.0, 0.5, 0.5))) + foam*0.5;
+	float color = foam;
 
 	return float4(color, color, color, 1.0);
 }
