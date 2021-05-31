@@ -183,7 +183,7 @@ void CSMain(uint3 id : SV_DispatchThreadID)
     float3 Tangentout = outputWaveVectors.tangentVector;
 
     float2 UV = float2(float(id.x + 0.5f) / 512.0f * 1.0f, float(id.y + 0.5f) / 512.0f * 1.0f) + _Time / 100.0f;
-    float _FoamNoise = NoiseFoam.SampleLevel(samplerNoiseFoam, UV, 0);
+    float _FoamNoise = NoiseFoam.SampleLevel(samplerNoiseFoam, UV, 0).r;
 
     float FoamMask = 0.15f * (0.6f - Tangentout.z) + Normal[id.xy].a * 0.9f;
     //float FoamMask = (0.8f-Tangentout.z);

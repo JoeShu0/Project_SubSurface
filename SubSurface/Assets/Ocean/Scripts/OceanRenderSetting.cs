@@ -38,6 +38,8 @@ public class OceanRenderSetting : ScriptableObject
     [Range(0.0f, 3.0f)]
     public float[] WaveAmplitudeTweak = new float[8];
 
+    public float debug = 11;
+
     public enum TileType
     {
         Interior,
@@ -88,7 +90,7 @@ public class OceanRenderSetting : ScriptableObject
 
     private void Awake()
     {
-        //InitLODRTs();
+        ReInitLODRTs();
     }
 
     public void Initialization()
@@ -208,6 +210,8 @@ public class OceanRenderSetting : ScriptableObject
             OceanMats[i].enableInstancing = true;
             OceanMats[i].SetTexture(displaceTexId, LODDisplaceMaps[i]);
             OceanMats[i].SetTexture(displaceTexNextId, LODDisplaceMaps[Mathf.Min(i+1, LODCount-1)]);
+            OceanMats[i].SetTexture(normalTexId, LODNormalMaps[i]);
+            OceanMats[i].SetTexture(normalTexNextId, LODNormalMaps[Mathf.Min(i + 1, LODCount - 1)]);
             AssetDatabase.DeleteAsset(MatPath);
             AssetDatabase.CreateAsset(OceanMats[i], MatPath);
         }
@@ -248,6 +252,16 @@ public class OceanRenderSetting : ScriptableObject
             LODNormalMaps[i].filterMode = FilterMode.Trilinear;
             LODNormalMaps[i].Create();
             AssetDatabase.CreateAsset(RT, RTPath);
+        }
+    }
+
+    //this is for restore some of the settings for RTs
+    void ReInitLODRTs()
+    {
+        for (int i = 0; i < LODCount; i++)
+        {
+            LODDisplaceMaps[i].enableRandomWrite = true;
+            LODNormalMaps[i].enableRandomWrite = true;
         }
     }
 

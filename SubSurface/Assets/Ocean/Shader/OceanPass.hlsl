@@ -2,6 +2,15 @@
 #define CUSTOM_OCEAN_PASS_INCLUDED
 
 
+#include "../../CustomRP/ShaderLib/Surface.hlsl"
+#include "../../CustomRP/ShaderLib/Shadows.hlsl"
+#include "../../CustomRP/ShaderLib/Light.hlsl"
+#include "../../CustomRP/ShaderLib/BRDF.hlsl"
+#include "../../CustomRP/ShaderLib/GI.hlsl"
+#include "../../CustomRP/ShaderLib/Lighting.hlsl"
+
+
+
 struct Attributes
 {
 	float3 positionOS : POSITION;
@@ -27,21 +36,23 @@ Varyings OceanPassVertex(Attributes input)
 	//transfer instance ID to frag
 	UNITY_TRANSFER_INSTANCE_ID(input, output);
 
-	float _OceanScale = 1;
-
 	//Get World and ScreenSpace position
 	float3 positionWS = TransformObjectToWorld(input.positionOS);
 	
 	//Snap tp 2*unit grid(Should be scaled by whole ocean)
-	positionWS = SnapToWorldPosition(positionWS,  _OceanScale);
+	positionWS = SnapToWorldPosition(positionWS, INPUT_PROP(_OceanScale));
+
 	//Transition at the edge of LODs
-	positionWS = TransitionLOD(positionWS, _OceanScale);
+	positionWS = TransitionLOD(positionWS, INPUT_PROP(_OceanScale));
+
 	//sample the displacement Texture and add to WPos
-    float2 UV = (positionWS.xz - _CenterPos.xz) / (_LODSize*_OceanScale) + 0.5f;
-    float2 UV_n = (positionWS.xz - _CenterPos.xz) / (_LODSize*_OceanScale) * 0.5f + 0.5f;
+	float4 UVn = GetWorldPosUVAndNext(positionWS);
+    //float2 UV = (positionWS.xz - _CenterPos.xz) / (_LODSize*INPUT_PROP(_OceanScale)) + 0.5f;
+    //float2 UV_n = (positionWS.xz - _CenterPos.xz) / (_LODSize*INPUT_PROP(_OceanScale)) * 0.5f + 0.5f;
+	
 	//StaticUV for detail tex, current scale and transiton fixed!
     float2 S_UV = positionWS.xz * 0.5f ;
-	float3 debugDisplacecolor = GetOceanDisplacement(UV, UV_n);
+	float3 debugDisplacecolor = GetOceanDisplacement(UVn);
 	positionWS += debugDisplacecolor;
 
 
@@ -55,7 +66,7 @@ Varyings OceanPassVertex(Attributes input)
 	output.positionWS = positionWS;
 	output.positionCS_SS = SrcPos;
 	output.depth01 = depth01;
-	output.UV = float4(UV, UV_n);
+	output.UV = UVn;
 	output.StaticUV = S_UV;
 	output.DebugColor = debugDisplacecolor;
 	return output;
@@ -78,13 +89,41 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	//Setup the instance ID for Input
 	UNITY_SETUP_INSTANCE_ID(input);
 	float OceanDepth = LOAD_TEXTURE2D(_CameraOceanDepthTexture, input.positionCS_SS.xy).a;
+	
+	float4 NormalFoam = GetOceanNormal(input.UV);
+	float3 normal = NormalFoam.xyz;
+	float3 foam = NormalFoam.w;
+
+	Surface surface;
+	surface.position = input.positionWS;
+	surface.normal = normalize(normal);
+	surface.color = INPUT_PROP(_BaseColor).rgb;
+	surface.alpha = 0.5;
+	surface.metallic = 0;
+	surface.occlusion = 1;
+	surface.smoothness = 0.5;
+	surface.fresnelStrength = 1;
+	surface.viewDirection = normalize(_WorldSpaceCameraPos - input.positionWS);
+	//surface.depth = -TransformWorldToView(input.positionWS).z;
+	//surface.dither = InterleavedGradientNoise(config.fragment.positionSS, 0);
+	//surface.renderingLayerMask = asuint(unity_RenderingLayer.x);// treat float as uint
+
+	//BRDF brdf = GetBRDF(surface);
+
+	//GI gi = GetGI(GI_FRAGMENT_DATA(input), surface, brdf);
+
+	//float3 color = GetLighting(surface, brdf, gi);
 
 	//?????Dont konw why the OrthographicDepthBufferToLinear case the tile to offsets?????
 	//bufferDepth = IsOrthographicCamera() ?
 		//OrthographicDepthBufferToLinear(bufferDepth) :
 		//LinearEyeDepth(bufferDepth, _ZBufferParams);
 	//return float4(INPUT_PROP(_BaseColor).rgb, 0.5);
-	return float4(input.DebugColor, 1.0);
+	
+	//Basic lighting
+	float color = dot(normal, normalize(float3(0.0, 0.5, 0.5))) + foam*0.5;
+
+	return float4(color, color, color, 1.0);
 }
 
 #endif

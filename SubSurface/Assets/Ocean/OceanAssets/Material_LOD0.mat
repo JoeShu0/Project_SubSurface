@@ -28,16 +28,17 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NextLODNTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 8400000, guid: 037547e5c73f60e47b24be876a2e69c5, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 8400000, guid: e13bd4634a62a154685fcc211acd6209, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _GridSize: 0.2
     - _LODSize: 64
+    - _OceanScale: 1
     m_Colors:
     - _BaseColor: {r: 0, g: 0, b: 0, a: 0}
     - _TransitionParam: {r: 27.2, g: 27.2, b: 3.2, a: 3.2}

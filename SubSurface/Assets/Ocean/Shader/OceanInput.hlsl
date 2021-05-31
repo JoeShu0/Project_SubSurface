@@ -7,16 +7,16 @@
 TEXTURE2D(_DispTex);
 SAMPLER(sampler_DispTex);
 TEXTURE2D(_NextDispTex);
-SAMPLER(sampler_NextDispTex);
+
 TEXTURE2D(_NormalTex);
 SAMPLER(sampler_NormalTex);
 TEXTURE2D(_NextLODNTex);
-SAMPLER(sampler_NextLODNTex);
 
 
 UNITY_INSTANCING_BUFFER_START(UnityPerMaterial)
     UNITY_DEFINE_INSTANCED_PROP(float4, _BaseColor)
     UNITY_DEFINE_INSTANCED_PROP(float, _GridSize)
+    UNITY_DEFINE_INSTANCED_PROP(float, _OceanScale)
     UNITY_DEFINE_INSTANCED_PROP(float4, _TransitionParam)
     //UNITY_DEFINE_INSTANCED_PROP(float4, _CenterPos)
     UNITY_DEFINE_INSTANCED_PROP(float, _LODSize)
@@ -29,6 +29,7 @@ CBUFFER_END
 
 TEXTURE2D(_CameraOceanDepthTexture);
 SAMPLER(sampler_CameraOceanDepthTexture);
+
 
 float3 SnapToWorldPosition(float3 positionWS, float oceanScale)
 {
@@ -70,17 +71,39 @@ float3 TransitionLOD(float3 positionWS, float oceanScale)
     return TransitionPosition;
 }
 
-float3 GetOceanDisplacement(float2 UV, float2 UV_n)
+float3 GetOceanDisplacement(float4 UVn)
 {
     //sample displacement tex
-    float3 col = _DispTex.SampleLevel(sampler_DispTex, UV, 0).rgb;
-    float3 col_n = _NextDispTex.SampleLevel(sampler_DispTex, UV_n, 0).rgb;
+    float3 col = _DispTex.SampleLevel(sampler_DispTex, UVn.xy, 0).rgb;
+    float3 col_n = _NextDispTex.SampleLevel(sampler_DispTex, UVn.zw, 0).rgb;
 
-    float2 LODUVblend = clamp((abs(UV - 0.5f) / 0.5f - 0.75f)*5.0f, 0, 1);
+    float2 LODUVblend = clamp((abs(UVn.xy - 0.5f) / 0.5f - 0.75f)*5.0f, 0, 1);
     float LODBlendFactor = max(LODUVblend.x, LODUVblend.y);
     //LODBlendFactor = 0.0f;
     col = lerp(col, col_n, LODBlendFactor);
     return col;
+}
+
+float4 GetOceanNormal(float4 UVn)
+{
+    //sample displacement tex
+    float4 col = _NormalTex.SampleLevel(sampler_NormalTex, UVn.xy, 0);
+    float4 col_n = _NextLODNTex.SampleLevel(sampler_NormalTex, UVn.zw, 0);
+
+    float2 LODUVblend = clamp((abs(UVn.xy - 0.5f) / 0.5f - 0.75f) * 5.0f, 0, 1);
+    float LODBlendFactor = max(LODUVblend.x, LODUVblend.y);
+    //LODBlendFactor = 0.0f;
+    col = lerp(col, col_n, LODBlendFactor);
+    return col;
+}
+
+float4 GetWorldPosUVAndNext(float3 positionWS)
+{
+    float2 UV = (positionWS.xz - _CenterPos.xz) / 
+        (INPUT_PROP(_LODSize) * INPUT_PROP(_OceanScale)) + 0.5f;
+    float2 UV_n = (positionWS.xz - _CenterPos.xz) / 
+        (INPUT_PROP(_LODSize) * INPUT_PROP(_OceanScale)) * 0.5f + 0.5f;
+    return float4(UV, UV_n);
 }
 
 #endif
