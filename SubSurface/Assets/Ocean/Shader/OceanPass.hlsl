@@ -123,7 +123,10 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	//Basic lighting
 	float3 color = input.DebugColor;
 
-	return float4(foam, 0.0,0.0,1.0);
+	float3 reflectDir = normalize(reflect(surface.viewDirection, surface.normal));
+	float SunReflect = pow(saturate(dot(normalize(float3(0.5,0.5,0.0)), reflectDir)), 50);
+
+	return float4(dot(reflectDir,float3(0.5, 0.5, 0.0)),0.25,0.25,1.0f);
 }
 
 #endif

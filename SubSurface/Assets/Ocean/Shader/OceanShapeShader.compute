@@ -1,18 +1,35 @@
 // Each #kernel tells which function to compile; you can have many kernels
 #pragma kernel CSMain
-
+/*
 // Create a RenderTexture with enableRandomWrite flag and set it
 // with cs.SetTexture
-Texture2D<float4> BaseDisplace;
-SamplerState samplerBaseDisplace;
-Texture2D<float4> BaseNormal;
-SamplerState samplerBaseNormal;
+Texture2D<float4> _BaseDisplace;//Previous LOD DispMap, RGB:displacement, A: Dxy
+Texture2D<float4> _BaseNormal;//Previous LOD normal and foam Map, RGB:normal A:foam
+//Texture2D<float4> _CurrNormal;//Same as _NormalMap just for sampling
 
-Texture2D<float4> NoiseFoam;
-SamplerState samplerNoiseFoam;
+//this map will be used though all LODs
+RWTexture2D<float4> _BaseDerivativeMap;//Previous LOD DeriMap ,R: Dxx, G:Dyy, B:Dzx, A:Dzy
+Texture2D<float4> _BaseDerivativeMap_Sample;//Same as _BaseDerivativeMap just for sampling
 
-RWTexture2D<float4> _DisplaceMap;
-RWTexture2D<float4> _NormalMap;
+//sampler 
+SamplerState linearClampSampler;
+*/
+RWTexture2D<float4> _DisplaceMap;//Displace Mapout for current LOD = disp + B_disp
+RWTexture2D<float4> _NormalMap;//Normal out for current LOD normal and foam RGB:normal A:foam
+//NormalMap will not be used by next LOD, but will be used by current LOD for foam fading
+//Dxx.etc will add from previous LOD (A+B)' = A' + B'
+//****Normal Cal****
+//float3 tangent = normalize(float3(1.0f, 0.0f, 0.0f) + float3(Dxx, Dzx, Dxy));
+//float3 binormal = normalize(float3(0.0f, 0.0f, 1.0f) + float3(Dxy, Dzy, Dyy));
+//float3 normal = normalize(cross(binormal, tangent));
+//****foam mask****
+//float JacobianDet = (1 + Dxx) * (1 + Dyy) - (Dxy) * (Dxy);
+//float FoamMask = clamp(1.0f - JacobianDet,0.0,1.0) * 0.1f + _NormalMap[id.xy].a * 0.9f ;
+
+//Texture2D<float4> NoiseFoam;
+//SamplerState samplerNoiseFoam;
+
+
 float3 CenterPos;
 float _LODSize;
 //int _LODIndex;
@@ -32,33 +49,19 @@ struct Wave
     float2 Direction;
 };
 StructuredBuffer<Wave> _WavesBuffer;
-/*
-struct WaveBatched
-{
-    float4 WaveLengths;
-    float4 Steepnesses;
-    float4 DirectionX;
-    float4 DirectionY;
-};
-StructuredBuffer<WaveBatched> WavesBatchBuffer;
-*/
+
 struct GerstnerOut
 {
-    float3 displacement;
-    float3 normalVector;
-    float3 tangentVector;
+    float4 dispVector;
+    float4 normalVector;
+    float4 derivativeVector;
 };
 
 GerstnerOut GetWaveSum(float3 OriginalWPos, int2 coord)
 {
     float PI = 3.14159265f;
 
-    float3 displace = float3(0.0f, 0.0f, 0.0f);
-    //float3 tangent = float3(1.0f, 0.0f, 0.0f);
-    //float3 binormal = float3(0.0f, 0.0f, 1.0f);
-    //float3 normal = float3(0.0f, 1.0f, 0.0f);
-
-    //float3 _Normal = float3(0.0f, 0.0f, 0.0f);
+    float3 displace = float3(0.0, 0.0, 0.0);
 
     float Dxx = 0.0f;
     float Dyy = 0.0f;
@@ -66,7 +69,7 @@ GerstnerOut GetWaveSum(float3 OriginalWPos, int2 coord)
     float Dzx = 0.0f;
     float Dzy = 0.0f;
 
-    float Dza = 0.0f;
+    //float Dza = 0.0f;
 
     /*
     if (LODIndex < 7)
@@ -112,8 +115,8 @@ GerstnerOut GetWaveSum(float3 OriginalWPos, int2 coord)
 
         //Dzxx += _Direction.x * _Steepness * (-cos(f)) * k * _Direction.x;
         //Dzyy += _Direction.y * _Steepness * (-cos(f)) * k * _Direction.y;
-        Dza += _Direction.x * _Steepness * (-sin(f)) * k * _Direction.x;
-        Dza += _Direction.y * _Steepness * (-sin(f)) * k * _Direction.y;
+        //Dza += _Direction.x * _Steepness * (-sin(f)) * k * _Direction.x;
+        //Dza += _Direction.y * _Steepness * (-sin(f)) * k * _Direction.y;
         //tangent += float3(Dxx, _Direction.x * (_Steepness * cos(f)) * 1.0f, Dxy);
 
         //binormal += float3(Dxy, _Direction.y * (_Steepness * cos(f)) * 1.0f, Dyy);
@@ -144,6 +147,20 @@ GerstnerOut GetWaveSum(float3 OriginalWPos, int2 coord)
     }
     */
 
+    /*
+    //Sample the data (disp and derivative from Base LOD)
+    float2 UV = float2(float(coord.x + 0.5f) / 512.0f * 0.5f + 0.25f, float(coord.y + 0.5f) / 512.0f * 0.5f + 0.25f);
+    float4 baseDisplaceV = _BaseDisplace.SampleLevel(linearClampSampler, UV, 0);
+    float4 baseDerivativeV = _BaseDerivativeMap_Sample.SampleLevel(linearClampSampler, UV, 0);
+    //baseNormalV = _BaseNormal.SampleLevel(linearClampSampler, UV, 0);
+    Dxx += baseDerivativeV.x;
+    Dyy += baseDerivativeV.y;
+    Dxy += baseDisplaceV.w;
+    Dzx += baseDerivativeV.z;
+    Dzy += baseDerivativeV.w;
+    displace += baseDisplaceV.xyz;
+    */
+
     //adding 1 is because we are calculating the D of offset
     //D(x+ dx01 + dx02)'x = 1+dxx01+dxx02 
     float3 tangent = normalize(float3(1.0f, 0.0f, 0.0f) + float3(Dxx, Dzx, Dxy));
@@ -151,15 +168,13 @@ GerstnerOut GetWaveSum(float3 OriginalWPos, int2 coord)
     float3 normal = normalize(cross(binormal, tangent));
     //Jacobian Det from "Ocean Wave Rendering with Whitcap in the Visual System of a Maritime Simulaor"
     float JacobianDet = (1 + Dxx) * (1 + Dyy) - (Dxy) * (Dxy);
-    //float3 N_Normal = _Tangent * C_normal.x + _Binormal * C_normal.z + _Normal * C_normal.y;
+    float foam = clamp(1.0f - JacobianDet,0.0, 1.0);
 
-
-    tangent = normalize(tangent);
 
     GerstnerOut ReturnData;
-    ReturnData.displacement = displace;
-    ReturnData.normalVector = normal;
-    ReturnData.tangentVector = float3((1 + Dxx) * (1 + Dyy), Dxy * Dxy, JacobianDet);
+    ReturnData.dispVector = float4(displace, Dxy);
+    ReturnData.normalVector = float4(normal, foam);
+    ReturnData.derivativeVector = float4(Dxx, Dyy, Dzx, Dzy);
 
     return ReturnData;
 }
@@ -181,19 +196,20 @@ void CSMain(uint3 id : SV_DispatchThreadID)
     //WavesBuffer[0].WaveLength
     GerstnerOut outputWaveVectors = GetWaveSum(WPos, id.xy);
 
-    float3 Displacement = outputWaveVectors.displacement;
-    float3 Normalout = outputWaveVectors.normalVector;
-    float3 Tangentout = outputWaveVectors.tangentVector;
+    float4 outDisplaceV = outputWaveVectors.dispVector;
+    float4 outDerivativeV = outputWaveVectors.derivativeVector;
+    float4 outNormalV = outputWaveVectors.normalVector;
 
-    float2 UV = float2(float(id.x + 0.5f) / 512.0f * 1.0f, float(id.y + 0.5f) / 512.0f * 1.0f) + _Time / 100.0f;
-    float _FoamNoise = NoiseFoam.SampleLevel(samplerNoiseFoam, UV, 0).r;
+    //float2 UV = float2(float(id.x + 0.5f) / 512.0f * 1.0f, float(id.y + 0.5f) / 512.0f * 1.0f) + _Time / 100.0f;
+    //float _FoamNoise = NoiseFoam.SampleLevel(samplerNoiseFoam, UV, 0).r;
 
-    float FoamMask = clamp(1.0f - Tangentout.z,0.0,1.0) * 0.1f + _NormalMap[id.xy].a * 0.9f ;
+    float FoamMask = outNormalV.a * 0.1f + _NormalMap[id.xy].a * 0.9f ;
     //float FoamMask = (1.0f-Tangentout.z);
 
-    _DisplaceMap[id.xy] = float4(Displacement, 0.0f);
 
-    _NormalMap[id.xy] = float4(Normalout, FoamMask);
+    _DisplaceMap[id.xy] = outDisplaceV;
+    _NormalMap[id.xy] = float4(outNormalV.rgb, FoamMask);
+    //_BaseDerivativeMap[id.xy] = outDerivativeV;
 
     //debug
     //Displace[id.xy] = _WaveLengths[10];

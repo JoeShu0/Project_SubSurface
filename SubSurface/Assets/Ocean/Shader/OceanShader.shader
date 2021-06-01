@@ -34,6 +34,7 @@
             
             //for Alpha blend type We will use One OneMinusSrcAlpha
             Blend SrcAlpha OneMinusSrcAlpha
+            Cull Back
             ZWrite Off
             HLSLPROGRAM
             #pragma target 3.5
