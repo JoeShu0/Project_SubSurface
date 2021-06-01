@@ -15,7 +15,8 @@ RWTexture2D<float4> _DisplaceMap;
 RWTexture2D<float4> _NormalMap;
 float3 CenterPos;
 float _LODSize;
-int _LODIndex;
+//int _LODIndex;
+float _LODWaveAmpMul;
 float _Time;
 float _DeltaTime;
 int _WaveCount;
@@ -88,7 +89,7 @@ GerstnerOut GetWaveSum(float3 OriginalWPos, int2 coord)
 
         float _WaveLength = _WavesBuffer[i].WaveLength;
         float k = 2 * PI / _WaveLength;
-        float _Amplitude = _WavesBuffer[i].Amplitude;
+        float _Amplitude = _WavesBuffer[i].Amplitude * _LODWaveAmpMul;
         float _Steepness = _Amplitude * k;
         float _Speed = _WavesBuffer[i].Speed;
         float2 _Direction = normalize(_WavesBuffer[i].Direction);

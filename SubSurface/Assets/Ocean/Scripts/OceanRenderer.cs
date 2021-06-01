@@ -37,6 +37,7 @@ public class OceanRenderer :MonoBehaviour
     int timeId = Shader.PropertyToID("_Time");
     int deltaTimeId = Shader.PropertyToID("_DeltaTime");
     int foamFadeId = Shader.PropertyToID("_FoamFade");
+    int lodWaveAmpMulId = Shader.PropertyToID("_LODWaveAmpMul");
 
     //Global params
     int centerPosId = Shader.PropertyToID("_CenterPos");
@@ -267,7 +268,9 @@ public class OceanRenderer :MonoBehaviour
             ORS.shapeShader.SetBuffer(KIndex, waveBufferId, shapeWaveBufer);
 
             ORS.shapeShader.SetFloat(lodSizeId, ORS.GridSize * ORS.GridCountPerTile * 4 * Mathf.Pow(2, i) * 1);//times ocean scale
-            ORS.shapeShader.SetInt(lodIndexId, i);
+            //ORS.shapeShader.SetInt(lodIndexId, i);
+            ORS.shapeShader.SetFloat(lodWaveAmpMulId, ORS.WaveAmplitudeTweak[i]);
+            
             ORS.shapeShader.SetFloat(timeId, Time.time);
             ORS.shapeShader.SetFloat(deltaTimeId, Time.deltaTime);
             ORS.shapeShader.SetFloat(foamFadeId, ORS.FoamFadePow);
