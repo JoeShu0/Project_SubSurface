@@ -24,7 +24,7 @@ struct Varyings
 	float depth01 : VAR_DEPTH01;
 	float4 UV : VAR_OCEANUV;
 	float2 StaticUV : VAR_DETAILUV;
-	float3 DebugColor : VertexDebug;
+	float4 DebugColor : VertexDebug;
 	UNITY_VERTEX_INPUT_INSTANCE_ID
 };
 
@@ -68,7 +68,7 @@ Varyings OceanPassVertex(Attributes input)
 	output.depth01 = depth01;
 	output.UV = UVn;
 	output.StaticUV = S_UV;
-	output.DebugColor = debugDisplacecolor;
+	output.DebugColor = GetOceanNormal(UVn);;
 	return output;
 }
 
@@ -97,7 +97,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	Surface surface;
 	surface.position = input.positionWS;
 	surface.normal = normalize(normal);
-	surface.color = INPUT_PROP(_BaseColor).rgb;
+	//surface.color = INPUT_PROP(_BaseColor).rgb;
 	surface.alpha = 0.5;
 	surface.metallic = 0;
 	surface.occlusion = 1;
@@ -121,7 +121,9 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	//return float4(INPUT_PROP(_BaseColor).rgb, 0.5);
 	
 	//Basic lighting
-	float3 color = input.DebugColor;
+	float3 color = input.DebugColor.rgb;
+
+	//return float4(normal, 1.0f);
 
 	float3 reflectDir = normalize(reflect(surface.viewDirection, surface.normal));
 	float SunReflect = pow(saturate(dot(normalize(float3(0.5,0.5,0.0)), reflectDir)), 50);

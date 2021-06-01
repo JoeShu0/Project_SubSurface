@@ -1,10 +1,10 @@
 // Each #kernel tells which function to compile; you can have many kernels
 #pragma kernel CSMain
-/*
+
 // Create a RenderTexture with enableRandomWrite flag and set it
 // with cs.SetTexture
 Texture2D<float4> _BaseDisplace;//Previous LOD DispMap, RGB:displacement, A: Dxy
-Texture2D<float4> _BaseNormal;//Previous LOD normal and foam Map, RGB:normal A:foam
+//Texture2D<float4> _BaseNormal;//Previous LOD normal and foam Map, RGB:normal A:foam
 //Texture2D<float4> _CurrNormal;//Same as _NormalMap just for sampling
 
 //this map will be used though all LODs
@@ -13,7 +13,7 @@ Texture2D<float4> _BaseDerivativeMap_Sample;//Same as _BaseDerivativeMap just fo
 
 //sampler 
 SamplerState linearClampSampler;
-*/
+
 RWTexture2D<float4> _DisplaceMap;//Displace Mapout for current LOD = disp + B_disp
 RWTexture2D<float4> _NormalMap;//Normal out for current LOD normal and foam RGB:normal A:foam
 //NormalMap will not be used by next LOD, but will be used by current LOD for foam fading
@@ -87,6 +87,7 @@ GerstnerOut GetWaveSum(float3 OriginalWPos, int2 coord)
         _Normal = float3(0.0f, 1.0f, 0.0f);
     }
     */
+    [unroll(10)]
     for (int i = 0; i < _WaveCount; i++)
     {
 
@@ -147,7 +148,7 @@ GerstnerOut GetWaveSum(float3 OriginalWPos, int2 coord)
     }
     */
 
-    /*
+    
     //Sample the data (disp and derivative from Base LOD)
     float2 UV = float2(float(coord.x + 0.5f) / 512.0f * 0.5f + 0.25f, float(coord.y + 0.5f) / 512.0f * 0.5f + 0.25f);
     float4 baseDisplaceV = _BaseDisplace.SampleLevel(linearClampSampler, UV, 0);
@@ -159,7 +160,7 @@ GerstnerOut GetWaveSum(float3 OriginalWPos, int2 coord)
     Dzx += baseDerivativeV.z;
     Dzy += baseDerivativeV.w;
     displace += baseDisplaceV.xyz;
-    */
+    
 
     //adding 1 is because we are calculating the D of offset
     //D(x+ dx01 + dx02)'x = 1+dxx01+dxx02 
@@ -209,7 +210,7 @@ void CSMain(uint3 id : SV_DispatchThreadID)
 
     _DisplaceMap[id.xy] = outDisplaceV;
     _NormalMap[id.xy] = float4(outNormalV.rgb, FoamMask);
-    //_BaseDerivativeMap[id.xy] = outDerivativeV;
+    _BaseDerivativeMap[id.xy] = outDerivativeV;
 
     //debug
     //Displace[id.xy] = _WaveLengths[10];
@@ -229,9 +230,8 @@ void CSMain(uint3 id : SV_DispatchThreadID)
 
 
 
-
+//*****Crest Reference*****//
 /*
-
 for (uint vi = 0; vi < _NumWaveVecs; vi++)
 {
     // direction

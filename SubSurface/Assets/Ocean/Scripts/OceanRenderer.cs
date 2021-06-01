@@ -79,13 +79,13 @@ public class OceanRenderer :MonoBehaviour
         //if(!Application.isPlaying)
             //RenderDisAndNormalMapsForLODs();
 #endif
-        RenderDisAndNormalMapsForLODs();
+        //RenderDisAndNormalMapsForLODs();
         UpdateShaderGlobalParams();
     }
 
     private void FixedUpdate()
     {
-        //RenderDisAndNormalMapsForLODs();
+        RenderDisAndNormalMapsForLODs();
     }
 
     void CreateOceanLODs()
@@ -269,18 +269,12 @@ public class OceanRenderer :MonoBehaviour
             0, RenderTextureFormat.ARGBFloat,
             RenderTextureReadWrite.Linear);
         DerivativeMap.enableRandomWrite = true;
-        DerivativeMap.antiAliasing = 1;
-        DerivativeMap.wrapMode = TextureWrapMode.Clamp;
-        DerivativeMap.filterMode = FilterMode.Trilinear;
         DerivativeMap.Create();
         RenderTexture BaseDerivativeMap = new RenderTexture(
             ORS.RTSize, ORS.RTSize,
             0, RenderTextureFormat.ARGBFloat,
             RenderTextureReadWrite.Linear);
         BaseDerivativeMap.enableRandomWrite = true;
-        BaseDerivativeMap.antiAliasing = 1;
-        BaseDerivativeMap.wrapMode = TextureWrapMode.Clamp;
-        BaseDerivativeMap.filterMode = FilterMode.Trilinear;
         BaseDerivativeMap.Create();
         */
         int WavePerLOD = ORS.WaveCount / ORS.LODCount;
@@ -288,12 +282,12 @@ public class OceanRenderer :MonoBehaviour
         {
             //Graphics.CopyTexture(DerivativeMap, BaseDerivativeMap);
             //each LOD now only calculate  WaveCount/LODCcount of waves
-            //ORS.shapeShader.SetInt(waveCountId, WavePerLOD);
-            ORS.shapeShader.SetInt(waveCountId, ORS.WaveCount-i* WavePerLOD);
-            WaveData[] WaveSubsets = ORS.SpectrumWaves.Skip(WavePerLOD * i).ToArray();
-            shapeWaveBufer.SetData(ORS.SpectrumWaves);
-            //WaveData[] WaveSubsets = ORS.SpectrumWaves.Skip(WavePerLOD * i).Take(WavePerLOD).ToArray();
-            //shapeWaveBufer.SetData(WaveSubsets);
+            ORS.shapeShader.SetInt(waveCountId, WavePerLOD);
+            //ORS.shapeShader.SetInt(waveCountId, ORS.WaveCount-i* WavePerLOD);
+            //WaveData[] WaveSubsets = ORS.SpectrumWaves.Skip(WavePerLOD * i).ToArray();
+            //shapeWaveBufer.SetData(ORS.SpectrumWaves);
+            WaveData[] WaveSubsets = ORS.SpectrumWaves.Skip(WavePerLOD * i).Take(WavePerLOD).ToArray();
+            shapeWaveBufer.SetData(WaveSubsets);
             ORS.shapeShader.SetBuffer(KIndex, waveBufferId, shapeWaveBufer);
 
             ORS.shapeShader.SetFloat(lodSizeId, ORS.GridSize * ORS.GridCountPerTile * 4 * Mathf.Pow(2, i) * 1);//times ocean scale
@@ -303,14 +297,14 @@ public class OceanRenderer :MonoBehaviour
             ORS.shapeShader.SetFloat(deltaTimeId, Time.deltaTime);
             ORS.shapeShader.SetFloat(foamFadeId, ORS.FoamFadePow);
 
-            //ORS.shapeShader.SetTexture(KIndex, lodBaseDispMapId, ORS.LODDisplaceMaps[Mathf.Min(i + 1, ORS.LODCount - 1)]);
+            ORS.shapeShader.SetTexture(KIndex, lodBaseDispMapId, ORS.LODDisplaceMaps[Mathf.Min(i + 1, ORS.LODCount - 1)]);
             //ORS.shapeShader.SetTexture(KIndex, lodBaseNormalMapId, ORS.LODNormalMaps[Mathf.Min(i + 1, ORS.LODCount - 1)]);
 
             ORS.shapeShader.SetTexture(KIndex, lodDisplaceMapId, ORS.LODDisplaceMaps[i]);
             ORS.shapeShader.SetTexture(KIndex, lodNormalMapId, ORS.LODNormalMaps[i]);
 
-            //ORS.shapeShader.SetTexture(KIndex, lodBaseDerivativeMapId, DerivativeMap);
-            //ORS.shapeShader.SetTexture(KIndex, lodBaseDerivativeMapId_S, BaseDerivativeMap);
+            ORS.shapeShader.SetTexture(KIndex, lodBaseDerivativeMapId, ORS.LODDerivativeMaps[i]);
+            ORS.shapeShader.SetTexture(KIndex, lodBaseDerivativeMapId_S, ORS.LODDerivativeMaps[Mathf.Min(i + 1, ORS.LODCount - 1)]);
 
             //ORS.shapeShader.SetTexture(KIndex, "NoiseFoam", WaterFoamNoise);
 
@@ -319,5 +313,6 @@ public class OceanRenderer :MonoBehaviour
 
         shapeWaveBufer.Release();
         //DerivativeMap.Release();
+        //BaseDerivativeMap.Release();
     }
 }

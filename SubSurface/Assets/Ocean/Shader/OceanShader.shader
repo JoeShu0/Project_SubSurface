@@ -2,7 +2,7 @@
 {
     Properties
     {
-        _BaseColor("Color", Color) = (0.5,0.5,0.5,1.0)
+        //_BaseColor("Color", Color) = (0.5,0.5,0.5,1.0)
         _OceanScale("OceanScale", Float) = 1
         _GridSize("GridSize", Float) = 1
         _TransitionParam("TransitionParams", Vector) = (1.0,1.0,1.0,1.0)

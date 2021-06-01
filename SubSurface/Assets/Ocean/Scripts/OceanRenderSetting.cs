@@ -81,6 +81,7 @@ public class OceanRenderSetting : ScriptableObject
     //anim wave render texture
     public RenderTexture[] LODDisplaceMaps;
     public RenderTexture[] LODNormalMaps;
+    public RenderTexture[] LODDerivativeMaps;
 
     [Tooltip("Tick this box will regenerate All Materials for LODs ")]
     public bool RegenerateMODMaterials = true;
@@ -97,6 +98,16 @@ public class OceanRenderSetting : ScriptableObject
         ReInitLODRTs();
     }
 
+    void ReInitLODRTs()
+    {
+        for (int i = 0; i < LODCount; i++)
+        {
+            LODDisplaceMaps[i].enableRandomWrite = true;
+            LODNormalMaps[i].enableRandomWrite = true;
+            LODDerivativeMaps[i].enableRandomWrite = true;
+        }
+    }
+#if UNITY_EDITOR
     public void Initialization()
     {
         InitLODRTs();
@@ -119,6 +130,7 @@ public class OceanRenderSetting : ScriptableObject
 
     private void OnValidate()
     {
+
         if (!IsInit)
         {
             //Incase we need to regenerate the mesh an the rendertexture
@@ -144,6 +156,7 @@ public class OceanRenderSetting : ScriptableObject
             InitMaterials();
             RegenerateMODMaterials = false;
         }
+
     }
 
 
@@ -225,6 +238,7 @@ public class OceanRenderSetting : ScriptableObject
     {
         LODDisplaceMaps = new RenderTexture[LODCount];
         LODNormalMaps = new RenderTexture[LODCount];
+        LODDerivativeMaps = new RenderTexture[LODCount];
         string RTPath;
         for (int i = 0; i < LODDisplaceMaps.Length; i++)
         {
@@ -256,18 +270,25 @@ public class OceanRenderSetting : ScriptableObject
             LODNormalMaps[i].filterMode = FilterMode.Trilinear;
             LODNormalMaps[i].Create();
             AssetDatabase.CreateAsset(RT, RTPath);
+
+            RTPath = string.Format("Assets/Ocean/OceanAssets/DerivativeMap_LOD{0}.renderTexture", i);
+            AssetDatabase.DeleteAsset(RTPath);
+
+            RT = new RenderTexture(RTSize, RTSize, 0, RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear);
+
+            //RT = (RenderTexture)AssetDatabase.LoadAssetAtPath(RTPath, typeof(RenderTexture));
+            LODDerivativeMaps[i] = RT;
+            LODDerivativeMaps[i].enableRandomWrite = true;
+            LODDerivativeMaps[i].antiAliasing = 1;
+            LODDerivativeMaps[i].wrapMode = TextureWrapMode.Clamp;
+            LODDerivativeMaps[i].filterMode = FilterMode.Trilinear;
+            LODDerivativeMaps[i].Create();
+            AssetDatabase.CreateAsset(RT, RTPath);
         }
     }
 
     //this is for restore some of the settings for RTs
-    void ReInitLODRTs()
-    {
-        for (int i = 0; i < LODCount; i++)
-        {
-            LODDisplaceMaps[i].enableRandomWrite = true;
-            LODNormalMaps[i].enableRandomWrite = true;
-        }
-    }
+
 
     void InitTiles()
     {
@@ -411,4 +432,5 @@ public class OceanRenderSetting : ScriptableObject
         //Debug.Log(type);
         return tilemesh;
     }
+#endif
 }

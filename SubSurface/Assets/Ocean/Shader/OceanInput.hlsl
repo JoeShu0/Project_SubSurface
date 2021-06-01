@@ -7,14 +7,15 @@
 TEXTURE2D(_DispTex);
 SAMPLER(sampler_DispTex);
 TEXTURE2D(_NextDispTex);
-
+SAMPLER(sampler_NextDispTex);
 TEXTURE2D(_NormalTex);
 SAMPLER(sampler_NormalTex);
 TEXTURE2D(_NextLODNTex);
+SAMPLER(sampler_NextLODNTex);
 
 
 UNITY_INSTANCING_BUFFER_START(UnityPerMaterial)
-    UNITY_DEFINE_INSTANCED_PROP(float4, _BaseColor)
+    //UNITY_DEFINE_INSTANCED_PROP(float4, _BaseColor)
     UNITY_DEFINE_INSTANCED_PROP(float, _GridSize)
     UNITY_DEFINE_INSTANCED_PROP(float, _LODIndex)
     UNITY_DEFINE_INSTANCED_PROP(float, _OceanScale)
@@ -76,7 +77,7 @@ float3 GetOceanDisplacement(float4 UVn)
 {
     //sample displacement tex
     float3 col = _DispTex.SampleLevel(sampler_DispTex, UVn.xy, 0).rgb;
-    float3 col_n = _NextDispTex.SampleLevel(sampler_DispTex, UVn.zw, 0).rgb;
+    float3 col_n = _NextDispTex.SampleLevel(sampler_NextDispTex, UVn.zw, 0).rgb;
 
     float2 LODUVblend = clamp((abs(UVn.xy - 0.5f) / 0.5f - 0.75f)*5.0f, 0, 1);
     float LODBlendFactor = max(LODUVblend.x, LODUVblend.y);
@@ -88,13 +89,16 @@ float3 GetOceanDisplacement(float4 UVn)
 float4 GetOceanNormal(float4 UVn)
 {
     //sample displacement tex
+    //float4 col = _DispTex.SampleLevel(sampler_DispTex, UVn.xy, 0);
+    //float4 col_n = _NextDispTex.SampleLevel(sampler_NextDispTex, UVn.zw, 0);
     float4 col = _NormalTex.SampleLevel(sampler_NormalTex, UVn.xy, 0);
-    float4 col_n = _NextLODNTex.SampleLevel(sampler_NormalTex, UVn.zw, 0);
+    float4 col_n = _NextLODNTex.SampleLevel(sampler_NextLODNTex, UVn.zw, 0);
 
     float2 LODUVblend = clamp((abs(UVn.xy - 0.5f) / 0.5f - 0.75f) * 5.0f, 0, 1);
     float LODBlendFactor = max(LODUVblend.x, LODUVblend.y);
-    //LODBlendFactor = 0.0f;
+    //LODBlendFactor = 1.0f;
     col = lerp(col, col_n, LODBlendFactor);
+
     return col;
 }
 

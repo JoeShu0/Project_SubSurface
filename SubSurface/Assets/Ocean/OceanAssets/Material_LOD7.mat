@@ -41,6 +41,5 @@ Material:
     - _LODSize: 8192
     - _OceanScale: 1
     m_Colors:
-    - _BaseColor: {r: 1.75, g: 1.75, b: 1.75, a: 7}
     - _TransitionParam: {r: 3481.6, g: 3481.6, b: 409.6, a: 409.6}
   m_BuildTextureStacks: []
