@@ -88,25 +88,27 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 {
 	//Setup the instance ID for Input
 	UNITY_SETUP_INSTANCE_ID(input);
-	float OceanDepth = LOAD_TEXTURE2D(_CameraOceanDepthTexture, input.positionCS_SS.xy).a;
+	//Depth10 for ocean depth(not used in here)
+	float OceanDepth10 = LOAD_TEXTURE2D(_CameraOceanDepthTexture, input.positionCS_SS.xy).a;
 	
 	float4 NormalFoam = GetOceanNormal(input.UV);
-	float3 normal = NormalFoam.xyz;
+	float3 normal = normalize(NormalFoam.xyz);
 	float foam = NormalFoam.w;
 
 	Surface surface;
 	surface.position = input.positionWS;
-	surface.normal = normalize(normal);
-	//surface.color = INPUT_PROP(_BaseColor).rgb;
-	surface.alpha = 0.5;
+	surface.normal = normal;
+
+	surface.color = _BaseColor.rgb;
+	surface.alpha = 1.0f;
 	surface.metallic = 0;
 	surface.occlusion = 1;
 	surface.smoothness = 0.5;
 	surface.fresnelStrength = 1;
 	surface.viewDirection = normalize(_WorldSpaceCameraPos - input.positionWS);
-	//surface.depth = -TransformWorldToView(input.positionWS).z;
+	surface.depth = -TransformWorldToView(input.positionWS).z;
 	//surface.dither = InterleavedGradientNoise(config.fragment.positionSS, 0);
-	//surface.renderingLayerMask = asuint(unity_RenderingLayer.x);// treat float as uint
+	surface.renderingLayerMask = asuint(unity_RenderingLayer.x);// treat float as uint
 
 	//BRDF brdf = GetBRDF(surface);
 
@@ -126,9 +128,10 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	//return float4(normal, 1.0f);
 
 	float3 reflectDir = normalize(reflect(surface.viewDirection, surface.normal));
-	float SunReflect = pow(saturate(dot(normalize(float3(0.5,0.5,0.0)), reflectDir)), 50);
+	float SunReflect = pow(saturate(dot(normalize(float3(0.5,0.5,0.0)), reflectDir)), _HightParams.x);
 
-	return float4(dot(reflectDir,float3(0.5, 0.5, 0.0)),0.25,0.25,1.0f);
+
+	return float4(SunReflect, foam, 0.0,1.0f);
 }
 
 #endif

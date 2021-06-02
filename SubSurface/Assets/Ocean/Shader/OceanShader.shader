@@ -22,7 +22,7 @@
         #include "../../CustomRP/ShaderLib/Common.hlsl"
         #include "OceanInput.hlsl"
         ENDHLSL
-        Tags{"Queue" = "Transparent-250"}
+        Tags{"Queue" = "Transparent+250"}
 
         Pass
         {
@@ -35,7 +35,7 @@
             //for Alpha blend type We will use One OneMinusSrcAlpha
             Blend SrcAlpha OneMinusSrcAlpha
             Cull Back
-            ZWrite Off
+            ZWrite On
             HLSLPROGRAM
             #pragma target 3.5
             #pragma shader_feature _PREMULTIPLY_ALPHA

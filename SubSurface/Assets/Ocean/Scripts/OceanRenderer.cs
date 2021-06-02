@@ -9,6 +9,8 @@ using static OceanRenderSetting;
 public class OceanRenderer :MonoBehaviour
 {
     public OceanRenderSetting ORS;
+    public OceanShadingSetting OSS;
+
     [Tooltip("Tick this box will regenerate All LOD meshes and Materials")]
     public bool hasOceanLOD = false;
 
@@ -19,19 +21,24 @@ public class OceanRenderer :MonoBehaviour
     //temp solution
     private int KIndex = 0;
 
-    //Ocean Render Shader
-    int baseColorId = Shader.PropertyToID("_BaseColor");
+    //*****Ocean Render Shader LOD related*****
     int gridSizeId = Shader.PropertyToID("_GridSize");
     int lodIndexId = Shader.PropertyToID("_LODIndex");
     int transitionParams = Shader.PropertyToID("_TransitionParam");
     int lodSizeId = Shader.PropertyToID("_LODSize");
-
     int lodDisplaceMapId = Shader.PropertyToID("_DisplaceMap");
     int lodNormalMapId = Shader.PropertyToID("_NormalMap");
     int lodNextDisplaceMapId = Shader.PropertyToID("_NextDisplaceMap");
     int lodNextNormalMapId = Shader.PropertyToID("_NextNormalMap");
 
-    //Ocean RT render Shader
+    //*****Ocean Render Shading related*****
+    int baseColorId = Shader.PropertyToID("_BaseColor");
+    int brightColorId = Shader.PropertyToID("_BrightColor");
+    int darkColorId = Shader.PropertyToID("_DarkColor");
+    int foamColorId = Shader.PropertyToID("_FoamColor");
+    int hightLightParamId = Shader.PropertyToID("_HightParams");
+
+    //******Ocean RT render Shader******
     int waveCountId = Shader.PropertyToID("_WaveCount");
     int waveBufferId = Shader.PropertyToID("_WavesBuffer");
     //int lodSizeId = Shader.PropertyToID("_LODSize");
@@ -39,9 +46,8 @@ public class OceanRenderer :MonoBehaviour
     int deltaTimeId = Shader.PropertyToID("_DeltaTime");
     int foamFadeId = Shader.PropertyToID("_FoamFade");
     int lodWaveAmpMulId = Shader.PropertyToID("_LODWaveAmpMul");
-
     int lodBaseDispMapId = Shader.PropertyToID("_BaseDisplace");
-    int lodBaseNormalMapId = Shader.PropertyToID("_BaseNormal");
+    //int lodBaseNormalMapId = Shader.PropertyToID("_BaseNormal");
     int lodBaseDerivativeMapId = Shader.PropertyToID("_BaseDerivativeMap");
     int lodBaseDerivativeMapId_S = Shader.PropertyToID("_BaseDerivativeMap_Sample");
 
@@ -65,19 +71,12 @@ public class OceanRenderer :MonoBehaviour
     private void Update()
     {
 #if UNITY_EDITOR
-        /*
-        if (ORS && !ORS.IsInit)
-        {
-            Debug.Log("");
-            Awake();
-        }
-        */
 
 
         if(!hasOceanLOD)
             CreateOceanLODs();
-        //if(!Application.isPlaying)
-            //RenderDisAndNormalMapsForLODs();
+        if(!Application.isPlaying)
+            RenderDisAndNormalMapsForLODs();
 #endif
         //RenderDisAndNormalMapsForLODs();
         UpdateShaderGlobalParams();
@@ -226,6 +225,7 @@ public class OceanRenderer :MonoBehaviour
 
 
             CTile.GetComponent<MeshRenderer>().sharedMaterial = LODMat;
+            CTile.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
             //CTile.GetComponent<MeshRenderer>().SetPropertyBlock(block);
         }
 
@@ -237,14 +237,17 @@ public class OceanRenderer :MonoBehaviour
 
     void UpdateShaderGlobalParams()
     {
+        //update ocean rendering Global Material properties
+        //center position for the ocean(following camerafront)
         Shader.SetGlobalVector(centerPosId, transform.position);
-        //Shader.SetGlobalVector(CameraProjParamsId, new Vector4(1.0, ))
-        /*
-        for (int i = 0; i < ORS.OceanMats.Length; i++)
-        {
-            ORS.OceanMats[i].SetVector(centerPosId, transform.position);
-        }
-        */
+        //Ocean shanding stuff
+        Shader.SetGlobalVector(hightLightParamId, 
+            new Vector4(OSS.highlights.HighLightExp, 
+            OSS.highlights.HighLightBost, 0.0f,0.0f));
+        Shader.SetGlobalColor(baseColorId, OSS.BaseColor);
+        Shader.SetGlobalColor(brightColorId, OSS.BrightColor);
+        Shader.SetGlobalColor(darkColorId, OSS.DarkColor);
+        Shader.SetGlobalColor(foamColorId, OSS.FoamColor);
     }
 
 

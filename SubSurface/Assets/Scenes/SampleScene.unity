@@ -20554,6 +20554,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ORS: {fileID: 11400000, guid: 3c821bf86d691a4408f94a1a5ba1fca7, type: 2}
+  OSS: {fileID: 11400000, guid: 0173b03abd735c942beef7fef583e461, type: 2}
   hasOceanLOD: 1
 --- !u!4 &1817882522
 Transform:

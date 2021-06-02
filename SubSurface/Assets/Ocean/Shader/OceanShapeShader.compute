@@ -205,7 +205,7 @@ void CSMain(uint3 id : SV_DispatchThreadID)
     //float _FoamNoise = NoiseFoam.SampleLevel(samplerNoiseFoam, UV, 0).r;
 
     float FoamMask = outNormalV.a * 0.1f + _NormalMap[id.xy].a * 0.9f ;
-    //float FoamMask = (1.0f-Tangentout.z);
+    FoamMask = max(outNormalV.a, _NormalMap[id.xy].a * 0.95f);
 
 
     _DisplaceMap[id.xy] = outDisplaceV;

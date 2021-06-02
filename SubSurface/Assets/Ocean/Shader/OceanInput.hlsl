@@ -24,9 +24,17 @@ UNITY_INSTANCING_BUFFER_START(UnityPerMaterial)
     UNITY_DEFINE_INSTANCED_PROP(float, _LODSize)
 UNITY_INSTANCING_BUFFER_END(UnityPerMaterial)
 //specify the buffer, use the Shader.setglobal~ to set buffers 
-CBUFFER_START(_OceanData)
+CBUFFER_START(_OceanGlobalData)
+    //LOD related
     float4 _CenterPos;
-    //float4 _CamProjectionParams;
+    
+    //Shading Related
+    float4 _BaseColor;
+    float4 _BrightColor;
+    float4 _DarkColor;
+    float4 _FoamColor;
+    
+    float4 _HightParams;
 CBUFFER_END
 
 TEXTURE2D(_CameraOceanDepthTexture);
