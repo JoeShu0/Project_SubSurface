@@ -265,6 +265,12 @@ public class OceanRenderer :MonoBehaviour
         ORS.shapeShader.SetFloats("CenterPos", new float[]
             { transform.position.x, transform.position.y, transform.position.z}
             );
+
+        ORS.shapeShader.SetFloat(timeId, Time.time);
+        ORS.shapeShader.SetFloat(deltaTimeId, Time.deltaTime);
+        //this function should be call in fixed update
+        float inverstime = 1 / ORS.FoamFadeTime * Time.fixedDeltaTime;
+        ORS.shapeShader.SetFloat(foamFadeId, inverstime);
         /*
         //Create a RenderTexture to pass the derivative
         RenderTexture DerivativeMap = new RenderTexture(
@@ -296,11 +302,7 @@ public class OceanRenderer :MonoBehaviour
             ORS.shapeShader.SetFloat(lodSizeId, ORS.GridSize * ORS.GridCountPerTile * 4 * Mathf.Pow(2, i) * 1);//times ocean scale
             //ORS.shapeShader.SetInt(lodIndexId, i);
             ORS.shapeShader.SetFloat(lodWaveAmpMulId, ORS.WaveAmplitudeTweak[i]);
-            ORS.shapeShader.SetFloat(timeId, Time.time);
-            ORS.shapeShader.SetFloat(deltaTimeId, Time.deltaTime);
-            //this function should be call in fixed update
-            float inverstime = 1 / ORS.FoamFadeTime * Time.fixedDeltaTime;
-            ORS.shapeShader.SetFloat(foamFadeId, inverstime);
+            
 
             ORS.shapeShader.SetTexture(KIndex, lodBaseDispMapId, ORS.LODDisplaceMaps[Mathf.Min(i + 1, ORS.LODCount - 1)]);
             //ORS.shapeShader.SetTexture(KIndex, lodBaseNormalMapId, ORS.LODNormalMaps[Mathf.Min(i + 1, ORS.LODCount - 1)]);

@@ -8,26 +8,45 @@ public class HeightSampler : MonoBehaviour
 
     public Transform Ocean;
 
-    public ComputeShader GetDepth;
+    public ComputeShader GetHeight;
+
+    public float[] testdata = new float[16384];
     // Start is called before the first frame update
     void Start()
     {
-        
+        testdata = new float[16384];
     }
 
     // Update is called once per frame
     void Update()
     {
-        float height = GetWaveHeight(transform.position);
-
+        int lod = GetWaveLOD(transform.position);
+        /*
         transform.position = new Vector3(
             transform.position.x,
             height * 10f,
             transform.position.z
             );
+        */
+        //sampleheight(transform.position, lod);
     }
 
-    float GetWaveHeight(Vector3 PositionWS)
+    private void FixedUpdate()
+    {
+        //sampleheight(transform.position, 0);
+        float height = 0;
+        for (int i=1; i<256; i++)
+        {
+            //height = calHeight(transform.position);
+        }
+        transform.position = new Vector3(
+            transform.position.x,
+            height,
+            transform.position.z
+            );
+    }
+
+    int GetWaveLOD(Vector3 PositionWS)
     {
         Vector3 PositionRelate = PositionWS - Ocean.position;
         float LOD0Size = ORS.GridSize * ORS.GridCountPerTile * 4;
@@ -46,6 +65,46 @@ public class HeightSampler : MonoBehaviour
 
         //Vector4 col = ORS.LODDisplaceMaps[LOD].
 
-        return (float)LOD;
+        return LOD;
+    }
+
+    float sampleheight(Vector3 PosWS, int LOD)
+    {
+        ComputeBuffer testbuffer = new ComputeBuffer(16384, 4);
+        testbuffer.SetData(testdata);
+
+        GetHeight.SetBuffer(0, "_Height", testbuffer);
+
+        GetHeight.Dispatch(0, 64, 1, 1);
+
+        testbuffer.GetData(testdata);
+        testbuffer.Release();
+
+        return 0.0f;
+    }
+
+    float calHeight(Vector3 PosWS)
+    {
+        float PI = 14159265f;
+        float _LODWaveAmpMul = 1.0f;
+        Vector3 displace = new Vector3(0.0f,0.0f,0.0f);
+        for (int i = 0; i < ORS.WaveCount; i++)
+        {
+            float _WaveLength = ORS.SpectrumWaves[i].WaveLength;
+            float k = 2 * PI / _WaveLength;
+            float _Amplitude = ORS.SpectrumWaves[i].Amplitude * _LODWaveAmpMul;
+            float _Steepness = _Amplitude * k;
+            float _Speed = ORS.SpectrumWaves[i].Speed;
+            Vector2 _Direction = Vector3.Normalize(ORS.SpectrumWaves[i].Direction);
+            float f = k * (Vector3.Dot(PosWS, new Vector3(_Direction.x, 0, _Direction.y)) - Time.time * _Speed);
+
+            float Wx = _Amplitude * Mathf.Cos(f) * _Direction.x;
+            float Wz = _Amplitude * Mathf.Cos(f) * _Direction.y;
+            float Wy = _Amplitude * Mathf.Sin(f) * 1.0f;
+
+            displace += new Vector3(Wx, Wy, Wz);
+        }
+
+        return displace.y;
     }
 }

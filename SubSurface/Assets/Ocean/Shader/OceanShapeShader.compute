@@ -39,7 +39,6 @@ float _DeltaTime;
 int _WaveCount;
 float _FoamFade;
 
-const int LODCount = 8;
 
 struct Wave
 {
@@ -55,9 +54,10 @@ struct GerstnerOut
     float4 dispVector;
     float4 normalVector;
     float4 derivativeVector;
+    float4 VelocityHeight;
 };
 
-GerstnerOut GetWaveSum(float3 OriginalWPos, int2 coord)
+GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
 {
     float PI = 3.14159265f;
 
@@ -69,24 +69,6 @@ GerstnerOut GetWaveSum(float3 OriginalWPos, int2 coord)
     float Dzx = 0.0f;
     float Dzy = 0.0f;
 
-    //float Dza = 0.0f;
-
-    /*
-    if (LODIndex < 7)
-    {
-        float2 UV = float2(float(coord.x +0.5f)/512.0f * 0.5f +0.25f, float(coord.y+0.5f)/512.0f*0.5f+0.25f);
-        _Normal = normal;
-        //_Normal = BaseNormal.SampleLevel(samplerBaseNormal, UV, 0);
-        //displace += BaseDisplace.SampleLevel(samplerBaseDisplace, UV, 0);
-            //BaseDisplace[HalfCoord].xyz;
-        //normal += BaseNormal[coord].xyz;
-        //displace += BaseDisplace[coord].xyz;
-    }
-    else
-    {
-        _Normal = float3(0.0f, 1.0f, 0.0f);
-    }
-    */
     [unroll(10)]
     for (int i = 0; i < _WaveCount; i++)
     {
@@ -111,6 +93,7 @@ GerstnerOut GetWaveSum(float3 OriginalWPos, int2 coord)
         Dzx += _Direction.x * (_Steepness * cos(f));
         Dzy += _Direction.y * (_Steepness * cos(f));
 
+       
         //Dx * A *k * cos
         //Dx * A *k * -sin * k *Dx
 
@@ -150,7 +133,7 @@ GerstnerOut GetWaveSum(float3 OriginalWPos, int2 coord)
 
     
     //Sample the data (disp and derivative from Base LOD)
-    float2 UV = float2(float(coord.x + 0.5f) / 512.0f * 0.5f + 0.25f, float(coord.y + 0.5f) / 512.0f * 0.5f + 0.25f);
+    float2 UV = float2(float(coord.x + 0.5f) / RTSize * 0.5f + 0.25f, float(coord.y + 0.5f) / RTSize * 0.5f + 0.25f);
     float4 baseDisplaceV = _BaseDisplace.SampleLevel(linearClampSampler, UV, 0);
     float4 baseDerivativeV = _BaseDerivativeMap_Sample.SampleLevel(linearClampSampler, UV, 0);
     //baseNormalV = _BaseNormal.SampleLevel(linearClampSampler, UV, 0);
@@ -180,6 +163,50 @@ GerstnerOut GetWaveSum(float3 OriginalWPos, int2 coord)
     return ReturnData;
 }
 
+float4 GetWaveHV(float3 WPos, float RTSize)
+{
+    float PI = 3.14159265f;
+
+    float3 displace = float3(0.0, 0.0, 0.0);
+
+    float Dxx = 0.0f;
+    float Dyy = 0.0f;
+    float Dxy = 0.0f;
+    float Dzx = 0.0f;
+    float Dzy = 0.0f;
+
+    [unroll(10)]
+    for (int i = 0; i < _WaveCount; i++)
+    {
+
+        float _WaveLength = _WavesBuffer[i].WaveLength;
+        float k = 2 * PI / _WaveLength;
+        float _Amplitude = _WavesBuffer[i].Amplitude * _LODWaveAmpMul;
+        float _Steepness = _Amplitude * k;
+        float _Speed = _WavesBuffer[i].Speed;
+        float2 _Direction = normalize(_WavesBuffer[i].Direction);
+        float f = k * (dot(WPos, float3(_Direction.x, 0, _Direction.y)) - _Time * _Speed);
+
+        float Wy = _Amplitude * sin(f) * 1.0f;
+
+        displace += float3(0.0, Wy, 0.0);
+
+    }
+
+
+    
+    //Sample the data (disp and derivative from Base LOD)
+    float2 coord = ((WPos.xz - CenterPos.xz)/_LODSize+0.5f)*RTSize;
+    float2 UV = float2(float(coord.x + 0.5f) / 512.0f * 0.5f + 0.25f, float(coord.y + 0.5f) / 512.0f * 0.5f + 0.25f);
+    float4 baseDisplaceV = _BaseDisplace.SampleLevel(linearClampSampler, UV, 0);
+    //float4 baseDerivativeV = _BaseDerivativeMap_Sample.SampleLevel(linearClampSampler, UV, 0);
+    //baseNormalV = _BaseNormal.SampleLevel(linearClampSampler, UV, 0);
+
+    displace += baseDisplaceV.xyz;
+    
+    return float4(0.0,0.0,0.0, displace.y);
+}
+
 [numthreads(32, 32, 1)]
 void CSMain(uint3 id : SV_DispatchThreadID)
 {
@@ -194,19 +221,18 @@ void CSMain(uint3 id : SV_DispatchThreadID)
         (id.y / float(height) - 0.5f) * _LODSize
         ) + CenterPos;
 
-    //WavesBuffer[0].WaveLength
-    GerstnerOut outputWaveVectors = GetWaveSum(WPos, id.xy);
+    //get all the in place data
+    GerstnerOut outputWaveVectors = GetWaveDDNF(WPos, id.xy, width);//DDBF means Displace/Derivative/Normal/Foammask/Height/Velocity
 
     float4 outDisplaceV = outputWaveVectors.dispVector;
     float4 outDerivativeV = outputWaveVectors.derivativeVector;
     float4 outNormalV = outputWaveVectors.normalVector;
 
-    //float2 UV = float2(float(id.x + 0.5f) / 512.0f * 1.0f, float(id.y + 0.5f) / 512.0f * 1.0f) + _Time / 100.0f;
-    //float _FoamNoise = NoiseFoam.SampleLevel(samplerNoiseFoam, UV, 0).r;
-
     float FoamMask = outNormalV.a * 0.1f + _NormalMap[id.xy].a * 0.9f ;
     FoamMask = max(outNormalV.a, _NormalMap[id.xy].a * (1-_FoamFade));
 
+    //Get the offset data(height and velocity)
+    //float4 VelHVector = GetWaveHV(WPos + float3(outDisplaceV.x, 0, outDisplaceV.z), width);
 
     _DisplaceMap[id.xy] = outDisplaceV;
     _NormalMap[id.xy] = float4(outNormalV.rgb, FoamMask);
@@ -229,6 +255,9 @@ void CSMain(uint3 id : SV_DispatchThreadID)
 
 
 
+
+ //float2 UV = float2(float(id.x + 0.5f) / 512.0f * 1.0f, float(id.y + 0.5f) / 512.0f * 1.0f) + _Time / 100.0f;
+ //float _FoamNoise = NoiseFoam.SampleLevel(samplerNoiseFoam, UV, 0).r;
 
 //*****Crest Reference*****//
 /*
