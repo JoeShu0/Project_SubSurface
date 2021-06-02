@@ -62,6 +62,7 @@
     <Compile Include="Assets\CustomRP\Runtime\RenderingLayerMaskFieldAttribute.cs" />
     <Compile Include="Assets\CustomRP\Runtime\CameraRenderer.cs" />
     <Compile Include="Assets\Ocean\Scripts\OceanRenderer.cs" />
+    <Compile Include="Assets\Ocean\Scripts\OceanShadingSetting.cs" />
     <Compile Include="Assets\CustomRP\Runtime\CustomRenderPipelineCamera.cs" />
     <Compile Include="Assets\CustomRP\Runtime\Lighting.cs" />
     <Compile Include="Assets\CustomRP\Runtime\CustomRenderPipelineAsset.cs" />
@@ -79,7 +80,7 @@
     <Compile Include="Assets\Ocean\Scripts\PerTileMaterialProperty.cs" />
     <Compile Include="Assets\CustomRP\Runtime\CustomRenderPipeline.cs" />
     <Compile Include="Assets\CustomRP\Runtime\ShadowSettings.cs" />
-    <Compile Include="Assets\Ocean\Scripts\OceanShadingSetting.cs" />
+    <Compile Include="Assets\Ocean\Objects\HeightSampler.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\CustomRP\Shader\Particles_Unlit.shader" />
@@ -106,6 +107,7 @@
      <None Include="Assets\CustomRP\Shader\CameraRendererPasses.hlsl" />
      <None Include="Assets\CustomRP\Shader\CameraRenderer.shader" />
      <None Include="Assets\CustomRP\ShaderLib\UnityInput.hlsl" />
+     <None Include="Assets\Ocean\Objects\SampleHeight.compute" />
      <None Include="Assets\CustomRP\ShaderLib\GI.hlsl" />
      <None Include="Assets\CustomRP\ShaderLib\Fragment.hlsl" />
      <None Include="Assets\CustomRP\Shader\UnlitInput.hlsl" />

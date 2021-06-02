@@ -35,6 +35,7 @@ public class OceanRenderSetting : ScriptableObject
     public Vector2 WaveLengthRange = new Vector2(128.0f, 0.25f);
 
     //Foam fade Time in secs
+    [Range(0.0f, 3.0f)]
     public float FoamFadeTime = 1.0f;
 
     //tweaker for wave datas

@@ -23,16 +23,16 @@ MonoBehaviour:
   AnimeWindAngle: 0
   WaveDirAngleRange: 180
   WaveLengthRange: {x: 128, y: 0.25}
-  FoamFadePow: 2
+  FoamFadeTime: 1
   WaveAmplitudeTweak:
-  - 2.61
-  - 2.14
-  - 1.75
-  - 1.42
-  - 1.31
-  - 1.31
-  - 1.41
-  - 1.82
+  - 0.59
+  - 1.02
+  - 1.16
+  - 1.35
+  - 1.38
+  - 1.45
+  - 1.59
+  - 1.83
   debug: 11
   RegenerateWaveDatas: 0
   SpectrumWaves:

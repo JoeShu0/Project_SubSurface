@@ -298,7 +298,8 @@ public class OceanRenderer :MonoBehaviour
             ORS.shapeShader.SetFloat(lodWaveAmpMulId, ORS.WaveAmplitudeTweak[i]);
             ORS.shapeShader.SetFloat(timeId, Time.time);
             ORS.shapeShader.SetFloat(deltaTimeId, Time.deltaTime);
-            float inverstime = 1 / ORS.FoamFadeTime * Time.deltaTime;
+            //this function should be call in fixed update
+            float inverstime = 1 / ORS.FoamFadeTime * Time.fixedDeltaTime;
             ORS.shapeShader.SetFloat(foamFadeId, inverstime);
 
             ORS.shapeShader.SetTexture(KIndex, lodBaseDispMapId, ORS.LODDisplaceMaps[Mathf.Min(i + 1, ORS.LODCount - 1)]);

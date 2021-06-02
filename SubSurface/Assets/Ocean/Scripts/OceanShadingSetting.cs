@@ -9,7 +9,7 @@ public class OceanShadingSetting : ScriptableObject
     [System.Serializable]
     public struct Highlights
     {
-        [Range(0f, 10f)]
+        [Range(0f, 150f)]
         public float HighLightExp;
         [Range(0f, 10f)]
         public float HighLightBost;

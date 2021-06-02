@@ -149,7 +149,7 @@ float4 LitPassFragment(Varyings input) : SV_TARGET
 		//return float4(1.0, 0.0, 0.0, GetFinalAlpha(surface.alpha));
 	//}
 
-	float4 OceanDelta01 = clamp(-OceanDepthDelta*10000, 0.0, 1.0);
+	float4 OceanDelta01 = clamp(-OceanDepthDelta*1000, 0.0, 1.0);
 	
 	return lerp(float4(color, GetFinalAlpha(surface.alpha)),float4(1.0, 0.0, 0.0,GetFinalAlpha(surface.alpha)), OceanDelta01);
 }
