@@ -27,6 +27,9 @@ public class OceanRenderSetting : ScriptableObject
     //And We are getting each LOD to compute diff wave length so we fix the WaveCount to 64=8*8
     public int WaveCount = 128;
 
+    //EachLOD have 4 tiles
+    public static int TilePerLOD = 4;
+
     //wind angle causing the waves(degrees)
     public float AnimeWindAngle = 0.0f;
     //Wave dir distribute(degrees)

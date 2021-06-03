@@ -4,14 +4,53 @@
 // Create a RenderTexture with enableRandomWrite flag and set it
 // with cs.SetTexture
 //RWTexture2D<float4> Result;
+Texture2D<float4> _DisplaceLOD;
+SamplerState linearClampSampler;
 
-RWStructuredBuffer<float> _Height;
+StructuredBuffer<float3> _Positions;
+RWStructuredBuffer<float3> _ReltiveDepth;
+
+float4 _OceanLODParams;//xyz is the ocean center, z is LOD0Size
+
+int GetWaveLODOnPos(float3 ReltivePos)
+{
+    //float3 ReltivePos = PositionWS - _OceanLODParams.xyz;
+    float EdgeBuffer = 5.0f;
+    int LODx = ceil(log2(abs(ReltivePos.x + EdgeBuffer)/(_OceanLODParams.w*0.5f)));
+    int LODy = ceil(log2(abs(ReltivePos.z + EdgeBuffer)/(_OceanLODParams.w*0.5f)));
+    
+    int LODMax = max(max(LODx, LODy), 0);
+    
+    return LODMax;
+}
+
 
 [numthreads(256,1,1)]
 void CSMain (uint3 id : SV_DispatchThreadID)
 {
-    // TODO: insert actual code here!
+    float3 positionWS = _Positions[id.x];
 
-    //Result[id.xy] = float4(id.x & id.y, (id.x & 15)/15.0, (id.y & 15)/15.0, 0.0);
-    _Height[id.x] = float(id.x);
+    float3 ReltivePos = positionWS - _OceanLODParams.xyz;
+    float LOD0Size = _OceanLODParams.w;
+
+    int lodIndex = GetWaveLODOnPos(ReltivePos);
+    lodIndex = 0;
+    float2 UV  = ReltivePos.xz/(LOD0Size * pow(2, lodIndex)) + 0.5f;
+
+    float4 Displace = _DisplaceLOD.SampleLevel(linearClampSampler, UV, 0);
+
+    //composite offset??
+    for (int i=0; i<1 ;i++)
+    {
+        ReltivePos.xz -= Displace.xz;
+        UV = ReltivePos.xz/(LOD0Size * pow(2, lodIndex)) + 0.5f;
+        Displace = _DisplaceLOD.SampleLevel(linearClampSampler, UV, 0);
+    }
+    //ReltivePos.xz += Displace.xz;
+    //UV  = ReltivePos.xz/(LOD0Size * pow(2, lodIndex)) + 0.5f;
+    //Displace = _DisplaceLOD.SampleLevel(linearClampSampler, UV, 0);
+
+    float relativeDepth = ReltivePos.y - Displace.y;
+    
+    _ReltiveDepth[id.x] = Displace.xyz;
 }

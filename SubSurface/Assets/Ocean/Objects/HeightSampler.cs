@@ -11,43 +11,66 @@ public class HeightSampler : MonoBehaviour
 
     public ComputeShader GetHeight;
 
-    public float[] testdata = new float[16384];
-    // Start is called before the first frame update
+    private bool IsRetrivingGPUData = false;
+
+    //public float[] testdata = new float[16384];
+
+    List<Transform> SamplePointTranfroms = new List<Transform>();
+    //public List<Transform> SamplePointTranfroms = new List<Transform>();
+    Vector3[] offsets = new Vector3[128];
+    float originalheight;
+
+
     void Start()
     {
-        Debug.Log("Start:" + Time.frameCount);
-        testdata = new float[16384];
+        //Debug.Log("Start:" + Time.frameCount);
+        //testdata = new float[16384];
+        originalheight = transform.position.y;
 
-        StartCoroutine(sample());
+        //SamplePointTranfroms.Add(transform);
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            SamplePointTranfroms.Add(transform.GetChild(i));
+        }
+        //StartCoroutine(sample());
     }
 
     // Update is called once per frame
     void Update()
     {
         int lod = GetWaveLOD(transform.position);
-        /*
-        transform.position = new Vector3(
-            transform.position.x,
-            height * 10f,
-            transform.position.z
+        
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Vector3 pos = SamplePointTranfroms[i].position;
+            SamplePointTranfroms[i].position = new Vector3(
+            pos.x,
+            offsets[i].y,
+            pos.z
             );
-        */
+        }
+        
+        
         //sampleheight(transform.position, lod);
+        /*
+        Debug.DrawLine(transform.position,
+            transform.position + offset.y * new Vector3(0.0f, 1.0f, 0.0f),
+            Color.red);
+        */
     }
 
     private void FixedUpdate()
     {
         //sampleheight(transform.position, 0);
-        float height = 0;
-        for (int i=1; i<256; i++)
+        
+        
+        if (!IsRetrivingGPUData)
         {
-            //height = calHeight(transform.position);
+            //int lod = GetWaveLOD(transform.position);
+            //offsets = new Vector3[SamplePointTranfroms.Count];
+            StartCoroutine(sample());
         }
-        transform.position = new Vector3(
-            transform.position.x,
-            height,
-            transform.position.z
-            );
     }
 
     int GetWaveLOD(Vector3 PositionWS)
@@ -74,30 +97,51 @@ public class HeightSampler : MonoBehaviour
 
     IEnumerator sample()
     {
-        float A = 0;
+        float LOD0Size = ORS.GridSize * ORS.GridCountPerTile * OceanRenderSetting.TilePerLOD;
 
-        ComputeBuffer testbuffer = new ComputeBuffer(16384, 4);
-        testbuffer.SetData(testdata);
+        //get the positions
+        Vector3[] PosWSPoints = new Vector3[SamplePointTranfroms.Count];
+        Vector3[] RelDepths = new Vector3[SamplePointTranfroms.Count];
+        for (int i = 0; i < SamplePointTranfroms.Count; i++)
+        {
+            PosWSPoints[i] = SamplePointTranfroms[i].position;
+            RelDepths[i] = Vector3.zero;
+        }
 
-        GetHeight.SetBuffer(0, "_Height", testbuffer);
+        ComputeBuffer Positions = new ComputeBuffer(SamplePointTranfroms.Count, 12);
+        Positions.SetData(PosWSPoints);
+        ComputeBuffer RelativeDepths = new ComputeBuffer(SamplePointTranfroms.Count, 12);
+        RelativeDepths.SetData(RelDepths);
+
+        GetHeight.SetBuffer(0, "_Positions", Positions);
+        GetHeight.SetBuffer(0, "_ReltiveDepth", RelativeDepths);
+
+        GetHeight.SetTexture(0, "_DisplaceLOD", ORS.LODDisplaceMaps[0]);
+        GetHeight.SetVector("_OceanLODParams" , new Vector4
+            ( Ocean.position.x, Ocean.position.y, Ocean.position.z, LOD0Size));
 
         GetHeight.Dispatch(0, 64, 1, 1);
 
-        var request = AsyncGPUReadback.Request(testbuffer);
+        var request = AsyncGPUReadback.Request(RelativeDepths);
 
-        Debug.Log("frame1:" + Time.frameCount);
+        //Debug.Log("frame1:" + Time.frameCount);
+        IsRetrivingGPUData = true;
         yield return new WaitUntil(() => request.done);
-        Debug.Log("frame2:" + Time.frameCount);
+        //Debug.Log("frame2:" + Time.frameCount);
+        IsRetrivingGPUData = false;
 
-        testdata = request.GetData<float>().ToArray();
+        RelDepths = request.GetData<Vector3>().ToArray();
 
         //testbuffer.GetData(testdata);
+        Positions.Release();
+        RelativeDepths.Release();
 
-        testbuffer.Release();
+        for (int i = 0; i < SamplePointTranfroms.Count; i++)
+        {
+            offsets[i] = RelDepths[i];
+        }
 
-
-        A = testdata[20];
-
+            
     }
 
     float calHeight(Vector3 PosWS)
