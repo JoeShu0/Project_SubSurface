@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class HeightSampler : MonoBehaviour
 {
@@ -14,7 +15,10 @@ public class HeightSampler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Start:" + Time.frameCount);
         testdata = new float[16384];
+
+        StartCoroutine(sample());
     }
 
     // Update is called once per frame
@@ -68,8 +72,10 @@ public class HeightSampler : MonoBehaviour
         return LOD;
     }
 
-    float sampleheight(Vector3 PosWS, int LOD)
+    IEnumerator sample()
     {
+        float A = 0;
+
         ComputeBuffer testbuffer = new ComputeBuffer(16384, 4);
         testbuffer.SetData(testdata);
 
@@ -77,10 +83,21 @@ public class HeightSampler : MonoBehaviour
 
         GetHeight.Dispatch(0, 64, 1, 1);
 
-        testbuffer.GetData(testdata);
+        var request = AsyncGPUReadback.Request(testbuffer);
+
+        Debug.Log("frame1:" + Time.frameCount);
+        yield return new WaitUntil(() => request.done);
+        Debug.Log("frame2:" + Time.frameCount);
+
+        testdata = request.GetData<float>().ToArray();
+
+        //testbuffer.GetData(testdata);
+
         testbuffer.Release();
 
-        return 0.0f;
+
+        A = testdata[20];
+
     }
 
     float calHeight(Vector3 PosWS)
