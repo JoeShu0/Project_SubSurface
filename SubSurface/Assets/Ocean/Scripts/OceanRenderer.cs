@@ -8,8 +8,12 @@ using static OceanRenderSetting;
 [ExecuteInEditMode]
 public class OceanRenderer :MonoBehaviour
 {
-    public OceanRenderSetting ORS;
-    public OceanShadingSetting OSS;
+
+
+
+    private OceanRenderSetting ORS;
+    private OceanShadingSetting OSS;
+    private OceanHeightSampler OHS;
 
     [Tooltip("Tick this box will regenerate All LOD meshes and Materials")]
     public bool hasOceanLOD = false;
@@ -37,6 +41,7 @@ public class OceanRenderer :MonoBehaviour
     int darkColorId = Shader.PropertyToID("_DarkColor");
     int foamColorId = Shader.PropertyToID("_FoamColor");
     int hightLightParamId = Shader.PropertyToID("_HightParams");
+    
 
     //******Ocean RT render Shader******
     int waveCountId = Shader.PropertyToID("_WaveCount");
@@ -55,12 +60,33 @@ public class OceanRenderer :MonoBehaviour
     int centerPosId = Shader.PropertyToID("_CenterPos");
     //int CameraProjParamsId = Shader.PropertyToID("_CamProjectionParams");
 
+    //*****this class is a singleton*****
+    private static OceanRenderer _instance;
+    public static OceanRenderer Instance
+    {
+        get { return _instance; }
+    }
     private void Awake()
     {
+        if (_instance != null && _instance != this)
+        {
+            Debug.LogError("OceanRender Singleton pattern breaks");
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+        //*****this class is a singleton*****
         //ORS.LODDisplaceMaps = new RenderTexture[ORS.LODCount]
         //ORS.Initialization()
         //CreateOceanLODs();
 
+        //init the Ocean sampler
+        OHS = new OceanHeightSampler(ORS, transform);
+        
+
+        //the render RT part should be moved into a separate class
         threadGroupX = threadGroupY = Mathf.CeilToInt(ORS.RTSize / 32.0f);
     }
 
@@ -248,6 +274,8 @@ public class OceanRenderer :MonoBehaviour
         Shader.SetGlobalColor(brightColorId, OSS.BrightColor);
         Shader.SetGlobalColor(darkColorId, OSS.DarkColor);
         Shader.SetGlobalColor(foamColorId, OSS.FoamColor);
+
+        //Shader.SetGlobalTexture(detailNormalId, ORS.OceanDetailNoise);
     }
 
 

@@ -94,12 +94,19 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	float OceanDepth10 = LOAD_TEXTURE2D(_CameraOceanDepthTexture, input.positionCS_SS.xy).a;
 	
 	float4 NormalFoam = GetOceanNormal(input.UV);
-	float3 normal = normalize(NormalFoam.xyz);
+	float3 normalWS = normalize(NormalFoam.xyz);
 	float foam = NormalFoam.w;
 
+	
+	//Get the detail normal and combine with base normal
+	float3 DetailTangentNormal = GetTangentDetailNormal(input.StaticUV);
+	normalWS = DetailTangentNormalToWorld(DetailTangentNormal, normalWS);
+
+
+	//******Surface setup******
 	Surface surface;
 	surface.position = input.positionWS;
-	surface.normal = normal;
+	surface.normal = normalWS;
 
 	surface.color = _BaseColor.rgb;
 	surface.alpha = 1.0f;
@@ -127,7 +134,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	//Basic lighting
 	float3 color = input.DebugColor.rgb;
 
-	//return float4(input.UV.xy,0.0, 1.0f);
+	//return float4(surface.normal, 1.0f);
 
 	float3 reflectDir = normalize(reflect(surface.viewDirection, surface.normal));
 	float SunReflect = pow(saturate(dot(normalize(float3(-0.5,-0.5,0.0)), reflectDir)), _HightParams.x);

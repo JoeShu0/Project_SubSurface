@@ -47,6 +47,7 @@ public class OceanRenderSetting : ScriptableObject
 
     public float debug = 11;
 
+    
     public enum TileType
     {
         Interior,
@@ -92,10 +93,13 @@ public class OceanRenderSetting : ScriptableObject
     //All ocean Materials
     public Material[] OceanMats;
 
+    public Texture2D OceanDetailNoise;
+
     static int displaceTexId = Shader.PropertyToID("_DispTex");
     static int displaceTexNextId = Shader.PropertyToID("_NextDispTex");
     static int normalTexId = Shader.PropertyToID("_NormalTex");
     static int normalTexNextId = Shader.PropertyToID("_NextLODNTex");
+    static int detailNormalId = Shader.PropertyToID("_DetailNormalNoise");
 
     private void Awake()
     {
@@ -114,21 +118,26 @@ public class OceanRenderSetting : ScriptableObject
 #if UNITY_EDITOR
     public void Initialization()
     {
-        InitLODRTs();
-        InitTiles();
-        InitMaterials();
-
         if (!oceanShader)
         {
             oceanShader = Shader.Find("Custom_RP/OceanShader");
         }
         if (!shapeShader)
         {
-            //shapeShader = (ComputeShader)Resources.Load("OceanShapeShader");
+            shapeShader = (ComputeShader)Resources.Load("OceanShapeShader");
         }
+        if (!OceanDetailNoise)
+        {
+            OceanDetailNoise = (Texture2D)Resources.Load("WaterDetailNormal");
+        }
+
+        InitLODRTs();
+        InitTiles();
+        InitMaterials();
+        InitOceanWaves();
+
         IsInit = true;
 
-        InitOceanWaves();
     }
 
 
@@ -233,6 +242,7 @@ public class OceanRenderSetting : ScriptableObject
             OceanMats[i].SetTexture(displaceTexNextId, LODDisplaceMaps[Mathf.Min(i+1, LODCount-1)]);
             OceanMats[i].SetTexture(normalTexId, LODNormalMaps[i]);
             OceanMats[i].SetTexture(normalTexNextId, LODNormalMaps[Mathf.Min(i + 1, LODCount - 1)]);
+            OceanMats[i].SetTexture(detailNormalId, OceanDetailNoise);
             AssetDatabase.DeleteAsset(MatPath);
             AssetDatabase.CreateAsset(OceanMats[i], MatPath);
         }

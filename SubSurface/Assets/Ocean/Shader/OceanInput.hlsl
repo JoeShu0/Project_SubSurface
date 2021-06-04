@@ -13,6 +13,8 @@ SAMPLER(sampler_NormalTex);
 TEXTURE2D(_NextLODNTex);
 SAMPLER(sampler_NextLODNTex);
 
+TEXTURE2D(_DetailNormalNoise);
+SAMPLER(sampler_DetailNormalNoise);
 
 UNITY_INSTANCING_BUFFER_START(UnityPerMaterial)
     //UNITY_DEFINE_INSTANCED_PROP(float4, _BaseColor)
@@ -34,6 +36,7 @@ CBUFFER_START(_OceanGlobalData)
     float4 _DarkColor;
     float4 _FoamColor;
     
+    float4 _DetailNormalParams;
     float4 _HightParams;
 CBUFFER_END
 
@@ -117,6 +120,32 @@ float4 GetWorldPosUVAndNext(float3 positionWS)
     float2 UV_n = (positionWS.xz - _CenterPos.xz) / 
         (INPUT_PROP(_LODSize) * INPUT_PROP(_OceanScale)) * 0.5f + 0.5f;
     return float4(UV, UV_n);
+}
+
+float3 GetTangentDetailNormal(float2 staticUV)
+{
+    float4 map = SAMPLE_TEXTURE2D(_DetailNormalNoise, sampler_DetailNormalNoise, staticUV);
+    float scale = 1;//INPUT_PROP(_NormalScale);
+    float3 normal = DecodeNormal(map, scale);
+
+    return normal;
+}
+
+float3 DetailTangentNormalToWorld(float3 tangentDetailNormal, float3 worldBaseNormal)
+{
+    //try recon binormal and tangent using x->tangent
+    float3 binormalWS = normalize(cross(float3(1, 0, 0), worldBaseNormal));
+    float3 tangentWS = normalize(cross(worldBaseNormal, binormalWS));
+    /*
+    float3 FinalNormal = 
+        tangentWS * tangentDetailNormal.x +
+        binormalWS * tangentDetailNormal.y +
+        tangentDetailNormal * tangentDetailNormal.z;
+    */
+
+    float3 FinalNormal = NormalTangentToWorld(tangentDetailNormal, worldBaseNormal, float4(tangentWS, 1.0));
+    //return tangentDetailNormal;
+    return normalize(FinalNormal);
 }
 
 #endif

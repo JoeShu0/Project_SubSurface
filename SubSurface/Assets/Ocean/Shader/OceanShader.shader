@@ -15,6 +15,8 @@
 
         _NormalTex("LODNTexture", 2D) = "white" {}
         _NextLODNTex("NextLODNTexture", 2D) = "white" {}
+
+        _DetailNormalNoise("FFTDetailNormalTex", 2D) = "white" {}
     }
     SubShader
     {

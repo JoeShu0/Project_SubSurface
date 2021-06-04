@@ -124,6 +124,9 @@ public class HeightSampler : MonoBehaviour
 
         var request = AsyncGPUReadback.Request(RelativeDepths);
 
+        Positions.Release();
+        RelativeDepths.Release();
+
         //Debug.Log("frame1:" + Time.frameCount);
         IsRetrivingGPUData = true;
         yield return new WaitUntil(() => request.done);
@@ -133,8 +136,7 @@ public class HeightSampler : MonoBehaviour
         RelDepths = request.GetData<Vector3>().ToArray();
 
         //testbuffer.GetData(testdata);
-        Positions.Release();
-        RelativeDepths.Release();
+        
 
         System.Array.Copy(RelDepths, offsets, SamplePointTranfroms.Count);
         /*
