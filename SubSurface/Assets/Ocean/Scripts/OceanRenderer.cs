@@ -10,9 +10,11 @@ public class OceanRenderer :MonoBehaviour
 {
 
 
+    [HideInInspector]
+    public OceanRenderSetting ORS;
+    [HideInInspector]
+    public OceanShadingSetting OSS;
 
-    private OceanRenderSetting ORS;
-    private OceanShadingSetting OSS;
     private OceanHeightSampler OHS;
 
     [Tooltip("Tick this box will regenerate All LOD meshes and Materials")]
@@ -87,7 +89,7 @@ public class OceanRenderer :MonoBehaviour
         
 
         //the render RT part should be moved into a separate class
-        threadGroupX = threadGroupY = Mathf.CeilToInt(ORS.RTSize / 32.0f);
+        this.threadGroupX = threadGroupY = Mathf.CeilToInt(ORS.RTSize / 32.0f);
     }
 
     private void OnEnable()
