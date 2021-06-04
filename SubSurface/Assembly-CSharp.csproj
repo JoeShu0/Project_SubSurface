@@ -81,6 +81,7 @@
     <Compile Include="Assets\CustomRP\Runtime\CustomRenderPipeline.cs" />
     <Compile Include="Assets\CustomRP\Runtime\ShadowSettings.cs" />
     <Compile Include="Assets\Ocean\Objects\HeightSampler.cs" />
+    <Compile Include="Assets\Ocean\Scripts\OceanHeightSampler.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\CustomRP\Shader\Particles_Unlit.shader" />
