@@ -234,6 +234,9 @@ public class OceanRenderer :MonoBehaviour
         LODMat.SetFloat(lodSizeId, LODSize);
         LODMat.SetFloat(lodIndexId, LODIndex);
         LODMat.SetColor(baseColorId, new Vector4(0.25f, 0.25f, 0.25f, 1.0f) * LODIndex);
+
+        //LODMat.SetTexture("_DispTexArray", ORS.LODDisplaceMapsArray);
+
         LODMat.SetTexture(lodDisplaceMapId, ORS.LODDisplaceMaps[LODIndex]);
         LODMat.SetTexture(lodNormalMapId, ORS.LODNormalMaps[LODIndex]);
         LODMat.SetTexture(lodNextDisplaceMapId, ORS.LODDisplaceMaps[Mathf.Min(LODIndex, ORS.LODCount)]);
@@ -282,6 +285,9 @@ public class OceanRenderer :MonoBehaviour
         Shader.SetGlobalColor(darkColorId, OSS.DarkColor);
         Shader.SetGlobalColor(foamColorId, OSS.FoamColor);
 
+        Shader.SetGlobalTexture("_DispTexArray", ORS.LODDisplaceMapsArray);
+        Shader.SetGlobalTexture("_NormalTexArray", ORS.LODNormalMapsArray);
+
         //Shader.SetGlobalTexture(detailNormalId, ORS.OceanDetailNoise);
     }
 
@@ -306,25 +312,12 @@ public class OceanRenderer :MonoBehaviour
         //this function should be call in fixed update
         float inverstime = 1 / ORS.FoamFadeTime * Time.fixedDeltaTime;
         ORS.shapeShader.SetFloat(foamFadeId, inverstime);
-        /*
-        //Create a RenderTexture to pass the derivative
-        RenderTexture DerivativeMap = new RenderTexture(
-            ORS.RTSize, ORS.RTSize,
-            0, RenderTextureFormat.ARGBFloat,
-            RenderTextureReadWrite.Linear);
-        DerivativeMap.enableRandomWrite = true;
-        DerivativeMap.Create();
-        RenderTexture BaseDerivativeMap = new RenderTexture(
-            ORS.RTSize, ORS.RTSize,
-            0, RenderTextureFormat.ARGBFloat,
-            RenderTextureReadWrite.Linear);
-        BaseDerivativeMap.enableRandomWrite = true;
-        BaseDerivativeMap.Create();
-        */
+
+
         int WavePerLOD = ORS.WaveCount / ORS.LODCount;
         for (int i = ORS.LODCount-1; i>=0; i--)
         {
-            //Graphics.CopyTexture(DerivativeMap, BaseDerivativeMap);
+            //Graphics.CopyTexture(ORS.LODDisplaceMapsArray, Temp);
             //each LOD now only calculate  WaveCount/LODCcount of waves
             ORS.shapeShader.SetInt(waveCountId, WavePerLOD);
             //ORS.shapeShader.SetInt(waveCountId, ORS.WaveCount-i* WavePerLOD);
@@ -335,9 +328,11 @@ public class OceanRenderer :MonoBehaviour
             ORS.shapeShader.SetBuffer(KIndex, waveBufferId, shapeWaveBufer);
 
             ORS.shapeShader.SetFloat(lodSizeId, ORS.GridSize * ORS.GridCountPerTile * 4 * Mathf.Pow(2, i) * 1);//times ocean scale
-            //ORS.shapeShader.SetInt(lodIndexId, i);
+            ORS.shapeShader.SetInt(lodIndexId, i);
             ORS.shapeShader.SetFloat(lodWaveAmpMulId, ORS.WaveAmplitudeTweak[i]);
-            
+
+            ORS.shapeShader.SetTexture(KIndex, "_DisplaceArray", ORS.LODDisplaceMapsArray);
+            ORS.shapeShader.SetTexture(KIndex, "_NormalArray", ORS.LODNormalMapsArray);
 
             ORS.shapeShader.SetTexture(KIndex, lodBaseDispMapId, ORS.LODDisplaceMaps[Mathf.Min(i + 1, ORS.LODCount - 1)]);
             //ORS.shapeShader.SetTexture(KIndex, lodBaseNormalMapId, ORS.LODNormalMaps[Mathf.Min(i + 1, ORS.LODCount - 1)]);

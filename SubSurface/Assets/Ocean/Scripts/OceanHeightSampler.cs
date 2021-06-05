@@ -87,10 +87,14 @@ public class OceanHeightSampler
         ComputeBuffer RelativeDepths = new ComputeBuffer(SamplePointTranfroms.Count, 12);
         //RelativeDepths.SetData(RelDepths);
 
+        //GetHeight.SetTexture
+
         GetHeight.SetBuffer(0, "_Positions", Positions);
         GetHeight.SetBuffer(0, "_ReltiveDepth", RelativeDepths);
 
         GetHeight.SetTexture(0, "_DisplaceLOD", ORS.LODDisplaceMaps[0]);
+        GetHeight.SetTexture(0, "_DisplaceArray", ORS.LODDisplaceMapsArray);
+
         GetHeight.SetVector("_OceanLODParams", new Vector4
             (OceanCenter.position.x, OceanCenter.position.y, OceanCenter.position.z, LOD0Size));
 

@@ -3,7 +3,7 @@
 
 //short cut unity access per material property
 #define INPUT_PROP(name) UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, name)
-
+/*
 TEXTURE2D(_DispTex);
 SAMPLER(sampler_DispTex);
 TEXTURE2D(_NextDispTex);
@@ -12,7 +12,7 @@ TEXTURE2D(_NormalTex);
 SAMPLER(sampler_NormalTex);
 TEXTURE2D(_NextLODNTex);
 SAMPLER(sampler_NextLODNTex);
-
+*/
 TEXTURE2D(_DetailNormalNoise);
 SAMPLER(sampler_DetailNormalNoise);
 
@@ -38,6 +38,11 @@ CBUFFER_START(_OceanGlobalData)
     
     float4 _DetailNormalParams;
     float4 _HightParams;
+
+    Texture2DArray _DispTexArray;
+    Texture2DArray _NormalTexArray;
+    //sampler 
+    SamplerState linearClampSampler;
 CBUFFER_END
 
 TEXTURE2D(_CameraOceanDepthTexture);
@@ -87,13 +92,19 @@ float3 TransitionLOD(float3 positionWS, float oceanScale)
 float3 GetOceanDisplacement(float4 UVn)
 {
     //sample displacement tex
-    float3 col = _DispTex.SampleLevel(sampler_DispTex, UVn.xy, 0).rgb;
-    float3 col_n = _NextDispTex.SampleLevel(sampler_NextDispTex, UVn.zw, 0).rgb;
+    //float3 col = _DispTex.SampleLevel(sampler_DispTex, UVn.xy, 0).rgb;
+    //float3 col_n = _NextDispTex.SampleLevel(sampler_NextDispTex, UVn.zw, 0).rgb;
+
+    float3 col = _DispTexArray.SampleLevel(linearClampSampler, float3(UVn.xy,INPUT_PROP(_LODIndex)), 0).rgb;
+    float3 col_n =_DispTexArray.SampleLevel(linearClampSampler, float3(UVn.zw,min(INPUT_PROP(_LODIndex)+1,8)), 0).rgb;
 
     float2 LODUVblend = clamp((abs(UVn.xy - 0.5f) / 0.5f - 0.75f)*5.0f, 0, 1);
     float LODBlendFactor = max(LODUVblend.x, LODUVblend.y);
     //LODBlendFactor = 0.0f;
     col = lerp(col, col_n, LODBlendFactor);
+
+    
+
     return col;
 }
 
@@ -102,8 +113,10 @@ float4 GetOceanNormal(float4 UVn)
     //sample displacement tex
     //float4 col = _DispTex.SampleLevel(sampler_DispTex, UVn.xy, 0);
     //float4 col_n = _NextDispTex.SampleLevel(sampler_NextDispTex, UVn.zw, 0);
-    float4 col = _NormalTex.SampleLevel(sampler_NormalTex, UVn.xy, 0);
-    float4 col_n = _NextLODNTex.SampleLevel(sampler_NextLODNTex, UVn.zw, 0);
+    //float4 col = _NormalTex.SampleLevel(sampler_NormalTex, UVn.xy, 0);
+    //float4 col_n = _NextLODNTex.SampleLevel(sampler_NextLODNTex, UVn.zw, 0);
+    float4 col = _NormalTexArray.SampleLevel(linearClampSampler, float3(UVn.xy,INPUT_PROP(_LODIndex)), 0);
+    float4 col_n =_NormalTexArray.SampleLevel(linearClampSampler, float3(UVn.zw,min(INPUT_PROP(_LODIndex)+1,8)), 0);
 
     float2 LODUVblend = clamp((abs(UVn.xy - 0.5f) / 0.5f - 0.75f) * 5.0f, 0, 1);
     float LODBlendFactor = max(LODUVblend.x, LODUVblend.y);

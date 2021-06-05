@@ -1,10 +1,9 @@
 // Each #kernel tells which function to compile; you can have many kernels
 #pragma kernel CSMain
 
-// Create a RenderTexture with enableRandomWrite flag and set it
-// with cs.SetTexture
-//RWTexture2D<float4> Result;
-
+//Test the texture array
+//Texture2DArray<float4> _BaseDisplaceArray;
+Texture2DArray<float4> _DisplaceArray;
 Texture2D<float4> _DisplaceLOD;//will use the Texture2DArray to for all LODs
 SamplerState linearClampSampler;
 
@@ -35,16 +34,17 @@ void CSMain (uint3 id : SV_DispatchThreadID)
     float LOD0Size = _OceanLODParams.w;
 
     int lodIndex = GetWaveLODOnPos(ReltivePos);
-    lodIndex = 0;
+    //lodIndex = 0;
     float2 UV  = ReltivePos.xz/(LOD0Size * pow(2, lodIndex)) + 0.5f;
 
-    float4 Displace = _DisplaceLOD.SampleLevel(linearClampSampler, UV, 0);
+    float4 Displace = _DisplaceArray.SampleLevel(linearClampSampler, float3(UV, lodIndex), 0);
 
     //composite offset??
   
     ReltivePos.xz -= Displace.xz;
     UV = ReltivePos.xz/(LOD0Size * pow(2, lodIndex)) + 0.5f;
-    Displace = _DisplaceLOD.SampleLevel(linearClampSampler, UV, 0);
+    //Displace = _DisplaceLOD.SampleLevel(linearClampSampler, UV, 0);
+    Displace = _DisplaceArray.SampleLevel(linearClampSampler, float3(UV, lodIndex), 0);
 
     //ReltivePos.xz += Displace.xz;
     //UV  = ReltivePos.xz/(LOD0Size * pow(2, lodIndex)) + 0.5f;

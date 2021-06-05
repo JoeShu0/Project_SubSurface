@@ -87,9 +87,14 @@ public class OceanRenderSetting : ScriptableObject
     [Tooltip("Tick this box will regenerate All RT based on settings ")]
     public bool RegenerateRenderTextures = true;
     //anim wave render texture
+    [HideInInspector]
     public RenderTexture[] LODDisplaceMaps;
+    [HideInInspector]
     public RenderTexture[] LODNormalMaps;
+    [HideInInspector]
     public RenderTexture[] LODDerivativeMaps;
+    public RenderTexture LODDisplaceMapsArray;
+    public RenderTexture LODNormalMapsArray;
 
     [Tooltip("Tick this box will regenerate All Materials for LODs ")]
     public bool RegenerateMODMaterials = true;
@@ -256,6 +261,7 @@ public class OceanRenderSetting : ScriptableObject
         LODDisplaceMaps = new RenderTexture[LODCount];
         LODNormalMaps = new RenderTexture[LODCount];
         LODDerivativeMaps = new RenderTexture[LODCount];
+
         string RTPath;
         for (int i = 0; i < LODDisplaceMaps.Length; i++)
         {
@@ -302,6 +308,33 @@ public class OceanRenderSetting : ScriptableObject
             LODDerivativeMaps[i].Create();
             AssetDatabase.CreateAsset(RT, RTPath);
         }
+
+        RTPath = string.Format("Assets/Ocean/OceanAssets/LODDisplacementMapArray.renderTexture");
+        AssetDatabase.DeleteAsset(RTPath);
+        LODDisplaceMapsArray = new RenderTexture(RTSize, RTSize, 0, 
+            RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear);
+        LODDisplaceMapsArray.dimension = UnityEngine.Rendering.TextureDimension.Tex2DArray;
+        LODDisplaceMapsArray.volumeDepth = LODCount;
+        LODDisplaceMapsArray.enableRandomWrite = true;
+        LODDisplaceMapsArray.antiAliasing = 1;
+        LODDisplaceMapsArray.wrapMode = TextureWrapMode.Clamp;
+        LODDisplaceMapsArray.filterMode = FilterMode.Trilinear;
+        LODDisplaceMapsArray.Create();
+        AssetDatabase.CreateAsset(LODDisplaceMapsArray, RTPath);
+
+        RTPath = string.Format("Assets/Ocean/OceanAssets/LODNormalMapArray.renderTexture");
+        AssetDatabase.DeleteAsset(RTPath);
+        LODNormalMapsArray = new RenderTexture(RTSize, RTSize, 0,
+            RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear);
+        LODNormalMapsArray.dimension = UnityEngine.Rendering.TextureDimension.Tex2DArray;
+        LODNormalMapsArray.volumeDepth = LODCount;
+        LODNormalMapsArray.enableRandomWrite = true;
+        LODNormalMapsArray.antiAliasing = 1;
+        LODNormalMapsArray.wrapMode = TextureWrapMode.Clamp;
+        LODNormalMapsArray.filterMode = FilterMode.Trilinear;
+        LODNormalMapsArray.Create();
+        AssetDatabase.CreateAsset(LODNormalMapsArray, RTPath);
+
     }
 
     //this is for restore some of the settings for RTs

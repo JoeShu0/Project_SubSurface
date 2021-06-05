@@ -7,6 +7,10 @@ Texture2D<float4> _BaseDisplace;//Previous LOD DispMap, RGB:displacement, A: Dxy
 //Texture2D<float4> _BaseNormal;//Previous LOD normal and foam Map, RGB:normal A:foam
 //Texture2D<float4> _CurrNormal;//Same as _NormalMap just for sampling
 
+//ExtraArray output for physics sampling(or  we will use this for all later stuff)
+RWTexture2DArray<float4> _DisplaceArray;
+RWTexture2DArray<float4> _NormalArray;
+
 //this map will be used though all LODs
 RWTexture2D<float4> _BaseDerivativeMap;//Previous LOD DeriMap ,R: Dxx, G:Dyy, B:Dzx, A:Dzy
 Texture2D<float4> _BaseDerivativeMap_Sample;//Same as _BaseDerivativeMap just for sampling
@@ -32,7 +36,7 @@ RWTexture2D<float4> _NormalMap;//Normal out for current LOD normal and foam RGB:
 
 float3 CenterPos;
 float _LODSize;
-//int _LODIndex;
+int _LODIndex;
 float _LODWaveAmpMul;
 float _Time;
 float _DeltaTime;
@@ -56,6 +60,12 @@ struct GerstnerOut
     float4 derivativeVector;
     float4 VelocityHeight;
 };
+/*
+float4 BilinearSamplerTextureArray(RWTexture2DArray<float4> TexArray, float2 UV, float RTSize )
+{
+    
+}
+*/
 
 GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
 {
@@ -68,6 +78,7 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
     float Dxy = 0.0f;
     float Dzx = 0.0f;
     float Dzy = 0.0f;
+    //float Dzy = 0.0f;
 
     [unroll(10)]
     for (int i = 0; i < _WaveCount; i++)
@@ -94,47 +105,19 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
         Dzy += _Direction.y * (_Steepness * cos(f));
 
        
-        //Dx * A *k * cos
-        //Dx * A *k * -sin * k *Dx
-
-        //Dzxx += _Direction.x * _Steepness * (-cos(f)) * k * _Direction.x;
-        //Dzyy += _Direction.y * _Steepness * (-cos(f)) * k * _Direction.y;
-        //Dza += _Direction.x * _Steepness * (-sin(f)) * k * _Direction.x;
-        //Dza += _Direction.y * _Steepness * (-sin(f)) * k * _Direction.y;
-        //tangent += float3(Dxx, _Direction.x * (_Steepness * cos(f)) * 1.0f, Dxy);
-
-        //binormal += float3(Dxy, _Direction.y * (_Steepness * cos(f)) * 1.0f, Dyy);
-
-        //JacobianDet += (1 + Dxx) * (1 + Dyy) - (1 + Dxy) * (1 + Dxy);
+        
     }
-    /*
-    //fixed wave attenuation
-    float4 wt = float4(1, 1, 1, 1);
-
-    for (int n = 0; n < fmod(WaveCount, 4); n++)
-    {
-
-        float4 ks = 2 * PI / _WaveLengths[n];
-        float4 Amplitudes = _Steepnesses[n] / ks;
-        //later we have to this sqrt into CPU and integret it into Dir
-        float4 Speeds = 0.1f;//sqrt(9.8 / k);
-        float4 fs = ks * ((OriginalWPos.x * _DirXs[n] + OriginalWPos.z * _DirZs[n]) - _Time * Speeds);
-        float4 Wxs = Amplitudes * cos(fs) * _DirXs[n];
-        float4 Wzs = Amplitudes * cos(fs) * _DirZs[n];
-        float4 Wys = Amplitudes * sin(fs);
-
-        Displace += float3(dot(Wxs, wt), dot(Wys, wt), dot(Wzs, wt));
-        Displace += ks.xyz;
-
-
-        Displace += float3(WavesBatchBuffer[i].x, WavesBatchBuffer[i].y, WavesBatchBuffer[i].z);
-    }
-    */
-
     
     //Sample the data (disp and derivative from Base LOD)
     float2 UV = float2(float(coord.x + 0.5f) / RTSize * 0.5f + 0.25f, float(coord.y + 0.5f) / RTSize * 0.5f + 0.25f);
+
+    //uint2 UV = uint2(coord.x * 0.5f + 0.25f * RTSize, coord.y * 0.5f + 0.25f * RTSize);
+
     float4 baseDisplaceV = _BaseDisplace.SampleLevel(linearClampSampler, UV, 0);
+    
+    //float4 baseDisplaceV = _BaseDisplaceArray[uint3(UV, min(_LODIndex,7))];
+    //float4 baseDisplaceV = float4(0.0,0.0,0.0,0.0);
+    
     float4 baseDerivativeV = _BaseDerivativeMap_Sample.SampleLevel(linearClampSampler, UV, 0);
     //baseNormalV = _BaseNormal.SampleLevel(linearClampSampler, UV, 0);
     Dxx += baseDerivativeV.x;
@@ -211,8 +194,8 @@ float4 GetWaveHV(float3 WPos, float RTSize)
 void CSMain(uint3 id : SV_DispatchThreadID)
 {
     // TODO: insert actual code here!
-    uint width, height;
-    _DisplaceMap.GetDimensions(width, height);
+    uint width, height, elements;
+    _DisplaceArray.GetDimensions(width, height, elements);
 
     //D3D CoordSystem
     float3 WPos = float3(
@@ -220,6 +203,8 @@ void CSMain(uint3 id : SV_DispatchThreadID)
         0.0f,
         (id.y / float(height) - 0.5f) * _LODSize
         ) + CenterPos;
+    
+    //WPos *= 0.05f;
 
     //get all the in place data
     GerstnerOut outputWaveVectors = GetWaveDDNF(WPos, id.xy, width);//DDBF means Displace/Derivative/Normal/Foammask/Height/Velocity
@@ -235,8 +220,12 @@ void CSMain(uint3 id : SV_DispatchThreadID)
     //float4 VelHVector = GetWaveHV(WPos + float3(outDisplaceV.x, 0, outDisplaceV.z), width);
 
     _DisplaceMap[id.xy] = outDisplaceV;
-    _NormalMap[id.xy] = float4(outNormalV.rgb, FoamMask);
+    
+    //_NormalMap[id.xy] = float4(outNormalV.rgb, FoamMask);
     _BaseDerivativeMap[id.xy] = outDerivativeV;
+
+    _DisplaceArray[uint3(id.xy, _LODIndex)] = outDisplaceV;
+    _NormalArray[uint3(id.xy, _LODIndex)] = float4(outNormalV.rgb, FoamMask);;
 
     //debug
     //Displace[id.xy] = _WaveLengths[10];

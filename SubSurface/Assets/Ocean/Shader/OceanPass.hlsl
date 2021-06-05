@@ -70,7 +70,7 @@ Varyings OceanPassVertex(Attributes input)
 	output.depth01 = depth01;
 	output.UV = UVn;
 	output.StaticUV = S_UV;
-	output.DebugColor = GetOceanNormal(UVn);;
+	output.DebugColor = float4(debugDisplacecolor,0.0);
 	return output;
 }
 
@@ -134,7 +134,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	//Basic lighting
 	float3 color = input.DebugColor.rgb;
 
-	//return float4(surface.normal, 1.0f);
+	//return float4(color, 1.0f);
 
 	float3 reflectDir = normalize(reflect(surface.viewDirection, surface.normal));
 	float SunReflect = pow(saturate(dot(normalize(float3(-0.5,-0.5,0.0)), reflectDir)), _HightParams.x);
