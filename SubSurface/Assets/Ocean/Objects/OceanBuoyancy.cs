@@ -19,8 +19,8 @@ public class OceanBuoyancy : MonoBehaviour
         public int BPindex;
            
     }
-    public float MaxWaterDrag = 5;
-    public float MaxWaterADrag = 5;
+    public Vector2 WaterDrag = new Vector2(0.5f,2);
+    public Vector2 WaterADrag = new Vector2(0.5f,2);
     public Vector3 COMoffset = Vector3.zero;
     [SerializeField]
     public BuoyancyPoint[] BuoyancyPoints;
@@ -47,9 +47,9 @@ public class OceanBuoyancy : MonoBehaviour
             {
                 if (BuoyancyPoints[i].BPindex >= 0)
                 {
-                    Vector3 Reldepth = OceanRenderer.Instance.OHS.GetRelativeDepthByIndex(BuoyancyPoints[i].BPindex);
+                    Vector4 OceanData = OceanRenderer.Instance.OHS.GetRelativeDepthByIndex(BuoyancyPoints[i].BPindex);
                     Debug.DrawLine(BuoyancyPoints[i].transform.position,
-                        BuoyancyPoints[i].transform.position - new Vector3(0.0f, Reldepth.x, 0.0f),
+                        BuoyancyPoints[i].transform.position - new Vector3(0.0f, OceanData.w, 0.0f),
                         Color.green
                         );
                 }
@@ -136,10 +136,10 @@ public class OceanBuoyancy : MonoBehaviour
     {
         for (int i = 0; i < BuoyancyPoints.Length; i++)
         {
-            Vector3 Reldepth = OceanRenderer.Instance.OHS.GetRelativeDepthByIndex(BuoyancyPoints[i].BPindex);
-            float ValidDepth = Mathf.Clamp(-Reldepth.x,
+            Vector4 OceanData = OceanRenderer.Instance.OHS.GetRelativeDepthByIndex(BuoyancyPoints[i].BPindex);
+            float ValidDepth = Mathf.Clamp(-OceanData.w,
                 0, BuoyancyPoints[i].buoyancyHeight);
-            Vector3 BuoyancyDirection = new Vector3(0.0f, 1.0f, 0.0f);
+            Vector3 BuoyancyDirection = Vector3.Normalize(new Vector3(OceanData.x, OceanData.y, OceanData.z));//new Vector3(0.0f, 1.0f, 0.0f);
             if (ValidDepth != 0)
             {
                 Vector3 buoyancyforce =
@@ -150,6 +150,7 @@ public class OceanBuoyancy : MonoBehaviour
                     BuoyancyPoints[i].transform.position +
                     BuoyancyPoints[i].transform.up * ValidDepth * 0.5f;
                 RB.AddForceAtPosition(buoyancyforce, BuoyancyPoints[i].transform.position, ForceMode.Force);
+                
                 Debug.DrawLine(buoyancyApplyPoint, buoyancyApplyPoint + buoyancyforce, Color.cyan);
             }
             
@@ -160,8 +161,8 @@ public class OceanBuoyancy : MonoBehaviour
         int submergedBPCount = 0;
         for (int i = 0; i < BuoyancyPoints.Length; i++)
         {
-            Vector3 Reldepth = OceanRenderer.Instance.OHS.GetRelativeDepthByIndex(BuoyancyPoints[i].BPindex);
-            float ValidDepth = Mathf.Clamp(-Reldepth.x,
+            Vector4 OceanData = OceanRenderer.Instance.OHS.GetRelativeDepthByIndex(BuoyancyPoints[i].BPindex);
+            float ValidDepth = Mathf.Clamp(-OceanData.z,
                 0, BuoyancyPoints[i].buoyancyHeight);
             if (ValidDepth != 0)
             {
@@ -170,7 +171,8 @@ public class OceanBuoyancy : MonoBehaviour
 
         }
 
-        RB.drag = MaxWaterDrag * ((float)submergedBPCount / (float)BuoyancyPoints.Length);
-        RB.angularDrag = MaxWaterADrag * ((float)submergedBPCount / (float)BuoyancyPoints.Length);
+        //basic drag system
+        RB.drag = WaterDrag.y * ((float)submergedBPCount / (float)BuoyancyPoints.Length) + WaterDrag.x;
+        RB.angularDrag = WaterADrag.y * ((float)submergedBPCount / (float)BuoyancyPoints.Length) + WaterADrag.x;
     }
 }

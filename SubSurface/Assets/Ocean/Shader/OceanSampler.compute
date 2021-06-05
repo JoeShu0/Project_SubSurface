@@ -4,11 +4,12 @@
 //Test the texture array
 //Texture2DArray<float4> _BaseDisplaceArray;
 Texture2DArray<float4> _DisplaceArray;
-Texture2D<float4> _DisplaceLOD;//will use the Texture2DArray to for all LODs
+Texture2DArray<float4> _NormalArray;
+//Texture2D<float4> _DisplaceLOD;//will use the Texture2DArray to for all LODs
 SamplerState linearClampSampler;
 
 StructuredBuffer<float3> _Positions;
-RWStructuredBuffer<float3> _ReltiveDepth;
+RWStructuredBuffer<float4> _NormalDepth;
 
 float4 _OceanLODParams;//xyz is the ocean center, z is LOD0Size
 
@@ -39,12 +40,13 @@ void CSMain (uint3 id : SV_DispatchThreadID)
 
     float4 Displace = _DisplaceArray.SampleLevel(linearClampSampler, float3(UV, lodIndex), 0);
 
-    //composite offset??
+    //compensate offset??
   
     ReltivePos.xz -= Displace.xz;
     UV = ReltivePos.xz/(LOD0Size * pow(2, lodIndex)) + 0.5f;
     //Displace = _DisplaceLOD.SampleLevel(linearClampSampler, UV, 0);
     Displace = _DisplaceArray.SampleLevel(linearClampSampler, float3(UV, lodIndex), 0);
+    float3 Normal = _NormalArray.SampleLevel(linearClampSampler, float3(UV, lodIndex), 0).rgb;
 
     //ReltivePos.xz += Displace.xz;
     //UV  = ReltivePos.xz/(LOD0Size * pow(2, lodIndex)) + 0.5f;
@@ -52,5 +54,5 @@ void CSMain (uint3 id : SV_DispatchThreadID)
 
     float relativeDepth = ReltivePos.y - Displace.y;
     
-    _ReltiveDepth[id.x] = float3(relativeDepth, 0.0f,0.0f);//Displace.xyz;
+    _NormalDepth[id.x] = float4(Normal, relativeDepth);//Displace.xyz;
 }

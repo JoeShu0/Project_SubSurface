@@ -121,6 +121,8 @@ public class OceanRenderSetting : ScriptableObject
             LODDisplaceMaps[i].enableRandomWrite = true;
             LODNormalMaps[i].enableRandomWrite = true;
             LODDerivativeMaps[i].enableRandomWrite = true;
+            LODDisplaceMapsArray.enableRandomWrite = true;
+            LODNormalMapsArray.enableRandomWrite = true;
         }
     }
 #if UNITY_EDITOR

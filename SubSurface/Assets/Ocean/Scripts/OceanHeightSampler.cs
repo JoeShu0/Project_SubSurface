@@ -11,7 +11,7 @@ public class OceanHeightSampler
     public bool IsRetrivingGPUData = false;
 
     List<Transform> SamplePointTranfroms = new List<Transform>();
-    Vector3[] offsets = new Vector3[128];
+    Vector4[] OceanDatas = new Vector4[128];
 
     OceanRenderSetting ORS;
     Transform OceanCenter;
@@ -60,12 +60,12 @@ public class OceanHeightSampler
                 SamplePointTranfroms.RemoveAt(i);
             }
         }
-        if (offsets.Length <= SamplePointTranfroms.Count||
-            offsets.Length > SamplePointTranfroms.Count + 20)
+        if (OceanDatas.Length <= SamplePointTranfroms.Count||
+            OceanDatas.Length > SamplePointTranfroms.Count + 20)
         {
-            Vector3[] newOffsets = new Vector3[(int)(SamplePointTranfroms.Count + 20)];
-            System.Array.Copy(offsets, newOffsets, SamplePointTranfroms.Count);
-            offsets = newOffsets;
+            Vector4[] newOffsets = new Vector4[(int)(SamplePointTranfroms.Count + 20)];
+            System.Array.Copy(OceanDatas, newOffsets, SamplePointTranfroms.Count);
+            OceanDatas = newOffsets;
         }
     }
 
@@ -75,35 +75,36 @@ public class OceanHeightSampler
 
         //get the positions
         Vector3[] PosWSPoints = new Vector3[SamplePointTranfroms.Count];
-        Vector3[] RelDepths = new Vector3[SamplePointTranfroms.Count];
+        Vector4[] OceanDataBack = new Vector4[SamplePointTranfroms.Count];
         for (int i = 0; i < SamplePointTranfroms.Count; i++)
         {
             PosWSPoints[i] = SamplePointTranfroms[i].position;
-            RelDepths[i] = Vector3.zero;
+            OceanDataBack[i] = Vector4.zero;
         }
 
         ComputeBuffer Positions = new ComputeBuffer(SamplePointTranfroms.Count, 12);
         Positions.SetData(PosWSPoints);
-        ComputeBuffer RelativeDepths = new ComputeBuffer(SamplePointTranfroms.Count, 12);
-        //RelativeDepths.SetData(RelDepths);
+        ComputeBuffer OceanDataBuffer = new ComputeBuffer(SamplePointTranfroms.Count, 16);
+        //RelativeDepths.SetData(OceanDataBack);
 
         //GetHeight.SetTexture
 
         GetHeight.SetBuffer(0, "_Positions", Positions);
-        GetHeight.SetBuffer(0, "_ReltiveDepth", RelativeDepths);
+        GetHeight.SetBuffer(0, "_NormalDepth", OceanDataBuffer);
 
-        GetHeight.SetTexture(0, "_DisplaceLOD", ORS.LODDisplaceMaps[0]);
+        //GetHeight.SetTexture(0, "_DisplaceLOD", ORS.LODDisplaceMaps[0]);
         GetHeight.SetTexture(0, "_DisplaceArray", ORS.LODDisplaceMapsArray);
+        GetHeight.SetTexture(0, "_NormalArray", ORS.LODNormalMapsArray);
 
         GetHeight.SetVector("_OceanLODParams", new Vector4
             (OceanCenter.position.x, OceanCenter.position.y, OceanCenter.position.z, LOD0Size));
 
         GetHeight.Dispatch(0, 64, 1, 1);
 
-        var request = AsyncGPUReadback.Request(RelativeDepths);
+        var request = AsyncGPUReadback.Request(OceanDataBuffer);
 
         Positions.Release();
-        RelativeDepths.Release();
+        OceanDataBuffer.Release();
 
         //Debug.Log("frame1:" + Time.frameCount);
         IsRetrivingGPUData = true;
@@ -111,16 +112,16 @@ public class OceanHeightSampler
         //Debug.Log("frame2:" + Time.frameCount);
         IsRetrivingGPUData = false;
 
-        RelDepths = request.GetData<Vector3>().ToArray();
+        OceanDataBack = request.GetData<Vector4>().ToArray();
 
         //testbuffer.GetData(testdata);
 
 
-        System.Array.Copy(RelDepths, offsets, RelDepths.Length);
+        System.Array.Copy(OceanDataBack, OceanDatas, OceanDataBack.Length);
     }
 
-    public Vector3 GetRelativeDepthByIndex(int BPIndex)
+    public Vector4 GetRelativeDepthByIndex(int BPIndex)
     {
-        return offsets[BPIndex];
+        return OceanDatas[BPIndex];
     }
 }

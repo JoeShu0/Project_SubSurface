@@ -2756,8 +2756,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a0b4a0a20a47164b95deed50edf3ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxWaterDrag: 2
-  MaxWaterADrag: 2
+  WaterDrag: {x: 0.5, y: 2}
+  WaterADrag: {x: 0.5, y: 2}
   COMoffset: {x: 0, y: -0.5, z: 0}
   BuoyancyPoints:
   - transform: {fileID: 1532577910}
@@ -10183,8 +10183,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a0b4a0a20a47164b95deed50edf3ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxWaterDrag: 2
-  MaxWaterADrag: 2
+  WaterDrag: {x: 0.5, y: 2}
+  WaterADrag: {x: 0.5, y: 2}
   COMoffset: {x: 0, y: -0.5, z: 0}
   BuoyancyPoints:
   - transform: {fileID: 899218336}
@@ -18875,8 +18875,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a0b4a0a20a47164b95deed50edf3ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxWaterDrag: 2
-  MaxWaterADrag: 2
+  WaterDrag: {x: 0.5, y: 2}
+  WaterADrag: {x: 0.5, y: 2}
   COMoffset: {x: 0, y: -0.5, z: 0}
   BuoyancyPoints:
   - transform: {fileID: 1290784972}
@@ -21781,8 +21781,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a0b4a0a20a47164b95deed50edf3ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxWaterDrag: 2
-  MaxWaterADrag: 2
+  WaterDrag: {x: 0.5, y: 2}
+  WaterADrag: {x: 0.5, y: 2}
   COMoffset: {x: 0, y: -0.5, z: 0}
   BuoyancyPoints:
   - transform: {fileID: 977331203}
@@ -24100,8 +24100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a0b4a0a20a47164b95deed50edf3ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxWaterDrag: 2
-  MaxWaterADrag: 2
+  WaterDrag: {x: 0.5, y: 2}
+  WaterADrag: {x: 0.5, y: 2}
   COMoffset: {x: 0, y: -0.5, z: 0}
   BuoyancyPoints:
   - transform: {fileID: 583491570}

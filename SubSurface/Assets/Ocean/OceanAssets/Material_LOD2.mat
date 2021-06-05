@@ -23,22 +23,6 @@ Material:
         m_Texture: {fileID: 2800000, guid: 4269216d1f71f0246b4d1b1c7668ad2d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _DispTex:
-        m_Texture: {fileID: 8400000, guid: 74718baeac4bdb04ca0874d9d464c34f, type: 2}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _NextDispTex:
-        m_Texture: {fileID: 8400000, guid: cbad188ec1b48a74ca6b5ed2a8e030ab, type: 2}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _NextLODNTex:
-        m_Texture: {fileID: 8400000, guid: 13f6575178deff540b98cc8aef1b7ca2, type: 2}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _NormalTex:
-        m_Texture: {fileID: 8400000, guid: 2503b0f7f679ed24c8bedba38048fe9f, type: 2}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     m_Floats:
     - _GridSize: 0.8
     - _LODIndex: 2
