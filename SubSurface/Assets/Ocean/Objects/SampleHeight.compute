@@ -4,7 +4,8 @@
 // Create a RenderTexture with enableRandomWrite flag and set it
 // with cs.SetTexture
 //RWTexture2D<float4> Result;
-Texture2D<float4> _DisplaceLOD;
+
+Texture2D<float4> _DisplaceLOD;//will use the Texture2DArray to for all LODs
 SamplerState linearClampSampler;
 
 StructuredBuffer<float3> _Positions;
@@ -40,17 +41,16 @@ void CSMain (uint3 id : SV_DispatchThreadID)
     float4 Displace = _DisplaceLOD.SampleLevel(linearClampSampler, UV, 0);
 
     //composite offset??
-    for (int i=0; i<1 ;i++)
-    {
-        ReltivePos.xz -= Displace.xz;
-        UV = ReltivePos.xz/(LOD0Size * pow(2, lodIndex)) + 0.5f;
-        Displace = _DisplaceLOD.SampleLevel(linearClampSampler, UV, 0);
-    }
+  
+    ReltivePos.xz -= Displace.xz;
+    UV = ReltivePos.xz/(LOD0Size * pow(2, lodIndex)) + 0.5f;
+    Displace = _DisplaceLOD.SampleLevel(linearClampSampler, UV, 0);
+
     //ReltivePos.xz += Displace.xz;
     //UV  = ReltivePos.xz/(LOD0Size * pow(2, lodIndex)) + 0.5f;
     //Displace = _DisplaceLOD.SampleLevel(linearClampSampler, UV, 0);
 
     float relativeDepth = ReltivePos.y - Displace.y;
     
-    _ReltiveDepth[id.x] = Displace.xyz;
+    _ReltiveDepth[id.x] = float3(relativeDepth, 0.0f,0.0f);//Displace.xyz;
 }

@@ -139,12 +139,6 @@ public class HeightSampler : MonoBehaviour
         
 
         System.Array.Copy(RelDepths, offsets, SamplePointTranfroms.Count);
-        /*
-        for (int i = 0; i < SamplePointTranfroms.Count; i++)
-        {
-            offsets[i] = RelDepths[i];
-        }
-        */
             
     }
 

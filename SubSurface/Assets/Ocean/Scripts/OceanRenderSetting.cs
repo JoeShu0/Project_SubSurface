@@ -13,7 +13,9 @@ public class OceanRenderSetting : ScriptableObject
     //Shader to render ocean
     public Shader oceanShader;
     //Shader to render the displacement and normal maps
-    public ComputeShader shapeShader; 
+    public ComputeShader shapeShader;
+    //The compute shader to sample RT for CPU physics
+    public ComputeShader getHeight;
 
     //Count for LOD rings
     public int LODCount = 8;
@@ -45,6 +47,7 @@ public class OceanRenderSetting : ScriptableObject
     [Range(0.0f, 3.0f)]
     public float[] WaveAmplitudeTweak = new float[8];
 
+    
     public float debug = 11;
 
     

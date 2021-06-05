@@ -15,6 +15,7 @@ MonoBehaviour:
   IsInit: 1
   oceanShader: {fileID: 4800000, guid: 36e0b36d9215e6943acb44f0b8fa26a5, type: 3}
   shapeShader: {fileID: 7200000, guid: 23a92af6619da4d43b3189705f55a9be, type: 3}
+  getHeight: {fileID: 7200000, guid: 8c2a41e75b72cef4c933ac54d00261e4, type: 3}
   LODCount: 8
   GridSize: 0.2
   GridCountPerTile: 80

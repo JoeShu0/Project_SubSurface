@@ -10,12 +10,12 @@ public class OceanRenderer :MonoBehaviour
 {
 
 
-    [HideInInspector]
+    //[HideInInspector]
     public OceanRenderSetting ORS;
-    [HideInInspector]
+    //[HideInInspector]
     public OceanShadingSetting OSS;
-
-    private OceanHeightSampler OHS;
+    //[HideInInspector]
+    public OceanHeightSampler OHS;
 
     [Tooltip("Tick this box will regenerate All LOD meshes and Materials")]
     public bool hasOceanLOD = false;
@@ -85,7 +85,7 @@ public class OceanRenderer :MonoBehaviour
         //CreateOceanLODs();
 
         //init the Ocean sampler
-        OHS = new OceanHeightSampler(ORS, transform);
+        OHS = new OceanHeightSampler(ORS, transform, ORS.getHeight);
         
 
         //the render RT part should be moved into a separate class
@@ -113,6 +113,11 @@ public class OceanRenderer :MonoBehaviour
     private void FixedUpdate()
     {
         RenderDisAndNormalMapsForLODs();
+        // replave corotine with asnc await later
+        if (!OHS.IsRetrivingGPUData)
+        {
+            StartCoroutine(OHS.GetRelativeDepth());
+        }
     }
 
     void CreateOceanLODs()
