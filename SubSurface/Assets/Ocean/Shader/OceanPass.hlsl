@@ -100,7 +100,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	
 	//Get the detail normal and combine with base normal
 	float3 DetailTangentNormal = GetTangentDetailNormal(input.StaticUV);
-	normalWS = DetailTangentNormalToWorld(DetailTangentNormal, normalWS);
+	//normalWS = DetailTangentNormalToWorld(DetailTangentNormal, normalWS);
 
 
 	//******Surface setup******
@@ -132,13 +132,46 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	//return float4(INPUT_PROP(_BaseColor).rgb, 0.5);
 	
 	//Basic lighting
-	float3 color = input.DebugColor.rgb;
+	float4 color = float4(input.DebugColor.rgb,1.0f);
 
-	//return float4(color, 1.0f);
+	
+
+	//**********experimental part**********
+	float3 sunDirection = float3(-0.5,-0.5,0.0);
 
 	float3 reflectDir = normalize(reflect(surface.viewDirection, surface.normal));
-	float SunReflect = pow(saturate(dot(normalize(float3(-0.5,-0.5,0.0)), reflectDir)), _HightParams.x);
+	float SunReflect = pow(saturate(dot(normalize(sunDirection), reflectDir)), _HightParams.x);
 	
+	float LightNormalGradient = dot(-sunDirection, surface.normal);
+	float ViewNormalGradient = dot(surface.viewDirection, surface.normal);
+	
+
+	color = _DarkColor;
+	float baseMask = clamp(
+		pow(abs(LightNormalGradient + _BrightOffsetPow.x), _BrightOffsetPow.y),
+		0.0f,
+		1.0f);
+	color = lerp(color, _BaseColor, baseMask);
+	float brightMask = clamp(
+		pow(abs(LightNormalGradient + _BrightOffsetPow.z), _BrightOffsetPow.w),
+		0.0f,
+		1.0f);
+	color = lerp(color, _BrightColor, brightMask);
+
+	float foamMask = clamp(
+		pow(abs(foam + _FoamFresnelOffsetPow.x), _FoamFresnelOffsetPow.y),
+		0.0f,
+		1.0f);
+	color = lerp(color, _FoamColor, foamMask);
+	float fresnelMask = clamp(
+		pow(abs(1-ViewNormalGradient + _FoamFresnelOffsetPow.z), _FoamFresnelOffsetPow.w),
+		0.0f,
+		1.0f);
+	color = lerp(color, _FresnelColor, fresnelMask);
+
+	
+	
+	return float4(color.rgb, max(color.a, 1-ViewNormalGradient));//
 	//SunReflect = dot(normalize(float3(-0.5, -0.5, 0.0)), reflectDir);
 
 	return float4(SunReflect, foam, 0.0,1.0f) + float4(0.1f,0.1f,0.1f,0.0f);

@@ -15,12 +15,24 @@ public class OceanShadingSetting : ScriptableObject
         public float HighLightBost;
     };
 
+    [System.Serializable]
+    public struct ColorBanding
+    {
+        public Color color;
+        public float bandingOffset;
+        public float bandingPower;
+    }
 
     //Material Properties
-    public Color BaseColor;
-    public Color BrightColor;
-    public Color DarkColor;
-    public Color FoamColor;
+    
+    public ColorBanding Bright;
+    public ColorBanding Base;
+    public ColorBanding Dark;
+    public ColorBanding Foam;
+    public ColorBanding Fresnel;
+
+
+
 
     public Highlights highlights = new Highlights 
     { HighLightExp = 1 , HighLightBost  = 0};

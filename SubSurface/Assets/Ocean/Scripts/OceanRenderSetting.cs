@@ -44,7 +44,7 @@ public class OceanRenderSetting : ScriptableObject
     public float FoamFadeTime = 1.0f;
 
     //tweaker for wave datas
-    [Range(0.0f, 3.0f)]
+    [Range(0.0f, 5.0f)]
     public float[] WaveAmplitudeTweak = new float[8];
 
     

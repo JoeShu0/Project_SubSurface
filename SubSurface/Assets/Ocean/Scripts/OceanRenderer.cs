@@ -42,6 +42,7 @@ public class OceanRenderer :MonoBehaviour
     int brightColorId = Shader.PropertyToID("_BrightColor");
     int darkColorId = Shader.PropertyToID("_DarkColor");
     int foamColorId = Shader.PropertyToID("_FoamColor");
+    int fresnelColorId = Shader.PropertyToID("_FresnelColor");
     int hightLightParamId = Shader.PropertyToID("_HightParams");
     
 
@@ -280,10 +281,23 @@ public class OceanRenderer :MonoBehaviour
         Shader.SetGlobalVector(hightLightParamId, 
             new Vector4(OSS.highlights.HighLightExp, 
             OSS.highlights.HighLightBost, 0.0f,0.0f));
-        Shader.SetGlobalColor(baseColorId, OSS.BaseColor);
-        Shader.SetGlobalColor(brightColorId, OSS.BrightColor);
-        Shader.SetGlobalColor(darkColorId, OSS.DarkColor);
-        Shader.SetGlobalColor(foamColorId, OSS.FoamColor);
+        Shader.SetGlobalColor(baseColorId, OSS.Base.color);
+        Shader.SetGlobalColor(brightColorId, OSS.Bright.color);
+        Shader.SetGlobalColor(darkColorId, OSS.Dark.color);
+        Shader.SetGlobalColor(foamColorId, OSS.Foam.color);
+        Shader.SetGlobalColor(fresnelColorId, OSS.Fresnel.color);
+        Shader.SetGlobalVector("_BrightOffsetPow", new Vector4(
+            OSS.Base.bandingOffset,
+            OSS.Base.bandingPower,
+            OSS.Bright.bandingOffset,
+            OSS.Bright.bandingPower
+            ));
+        Shader.SetGlobalVector("_FoamFresnelOffsetPow", new Vector4(
+            OSS.Foam.bandingOffset,
+            OSS.Foam.bandingPower,
+            OSS.Fresnel.bandingOffset,
+            OSS.Fresnel.bandingPower
+            ));
 
         Shader.SetGlobalTexture("_DispTexArray", ORS.LODDisplaceMapsArray);
         Shader.SetGlobalTexture("_NormalTexArray", ORS.LODNormalMapsArray);

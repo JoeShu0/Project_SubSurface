@@ -12,10 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10080abe0b0be04448ef692f084148c1, type: 3}
   m_Name: OceanShadingSetting
   m_EditorClassIdentifier: 
-  BaseColor: {r: 0.40000004, g: 0.52156866, b: 0.93725497, a: 0}
-  BrightColor: {r: 0.50980395, g: 0.8000001, b: 0.8352942, a: 0}
-  DarkColor: {r: 0.1137255, g: 0.16862746, b: 0.42352945, a: 0}
-  FoamColor: {r: 0.96470594, g: 0.9803922, b: 0.9843138, a: 0}
+  Bright:
+    color: {r: 0.43137258, g: 0.6392157, b: 0.9294118, a: 1}
+    bandingOffset: 0.42
+    bandingPower: 500
+  Base:
+    color: {r: 0.18039216, g: 0.4666667, b: 0.7803922, a: 0.5803922}
+    bandingOffset: 0.54
+    bandingPower: 500
+  Dark:
+    color: {r: 0.03137255, g: 0.11764707, b: 0.28235295, a: 0.25490198}
+    bandingOffset: 0
+    bandingPower: 1
+  Foam:
+    color: {r: 0.36862746, g: 0.39607847, b: 0.48235297, a: 1}
+    bandingOffset: 0.75
+    bandingPower: 100
+  Fresnel:
+    color: {r: 0.7490196, g: 0.79215693, b: 0.78823537, a: 1}
+    bandingOffset: 0.14
+    bandingPower: 100
   highlights:
     HighLightExp: 86.8
     HighLightBost: 0

@@ -35,6 +35,11 @@ CBUFFER_START(_OceanGlobalData)
     float4 _BrightColor;
     float4 _DarkColor;
     float4 _FoamColor;
+    float4 _FresnelColor;
+
+    float4 _BrightOffsetPow;
+    float4 _FoamFresnelOffsetPow;
+
     
     float4 _DetailNormalParams;
     float4 _HightParams;
