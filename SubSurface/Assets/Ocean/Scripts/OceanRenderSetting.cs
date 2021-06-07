@@ -39,9 +39,19 @@ public class OceanRenderSetting : ScriptableObject
     //Wave Length range in meters
     public Vector2 WaveLengthRange = new Vector2(128.0f, 0.25f);
 
-    //Foam fade Time in secs
-    [Range(0.0f, 3.0f)]
-    public float FoamFadeTime = 1.0f;
+    [System.Serializable]
+    public struct FoamParams
+    {
+        [Range(0.000001f, 3.0f)]
+        public float FadeTime;//Foam fade Time in secs
+        [Range(0.0f, 1.0f)]
+        public float BandOffset;
+        [Range(0.0f, 100.0f)]
+        public float BandPower;
+    };
+    public FoamParams foamParams = new FoamParams
+    { FadeTime = 1.0f, BandOffset = 0.75f, BandPower = 100.0f};
+
 
     //tweaker for wave datas
     [Range(0.0f, 5.0f)]
@@ -120,10 +130,10 @@ public class OceanRenderSetting : ScriptableObject
         {
             LODDisplaceMaps[i].enableRandomWrite = true;
             LODNormalMaps[i].enableRandomWrite = true;
-            LODDerivativeMaps[i].enableRandomWrite = true;
-            LODDisplaceMapsArray.enableRandomWrite = true;
-            LODNormalMapsArray.enableRandomWrite = true;
+            LODDerivativeMaps[i].enableRandomWrite = true;  
         }
+        LODDisplaceMapsArray.enableRandomWrite = true;
+        LODNormalMapsArray.enableRandomWrite = true;
     }
 #if UNITY_EDITOR
     public void Initialization()

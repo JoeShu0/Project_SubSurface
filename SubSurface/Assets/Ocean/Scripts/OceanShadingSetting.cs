@@ -18,6 +18,7 @@ public class OceanShadingSetting : ScriptableObject
     [System.Serializable]
     public struct ColorBanding
     {
+        [ColorUsage(true, true)]
         public Color color;
         public float bandingOffset;
         public float bandingPower;

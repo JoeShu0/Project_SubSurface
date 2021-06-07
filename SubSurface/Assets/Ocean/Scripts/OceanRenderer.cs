@@ -52,7 +52,7 @@ public class OceanRenderer :MonoBehaviour
     //int lodSizeId = Shader.PropertyToID("_LODSize");
     int timeId = Shader.PropertyToID("_Time");
     int deltaTimeId = Shader.PropertyToID("_DeltaTime");
-    int foamFadeId = Shader.PropertyToID("_FoamFade");
+    int foamParamId = Shader.PropertyToID("_FoamParams");
     int lodWaveAmpMulId = Shader.PropertyToID("_LODWaveAmpMul");
     int lodBaseDispMapId = Shader.PropertyToID("_BaseDisplace");
     //int lodBaseNormalMapId = Shader.PropertyToID("_BaseNormal");
@@ -324,8 +324,9 @@ public class OceanRenderer :MonoBehaviour
         ORS.shapeShader.SetFloat(timeId, Time.time);
         ORS.shapeShader.SetFloat(deltaTimeId, Time.deltaTime);
         //this function should be call in fixed update
-        float inverstime = 1 / ORS.FoamFadeTime * Time.fixedDeltaTime;
-        ORS.shapeShader.SetFloat(foamFadeId, inverstime);
+        float inverstime = 1 / ORS.foamParams.FadeTime * Time.fixedDeltaTime;
+        ORS.shapeShader.SetVector(foamParamId, 
+            new Vector4(inverstime, ORS.foamParams.BandOffset,ORS.foamParams.BandPower, 0.0f));
 
 
         int WavePerLOD = ORS.WaveCount / ORS.LODCount;

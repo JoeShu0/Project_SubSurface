@@ -41,7 +41,7 @@ float _LODWaveAmpMul;
 float _Time;
 float _DeltaTime;
 int _WaveCount;
-float _FoamFade;
+float4 _FoamParams;//x is the inverse foam fade time, x is foam banding offset, y is the foam banding power
 
 
 struct Wave
@@ -113,11 +113,9 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
 
     //uint2 UV = uint2(coord.x * 0.5f + 0.25f * RTSize, coord.y * 0.5f + 0.25f * RTSize);
 
+    //if the base is set to the current LOD, there are texture2D and RWTexture2D mapped to 
+    //the same rendertexture in the same shader, the sample result is 0
     float4 baseDisplaceV = _BaseDisplace.SampleLevel(linearClampSampler, UV, 0);
-    
-    //float4 baseDisplaceV = _BaseDisplaceArray[uint3(UV, min(_LODIndex,7))];
-    //float4 baseDisplaceV = float4(0.0,0.0,0.0,0.0);
-    
     float4 baseDerivativeV = _BaseDerivativeMap_Sample.SampleLevel(linearClampSampler, UV, 0);
     //baseNormalV = _BaseNormal.SampleLevel(linearClampSampler, UV, 0);
     Dxx += baseDerivativeV.x;
@@ -213,17 +211,18 @@ void CSMain(uint3 id : SV_DispatchThreadID)
     float4 outDerivativeV = outputWaveVectors.derivativeVector;
     float4 outNormalV = outputWaveVectors.normalVector;
 
-    float FoamMask = outNormalV.a * 0.1f + _NormalMap[id.xy].a * 0.9f ;
-    FoamMask = max(outNormalV.a, _NormalMap[id.xy].a * (1-_FoamFade));
+    //foam banding and progressive fade
+    float FoamMask = clamp(pow(abs(outNormalV.a+ _FoamParams.y), _FoamParams.z),0.0,1.0);
+    FoamMask = max(FoamMask, _NormalMap[id.xy].a * (1- _FoamParams.x));
 
     //Get the offset data(height and velocity)
     //float4 VelHVector = GetWaveHV(WPos + float3(outDisplaceV.x, 0, outDisplaceV.z), width);
-
+    //assgin Temp map
     _DisplaceMap[id.xy] = outDisplaceV;
-    
-    //_NormalMap[id.xy] = float4(outNormalV.rgb, FoamMask);
+    _NormalMap[id.xy] = float4(outNormalV.rgb, FoamMask);
     _BaseDerivativeMap[id.xy] = outDerivativeV;
 
+    //assign maps for CPU process
     _DisplaceArray[uint3(id.xy, _LODIndex)] = outDisplaceV;
     _NormalArray[uint3(id.xy, _LODIndex)] = float4(outNormalV.rgb, FoamMask);;
 

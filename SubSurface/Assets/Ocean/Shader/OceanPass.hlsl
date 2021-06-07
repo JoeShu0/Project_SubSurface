@@ -145,6 +145,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	float LightNormalGradient = dot(-sunDirection, surface.normal);
 	float ViewNormalGradient = dot(surface.viewDirection, surface.normal);
 	
+	
 
 	color = _DarkColor;
 	float baseMask = clamp(
@@ -169,7 +170,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 		1.0f);
 	color = lerp(color, _FresnelColor, fresnelMask);
 
-	
+	//return float4(foam, foam, foam, 1.0f);
 	
 	return float4(color.rgb, max(color.a, 1-ViewNormalGradient));//
 	//SunReflect = dot(normalize(float3(-0.5, -0.5, 0.0)), reflectDir);

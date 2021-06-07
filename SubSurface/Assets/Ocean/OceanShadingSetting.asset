@@ -17,21 +17,21 @@ MonoBehaviour:
     bandingOffset: 0.42
     bandingPower: 500
   Base:
-    color: {r: 0.18039216, g: 0.4666667, b: 0.7803922, a: 0.5803922}
-    bandingOffset: 0.54
+    color: {r: 0.18039216, g: 0.4666667, b: 0.7803922, a: 1}
+    bandingOffset: 0
     bandingPower: 500
   Dark:
-    color: {r: 0.03137255, g: 0.11764707, b: 0.28235295, a: 0.25490198}
+    color: {r: 0.03137255, g: 0.11764707, b: 0.28235295, a: 0.7882353}
     bandingOffset: 0
     bandingPower: 1
   Foam:
     color: {r: 0.36862746, g: 0.39607847, b: 0.48235297, a: 1}
-    bandingOffset: 0.75
-    bandingPower: 100
+    bandingOffset: 0
+    bandingPower: 133.1
   Fresnel:
-    color: {r: 0.7490196, g: 0.79215693, b: 0.78823537, a: 1}
-    bandingOffset: 0.14
-    bandingPower: 100
+    color: {r: 0.7506827, g: 0.79215693, b: 0.79215693, a: 1}
+    bandingOffset: 0.08
+    bandingPower: 50
   highlights:
     HighLightExp: 86.8
     HighLightBost: 0
