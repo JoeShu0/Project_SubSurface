@@ -71,6 +71,9 @@ public class OceanHeightSampler
 
     public IEnumerator GetRelativeDepth()
     {
+        if (SamplePointTranfroms.Count <= 0)
+            yield break;
+
         float LOD0Size = ORS.GridSize * ORS.GridCountPerTile * OceanRenderSetting.TilePerLOD;
 
         //get the positions

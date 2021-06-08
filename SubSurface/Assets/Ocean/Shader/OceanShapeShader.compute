@@ -80,6 +80,7 @@ float4 BilinearSamplerTextureArray(RWTexture2DArray<float4> TexArray, int2 coord
     uint2 P11 = uint2(ceil(UV.x), ceil(UV.y));
 
     float4 sample00 = TexArray[uint3(P00, PreviousLODIndex)];
+    
     float4 sample10 = TexArray[uint3(P10, PreviousLODIndex)];
     float4 sample01 = TexArray[uint3(P01, PreviousLODIndex)];
     float4 sample11 = TexArray[uint3(P11, PreviousLODIndex)];
@@ -93,6 +94,7 @@ float4 BilinearSamplerTextureArray(RWTexture2DArray<float4> TexArray, int2 coord
         sample00 * (xy.x) * (xy.y);
 
    return samplexy;
+   //return sample00;
 }
 
 
