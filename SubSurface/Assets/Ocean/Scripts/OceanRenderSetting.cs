@@ -105,6 +105,7 @@ public class OceanRenderSetting : ScriptableObject
     public RenderTexture[] LODDerivativeMaps;
     public RenderTexture LODDisplaceMapsArray;
     public RenderTexture LODNormalMapsArray;
+    public RenderTexture LODDerivativeMapsArray;
 
     [Tooltip("Tick this box will regenerate All Materials for LODs ")]
     public bool RegenerateMODMaterials = true;
@@ -134,6 +135,7 @@ public class OceanRenderSetting : ScriptableObject
         }
         LODDisplaceMapsArray.enableRandomWrite = true;
         LODNormalMapsArray.enableRandomWrite = true;
+        LODDerivativeMapsArray.enableRandomWrite = true;
     }
 #if UNITY_EDITOR
     public void Initialization()
@@ -346,6 +348,19 @@ public class OceanRenderSetting : ScriptableObject
         LODNormalMapsArray.filterMode = FilterMode.Trilinear;
         LODNormalMapsArray.Create();
         AssetDatabase.CreateAsset(LODNormalMapsArray, RTPath);
+
+        RTPath = string.Format("Assets/Ocean/OceanAssets/LODDerivativeMapArray.renderTexture");
+        AssetDatabase.DeleteAsset(RTPath);
+        LODDerivativeMapsArray = new RenderTexture(RTSize, RTSize, 0,
+            RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear);
+        LODDerivativeMapsArray.dimension = UnityEngine.Rendering.TextureDimension.Tex2DArray;
+        LODDerivativeMapsArray.volumeDepth = LODCount;
+        LODDerivativeMapsArray.enableRandomWrite = true;
+        LODDerivativeMapsArray.antiAliasing = 1;
+        LODDerivativeMapsArray.wrapMode = TextureWrapMode.Clamp;
+        LODDerivativeMapsArray.filterMode = FilterMode.Trilinear;
+        LODDerivativeMapsArray.Create();
+        AssetDatabase.CreateAsset(LODDerivativeMapsArray, RTPath);
 
     }
 

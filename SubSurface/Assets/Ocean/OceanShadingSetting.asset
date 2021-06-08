@@ -27,7 +27,7 @@ MonoBehaviour:
   Foam:
     color: {r: 0.36862746, g: 0.39607847, b: 0.48235297, a: 1}
     bandingOffset: 0
-    bandingPower: 133.1
+    bandingPower: 5
   Fresnel:
     color: {r: 0.7506827, g: 0.79215693, b: 0.79215693, a: 1}
     bandingOffset: 0.08

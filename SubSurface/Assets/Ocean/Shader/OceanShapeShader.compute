@@ -9,6 +9,7 @@ Texture2D<float4> _BaseDisplace;//Previous LOD DispMap, RGB:displacement, A: Dxy
 
 //ExtraArray output for physics sampling(or  we will use this for all later stuff)
 RWTexture2DArray<float4> _DisplaceArray;
+RWTexture2DArray<float4> _DerivativeArray;
 RWTexture2DArray<float4> _NormalArray;
 
 //this map will be used though all LODs
@@ -34,16 +35,17 @@ RWTexture2D<float4> _NormalMap;//Normal out for current LOD normal and foam RGB:
 //SamplerState samplerNoiseFoam;
 
 
-float3 CenterPos;
-float _LODSize;
-int _LODIndex;
+float3 _CenterPos;
+float4 _LODParams;//x LODCOUNT ,y LODIndex, z LODSize.
+//float _LODSize;
+//int _LODIndex;
 float _LODWaveAmpMul;
 float _Time;
 float _DeltaTime;
-int _WaveCount;
+
 float4 _FoamParams;//x is the inverse foam fade time, x is foam banding offset, y is the foam banding power
 
-
+int _WaveCount;
 struct Wave
 {
     float WaveLength;
@@ -60,17 +62,47 @@ struct GerstnerOut
     float4 derivativeVector;
     float4 VelocityHeight;
 };
-/*
-float4 BilinearSamplerTextureArray(RWTexture2DArray<float4> TexArray, float2 UV, float RTSize )
+
+float4 BilinearSamplerTextureArray(RWTexture2DArray<float4> TexArray, int2 coord, float RTSize, int PreviousLODIndex)
 {
-    
+    int LODCount = (int)_LODParams.x;
+    if (PreviousLODIndex > LODCount-1)
+    {
+        return float4(0.0, 0.0, 0.0, 0.0);
+    }
+
+    float2 UV = float2(coord.x * 0.5f + 0.25f * RTSize, coord.y * 0.5f + 0.25f * RTSize);
+
+    //Bilinear Interpolation
+    uint2 P00 = uint2(floor(UV.x), floor(UV.y));
+    uint2 P10 = uint2(ceil(UV.x), floor(UV.y));
+    uint2 P01 = uint2(floor(UV.x), ceil(UV.y));
+    uint2 P11 = uint2(ceil(UV.x), ceil(UV.y));
+
+    float4 sample00 = TexArray[uint3(P00, PreviousLODIndex)];
+    float4 sample10 = TexArray[uint3(P10, PreviousLODIndex)];
+    float4 sample01 = TexArray[uint3(P01, PreviousLODIndex)];
+    float4 sample11 = TexArray[uint3(P11, PreviousLODIndex)];
+
+    float2 xy = UV - floor(UV);
+
+    float4 samplexy =
+        sample00 * (1 - xy.x) * (1 - xy.y) +
+        sample10 * (xy.x) * (1 - xy.y) +
+        sample01 * (1 - xy.x) * (xy.y) +
+        sample00 * (xy.x) * (xy.y);
+
+   return samplexy;
 }
-*/
+
 
 GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
 {
     float PI = 3.14159265f;
 
+    int LODCount = (int)_LODParams.x;
+    int LODIndex = (int)_LODParams.y;
+    
     float3 displace = float3(0.0, 0.0, 0.0);
 
     float Dxx = 0.0f;
@@ -111,13 +143,31 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
     //Sample the data (disp and derivative from Base LOD)
     float2 UV = float2(float(coord.x + 0.5f) / RTSize * 0.5f + 0.25f, float(coord.y + 0.5f) / RTSize * 0.5f + 0.25f);
 
-    //uint2 UV = uint2(coord.x * 0.5f + 0.25f * RTSize, coord.y * 0.5f + 0.25f * RTSize);
+    uint2 UVuint = uint2(coord.x * 0.5f + 0.25f * RTSize, coord.y * 0.5f + 0.25f * RTSize);
 
     //if the base is set to the current LOD, there are texture2D and RWTexture2D mapped to 
     //the same rendertexture in the same shader, the sample result is 0
-    float4 baseDisplaceV = _BaseDisplace.SampleLevel(linearClampSampler, UV, 0);
-    float4 baseDerivativeV = _BaseDerivativeMap_Sample.SampleLevel(linearClampSampler, UV, 0);
-    //baseNormalV = _BaseNormal.SampleLevel(linearClampSampler, UV, 0);
+    //turn out it is because all rwtex2d<float4> is not OK to sample and read at the same time 
+    //float4 baseDisplaceV = _BaseDisplace.SampleLevel(linearClampSampler, UV, 0);
+    //float4 baseDerivativeV = _BaseDerivativeMap_Sample.SampleLevel(linearClampSampler, UV, 0);
+
+    //float4 baseDisplaceV;
+    /*
+    if (LODIndex == LODCount - 1)
+    {
+        baseDisplaceV = float4(0.0, 0.0, 0.0, 0.0);
+    }
+    else
+    {
+        baseDisplaceV = _DisplaceArray[uint3(UVuint, LODIndex + 1)];
+    }
+    */
+    float4 baseDisplaceV = BilinearSamplerTextureArray(_DisplaceArray, coord, RTSize, LODIndex + 1);
+    
+    float4 baseDerivativeV = BilinearSamplerTextureArray(_DerivativeArray, coord, RTSize, LODIndex + 1);;
+
+
+
     Dxx += baseDerivativeV.x;
     Dyy += baseDerivativeV.y;
     Dxy += baseDisplaceV.w;
@@ -143,7 +193,7 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
 
     return ReturnData;
 }
-
+//not used
 float4 GetWaveHV(float3 WPos, float RTSize)
 {
     float PI = 3.14159265f;
@@ -174,10 +224,10 @@ float4 GetWaveHV(float3 WPos, float RTSize)
 
     }
 
-
+    float CurrentLODSize = _LODParams.z;
     
     //Sample the data (disp and derivative from Base LOD)
-    float2 coord = ((WPos.xz - CenterPos.xz)/_LODSize+0.5f)*RTSize;
+    float2 coord = ((WPos.xz - _CenterPos.xz)/ CurrentLODSize +0.5f)*RTSize;
     float2 UV = float2(float(coord.x + 0.5f) / 512.0f * 0.5f + 0.25f, float(coord.y + 0.5f) / 512.0f * 0.5f + 0.25f);
     float4 baseDisplaceV = _BaseDisplace.SampleLevel(linearClampSampler, UV, 0);
     //float4 baseDerivativeV = _BaseDerivativeMap_Sample.SampleLevel(linearClampSampler, UV, 0);
@@ -191,16 +241,19 @@ float4 GetWaveHV(float3 WPos, float RTSize)
 [numthreads(32, 32, 1)]
 void CSMain(uint3 id : SV_DispatchThreadID)
 {
-    // TODO: insert actual code here!
+
     uint width, height, elements;
     _DisplaceArray.GetDimensions(width, height, elements);
 
+    float CurrentLODSize = _LODParams.z;
+    float LODIndex = _LODParams.y;
+
     //D3D CoordSystem
     float3 WPos = float3(
-        (id.x / float(width) - 0.5f) * _LODSize,
+        (id.x / float(width) - 0.5f) * CurrentLODSize,
         0.0f,
-        (id.y / float(height) - 0.5f) * _LODSize
-        ) + CenterPos;
+        (id.y / float(height) - 0.5f) * CurrentLODSize
+        ) + _CenterPos;
     
     //WPos *= 0.05f;
 
@@ -223,9 +276,9 @@ void CSMain(uint3 id : SV_DispatchThreadID)
     _BaseDerivativeMap[id.xy] = outDerivativeV;
 
     //assign maps for CPU process
-    _DisplaceArray[uint3(id.xy, _LODIndex)] = outDisplaceV;
-    _NormalArray[uint3(id.xy, _LODIndex)] = float4(outNormalV.rgb, FoamMask);;
-
+    _DisplaceArray[uint3(id.xy, LODIndex)] = outDisplaceV;
+    _NormalArray[uint3(id.xy, LODIndex)] = float4(outNormalV.rgb, FoamMask);;
+    _DerivativeArray[uint3(id.xy, LODIndex)] = outDerivativeV;
     //debug
     //Displace[id.xy] = _WaveLengths[10];
     //Result[id.xy] = float4(1.0f, 0.0f, 0.0f, 1.0f);

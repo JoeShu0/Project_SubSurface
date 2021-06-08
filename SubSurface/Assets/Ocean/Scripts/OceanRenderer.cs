@@ -58,6 +58,7 @@ public class OceanRenderer :MonoBehaviour
     //int lodBaseNormalMapId = Shader.PropertyToID("_BaseNormal");
     int lodBaseDerivativeMapId = Shader.PropertyToID("_BaseDerivativeMap");
     int lodBaseDerivativeMapId_S = Shader.PropertyToID("_BaseDerivativeMap_Sample");
+    int lodParamsId = Shader.PropertyToID("_LODParams");
 
     //Global params
     int centerPosId = Shader.PropertyToID("_CenterPos");
@@ -317,7 +318,7 @@ public class OceanRenderer :MonoBehaviour
         //new ComputeBuffer with the stride is 20 ??
         ComputeBuffer shapeWaveBufer = new ComputeBuffer(ORS.WaveCount, 20);
 
-        ORS.shapeShader.SetFloats("CenterPos", new float[]
+        ORS.shapeShader.SetFloats(centerPosId, new float[]
             { transform.position.x, transform.position.y, transform.position.z}
             );
 
@@ -342,11 +343,16 @@ public class OceanRenderer :MonoBehaviour
             shapeWaveBufer.SetData(WaveSubsets);
             ORS.shapeShader.SetBuffer(KIndex, waveBufferId, shapeWaveBufer);
 
-            ORS.shapeShader.SetFloat(lodSizeId, ORS.GridSize * ORS.GridCountPerTile * 4 * Mathf.Pow(2, i) * 1);//times ocean scale
-            ORS.shapeShader.SetInt(lodIndexId, i);
+            float CurrentLODSize = ORS.GridSize * ORS.GridCountPerTile * 4 * Mathf.Pow(2, i) * 1;//times ocean scale
+            //ORS.shapeShader.SetFloat(lodSizeId, CurrentLODSize);
+            //ORS.shapeShader.SetInt(lodIndexId, i);
+            ORS.shapeShader.SetVector(lodParamsId,
+                new Vector4(ORS.LODCount, i, CurrentLODSize, 0.0f));
+
             ORS.shapeShader.SetFloat(lodWaveAmpMulId, ORS.WaveAmplitudeTweak[i]);
 
             ORS.shapeShader.SetTexture(KIndex, "_DisplaceArray", ORS.LODDisplaceMapsArray);
+            ORS.shapeShader.SetTexture(KIndex, "_DerivativeArray", ORS.LODDerivativeMapsArray);
             ORS.shapeShader.SetTexture(KIndex, "_NormalArray", ORS.LODNormalMapsArray);
 
             ORS.shapeShader.SetTexture(KIndex, lodBaseDispMapId, ORS.LODDisplaceMaps[Mathf.Min(i + 1, ORS.LODCount - 1)]);

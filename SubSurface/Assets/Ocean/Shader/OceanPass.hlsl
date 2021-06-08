@@ -133,7 +133,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	
 	//Basic lighting
 	float4 color = float4(input.DebugColor.rgb,1.0f);
-
+	//return float4(normalWS, 1.0f);
 	
 
 	//**********experimental part**********
@@ -170,12 +170,12 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 		1.0f);
 	color = lerp(color, _FresnelColor, fresnelMask);
 
-	//return float4(foam, foam, foam, 1.0f);
+	
 	
 	return float4(color.rgb, max(color.a, 1-ViewNormalGradient));//
 	//SunReflect = dot(normalize(float3(-0.5, -0.5, 0.0)), reflectDir);
 
-	return float4(SunReflect, foam, 0.0,1.0f) + float4(0.1f,0.1f,0.1f,0.0f);
+	//return float4(SunReflect, foam, 0.0,1.0f) + float4(0.1f,0.1f,0.1f,0.0f);
 }
 
 #endif
