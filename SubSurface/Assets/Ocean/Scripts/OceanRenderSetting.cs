@@ -106,6 +106,7 @@ public class OceanRenderSetting : ScriptableObject
     public RenderTexture LODDisplaceMapsArray;
     public RenderTexture LODNormalMapsArray;
     public RenderTexture LODDerivativeMapsArray;
+    public RenderTexture LODVelocityMapsArray;
 
     [Tooltip("Tick this box will regenerate All Materials for LODs ")]
     public bool RegenerateMODMaterials = true;
@@ -124,6 +125,10 @@ public class OceanRenderSetting : ScriptableObject
     {
         ReInitLODRTs();
     }
+    private void OnEnable()
+    {
+        ReInitLODRTs();
+    }
 
     void ReInitLODRTs()
     {
@@ -137,6 +142,7 @@ public class OceanRenderSetting : ScriptableObject
         LODDisplaceMapsArray.enableRandomWrite = true;
         LODNormalMapsArray.enableRandomWrite = true;
         LODDerivativeMapsArray.enableRandomWrite = true;
+        LODVelocityMapsArray.enableRandomWrite = true;
     }
 #if UNITY_EDITOR
     public void Initialization()
@@ -365,6 +371,18 @@ public class OceanRenderSetting : ScriptableObject
         LODDerivativeMapsArray.Create();
         AssetDatabase.CreateAsset(LODDerivativeMapsArray, RTPath);
 
+        RTPath = string.Format("Assets/Ocean/OceanAssets/LODVelocityMapArray.renderTexture");
+        AssetDatabase.DeleteAsset(RTPath);
+        LODVelocityMapsArray = new RenderTexture(RTSize, RTSize, 0,
+            RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear);
+        LODVelocityMapsArray.dimension = UnityEngine.Rendering.TextureDimension.Tex2DArray;
+        LODVelocityMapsArray.volumeDepth = LODCount;
+        LODVelocityMapsArray.enableRandomWrite = true;
+        LODVelocityMapsArray.antiAliasing = 1;
+        LODVelocityMapsArray.wrapMode = TextureWrapMode.Clamp;
+        LODVelocityMapsArray.filterMode = FilterMode.Trilinear;
+        LODVelocityMapsArray.Create();
+        AssetDatabase.CreateAsset(LODVelocityMapsArray, RTPath);
     }
 
     //this is for restore some of the settings for RTs

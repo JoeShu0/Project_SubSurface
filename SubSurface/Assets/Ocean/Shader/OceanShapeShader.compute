@@ -11,7 +11,7 @@
 RWTexture2DArray<float4> _DisplaceArray;
 RWTexture2DArray<float4> _DerivativeArray;
 RWTexture2DArray<float4> _NormalArray;
-
+RWTexture2DArray<float4> _VelocityArray;
 //this map will be used though all LODs
 //RWTexture2D<float4> _BaseDerivativeMap;//Previous LOD DeriMap ,R: Dxx, G:Dyy, B:Dzx, A:Dzy
 //Texture2D<float4> _BaseDerivativeMap_Sample;//Same as _BaseDerivativeMap just for sampling
@@ -60,7 +60,7 @@ struct GerstnerOut
     float4 dispVector;
     float4 normalVector;
     float4 derivativeVector;
-    float4 VelocityHeight;
+    float4 VelocityVector;
 };
 
 float4 BilinearSamplerTextureArray(RWTexture2DArray<float4> TexArray, int2 coord, float RTSize, int PreviousLODIndex)
@@ -112,7 +112,10 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
     float Dxy = 0.0f;
     float Dzx = 0.0f;
     float Dzy = 0.0f;
-    //float Dzy = 0.0f;
+    
+    float Dxt = 0.0f;
+    float Dyt = 0.0f;
+    float Dzt = 0.0f;
 
     [unroll(10)]
     for (int i = 0; i < _WaveCount; i++)
@@ -138,8 +141,9 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
         Dzx += _Direction.x * (_Steepness * cos(f));
         Dzy += _Direction.y * (_Steepness * cos(f));
 
-       
-        
+        Dxt += _Direction.x * _Steepness * sin(f) * _Speed;
+        Dyt += _Direction.y * _Steepness * sin(f) * _Speed;
+        Dzt += -_Steepness * cos(f) * _Speed;
     }
     
     //Sample the data (disp and derivative from Base LOD)
@@ -165,8 +169,8 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
     }
     */
     float4 baseDisplaceV = BilinearSamplerTextureArray(_DisplaceArray, coord, RTSize, LODIndex + 1);
-    
-    float4 baseDerivativeV = BilinearSamplerTextureArray(_DerivativeArray, coord, RTSize, LODIndex + 1);;
+    float4 baseDerivativeV = BilinearSamplerTextureArray(_DerivativeArray, coord, RTSize, LODIndex + 1);
+    float4 baseVelocityV = BilinearSamplerTextureArray(_VelocityArray, coord, RTSize, LODIndex + 1);
 
 
 
@@ -176,6 +180,9 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
     Dzx += baseDerivativeV.z;
     Dzy += baseDerivativeV.w;
     displace += baseDisplaceV.xyz;
+    Dxt += baseVelocityV.x;
+    Dyt += baseVelocityV.y;
+    Dzt += baseVelocityV.z;
     
 
     //adding 1 is because we are calculating the D of offset
@@ -192,6 +199,7 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
     ReturnData.dispVector = float4(displace, Dxy);
     ReturnData.normalVector = float4(normal, foam);
     ReturnData.derivativeVector = float4(Dxx, Dyy, Dzx, Dzy);
+    ReturnData.VelocityVector = float4(Dxt,Dyt,Dzt,1.0);
 
     return ReturnData;
 }
@@ -221,6 +229,7 @@ void CSMain(uint3 id : SV_DispatchThreadID)
     float4 outDisplaceV = outputWaveVectors.dispVector;
     float4 outDerivativeV = outputWaveVectors.derivativeVector;
     float4 outNormalV = outputWaveVectors.normalVector;
+    float4 outVelocityV = outputWaveVectors.VelocityVector;
 
     //foam banding and progressive fade
     float FoamMask = clamp(pow(abs(outNormalV.a+ _FoamParams.y), _FoamParams.z),0.0,1.0);
@@ -237,6 +246,7 @@ void CSMain(uint3 id : SV_DispatchThreadID)
     _DisplaceArray[uint3(id.xy, LODIndex)] = outDisplaceV;
     _NormalArray[uint3(id.xy, LODIndex)] = float4(outNormalV.rgb, FoamMask);;
     _DerivativeArray[uint3(id.xy, LODIndex)] = outDerivativeV;
+    _VelocityArray[uint3(id.xy, LODIndex)] = outVelocityV;
     //debug
     //Displace[id.xy] = _WaveLengths[10];
     //Result[id.xy] = float4(1.0f, 0.0f, 0.0f, 1.0f);

@@ -139,7 +139,7 @@ public class OceanBuoyancy : MonoBehaviour
             Vector4 OceanData = OceanRenderer.Instance.OHS.GetRelativeDepthByIndex(BuoyancyPoints[i].BPindex);
             float ValidDepth = Mathf.Clamp(-OceanData.w,
                 0, BuoyancyPoints[i].buoyancyHeight);
-            Vector3 BuoyancyDirection = Vector3.Normalize(new Vector3(OceanData.x, OceanData.y, OceanData.z));//new Vector3(0.0f, 1.0f, 0.0f);
+            Vector3 BuoyancyDirection = new Vector3(0.0f, 1.0f, 0.0f);//Vector3.Normalize(new Vector3(OceanData.x, OceanData.y, OceanData.z));
             if (ValidDepth != 0)
             {
                 Vector3 buoyancyforce =

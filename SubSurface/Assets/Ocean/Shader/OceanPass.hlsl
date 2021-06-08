@@ -175,7 +175,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	return float4(color.rgb, max(color.a, 1-ViewNormalGradient));//
 	//SunReflect = dot(normalize(float3(-0.5, -0.5, 0.0)), reflectDir);
 
-	//return float4(SunReflect, foam, 0.0,1.0f) + float4(0.1f,0.1f,0.1f,0.0f);
+	//return float4(SunReflect, 0.0, 0.0,1.0f) + float4(0.1f,0.1f,0.1f,0.0f);
 }
 
 #endif

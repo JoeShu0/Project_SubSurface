@@ -96,6 +96,7 @@ public class OceanRenderer :MonoBehaviour
 
     private void OnEnable()
     {
+        //if()
     }
 
     private void Update()
@@ -120,6 +121,11 @@ public class OceanRenderer :MonoBehaviour
         {
             StartCoroutine(OHS.GetRelativeDepth());
         }
+    }
+
+    private void LateUpdate()
+    {
+
     }
 
     void CreateOceanLODs()
@@ -302,6 +308,7 @@ public class OceanRenderer :MonoBehaviour
 
         Shader.SetGlobalTexture("_DispTexArray", ORS.LODDisplaceMapsArray);
         Shader.SetGlobalTexture("_NormalTexArray", ORS.LODNormalMapsArray);
+        //Shader.SetGlobalTexture("_NormalTexArray", ORS.LODDerivativeMapsArray);
 
         //Shader.SetGlobalTexture(detailNormalId, ORS.OceanDetailNoise);
     }
@@ -330,6 +337,11 @@ public class OceanRenderer :MonoBehaviour
             new Vector4(inverstime, ORS.foamParams.BandOffset,ORS.foamParams.BandPower, 0.0f));
 
 
+        ORS.shapeShader.SetTexture(KIndex, "_DisplaceArray", ORS.LODDisplaceMapsArray);
+        ORS.shapeShader.SetTexture(KIndex, "_DerivativeArray", ORS.LODDerivativeMapsArray);
+        ORS.shapeShader.SetTexture(KIndex, "_NormalArray", ORS.LODNormalMapsArray);
+        ORS.shapeShader.SetTexture(KIndex, "_VelocityArray", ORS.LODVelocityMapsArray);
+
         int WavePerLOD = ORS.WaveCount / ORS.LODCount;
         for (int i = ORS.LODCount-1; i>=0; i--)
         {
@@ -351,9 +363,7 @@ public class OceanRenderer :MonoBehaviour
 
             ORS.shapeShader.SetFloat(lodWaveAmpMulId, ORS.WaveAmplitudeTweak[i]);
 
-            ORS.shapeShader.SetTexture(KIndex, "_DisplaceArray", ORS.LODDisplaceMapsArray);
-            ORS.shapeShader.SetTexture(KIndex, "_DerivativeArray", ORS.LODDerivativeMapsArray);
-            ORS.shapeShader.SetTexture(KIndex, "_NormalArray", ORS.LODNormalMapsArray);
+            
 
             //ORS.shapeShader.SetTexture(KIndex, lodBaseDispMapId, ORS.LODDisplaceMaps[Mathf.Min(i + 1, ORS.LODCount - 1)]);
             //ORS.shapeShader.SetTexture(KIndex, lodBaseNormalMapId, ORS.LODNormalMaps[Mathf.Min(i + 1, ORS.LODCount - 1)]);
