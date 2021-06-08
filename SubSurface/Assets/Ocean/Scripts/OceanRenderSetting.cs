@@ -97,12 +97,12 @@ public class OceanRenderSetting : ScriptableObject
     [Tooltip("Tick this box will regenerate All RT based on settings ")]
     public bool RegenerateRenderTextures = true;
     //anim wave render texture
-    [HideInInspector]
-    public RenderTexture[] LODDisplaceMaps;
-    [HideInInspector]
-    public RenderTexture[] LODNormalMaps;
-    [HideInInspector]
-    public RenderTexture[] LODDerivativeMaps;
+    //[HideInInspector]
+    //public RenderTexture[] LODDisplaceMaps;
+    //[HideInInspector]
+    //public RenderTexture[] LODNormalMaps;
+    //[HideInInspector]
+    //public RenderTexture[] LODDerivativeMaps;
     public RenderTexture LODDisplaceMapsArray;
     public RenderTexture LODNormalMapsArray;
     public RenderTexture LODDerivativeMapsArray;
@@ -127,12 +127,13 @@ public class OceanRenderSetting : ScriptableObject
 
     void ReInitLODRTs()
     {
+        /*
         for (int i = 0; i < LODCount; i++)
         {
             LODDisplaceMaps[i].enableRandomWrite = true;
             LODNormalMaps[i].enableRandomWrite = true;
             LODDerivativeMaps[i].enableRandomWrite = true;  
-        }
+        }*/
         LODDisplaceMapsArray.enableRandomWrite = true;
         LODNormalMapsArray.enableRandomWrite = true;
         LODDerivativeMapsArray.enableRandomWrite = true;
@@ -260,10 +261,10 @@ public class OceanRenderSetting : ScriptableObject
             OceanMats[i] = new Material(oceanShader);
             string MatPath = string.Format("Assets/Ocean/OceanAssets/Material_LOD{0}.mat", i);
             OceanMats[i].enableInstancing = true;
-            OceanMats[i].SetTexture(displaceTexId, LODDisplaceMaps[i]);
-            OceanMats[i].SetTexture(displaceTexNextId, LODDisplaceMaps[Mathf.Min(i+1, LODCount-1)]);
-            OceanMats[i].SetTexture(normalTexId, LODNormalMaps[i]);
-            OceanMats[i].SetTexture(normalTexNextId, LODNormalMaps[Mathf.Min(i + 1, LODCount - 1)]);
+            //OceanMats[i].SetTexture(displaceTexId, LODDisplaceMaps[i]);
+            //OceanMats[i].SetTexture(displaceTexNextId, LODDisplaceMaps[Mathf.Min(i+1, LODCount-1)]);
+            //OceanMats[i].SetTexture(normalTexId, LODNormalMaps[i]);
+            //OceanMats[i].SetTexture(normalTexNextId, LODNormalMaps[Mathf.Min(i + 1, LODCount - 1)]);
             OceanMats[i].SetTexture(detailNormalId, OceanDetailNoise);
             AssetDatabase.DeleteAsset(MatPath);
             AssetDatabase.CreateAsset(OceanMats[i], MatPath);
@@ -272,11 +273,13 @@ public class OceanRenderSetting : ScriptableObject
 
     void InitLODRTs()
     {
+        string RTPath;
+        /*
         LODDisplaceMaps = new RenderTexture[LODCount];
         LODNormalMaps = new RenderTexture[LODCount];
         LODDerivativeMaps = new RenderTexture[LODCount];
 
-        string RTPath;
+        
         for (int i = 0; i < LODDisplaceMaps.Length; i++)
         {
             RTPath = string.Format("Assets/Ocean/OceanAssets/DisplacementMap_LOD{0}.renderTexture", i);
@@ -322,7 +325,7 @@ public class OceanRenderSetting : ScriptableObject
             LODDerivativeMaps[i].Create();
             AssetDatabase.CreateAsset(RT, RTPath);
         }
-
+        */
         RTPath = string.Format("Assets/Ocean/OceanAssets/LODDisplacementMapArray.renderTexture");
         AssetDatabase.DeleteAsset(RTPath);
         LODDisplaceMapsArray = new RenderTexture(RTSize, RTSize, 0, 

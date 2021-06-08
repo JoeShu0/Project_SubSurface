@@ -116,7 +116,7 @@ public class HeightSampler : MonoBehaviour
         GetHeight.SetBuffer(0, "_Positions", Positions);
         GetHeight.SetBuffer(0, "_ReltiveDepth", RelativeDepths);
 
-        GetHeight.SetTexture(0, "_DisplaceLOD", ORS.LODDisplaceMaps[0]);
+        //GetHeight.SetTexture(0, "_DisplaceLOD", ORS.LODDisplaceMaps[0]);
         GetHeight.SetVector("_OceanLODParams" , new Vector4
             ( Ocean.position.x, Ocean.position.y, Ocean.position.z, LOD0Size));
 

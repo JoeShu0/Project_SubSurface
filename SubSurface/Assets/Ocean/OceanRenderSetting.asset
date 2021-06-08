@@ -22,7 +22,7 @@ MonoBehaviour:
   RTSize: 512
   WaveCount: 128
   AnimeWindAngle: 45
-  WaveDirAngleRange: 90
+  WaveDirAngleRange: 120
   WaveLengthRange: {x: 128, y: 0.5}
   foamParams:
     FadeTime: 3
@@ -40,518 +40,518 @@ MonoBehaviour:
   debug: 11
   RegenerateWaveDatas: 0
   SpectrumWaves:
-  - WaveLength: 0.61943173
-    Amplitude: 0.0030971586
-    Speed: 0.98292416
-    Direction: {x: -0.52311575, y: 0.85226166}
-  - WaveLength: 0.61295855
-    Amplitude: 0.0030647926
-    Speed: 0.9777748
-    Direction: {x: 0.7983564, y: -0.60218525}
-  - WaveLength: 0.60830176
-    Amplitude: 0.0030415088
-    Speed: 0.9740535
-    Direction: {x: -0.6784985, y: 0.7346018}
-  - WaveLength: 0.9537885
-    Amplitude: 0.0047689425
-    Speed: 1.2196896
-    Direction: {x: -0.12377427, y: 0.9923104}
-  - WaveLength: 0.78191555
-    Amplitude: 0.0039095776
-    Speed: 1.104341
-    Direction: {x: 0.92241496, y: 0.38620034}
-  - WaveLength: 0.74169964
-    Amplitude: 0.003708498
-    Speed: 1.0755666
-    Direction: {x: -0.44393417, y: 0.8960594}
-  - WaveLength: 0.90219873
-    Amplitude: 0.0045109936
-    Speed: 1.186245
-    Direction: {x: 0.9564977, y: -0.29173973}
-  - WaveLength: 0.9464402
-    Amplitude: 0.004732201
-    Speed: 1.214982
-    Direction: {x: -0.43966842, y: 0.89816016}
-  - WaveLength: 0.6808726
-    Amplitude: 0.003404363
-    Speed: 1.0305195
-    Direction: {x: 0.90009123, y: 0.4357015}
-  - WaveLength: 0.70940804
-    Amplitude: 0.00354704
-    Speed: 1.0518924
-    Direction: {x: 0.66390777, y: 0.7478145}
-  - WaveLength: 0.695529
-    Amplitude: 0.0034776449
-    Speed: 1.0415518
-    Direction: {x: 0.28101358, y: 0.9597038}
-  - WaveLength: 0.95166326
-    Amplitude: 0.004758316
-    Speed: 1.21833
-    Direction: {x: 0.14466459, y: 0.98948073}
-  - WaveLength: 0.7209764
-    Amplitude: 0.003604882
-    Speed: 1.0604345
-    Direction: {x: -0.67239046, y: 0.74019665}
-  - WaveLength: 0.7467877
-    Amplitude: 0.0037339386
-    Speed: 1.0792495
-    Direction: {x: 0.83352417, y: -0.552483}
-  - WaveLength: 0.87963694
-    Amplitude: 0.004398185
-    Speed: 1.1713185
-    Direction: {x: 0.64717937, y: 0.76233774}
-  - WaveLength: 0.94879925
-    Amplitude: 0.004743996
-    Speed: 1.2164954
-    Direction: {x: 0.91312385, y: 0.40768224}
-  - WaveLength: 1.6653078
-    Amplitude: 0.008326539
-    Speed: 1.6116493
-    Direction: {x: -0.36791912, y: 0.9298578}
-  - WaveLength: 1.6929171
-    Amplitude: 0.008464585
-    Speed: 1.6249542
-    Direction: {x: -0.4345303, y: 0.90065724}
-  - WaveLength: 1.933257
-    Amplitude: 0.009666285
-    Speed: 1.7364731
-    Direction: {x: 0.99043393, y: 0.13798791}
-  - WaveLength: 1.9381287
-    Amplitude: 0.009690643
-    Speed: 1.7386597
-    Direction: {x: -0.099846885, y: 0.9950028}
-  - WaveLength: 1.5133326
-    Amplitude: 0.007566663
-    Speed: 1.5363511
-    Direction: {x: 0.4462206, y: 0.894923}
-  - WaveLength: 1.8127698
-    Amplitude: 0.009063848
-    Speed: 1.6814911
-    Direction: {x: 0.99978626, y: 0.020675248}
-  - WaveLength: 1.4668227
-    Amplitude: 0.0073341136
-    Speed: 1.5125582
-    Direction: {x: 0.022083709, y: 0.9997561}
-  - WaveLength: 1.7707531
-    Amplitude: 0.008853765
-    Speed: 1.66189
-    Direction: {x: 0.49461818, y: 0.8691104}
-  - WaveLength: 1.8059018
-    Amplitude: 0.009029509
-    Speed: 1.6783029
-    Direction: {x: -0.46013516, y: 0.88784885}
-  - WaveLength: 1.3012381
-    Amplitude: 0.00650619
-    Speed: 1.4246286
-    Direction: {x: 0.8981858, y: 0.43961602}
-  - WaveLength: 1.9084814
-    Amplitude: 0.009542407
-    Speed: 1.7253104
-    Direction: {x: -0.2587215, y: 0.965952}
-  - WaveLength: 1.6907179
-    Amplitude: 0.00845359
-    Speed: 1.6238984
-    Direction: {x: 0.9999918, y: 0.0040534656}
-  - WaveLength: 1.2706125
-    Amplitude: 0.006353062
-    Speed: 1.407764
-    Direction: {x: 0.19123287, y: 0.9815447}
-  - WaveLength: 1.6654849
-    Amplitude: 0.0083274245
-    Speed: 1.611735
-    Direction: {x: 0.03548195, y: 0.99937034}
-  - WaveLength: 1.9039361
-    Amplitude: 0.00951968
-    Speed: 1.7232547
-    Direction: {x: 0.9416527, y: 0.33658606}
-  - WaveLength: 1.6820283
-    Amplitude: 0.008410141
-    Speed: 1.61972
-    Direction: {x: 0.99561, y: 0.09359909}
-  - WaveLength: 3.7616866
-    Amplitude: 0.018808432
-    Speed: 2.4222255
-    Direction: {x: 0.9815851, y: -0.19102547}
-  - WaveLength: 3.9799924
-    Amplitude: 0.01989996
-    Speed: 2.4915202
-    Direction: {x: 0.9691093, y: -0.24663162}
-  - WaveLength: 3.006565
-    Amplitude: 0.015032825
-    Speed: 2.165502
-    Direction: {x: 0.38193592, y: 0.9241888}
-  - WaveLength: 2.6754773
-    Amplitude: 0.013377386
-    Speed: 2.042791
-    Direction: {x: -0.69903207, y: 0.71509033}
-  - WaveLength: 3.4689445
-    Amplitude: 0.017344723
-    Speed: 2.3260655
-    Direction: {x: -0.37778905, y: 0.9258917}
-  - WaveLength: 2.329849
-    Amplitude: 0.011649244
-    Speed: 1.9062821
-    Direction: {x: -0.697135, y: 0.7169399}
-  - WaveLength: 3.691732
-    Amplitude: 0.018458659
-    Speed: 2.3995972
-    Direction: {x: -0.14712842, y: 0.9891174}
-  - WaveLength: 2.5694506
-    Amplitude: 0.012847253
-    Speed: 2.0019047
-    Direction: {x: 0.2354513, y: 0.97188616}
-  - WaveLength: 3.1877155
-    Amplitude: 0.015938578
-    Speed: 2.2297852
-    Direction: {x: 0.9999238, y: -0.0123445615}
-  - WaveLength: 3.9893677
-    Amplitude: 0.019946838
-    Speed: 2.494453
-    Direction: {x: 0.60194474, y: 0.79853773}
-  - WaveLength: 3.4141126
-    Amplitude: 0.017070562
-    Speed: 2.3076088
-    Direction: {x: 0.2148038, y: 0.9766572}
-  - WaveLength: 3.6766553
-    Amplitude: 0.018383276
-    Speed: 2.3946924
-    Direction: {x: 0.2822791, y: 0.95933235}
-  - WaveLength: 2.4610238
-    Amplitude: 0.012305119
-    Speed: 1.9592109
-    Direction: {x: -0.17842904, y: 0.98395276}
-  - WaveLength: 2.3858206
-    Amplitude: 0.011929103
-    Speed: 1.9290441
-    Direction: {x: 0.853448, y: -0.52117807}
-  - WaveLength: 2.5807152
-    Amplitude: 0.012903576
-    Speed: 2.0062883
-    Direction: {x: 0.9873926, y: -0.15829054}
-  - WaveLength: 3.5796852
-    Amplitude: 0.017898425
-    Speed: 2.362902
-    Direction: {x: 0.9596268, y: 0.28127643}
-  - WaveLength: 6.289229
-    Amplitude: 0.031446144
-    Speed: 3.1320016
-    Direction: {x: 0.9922751, y: -0.12405672}
-  - WaveLength: 7.3468757
-    Amplitude: 0.036734376
-    Speed: 3.3851242
-    Direction: {x: 0.9993654, y: -0.03562119}
-  - WaveLength: 5.6777954
-    Amplitude: 0.028388977
-    Speed: 2.9758644
-    Direction: {x: -0.43809426, y: 0.89892906}
-  - WaveLength: 7.5515637
-    Amplitude: 0.037757818
-    Speed: 3.431956
-    Direction: {x: 0.014814983, y: 0.99989027}
-  - WaveLength: 6.8996143
-    Amplitude: 0.03449807
-    Speed: 3.280467
-    Direction: {x: -0.4100946, y: 0.912043}
-  - WaveLength: 5.4671483
-    Amplitude: 0.02733574
-    Speed: 2.9201403
-    Direction: {x: 0.9469844, y: 0.3212796}
-  - WaveLength: 7.3742166
-    Amplitude: 0.036871083
-    Speed: 3.3914173
-    Direction: {x: -0.12674522, y: 0.9919353}
-  - WaveLength: 7.9619713
-    Amplitude: 0.039809857
-    Speed: 3.5239813
-    Direction: {x: 0.64744174, y: 0.76211494}
-  - WaveLength: 7.177294
-    Amplitude: 0.035886467
-    Speed: 3.3458283
-    Direction: {x: -0.67311496, y: 0.7395379}
-  - WaveLength: 6.7261014
-    Amplitude: 0.033630505
-    Speed: 3.2389555
-    Direction: {x: -0.621233, y: 0.7836259}
-  - WaveLength: 6.275407
-    Amplitude: 0.031377032
-    Speed: 3.128558
-    Direction: {x: 0.6333063, y: 0.7739012}
-  - WaveLength: 7.9388766
-    Amplitude: 0.039694384
-    Speed: 3.5188665
-    Direction: {x: -0.124414556, y: 0.9922303}
-  - WaveLength: 5.3983912
-    Amplitude: 0.026991956
-    Speed: 2.9017198
-    Direction: {x: 0.80470085, y: -0.5936805}
-  - WaveLength: 7.624885
-    Amplitude: 0.038124423
-    Speed: 3.448577
-    Direction: {x: -0.46084923, y: 0.8874785}
-  - WaveLength: 5.4564624
-    Amplitude: 0.02728231
-    Speed: 2.917285
-    Direction: {x: 0.61949545, y: 0.78500026}
-  - WaveLength: 7.9214067
-    Amplitude: 0.039607033
-    Speed: 3.5149927
-    Direction: {x: 0.3393, y: 0.94067824}
-  - WaveLength: 9.609756
-    Amplitude: 0.048048783
-    Speed: 3.871502
-    Direction: {x: 0.8526278, y: 0.52251875}
-  - WaveLength: 14.254705
-    Amplitude: 0.07127353
-    Speed: 4.7152247
-    Direction: {x: 0.9219265, y: 0.3873649}
-  - WaveLength: 11.9609995
-    Amplitude: 0.059804995
-    Speed: 4.3192368
-    Direction: {x: 0.92814577, y: -0.37221694}
-  - WaveLength: 11.000169
-    Amplitude: 0.05500084
-    Speed: 4.1421227
-    Direction: {x: 0.8981602, y: -0.43966836}
-  - WaveLength: 15.355619
-    Amplitude: 0.0767781
-    Speed: 4.893921
-    Direction: {x: -0.4592626, y: 0.88830054}
-  - WaveLength: 11.388681
-    Amplitude: 0.056943405
-    Speed: 4.2146354
-    Direction: {x: 0.7043897, y: 0.7098134}
-  - WaveLength: 9.55042
-    Amplitude: 0.047752097
-    Speed: 3.8595307
-    Direction: {x: 0.94445074, y: -0.32865304}
-  - WaveLength: 9.46482
-    Amplitude: 0.0473241
-    Speed: 3.8421955
-    Direction: {x: 0.9935732, y: -0.113191694}
-  - WaveLength: 11.920138
-    Amplitude: 0.059600692
-    Speed: 4.311853
-    Direction: {x: -0.5902768, y: 0.8072009}
-  - WaveLength: 11.23241
-    Amplitude: 0.05616205
-    Speed: 4.1856194
-    Direction: {x: -0.543512, y: 0.8394014}
-  - WaveLength: 12.0160675
-    Amplitude: 0.060080335
-    Speed: 4.3291683
-    Direction: {x: 0.612233, y: 0.7906774}
-  - WaveLength: 9.960142
-    Amplitude: 0.04980071
-    Speed: 3.94145
-    Direction: {x: 0.7241827, y: -0.6896081}
-  - WaveLength: 12.398169
-    Amplitude: 0.061990842
-    Speed: 4.3974614
-    Direction: {x: 0.9128783, y: -0.40823185}
-  - WaveLength: 11.237417
-    Amplitude: 0.056187086
-    Speed: 4.1865525
-    Direction: {x: 0.9727575, y: -0.23182502}
-  - WaveLength: 12.983282
-    Amplitude: 0.06491641
-    Speed: 4.500031
-    Direction: {x: 0.86141443, y: 0.50790274}
-  - WaveLength: 12.644484
-    Amplitude: 0.063222416
-    Speed: 4.440929
-    Direction: {x: 0.7462767, y: 0.6656359}
-  - WaveLength: 29.963303
-    Amplitude: 0.14981651
-    Speed: 6.8362527
-    Direction: {x: -0.4043742, y: 0.91459364}
-  - WaveLength: 19.095196
-    Amplitude: 0.09547598
-    Speed: 5.4573946
-    Direction: {x: 0.8586115, y: 0.51262677}
-  - WaveLength: 31.69225
-    Amplitude: 0.15846124
-    Speed: 7.03072
-    Direction: {x: 0.2509235, y: 0.9680069}
-  - WaveLength: 30.427002
-    Amplitude: 0.152135
-    Speed: 6.888947
-    Direction: {x: -0.22535206, y: 0.9742774}
-  - WaveLength: 20.799063
-    Amplitude: 0.10399531
-    Speed: 5.6956744
-    Direction: {x: 0.99999297, y: 0.0037557348}
-  - WaveLength: 18.513275
-    Amplitude: 0.09256637
-    Speed: 5.3735948
-    Direction: {x: 0.8969618, y: -0.44210806}
-  - WaveLength: 22.379017
-    Amplitude: 0.111895084
-    Speed: 5.908045
-    Direction: {x: 0.9478549, y: 0.31870222}
-  - WaveLength: 30.86479
-    Amplitude: 0.15432395
-    Speed: 6.9383297
-    Direction: {x: 0.89910334, y: 0.43773642}
-  - WaveLength: 24.933762
-    Amplitude: 0.12466881
-    Speed: 6.236159
-    Direction: {x: -0.7000451, y: 0.71409863}
-  - WaveLength: 17.743048
-    Amplitude: 0.08871523
-    Speed: 5.2606254
-    Direction: {x: 0.9986955, y: -0.051062413}
-  - WaveLength: 26.043732
-    Amplitude: 0.13021865
-    Speed: 6.3734546
-    Direction: {x: 0.74204785, y: 0.670347}
-  - WaveLength: 28.457401
-    Amplitude: 0.142287
-    Speed: 6.6622496
-    Direction: {x: 0.91013396, y: 0.41431415}
-  - WaveLength: 24.538038
-    Amplitude: 0.122690186
-    Speed: 6.186474
-    Direction: {x: 0.7560998, y: 0.6544563}
-  - WaveLength: 20.363647
-    Amplitude: 0.101818234
-    Speed: 5.635741
-    Direction: {x: 0.009361206, y: 0.9999562}
-  - WaveLength: 21.98573
-    Amplitude: 0.109928645
-    Speed: 5.855901
-    Direction: {x: 0.664898, y: 0.7469342}
-  - WaveLength: 30.870926
-    Amplitude: 0.15435463
-    Speed: 6.939019
-    Direction: {x: 0.74285907, y: -0.66944784}
-  - WaveLength: 60.699028
-    Amplitude: 0.30349514
-    Speed: 9.730029
-    Direction: {x: 0.99602693, y: 0.089052565}
-  - WaveLength: 37.97205
-    Amplitude: 0.18986024
-    Speed: 7.695827
-    Direction: {x: -0.22618136, y: 0.9740852}
-  - WaveLength: 43.09509
-    Amplitude: 0.21547544
-    Speed: 8.198552
-    Direction: {x: -0.16390544, y: 0.98647606}
-  - WaveLength: 36.018616
-    Amplitude: 0.18009308
-    Speed: 7.495261
-    Direction: {x: -0.4657211, y: 0.88493156}
-  - WaveLength: 59.141357
-    Amplitude: 0.29570678
-    Speed: 9.604371
-    Direction: {x: -0.41984275, y: 0.9075969}
-  - WaveLength: 60.55438
-    Amplitude: 0.3027719
-    Speed: 9.718429
-    Direction: {x: 0.8041568, y: 0.5944172}
-  - WaveLength: 61.270763
-    Amplitude: 0.3063538
-    Speed: 9.775746
-    Direction: {x: 0.94455105, y: 0.3283646}
-  - WaveLength: 44.137836
-    Amplitude: 0.22068918
-    Speed: 8.297147
-    Direction: {x: -0.4801003, y: 0.8772136}
-  - WaveLength: 45.2052
-    Amplitude: 0.226026
-    Speed: 8.396871
-    Direction: {x: 0.8337034, y: 0.5522125}
-  - WaveLength: 47.495605
-    Amplitude: 0.23747802
-    Speed: 8.606964
-    Direction: {x: 0.9878783, y: -0.1552302}
-  - WaveLength: 61.487522
-    Amplitude: 0.3074376
-    Speed: 9.793023
-    Direction: {x: -0.52220553, y: 0.8528197}
-  - WaveLength: 38.923946
-    Amplitude: 0.19461973
-    Speed: 7.791691
-    Direction: {x: 0.085189514, y: 0.9963648}
-  - WaveLength: 60.91314
-    Amplitude: 0.3045657
-    Speed: 9.747175
-    Direction: {x: -0.3333832, y: 0.9427914}
-  - WaveLength: 42.41383
-    Amplitude: 0.21206914
-    Speed: 8.1334915
-    Direction: {x: -0.6451526, y: 0.7640537}
-  - WaveLength: 36.137726
-    Amplitude: 0.18068862
-    Speed: 7.507644
-    Direction: {x: 0.9765796, y: -0.21515635}
-  - WaveLength: 43.872887
-    Amplitude: 0.21936443
-    Speed: 8.272207
-    Direction: {x: -0.39991453, y: 0.9165524}
-  - WaveLength: 117.31879
-    Amplitude: 0.5865939
-    Speed: 13.527173
-    Direction: {x: 0.51347125, y: 0.8581068}
-  - WaveLength: 95.34842
-    Amplitude: 0.4767421
-    Speed: 12.19495
-    Direction: {x: 0.3772548, y: 0.9261095}
-  - WaveLength: 87.738914
-    Amplitude: 0.43869457
-    Speed: 11.69821
-    Direction: {x: 0.9924445, y: 0.122694455}
-  - WaveLength: 77.278656
-    Amplitude: 0.38639328
-    Speed: 10.978754
-    Direction: {x: 0.99516225, y: -0.09824523}
-  - WaveLength: 81.49183
-    Amplitude: 0.40745914
-    Speed: 11.274059
-    Direction: {x: 0.17466222, y: 0.98462844}
-  - WaveLength: 86.979004
-    Amplitude: 0.434895
-    Speed: 11.64744
-    Direction: {x: -0.027889255, y: 0.999611}
-  - WaveLength: 125.77438
-    Amplitude: 0.6288719
-    Speed: 14.006169
-    Direction: {x: 0.98795265, y: 0.15475643}
-  - WaveLength: 88.14088
-    Amplitude: 0.44070438
-    Speed: 11.724977
-    Direction: {x: 0.2462709, y: 0.969201}
-  - WaveLength: 88.26031
-    Amplitude: 0.44130152
-    Speed: 11.732917
-    Direction: {x: -0.25633666, y: 0.96658754}
-  - WaveLength: 124.177734
-    Amplitude: 0.62088865
-    Speed: 13.916985
-    Direction: {x: 0.8544977, y: -0.5194552}
-  - WaveLength: 78.0621
-    Amplitude: 0.3903105
-    Speed: 11.034265
-    Direction: {x: 0.9890782, y: -0.14739169}
-  - WaveLength: 102.97697
-    Amplitude: 0.5148848
-    Speed: 12.673406
-    Direction: {x: 0.99638605, y: 0.08494002}
-  - WaveLength: 120.49046
-    Amplitude: 0.6024523
-    Speed: 13.708806
-    Direction: {x: 0.921603, y: -0.38813382}
-  - WaveLength: 123.332535
-    Amplitude: 0.6166627
-    Speed: 13.869541
-    Direction: {x: 0.8590346, y: 0.51191753}
-  - WaveLength: 123.48663
-    Amplitude: 0.61743313
-    Speed: 13.878203
-    Direction: {x: 0.8882616, y: -0.4593379}
-  - WaveLength: 112.52164
-    Amplitude: 0.5626082
-    Speed: 13.247725
-    Direction: {x: 0.7815798, y: 0.6238053}
+  - WaveLength: 0.5985461
+    Amplitude: 0.0029927304
+    Speed: 0.9662112
+    Direction: {x: -0.7457102, y: 0.6662705}
+  - WaveLength: 0.6172528
+    Amplitude: 0.003086264
+    Speed: 0.98119384
+    Direction: {x: 0.89629966, y: 0.44344887}
+  - WaveLength: 0.5500762
+    Amplitude: 0.002750381
+    Speed: 0.9262638
+    Direction: {x: 0.9487377, y: 0.31606448}
+  - WaveLength: 0.6026601
+    Amplitude: 0.0030133005
+    Speed: 0.9695261
+    Direction: {x: -0.790892, y: 0.61195576}
+  - WaveLength: 0.74584436
+    Amplitude: 0.0037292216
+    Speed: 1.0785676
+    Direction: {x: 0.26720273, y: -0.96364033}
+  - WaveLength: 0.6543752
+    Amplitude: 0.003271876
+    Speed: 1.0102682
+    Direction: {x: -0.055666313, y: 0.99844944}
+  - WaveLength: 0.74360764
+    Amplitude: 0.003718038
+    Speed: 1.0769491
+    Direction: {x: -0.7649035, y: 0.6441449}
+  - WaveLength: 0.65989274
+    Amplitude: 0.0032994635
+    Speed: 1.0145184
+    Direction: {x: 0.76893914, y: 0.639322}
+  - WaveLength: 0.9701848
+    Amplitude: 0.004850924
+    Speed: 1.2301286
+    Direction: {x: -0.87022823, y: 0.49264878}
+  - WaveLength: 0.9479769
+    Amplitude: 0.0047398843
+    Speed: 1.215968
+    Direction: {x: 0.9797314, y: 0.20031583}
+  - WaveLength: 0.7334514
+    Amplitude: 0.003667257
+    Speed: 1.0695693
+    Direction: {x: -0.76247066, y: 0.6470228}
+  - WaveLength: 0.9945661
+    Amplitude: 0.0049728304
+    Speed: 1.2454896
+    Direction: {x: -0.80786914, y: 0.58936185}
+  - WaveLength: 0.8027677
+    Amplitude: 0.0040138382
+    Speed: 1.1189694
+    Direction: {x: 0.9777524, y: -0.20976251}
+  - WaveLength: 0.6070077
+    Amplitude: 0.0030350382
+    Speed: 0.97301686
+    Direction: {x: -0.07493444, y: 0.99718845}
+  - WaveLength: 0.58380806
+    Amplitude: 0.0029190402
+    Speed: 0.9542416
+    Direction: {x: 0.8699046, y: -0.4932201}
+  - WaveLength: 0.74438184
+    Amplitude: 0.0037219091
+    Speed: 1.0775096
+    Direction: {x: 0.70795316, y: 0.70625937}
+  - WaveLength: 1.9623573
+    Amplitude: 0.009811786
+    Speed: 1.7494935
+    Direction: {x: 0.6298436, y: 0.77672195}
+  - WaveLength: 1.2351111
+    Amplitude: 0.0061755553
+    Speed: 1.3879579
+    Direction: {x: -0.70291024, y: 0.71127856}
+  - WaveLength: 1.5568581
+    Amplitude: 0.0077842902
+    Speed: 1.5582882
+    Direction: {x: 0.8585034, y: -0.51280785}
+  - WaveLength: 1.9042709
+    Amplitude: 0.009521354
+    Speed: 1.7234062
+    Direction: {x: 0.30832925, y: 0.9512797}
+  - WaveLength: 1.2869405
+    Amplitude: 0.0064347023
+    Speed: 1.4167802
+    Direction: {x: 0.4384105, y: 0.89877486}
+  - WaveLength: 1.7010472
+    Amplitude: 0.008505235
+    Speed: 1.6288514
+    Direction: {x: 0.77681977, y: 0.629723}
+  - WaveLength: 1.4174808
+    Amplitude: 0.007087404
+    Speed: 1.4869003
+    Direction: {x: 0.36694816, y: 0.9302414}
+  - WaveLength: 1.8056431
+    Amplitude: 0.009028215
+    Speed: 1.6781827
+    Direction: {x: -0.7723156, y: 0.635239}
+  - WaveLength: 1.980615
+    Amplitude: 0.009903075
+    Speed: 1.7576133
+    Direction: {x: 0.99758846, y: -0.069406465}
+  - WaveLength: 1.6547163
+    Amplitude: 0.008273581
+    Speed: 1.606516
+    Direction: {x: 0.37526563, y: 0.9269173}
+  - WaveLength: 1.885128
+    Amplitude: 0.00942564
+    Speed: 1.7147219
+    Direction: {x: 0.82404315, y: -0.56652707}
+  - WaveLength: 1.4295349
+    Amplitude: 0.0071476744
+    Speed: 1.4932091
+    Direction: {x: 0.92289025, y: -0.38506308}
+  - WaveLength: 1.1448337
+    Amplitude: 0.0057241684
+    Speed: 1.3362708
+    Direction: {x: -0.430487, y: 0.9025968}
+  - WaveLength: 1.2862288
+    Amplitude: 0.0064311437
+    Speed: 1.4163885
+    Direction: {x: 0.58446217, y: 0.811421}
+  - WaveLength: 1.1623325
+    Amplitude: 0.0058116624
+    Speed: 1.3464446
+    Direction: {x: 0.5974556, y: 0.801902}
+  - WaveLength: 1.317852
+    Amplitude: 0.00658926
+    Speed: 1.4336945
+    Direction: {x: -0.73270154, y: 0.6805501}
+  - WaveLength: 3.8766966
+    Amplitude: 0.019383483
+    Speed: 2.4589753
+    Direction: {x: 0.9986909, y: -0.051151555}
+  - WaveLength: 3.8282678
+    Amplitude: 0.019141339
+    Speed: 2.443568
+    Direction: {x: 0.97625285, y: -0.21663405}
+  - WaveLength: 3.9827666
+    Amplitude: 0.019913834
+    Speed: 2.4923882
+    Direction: {x: 0.71717185, y: 0.6968964}
+  - WaveLength: 2.7030888
+    Amplitude: 0.013515444
+    Speed: 2.053305
+    Direction: {x: 0.6493856, y: -0.7604593}
+  - WaveLength: 3.5321114
+    Amplitude: 0.017660556
+    Speed: 2.347148
+    Direction: {x: 0.7156708, y: -0.6984377}
+  - WaveLength: 3.312008
+    Amplitude: 0.016560039
+    Speed: 2.2728405
+    Direction: {x: 0.99797213, y: 0.06365284}
+  - WaveLength: 2.4114919
+    Amplitude: 0.012057459
+    Speed: 1.9393946
+    Direction: {x: 0.88164747, y: 0.47190863}
+  - WaveLength: 2.2660494
+    Amplitude: 0.011330247
+    Speed: 1.8800005
+    Direction: {x: 0.625016, y: 0.78061193}
+  - WaveLength: 3.9605498
+    Amplitude: 0.01980275
+    Speed: 2.4854271
+    Direction: {x: 0.9412048, y: -0.33783656}
+  - WaveLength: 2.2482026
+    Amplitude: 0.011241012
+    Speed: 1.8725827
+    Direction: {x: -0.88779587, y: 0.46023738}
+  - WaveLength: 3.3536115
+    Amplitude: 0.016768057
+    Speed: 2.287071
+    Direction: {x: 0.999698, y: -0.024574425}
+  - WaveLength: 2.5398765
+    Amplitude: 0.012699382
+    Speed: 1.9903506
+    Direction: {x: 0.74080807, y: 0.67171675}
+  - WaveLength: 3.5970716
+    Amplitude: 0.017985357
+    Speed: 2.3686333
+    Direction: {x: -0.7251203, y: 0.6886222}
+  - WaveLength: 3.3697042
+    Amplitude: 0.016848521
+    Speed: 2.2925518
+    Direction: {x: -0.9547913, y: 0.29727682}
+  - WaveLength: 3.5974917
+    Amplitude: 0.017987458
+    Speed: 2.3687716
+    Direction: {x: 0.9591593, y: 0.2828664}
+  - WaveLength: 2.640497
+    Amplitude: 0.013202485
+    Speed: 2.0293927
+    Direction: {x: 0.91833663, y: 0.3958002}
+  - WaveLength: 7.2132463
+    Amplitude: 0.03606623
+    Speed: 3.3541977
+    Direction: {x: 0.5314115, y: -0.8471138}
+  - WaveLength: 5.4778185
+    Amplitude: 0.027389092
+    Speed: 2.9229884
+    Direction: {x: -0.92149764, y: 0.388384}
+  - WaveLength: 4.830279
+    Amplitude: 0.024151394
+    Speed: 2.7447917
+    Direction: {x: -0.86746645, y: 0.49749568}
+  - WaveLength: 4.8689585
+    Amplitude: 0.024344793
+    Speed: 2.7557595
+    Direction: {x: 0.94441843, y: 0.32874587}
+  - WaveLength: 7.7857547
+    Amplitude: 0.038928773
+    Speed: 3.484766
+    Direction: {x: 0.96935153, y: -0.24567795}
+  - WaveLength: 7.0904984
+    Amplitude: 0.035452493
+    Speed: 3.325536
+    Direction: {x: 0.9058281, y: 0.42364535}
+  - WaveLength: 4.788226
+    Amplitude: 0.02394113
+    Speed: 2.7328172
+    Direction: {x: -0.47713318, y: 0.878831}
+  - WaveLength: 5.1338115
+    Amplitude: 0.025669057
+    Speed: 2.8297186
+    Direction: {x: -0.14874586, y: 0.98887545}
+  - WaveLength: 5.9020824
+    Amplitude: 0.029510412
+    Speed: 3.0340722
+    Direction: {x: 0.28849623, y: -0.957481}
+  - WaveLength: 7.1647353
+    Amplitude: 0.035823677
+    Speed: 3.3428996
+    Direction: {x: 0.9043137, y: 0.4268686}
+  - WaveLength: 7.5561695
+    Amplitude: 0.037780847
+    Speed: 3.4330025
+    Direction: {x: 0.97251713, y: -0.23283124}
+  - WaveLength: 5.506481
+    Amplitude: 0.027532406
+    Speed: 2.9306257
+    Direction: {x: 0.3724584, y: -0.9280489}
+  - WaveLength: 7.4262385
+    Amplitude: 0.03713119
+    Speed: 3.4033587
+    Direction: {x: 0.63369495, y: 0.77358305}
+  - WaveLength: 7.3890405
+    Amplitude: 0.0369452
+    Speed: 3.3948243
+    Direction: {x: -0.83799964, y: 0.5456708}
+  - WaveLength: 5.230049
+    Amplitude: 0.026150245
+    Speed: 2.8561182
+    Direction: {x: -0.6328267, y: 0.7742935}
+  - WaveLength: 6.3324385
+    Amplitude: 0.031662192
+    Speed: 3.1427424
+    Direction: {x: 0.76924694, y: -0.6389516}
+  - WaveLength: 12.770355
+    Amplitude: 0.063851774
+    Speed: 4.4629784
+    Direction: {x: -0.8873269, y: 0.46114096}
+  - WaveLength: 15.323339
+    Amplitude: 0.0766167
+    Speed: 4.8887744
+    Direction: {x: -0.95816493, y: 0.28621665}
+  - WaveLength: 15.349672
+    Amplitude: 0.076748356
+    Speed: 4.8929734
+    Direction: {x: 0.8149477, y: -0.5795345}
+  - WaveLength: 13.799122
+    Amplitude: 0.06899561
+    Speed: 4.639263
+    Direction: {x: 0.99754906, y: -0.06997035}
+  - WaveLength: 14.372117
+    Amplitude: 0.07186058
+    Speed: 4.734604
+    Direction: {x: -0.34449893, y: 0.9387867}
+  - WaveLength: 10.779659
+    Amplitude: 0.053898294
+    Speed: 4.100396
+    Direction: {x: -0.29427826, y: 0.95571977}
+  - WaveLength: 15.560503
+    Amplitude: 0.07780252
+    Speed: 4.9264617
+    Direction: {x: 0.9163683, y: -0.40033633}
+  - WaveLength: 11.041338
+    Amplitude: 0.05520669
+    Speed: 4.1498666
+    Direction: {x: 0.5043331, y: 0.8635092}
+  - WaveLength: 9.564058
+    Amplitude: 0.04782029
+    Speed: 3.8622856
+    Direction: {x: -0.8096476, y: 0.58691627}
+  - WaveLength: 13.150359
+    Amplitude: 0.06575179
+    Speed: 4.528893
+    Direction: {x: 0.77211386, y: -0.6354842}
+  - WaveLength: 15.396656
+    Amplitude: 0.07698328
+    Speed: 4.900456
+    Direction: {x: 0.7041016, y: -0.7100992}
+  - WaveLength: 12.645788
+    Amplitude: 0.06322894
+    Speed: 4.441158
+    Direction: {x: -0.37289122, y: 0.92787504}
+  - WaveLength: 12.95346
+    Amplitude: 0.06476729
+    Speed: 4.49486
+    Direction: {x: 0.9868804, y: 0.16145301}
+  - WaveLength: 14.953416
+    Amplitude: 0.074767075
+    Speed: 4.8294034
+    Direction: {x: 0.85293233, y: 0.52202153}
+  - WaveLength: 11.029409
+    Amplitude: 0.055147044
+    Speed: 4.1476245
+    Direction: {x: -0.9079596, y: 0.41905773}
+  - WaveLength: 10.176918
+    Amplitude: 0.05088459
+    Speed: 3.9841108
+    Direction: {x: 0.82797265, y: 0.5607684}
+  - WaveLength: 26.310734
+    Amplitude: 0.13155366
+    Speed: 6.4060416
+    Direction: {x: 0.31945282, y: -0.94760215}
+  - WaveLength: 18.99121
+    Amplitude: 0.094956055
+    Speed: 5.442515
+    Direction: {x: 0.91408294, y: 0.40552732}
+  - WaveLength: 28.966496
+    Amplitude: 0.14483248
+    Speed: 6.721578
+    Direction: {x: -0.76846325, y: 0.6398939}
+  - WaveLength: 27.366985
+    Amplitude: 0.13683492
+    Speed: 6.5333624
+    Direction: {x: -0.891522, y: 0.45297742}
+  - WaveLength: 21.225412
+    Amplitude: 0.10612706
+    Speed: 5.7537546
+    Direction: {x: 0.9350059, y: 0.35463208}
+  - WaveLength: 22.270252
+    Amplitude: 0.11135126
+    Speed: 5.8936706
+    Direction: {x: -0.84417295, y: 0.5360709}
+  - WaveLength: 20.06556
+    Amplitude: 0.1003278
+    Speed: 5.594341
+    Direction: {x: 0.6359175, y: -0.77175707}
+  - WaveLength: 20.462635
+    Amplitude: 0.102313176
+    Speed: 5.6494226
+    Direction: {x: 0.8985144, y: 0.43894404}
+  - WaveLength: 18.71656
+    Amplitude: 0.0935828
+    Speed: 5.4030166
+    Direction: {x: -0.74299383, y: 0.66929823}
+  - WaveLength: 30.635597
+    Amplitude: 0.15317798
+    Speed: 6.912521
+    Direction: {x: 0.08623814, y: 0.99627453}
+  - WaveLength: 21.501087
+    Amplitude: 0.10750543
+    Speed: 5.790999
+    Direction: {x: 0.8516072, y: 0.5241804}
+  - WaveLength: 31.860382
+    Amplitude: 0.1593019
+    Speed: 7.049345
+    Direction: {x: 0.9420116, y: 0.33558038}
+  - WaveLength: 21.565117
+    Amplitude: 0.107825585
+    Speed: 5.7996154
+    Direction: {x: 0.99840415, y: -0.056472816}
+  - WaveLength: 29.59818
+    Amplitude: 0.1479909
+    Speed: 6.794473
+    Direction: {x: 0.47941723, y: 0.8775871}
+  - WaveLength: 30.863276
+    Amplitude: 0.15431638
+    Speed: 6.9381595
+    Direction: {x: -0.3602198, y: 0.93286747}
+  - WaveLength: 28.967314
+    Amplitude: 0.14483656
+    Speed: 6.721673
+    Direction: {x: 0.8713948, y: -0.49058244}
+  - WaveLength: 47.325085
+    Amplitude: 0.23662542
+    Speed: 8.591499
+    Direction: {x: 0.9189432, y: -0.3943899}
+  - WaveLength: 41.427025
+    Amplitude: 0.20713513
+    Speed: 8.038318
+    Direction: {x: 0.6500965, y: -0.7598517}
+  - WaveLength: 39.31363
+    Amplitude: 0.19656815
+    Speed: 7.8305964
+    Direction: {x: -0.7483082, y: 0.66335124}
+  - WaveLength: 42.90676
+    Amplitude: 0.2145338
+    Speed: 8.180619
+    Direction: {x: 0.9011587, y: -0.43348938}
+  - WaveLength: 47.10451
+    Amplitude: 0.23552255
+    Speed: 8.571455
+    Direction: {x: 0.60187656, y: -0.7985891}
+  - WaveLength: 57.249138
+    Amplitude: 0.28624567
+    Speed: 9.449476
+    Direction: {x: 0.9926339, y: -0.12115253}
+  - WaveLength: 57.766747
+    Amplitude: 0.28883374
+    Speed: 9.492098
+    Direction: {x: 0.8368801, y: 0.5473862}
+  - WaveLength: 37.561604
+    Amplitude: 0.187808
+    Speed: 7.6541214
+    Direction: {x: -0.16519627, y: 0.9862607}
+  - WaveLength: 59.48918
+    Amplitude: 0.2974459
+    Speed: 9.632572
+    Direction: {x: 0.95676756, y: -0.29085374}
+  - WaveLength: 35.469604
+    Amplitude: 0.17734802
+    Speed: 7.437919
+    Direction: {x: 0.99986064, y: 0.016694998}
+  - WaveLength: 35.54226
+    Amplitude: 0.1777113
+    Speed: 7.4455333
+    Direction: {x: -0.397261, y: 0.91770566}
+  - WaveLength: 52.92215
+    Amplitude: 0.26461074
+    Speed: 9.085358
+    Direction: {x: -0.47851986, y: 0.87807673}
+  - WaveLength: 53.0383
+    Amplitude: 0.2651915
+    Speed: 9.095322
+    Direction: {x: -0.89194185, y: 0.45215017}
+  - WaveLength: 52.71087
+    Amplitude: 0.26355433
+    Speed: 9.0672035
+    Direction: {x: -0.68174285, y: 0.7315919}
+  - WaveLength: 42.063587
+    Amplitude: 0.21031792
+    Speed: 8.09984
+    Direction: {x: -0.6814756, y: 0.73184085}
+  - WaveLength: 48.511215
+    Amplitude: 0.24255607
+    Speed: 8.6985
+    Direction: {x: 0.7142205, y: -0.6999207}
+  - WaveLength: 113.235664
+    Amplitude: 0.5661783
+    Speed: 13.289691
+    Direction: {x: -0.40702373, y: 0.9134176}
+  - WaveLength: 86.70892
+    Amplitude: 0.4335446
+    Speed: 11.629342
+    Direction: {x: 0.3006809, y: -0.9537248}
+  - WaveLength: 94.67466
+    Amplitude: 0.4733733
+    Speed: 12.151787
+    Direction: {x: 0.4186592, y: -0.9081434}
+  - WaveLength: 109.078415
+    Amplitude: 0.54539204
+    Speed: 13.043456
+    Direction: {x: 0.2602184, y: -0.96554977}
+  - WaveLength: 77.56087
+    Amplitude: 0.38780433
+    Speed: 10.998782
+    Direction: {x: 0.6409699, y: -0.767566}
+  - WaveLength: 102.02305
+    Amplitude: 0.5101152
+    Speed: 12.614569
+    Direction: {x: 0.33295152, y: 0.94294393}
+  - WaveLength: 81.19714
+    Amplitude: 0.4059857
+    Speed: 11.253656
+    Direction: {x: 0.9607809, y: -0.2773085}
+  - WaveLength: 85.62551
+    Amplitude: 0.42812756
+    Speed: 11.556461
+    Direction: {x: 0.9682632, y: 0.24993269}
+  - WaveLength: 102.6862
+    Amplitude: 0.513431
+    Speed: 12.6555
+    Direction: {x: 0.34033963, y: 0.94030255}
+  - WaveLength: 87.84595
+    Amplitude: 0.43922973
+    Speed: 11.705343
+    Direction: {x: 0.90269566, y: -0.4302796}
+  - WaveLength: 95.81622
+    Amplitude: 0.4790811
+    Speed: 12.224829
+    Direction: {x: -0.94518477, y: 0.3265359}
+  - WaveLength: 108.638596
+    Amplitude: 0.543193
+    Speed: 13.017133
+    Direction: {x: 0.764992, y: -0.64403975}
+  - WaveLength: 114.5428
+    Amplitude: 0.572714
+    Speed: 13.366176
+    Direction: {x: 0.9496266, y: -0.3133835}
+  - WaveLength: 103.56296
+    Amplitude: 0.51781476
+    Speed: 12.709414
+    Direction: {x: 0.042507786, y: 0.99909616}
+  - WaveLength: 70.98933
+    Amplitude: 0.3549466
+    Speed: 10.522521
+    Direction: {x: 0.89398557, y: 0.44809574}
+  - WaveLength: 87.08583
+    Amplitude: 0.43542916
+    Speed: 11.654591
+    Direction: {x: 0.86505795, y: 0.501672}
   RegenerateTileMeshes: 0
   TileMeshes:
   - {fileID: 4300000, guid: 6301127261b292c4fa343e3e44c1b96b, type: 2}
@@ -564,33 +564,6 @@ MonoBehaviour:
   - {fileID: 4300000, guid: 8a25397d3ffca8e4aba98e944b4c6c67, type: 2}
   - {fileID: 4300000, guid: 71a52387fb7cd244fa8b82b831206fc6, type: 2}
   RegenerateRenderTextures: 0
-  LODDisplaceMaps:
-  - {fileID: 8400000, guid: 5872e594d68b768428e5a819c2a3f68f, type: 2}
-  - {fileID: 8400000, guid: 9eeec9b89a823d84bbbd7604c58c8367, type: 2}
-  - {fileID: 8400000, guid: 74718baeac4bdb04ca0874d9d464c34f, type: 2}
-  - {fileID: 8400000, guid: cbad188ec1b48a74ca6b5ed2a8e030ab, type: 2}
-  - {fileID: 8400000, guid: 199759b68d9336f4697a0ad02cc5784c, type: 2}
-  - {fileID: 8400000, guid: b4f2c570406809643a9dd6d5a5248ff9, type: 2}
-  - {fileID: 8400000, guid: 8029602f5e297c74ab8e6d5ce38c00a7, type: 2}
-  - {fileID: 8400000, guid: 83120dff6268c334b8084efa134c9959, type: 2}
-  LODNormalMaps:
-  - {fileID: 8400000, guid: e13bd4634a62a154685fcc211acd6209, type: 2}
-  - {fileID: 8400000, guid: 037547e5c73f60e47b24be876a2e69c5, type: 2}
-  - {fileID: 8400000, guid: 2503b0f7f679ed24c8bedba38048fe9f, type: 2}
-  - {fileID: 8400000, guid: 13f6575178deff540b98cc8aef1b7ca2, type: 2}
-  - {fileID: 8400000, guid: 03ede33ff2c7f724b82b937a3c32c7e9, type: 2}
-  - {fileID: 8400000, guid: 033d11368d7982f4fb7d2474b108920e, type: 2}
-  - {fileID: 8400000, guid: c8bca05077c5c67408d28f4e6d129123, type: 2}
-  - {fileID: 8400000, guid: 5794c4a1e182b26418b7b5a814103350, type: 2}
-  LODDerivativeMaps:
-  - {fileID: 8400000, guid: 78644cd27faef534c95d7f675efbc19a, type: 2}
-  - {fileID: 8400000, guid: 3dd9a5830ffc4334cb89e8d1c3e67554, type: 2}
-  - {fileID: 8400000, guid: 42d95f186b909434aab1d3acb1b8ea1f, type: 2}
-  - {fileID: 8400000, guid: ca22acda54a78d94a8c44465ff8af05e, type: 2}
-  - {fileID: 8400000, guid: e10a7b7c76001a54c92ba91c33e47f4e, type: 2}
-  - {fileID: 8400000, guid: b3b27bf1ad9b03d4686be76bca9069f7, type: 2}
-  - {fileID: 8400000, guid: 3ce87c970ec63fd42b8ad252c42c6792, type: 2}
-  - {fileID: 8400000, guid: 2257e232a7f326242bf9ecb6c79e6838, type: 2}
   LODDisplaceMapsArray: {fileID: 8400000, guid: 8aaec6f4718b18541bb3f0cda732d92e,
     type: 2}
   LODNormalMapsArray: {fileID: 8400000, guid: 8f8b3b33605465d4ba03b7f61f635d90, type: 2}

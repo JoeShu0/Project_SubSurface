@@ -3,7 +3,7 @@
 
 // Create a RenderTexture with enableRandomWrite flag and set it
 // with cs.SetTexture
-Texture2D<float4> _BaseDisplace;//Previous LOD DispMap, RGB:displacement, A: Dxy
+//Texture2D<float4> _BaseDisplace;//Previous LOD DispMap, RGB:displacement, A: Dxy
 //Texture2D<float4> _BaseNormal;//Previous LOD normal and foam Map, RGB:normal A:foam
 //Texture2D<float4> _CurrNormal;//Same as _NormalMap just for sampling
 
@@ -13,14 +13,14 @@ RWTexture2DArray<float4> _DerivativeArray;
 RWTexture2DArray<float4> _NormalArray;
 
 //this map will be used though all LODs
-RWTexture2D<float4> _BaseDerivativeMap;//Previous LOD DeriMap ,R: Dxx, G:Dyy, B:Dzx, A:Dzy
-Texture2D<float4> _BaseDerivativeMap_Sample;//Same as _BaseDerivativeMap just for sampling
+//RWTexture2D<float4> _BaseDerivativeMap;//Previous LOD DeriMap ,R: Dxx, G:Dyy, B:Dzx, A:Dzy
+//Texture2D<float4> _BaseDerivativeMap_Sample;//Same as _BaseDerivativeMap just for sampling
 
 //sampler 
 SamplerState linearClampSampler;
 
-RWTexture2D<float4> _DisplaceMap;//Displace Mapout for current LOD = disp + B_disp
-RWTexture2D<float4> _NormalMap;//Normal out for current LOD normal and foam RGB:normal A:foam
+//RWTexture2D<float4> _DisplaceMap;//Displace Mapout for current LOD = disp + B_disp
+//RWTexture2D<float4> _NormalMap;//Normal out for current LOD normal and foam RGB:normal A:foam
 //NormalMap will not be used by next LOD, but will be used by current LOD for foam fading
 //Dxx.etc will add from previous LOD (A+B)' = A' + B'
 //****Normal Cal****
@@ -193,50 +193,6 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
 
     return ReturnData;
 }
-//not used
-float4 GetWaveHV(float3 WPos, float RTSize)
-{
-    float PI = 3.14159265f;
-
-    float3 displace = float3(0.0, 0.0, 0.0);
-
-    float Dxx = 0.0f;
-    float Dyy = 0.0f;
-    float Dxy = 0.0f;
-    float Dzx = 0.0f;
-    float Dzy = 0.0f;
-
-    [unroll(10)]
-    for (int i = 0; i < _WaveCount; i++)
-    {
-
-        float _WaveLength = _WavesBuffer[i].WaveLength;
-        float k = 2 * PI / _WaveLength;
-        float _Amplitude = _WavesBuffer[i].Amplitude * _LODWaveAmpMul;
-        float _Steepness = _Amplitude * k;
-        float _Speed = _WavesBuffer[i].Speed;
-        float2 _Direction = normalize(_WavesBuffer[i].Direction);
-        float f = k * (dot(WPos, float3(_Direction.x, 0, _Direction.y)) - _Time * _Speed);
-
-        float Wy = _Amplitude * sin(f) * 1.0f;
-
-        displace += float3(0.0, Wy, 0.0);
-
-    }
-
-    float CurrentLODSize = _LODParams.z;
-    
-    //Sample the data (disp and derivative from Base LOD)
-    float2 coord = ((WPos.xz - _CenterPos.xz)/ CurrentLODSize +0.5f)*RTSize;
-    float2 UV = float2(float(coord.x + 0.5f) / 512.0f * 0.5f + 0.25f, float(coord.y + 0.5f) / 512.0f * 0.5f + 0.25f);
-    float4 baseDisplaceV = _BaseDisplace.SampleLevel(linearClampSampler, UV, 0);
-    //float4 baseDerivativeV = _BaseDerivativeMap_Sample.SampleLevel(linearClampSampler, UV, 0);
-    //baseNormalV = _BaseNormal.SampleLevel(linearClampSampler, UV, 0);
-
-    displace += baseDisplaceV.xyz;
-    
-    return float4(0.0,0.0,0.0, displace.y);
-}
 
 [numthreads(32, 32, 1)]
 void CSMain(uint3 id : SV_DispatchThreadID)
@@ -266,14 +222,14 @@ void CSMain(uint3 id : SV_DispatchThreadID)
 
     //foam banding and progressive fade
     float FoamMask = clamp(pow(abs(outNormalV.a+ _FoamParams.y), _FoamParams.z),0.0,1.0);
-    FoamMask = max(FoamMask, _NormalMap[id.xy].a * (1- _FoamParams.x));
+    FoamMask = max(FoamMask, _NormalArray[uint3(id.xy, LODIndex)].a * (1- _FoamParams.x));
 
     //Get the offset data(height and velocity)
     //float4 VelHVector = GetWaveHV(WPos + float3(outDisplaceV.x, 0, outDisplaceV.z), width);
     //assgin Temp map
-    _DisplaceMap[id.xy] = outDisplaceV;
-    _NormalMap[id.xy] = float4(outNormalV.rgb, FoamMask);
-    _BaseDerivativeMap[id.xy] = outDerivativeV;
+    //_DisplaceMap[id.xy] = outDisplaceV;
+    //_NormalMap[id.xy] = float4(outNormalV.rgb, FoamMask);
+    //_BaseDerivativeMap[id.xy] = outDerivativeV;
 
     //assign maps for CPU process
     _DisplaceArray[uint3(id.xy, LODIndex)] = outDisplaceV;
