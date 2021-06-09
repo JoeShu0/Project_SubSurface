@@ -1,15 +1,12 @@
 #ifndef CUSTOM_OCEAN_PASS_INCLUDED
 #define CUSTOM_OCEAN_PASS_INCLUDED
 
-
 #include "../../CustomRP/ShaderLib/Surface.hlsl"
 #include "../../CustomRP/ShaderLib/Shadows.hlsl"
 #include "../../CustomRP/ShaderLib/Light.hlsl"
 #include "../../CustomRP/ShaderLib/BRDF.hlsl"
 #include "../../CustomRP/ShaderLib/GI.hlsl"
 #include "../../CustomRP/ShaderLib/Lighting.hlsl"
-
-
 
 struct Attributes
 {
@@ -40,13 +37,13 @@ Varyings OceanPassVertex(Attributes input)
 	float3 positionWS = TransformObjectToWorld(input.positionOS);
 	
 	//Snap tp 2*unit grid(Should be scaled by whole ocean)
-	positionWS = SnapToWorldPosition(positionWS, INPUT_PROP(_OceanScale));
+	positionWS = SnapToWorldPosition(positionWS, _OceanScale);
 
 	//StaticUV for detail tex, current scale and transiton fixed!
 	float2 S_UV = positionWS.xz * 0.5f;
 
 	//Transition at the edge of LODs
-	positionWS = TransitionLOD(positionWS, INPUT_PROP(_OceanScale));
+	positionWS = TransitionLOD(positionWS, _OceanScale);
 
 	//sample the displacement Texture and add to WPos
 	float4 UVn = GetWorldPosUVAndNext(positionWS);
@@ -92,6 +89,10 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	UNITY_SETUP_INSTANCE_ID(input);
 	//Depth10 for ocean depth(not used in here)
 	float OceanDepth10 = LOAD_TEXTURE2D(_CameraOceanDepthTexture, input.positionCS_SS.xy).a;
+	//float OceanDepthDelta = input.depth01 - OceanDepth10;
+	//float4 OceanDelta01 = clamp(-OceanDepthDelta*5000, 0.0, 1.0);//!!!!this breaks when the render scale changes!!!!
+	//clip(OceanDelta01 > 0.5);
+	
 	
 	float4 NormalFoam = GetOceanNormal(input.UV);
 	float3 normalWS = normalize(NormalFoam.xyz);
@@ -99,7 +100,9 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 
 	
 	//Get the detail normal and combine with base normal
-	float3 DetailTangentNormal = GetTangentDetailNormal(input.StaticUV);
+	//detial normal need multi sample for distance fade and 
+	//panning to add dynamic, Also a multiplier to adjust effect 
+	float3 DetailTangentNormal = GetTangentDetailNormal(input.StaticUV * 0.1f);
 	//normalWS = DetailTangentNormalToWorld(DetailTangentNormal, normalWS);
 
 
@@ -132,8 +135,8 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	//return float4(INPUT_PROP(_BaseColor).rgb, 0.5);
 	
 	//Basic lighting
-	float4 color = float4(normalWS,1.0f);
-	//return float4(normalWS, 1.0f);
+	float4 color = float4(surface.normal,1.0f);
+	//return float4(OceanDepth10,0.0f,0.0f, 1.0f);
 	
 	//return color;
 
@@ -146,8 +149,6 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	float LightNormalGradient = dot(-sunDirection, surface.normal);
 	float ViewNormalGradient = dot(surface.viewDirection, surface.normal);
 	
-	
-
 	color = _DarkColor;
 	float baseMask = clamp(
 		pow(abs(LightNormalGradient + _BrightOffsetPow.x), _BrightOffsetPow.y),
@@ -171,8 +172,9 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 		1.0f);
 	color = lerp(color, _FresnelColor, fresnelMask);
 
+	color += clamp(pow(abs(SunReflect + 0.25), 100), 0 ,1) * pow(abs(1-foamMask),5) * 1.5f;
 	
-	
+	//return float4(pow(abs(1-foamMask),5), 0.0,0.0,1.0);
 	return float4(color.rgb, max(color.a, 1-ViewNormalGradient));//
 	//SunReflect = dot(normalize(float3(-0.5, -0.5, 0.0)), reflectDir);
 

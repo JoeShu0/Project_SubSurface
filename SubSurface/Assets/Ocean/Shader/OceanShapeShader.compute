@@ -233,7 +233,7 @@ void CSMain(uint3 id : SV_DispatchThreadID)
 
     //foam banding and progressive fade
     float FoamMask = clamp(pow(abs(outNormalV.a+ _FoamParams.y), _FoamParams.z),0.0,1.0);
-    FoamMask = max(FoamMask, _NormalArray[uint3(id.xy, LODIndex)].a * (1- _FoamParams.x));
+    FoamMask = max(FoamMask, _NormalArray[uint3(id.xy, LODIndex)].a * (1- _FoamParams.x));//this is not working!! for moving surface
 
     //Get the offset data(height and velocity)
     //float4 VelHVector = GetWaveHV(WPos + float3(outDisplaceV.x, 0, outDisplaceV.z), width);

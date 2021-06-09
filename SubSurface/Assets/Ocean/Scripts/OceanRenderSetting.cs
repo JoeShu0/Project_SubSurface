@@ -17,6 +17,11 @@ public class OceanRenderSetting : ScriptableObject
     //The compute shader to sample RT for CPU physics
     public ComputeShader getHeight;
 
+    //OceanSacle for the whole gameobject
+    public int OceanScale = 1;
+    //the camera ocean always follow
+    public float OceanCamExtend = 10.0f;
+    public float OceanCamHeightStage = 10.0f;
     //Count for LOD rings
     public int LODCount = 8;
     //Min grid size
@@ -52,15 +57,12 @@ public class OceanRenderSetting : ScriptableObject
     public FoamParams foamParams = new FoamParams
     { FadeTime = 1.0f, BandOffset = 0.75f, BandPower = 100.0f};
 
-
     //tweaker for wave datas
     [Range(0.0f, 5.0f)]
     public float[] WaveAmplitudeTweak = new float[8];
 
-    
     public float debug = 11;
 
-    
     public enum TileType
     {
         Interior,
@@ -115,10 +117,10 @@ public class OceanRenderSetting : ScriptableObject
 
     public Texture2D OceanDetailNoise;
 
-    static int displaceTexId = Shader.PropertyToID("_DispTex");
-    static int displaceTexNextId = Shader.PropertyToID("_NextDispTex");
-    static int normalTexId = Shader.PropertyToID("_NormalTex");
-    static int normalTexNextId = Shader.PropertyToID("_NextLODNTex");
+    //static int displaceTexId = Shader.PropertyToID("_DispTex");
+    //static int displaceTexNextId = Shader.PropertyToID("_NextDispTex");
+    //static int normalTexId = Shader.PropertyToID("_NormalTex");
+    //static int normalTexNextId = Shader.PropertyToID("_NextLODNTex");
     static int detailNormalId = Shader.PropertyToID("_DetailNormalNoise");
 
     private void Awake()

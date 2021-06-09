@@ -22,6 +22,7 @@ public class OceanShadingSetting : ScriptableObject
         public Color color;
         public float bandingOffset;
         public float bandingPower;
+        public float MultiPlier;
     }
 
     //Material Properties

@@ -16,6 +16,9 @@ MonoBehaviour:
   oceanShader: {fileID: 4800000, guid: 36e0b36d9215e6943acb44f0b8fa26a5, type: 3}
   shapeShader: {fileID: 7200000, guid: 23a92af6619da4d43b3189705f55a9be, type: 3}
   getHeight: {fileID: 7200000, guid: 8c2a41e75b72cef4c933ac54d00261e4, type: 3}
+  OceanScale: 2
+  OceanCamExtend: 20
+  OceanCamHeightStage: 40
   LODCount: 8
   GridSize: 0.2
   GridCountPerTile: 80
@@ -29,14 +32,14 @@ MonoBehaviour:
     BandOffset: 0.729
     BandPower: 100
   WaveAmplitudeTweak:
-  - 1.15
-  - 1.67
-  - 2.15
-  - 2.31
-  - 2.31
-  - 1.89
-  - 1.5
-  - 0.63
+  - 0.4
+  - 0.78
+  - 1.66
+  - 2.04
+  - 2.07
+  - 2.24
+  - 2.04
+  - 2.24
   debug: 11
   RegenerateWaveDatas: 0
   SpectrumWaves:

@@ -17067,7 +17067,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.106735446, y: 0.565453, z: -0.074101, w: 0.8144812}
-  m_LocalPosition: {x: -33.1, y: 12.2, z: -7.9}
+  m_LocalPosition: {x: -37, y: 14, z: -18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -22529,19 +22529,19 @@ MonoBehaviour:
   BuoyancyPoints:
   - transform: {fileID: 583491570}
     buoyancyHeight: 1
-    maxBuoyancyForce: 50
+    maxBuoyancyForce: 21
   - transform: {fileID: 1055157504}
     buoyancyHeight: 1
-    maxBuoyancyForce: 50
+    maxBuoyancyForce: 21
   - transform: {fileID: 978620667}
     buoyancyHeight: 1
-    maxBuoyancyForce: 50
+    maxBuoyancyForce: 21
   - transform: {fileID: 680137935}
     buoyancyHeight: 1
-    maxBuoyancyForce: 50
+    maxBuoyancyForce: 21
   - transform: {fileID: 5676392}
     buoyancyHeight: 1
-    maxBuoyancyForce: 50
+    maxBuoyancyForce: 1
 --- !u!4 &1396210575
 Transform:
   m_ObjectHideFlags: 0
@@ -28235,6 +28235,7 @@ MonoBehaviour:
   ORS: {fileID: 11400000, guid: 3c821bf86d691a4408f94a1a5ba1fca7, type: 2}
   OSS: {fileID: 11400000, guid: 0173b03abd735c942beef7fef583e461, type: 2}
   hasOceanLOD: 1
+  OceanCam: {fileID: 963194227}
 --- !u!4 &1817882522
 Transform:
   m_ObjectHideFlags: 0
@@ -28243,8 +28244,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1817882520}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -18.894335, y: 0, z: -11.245182}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 824368858}
   - {fileID: 354053326}

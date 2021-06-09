@@ -19,13 +19,15 @@ public class OceanRenderer :MonoBehaviour
 
     [Tooltip("Tick this box will regenerate All LOD meshes and Materials")]
     public bool hasOceanLOD = false;
-
+    public Camera OceanCam;
     private int threadGroupX, threadGroupY;
 
     private GameObject[] OceanLODS;
     //private Material[] OceanMATS;
     //temp solution
     private int KIndex = 0;
+
+    
 
     //*****Ocean Render Shader LOD related*****
     int gridSizeId = Shader.PropertyToID("_GridSize");
@@ -86,6 +88,9 @@ public class OceanRenderer :MonoBehaviour
         //ORS.Initialization()
         //CreateOceanLODs();
 
+        //init ocean Cam
+        OceanCam = Camera.main;
+
         //init the Ocean sampler
         OHS = new OceanHeightSampler(ORS, transform, ORS.getHeight);
         
@@ -111,6 +116,7 @@ public class OceanRenderer :MonoBehaviour
 #endif
         //RenderDisAndNormalMapsForLODs();
         UpdateShaderGlobalParams();
+        UpdateOceantransform();
     }
 
     private void FixedUpdate()
@@ -126,6 +132,21 @@ public class OceanRenderer :MonoBehaviour
     private void LateUpdate()
     {
 
+    }
+
+    void UpdateOceantransform()
+    {
+        //calculate ocean scale and position based on the camera
+        Vector3 CameraFacing = OceanCam.transform.forward;
+        Vector3 CameraPosition = OceanCam.transform.position;
+        Vector3 OceanPostion = CameraPosition + CameraFacing * ORS.OceanCamExtend;
+        int heightStage = Mathf.CeilToInt(Mathf.Max(Mathf.Log(CameraPosition.y / ORS.OceanCamHeightStage, 2), 0.1f) );
+        //Debug.Log(heightStage);
+        //update Ocean position
+        gameObject.transform.position = new Vector3(OceanPostion.x, gameObject.transform.position.y, OceanPostion.z);
+        //update ocean gameobject scale
+        ORS.OceanScale = (int)Mathf.Pow(2,heightStage);
+        gameObject.transform.localScale = new Vector3(ORS.OceanScale, ORS.OceanScale, ORS.OceanScale);
     }
 
     void CreateOceanLODs()
@@ -283,16 +304,19 @@ public class OceanRenderer :MonoBehaviour
     {
         //update ocean rendering Global Material properties
         //center position for the ocean(following camerafront)
+        Shader.SetGlobalFloat("_OceanScale", transform.localScale.x);
         Shader.SetGlobalVector(centerPosId, transform.position);
         //Ocean shanding stuff
         Shader.SetGlobalVector(hightLightParamId, 
             new Vector4(OSS.highlights.HighLightExp, 
             OSS.highlights.HighLightBost, 0.0f,0.0f));
+        
         Shader.SetGlobalColor(baseColorId, OSS.Base.color);
         Shader.SetGlobalColor(brightColorId, OSS.Bright.color);
         Shader.SetGlobalColor(darkColorId, OSS.Dark.color);
         Shader.SetGlobalColor(foamColorId, OSS.Foam.color);
         Shader.SetGlobalColor(fresnelColorId, OSS.Fresnel.color);
+        //Shader.SetGlobalVectorArray
         Shader.SetGlobalVector("_BrightOffsetPow", new Vector4(
             OSS.Base.bandingOffset,
             OSS.Base.bandingPower,
@@ -355,7 +379,7 @@ public class OceanRenderer :MonoBehaviour
             shapeWaveBufer.SetData(WaveSubsets);
             ORS.shapeShader.SetBuffer(KIndex, waveBufferId, shapeWaveBufer);
 
-            float CurrentLODSize = ORS.GridSize * ORS.GridCountPerTile * 4 * Mathf.Pow(2, i) * 1;//times ocean scale
+            float CurrentLODSize = ORS.GridSize * ORS.GridCountPerTile * 4 * Mathf.Pow(2, i) * transform.localScale.x;//times ocean scale
             //ORS.shapeShader.SetFloat(lodSizeId, CurrentLODSize);
             //ORS.shapeShader.SetInt(lodIndexId, i);
             ORS.shapeShader.SetVector(lodParamsId,
