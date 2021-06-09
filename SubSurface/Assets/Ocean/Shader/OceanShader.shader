@@ -58,7 +58,7 @@
             ENDHLSL
         }
 
-        Pass
+        Pass//currently this pass breaks when the render scale is changed!!!!!!!
         {
             Tags
             {

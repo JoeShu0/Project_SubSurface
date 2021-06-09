@@ -70,7 +70,7 @@ Varyings OceanPassVertex(Attributes input)
 	output.depth01 = depth01;
 	output.UV = UVn;
 	output.StaticUV = S_UV;
-	output.DebugColor = float4(debugDisplacecolor,0.0);
+	output.DebugColor = float4(debugDisplacecolor, 1.0f);
 	return output;
 }
 
@@ -125,16 +125,17 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 
 	//float3 color = GetLighting(surface, brdf, gi);
 
-	//?????Dont konw why the OrthographicDepthBufferToLinear case the tile to offsets?????
+	//?????Dont konw why the OrthographicDepthBufferToLinear cause the tile to offsets?????
 	//bufferDepth = IsOrthographicCamera() ?
 		//OrthographicDepthBufferToLinear(bufferDepth) :
 		//LinearEyeDepth(bufferDepth, _ZBufferParams);
 	//return float4(INPUT_PROP(_BaseColor).rgb, 0.5);
 	
 	//Basic lighting
-	float4 color = float4(input.DebugColor.rgb,1.0f);
+	float4 color = float4(normalWS,1.0f);
 	//return float4(normalWS, 1.0f);
 	
+	//return color;
 
 	//**********experimental part**********
 	float3 sunDirection = float3(-0.5,-0.5,0.0);

@@ -30,8 +30,8 @@ MonoBehaviour:
     bandingPower: 5
   Fresnel:
     color: {r: 0.7506827, g: 0.79215693, b: 0.79215693, a: 1}
-    bandingOffset: 0.05
-    bandingPower: 51.4
+    bandingOffset: 0
+    bandingPower: 50
   highlights:
     HighLightExp: 86.8
     HighLightBost: 0

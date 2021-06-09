@@ -340,7 +340,7 @@ public class OceanRenderSetting : ScriptableObject
         LODDisplaceMapsArray.volumeDepth = LODCount;
         LODDisplaceMapsArray.enableRandomWrite = true;
         LODDisplaceMapsArray.antiAliasing = 1;
-        LODDisplaceMapsArray.wrapMode = TextureWrapMode.Clamp;
+        LODDisplaceMapsArray.wrapMode = TextureWrapMode.Repeat;
         LODDisplaceMapsArray.filterMode = FilterMode.Trilinear;
         LODDisplaceMapsArray.Create();
         AssetDatabase.CreateAsset(LODDisplaceMapsArray, RTPath);
@@ -353,7 +353,7 @@ public class OceanRenderSetting : ScriptableObject
         LODNormalMapsArray.volumeDepth = LODCount;
         LODNormalMapsArray.enableRandomWrite = true;
         LODNormalMapsArray.antiAliasing = 1;
-        LODNormalMapsArray.wrapMode = TextureWrapMode.Clamp;
+        LODNormalMapsArray.wrapMode = TextureWrapMode.Repeat;
         LODNormalMapsArray.filterMode = FilterMode.Trilinear;
         LODNormalMapsArray.Create();
         AssetDatabase.CreateAsset(LODNormalMapsArray, RTPath);
@@ -366,7 +366,7 @@ public class OceanRenderSetting : ScriptableObject
         LODDerivativeMapsArray.volumeDepth = LODCount;
         LODDerivativeMapsArray.enableRandomWrite = true;
         LODDerivativeMapsArray.antiAliasing = 1;
-        LODDerivativeMapsArray.wrapMode = TextureWrapMode.Clamp;
+        LODDerivativeMapsArray.wrapMode = TextureWrapMode.Repeat;
         LODDerivativeMapsArray.filterMode = FilterMode.Trilinear;
         LODDerivativeMapsArray.Create();
         AssetDatabase.CreateAsset(LODDerivativeMapsArray, RTPath);
@@ -379,7 +379,7 @@ public class OceanRenderSetting : ScriptableObject
         LODVelocityMapsArray.volumeDepth = LODCount;
         LODVelocityMapsArray.enableRandomWrite = true;
         LODVelocityMapsArray.antiAliasing = 1;
-        LODVelocityMapsArray.wrapMode = TextureWrapMode.Clamp;
+        LODVelocityMapsArray.wrapMode = TextureWrapMode.Repeat;
         LODVelocityMapsArray.filterMode = FilterMode.Trilinear;
         LODVelocityMapsArray.Create();
         AssetDatabase.CreateAsset(LODVelocityMapsArray, RTPath);

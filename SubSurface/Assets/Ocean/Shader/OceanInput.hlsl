@@ -48,6 +48,7 @@ CBUFFER_START(_OceanGlobalData)
     Texture2DArray _NormalTexArray;
     //sampler 
     SamplerState linearClampSampler;
+    SamplerState linearRepeatSampler;
 CBUFFER_END
 
 TEXTURE2D(_CameraOceanDepthTexture);
