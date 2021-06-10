@@ -37,13 +37,13 @@ Varyings OceanPassVertex(Attributes input)
 	float3 positionWS = TransformObjectToWorld(input.positionOS);
 	
 	//Snap tp 2*unit grid(Should be scaled by whole ocean)
-	positionWS = SnapToWorldPosition(positionWS, _OceanScale);
+	positionWS = SnapToWorldPosition(positionWS);
 
 	//StaticUV for detail tex, current scale and transiton fixed!
 	float2 S_UV = positionWS.xz * 0.5f;
 
 	//Transition at the edge of LODs
-	positionWS = TransitionLOD(positionWS, _OceanScale);
+	positionWS = TransitionLOD(positionWS);
 
 	//sample the displacement Texture and add to WPos
 	float4 UVn = GetWorldPosUVAndNext(positionWS);
@@ -174,7 +174,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	
 	color += clamp(pow(abs(SunReflect + 0.25), 100), 0 ,1) * pow(abs(1-foamMask),5) * 1.5f;
 	
-	return float4(LightNormalGradient, 0.0,0.0,1.0);
+	//return float4(LightNormalGradient, 0.0,0.0,1.0);
 	return float4(color.rgb, max(color.a, 1-ViewNormalGradient));//
 	//SunReflect = dot(normalize(float3(-0.5, -0.5, 0.0)), reflectDir);
 

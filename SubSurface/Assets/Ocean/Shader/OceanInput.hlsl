@@ -3,6 +3,8 @@
 
 //short cut unity access per material property
 #define INPUT_PROP(name) UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, name)
+
+#define _LODCount 8
 /*
 TEXTURE2D(_DispTex);
 SAMPLER(sampler_DispTex);
@@ -27,7 +29,8 @@ UNITY_INSTANCING_BUFFER_START(UnityPerMaterial)
 UNITY_INSTANCING_BUFFER_END(UnityPerMaterial)
 //specify the buffer, use the Shader.setglobal~ to set buffers 
 CBUFFER_START(_OceanGlobalData)
-    float _OceanScale;
+    float4 _OceanScaleParams;//x scale log2, y scale, z transition
+    //float _OceanScaleTransi;
     
     //LOD related
     float4 _CenterPos;
@@ -57,9 +60,9 @@ TEXTURE2D(_CameraOceanDepthTexture);
 SAMPLER(sampler_CameraOceanDepthTexture);
 
 
-float3 SnapToWorldPosition(float3 positionWS, float oceanScale)
+float3 SnapToWorldPosition(float3 positionWS)
 {
-    float Grid = INPUT_PROP(_GridSize) * oceanScale;
+    float Grid = INPUT_PROP(_GridSize) * _OceanScaleParams.y;
     float Grid2 = Grid * 2.0f;
 
     //snap to 2*unit grid(scaled by parent!)
@@ -68,19 +71,24 @@ float3 SnapToWorldPosition(float3 positionWS, float oceanScale)
     return positionWS;
 }
 
-float3 TransitionLOD(float3 positionWS, float oceanScale)
+float3 TransitionLOD(float3 positionWS)
 {
     float3 TransitionPosition = positionWS;
-    float4 transitionParams = INPUT_PROP(_TransitionParam) * oceanScale;
+    float4 transitionParams = INPUT_PROP(_TransitionParam) * _OceanScaleParams.y;
     float3 centerPos = _CenterPos.xyz;
-    float Grid4 = INPUT_PROP(_GridSize) * 4.0f * oceanScale;
+    float Grid4 = INPUT_PROP(_GridSize) * 4.0f * _OceanScaleParams.y;
 
     float DistX = abs(positionWS.x - centerPos.x) - abs(transitionParams.x);
     float DistZ = abs(positionWS.z - centerPos.z) - abs(transitionParams.y);
     float TransiFactor = clamp(max(DistX, DistZ) / transitionParams.z, 0.0f, 1.0f);
     float2 POffset = frac(positionWS.xz / Grid4) - float2(0.5f, 0.5f);
     
-    //TransiFactor = 1;
+    if(INPUT_PROP(_LODIndex) == 0)
+    {
+        TransiFactor =  max(_OceanScaleParams.z, TransiFactor);
+        //TransiFactor = 0.5;
+    }
+
     const float MinTransitionRadius =0.26f;
     if (abs(POffset.x) < MinTransitionRadius)
     {
@@ -137,9 +145,9 @@ float4 GetOceanNormal(float4 UVn)
 float4 GetWorldPosUVAndNext(float3 positionWS)
 {
     float2 UV = (positionWS.xz - _CenterPos.xz) / 
-        (INPUT_PROP(_LODSize) * _OceanScale) + 0.5f;
+        (INPUT_PROP(_LODSize) * _OceanScaleParams.y) + 0.5f;
     float2 UV_n = (positionWS.xz - _CenterPos.xz) / 
-        (INPUT_PROP(_LODSize) * _OceanScale) * 0.5f + 0.5f;
+        (INPUT_PROP(_LODSize) * _OceanScaleParams.y) * 0.5f + 0.5f;
     return float4(UV, UV_n);
 }
 

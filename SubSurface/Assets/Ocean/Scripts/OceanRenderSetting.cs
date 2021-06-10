@@ -18,7 +18,13 @@ public class OceanRenderSetting : ScriptableObject
     public ComputeShader getHeight;
 
     //OceanSacle for the whole gameobject
-    public int OceanScale = 1;
+    [HideInInspector]
+    public Vector2 OceanScale;
+    [HideInInspector]
+    public float OceanScaleTransition = 0;
+    [HideInInspector]
+    public Vector2[] CurAndPastPos = new Vector2[2];
+
     //the camera ocean always follow
     public float OceanCamExtend = 10.0f;
     public float OceanCamHeightStage = 10.0f;

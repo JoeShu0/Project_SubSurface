@@ -37,6 +37,7 @@ SamplerState linearClampSampler;
 
 float3 _CenterPos;
 float4 _LODParams;//x LODCOUNT ,y LODIndex, z LODSize.
+float4 _CurPastPos;//x LODCOUNT ,y LODIndex, z LODSize.
 //float _LODSize;
 //int _LODIndex;
 float _LODWaveAmpMul;
@@ -45,7 +46,7 @@ float _DeltaTime;
 
 float4 _FoamParams;//x is the inverse foam fade time, x is foam banding offset, y is the foam banding power
 
-int _WaveCount;
+uint _WaveCount;
 struct Wave
 {
     float WaveLength;
@@ -102,8 +103,8 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
 {
     float PI = 3.14159265f;
 
-    int LODCount = (int)_LODParams.x;
-    int LODIndex = (int)_LODParams.y;
+    uint LODCount = (uint)_LODParams.x;
+    uint LODIndex = (uint)_LODParams.y;
     
     float3 displace = float3(0.0, 0.0, 0.0);
 
@@ -117,8 +118,12 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
     float Dyt = 0.0f;
     float Dzt = 0.0f;
 
+    uint wavePerLOD = _WaveCount / LODCount;
+    uint startWave = wavePerLOD * LODIndex;
+    uint endbeforeWave = wavePerLOD * LODIndex + wavePerLOD;
+
     [unroll(10)]
-    for (int i = 0; i < _WaveCount; i++)
+    for (uint i = startWave; i < endbeforeWave; i++)
     {
 
         float _WaveLength = _WavesBuffer[i].WaveLength;
@@ -234,10 +239,10 @@ void CSMain(uint3 id : SV_DispatchThreadID)
     
     //foam banding and progressive fade
     //float2 pos = WPos.xz;
-    //float2 posdiff = pos - _NormalArray[uint3(id.xy, LODIndex)].xy;
-    //int2 coordDiff = int2(posdiff / CurrentLODSize * width);
+    float2 posdiff = _CurPastPos.xy - _CurPastPos.zw;
+    int2 coordDiff = int2(posdiff / CurrentLODSize * width);
     float FoamMask = clamp(pow(abs(outNormalV.a+ _FoamParams.y), _FoamParams.z),0.0,1.0);
-
+    FoamMask = max(FoamMask, _NormalArray[uint3(id.xy, LODIndex)].a * (1- _FoamParams.x));//this is not working!! for moving surface
     //FoamMask = max(FoamMask, _NormalArray[uint3(id.xy + coordDiff, LODIndex)].a * (1- _FoamParams.x));//this is not working!! for moving surface
 
     //Get the offset data(height and velocity)
