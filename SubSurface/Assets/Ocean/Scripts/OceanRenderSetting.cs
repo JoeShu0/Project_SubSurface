@@ -51,7 +51,7 @@ public class OceanRenderSetting : ScriptableObject
         public float FadeTime;//Foam fade Time in secs
         [Range(0.0f, 1.0f)]
         public float BandOffset;
-        [Range(0.0f, 100.0f)]
+        [Range(0.0f, 10.0f)]
         public float BandPower;
     };
     public FoamParams foamParams = new FoamParams

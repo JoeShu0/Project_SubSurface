@@ -91,7 +91,7 @@ float4 BilinearSamplerTextureArray(RWTexture2DArray<float4> TexArray, int2 coord
         sample00 * (1 - xy.x) * (1 - xy.y) +
         sample10 * (xy.x) * (1 - xy.y) +
         sample01 * (1 - xy.x) * (xy.y) +
-        sample00 * (xy.x) * (xy.y);
+        sample11 * (xy.x) * (xy.y);
 
    return samplexy;
    //return sample00;
@@ -173,7 +173,7 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
     float4 baseVelocityV = BilinearSamplerTextureArray(_VelocityArray, coord, RTSize, LODIndex + 1);
 
 
-
+    
     Dxx += baseDerivativeV.x;
     Dyy += baseDerivativeV.y;
     Dxy += baseDisplaceV.w;
@@ -231,9 +231,14 @@ void CSMain(uint3 id : SV_DispatchThreadID)
     float4 outNormalV = outputWaveVectors.normalVector;
     float4 outVelocityV = outputWaveVectors.VelocityVector;
 
+    
     //foam banding and progressive fade
+    //float2 pos = WPos.xz;
+    //float2 posdiff = pos - _NormalArray[uint3(id.xy, LODIndex)].xy;
+    //int2 coordDiff = int2(posdiff / CurrentLODSize * width);
     float FoamMask = clamp(pow(abs(outNormalV.a+ _FoamParams.y), _FoamParams.z),0.0,1.0);
-    FoamMask = max(FoamMask, _NormalArray[uint3(id.xy, LODIndex)].a * (1- _FoamParams.x));//this is not working!! for moving surface
+
+    //FoamMask = max(FoamMask, _NormalArray[uint3(id.xy + coordDiff, LODIndex)].a * (1- _FoamParams.x));//this is not working!! for moving surface
 
     //Get the offset data(height and velocity)
     //float4 VelHVector = GetWaveHV(WPos + float3(outDisplaceV.x, 0, outDisplaceV.z), width);
