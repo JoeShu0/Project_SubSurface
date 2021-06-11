@@ -37,9 +37,10 @@ SamplerState linearClampSampler;
 
 float3 _CenterPos;
 float4 _LODParams;//x LODCOUNT ,y LODIndex, z LODSize.
-float4 _CurPastPos;//x LODCOUNT ,y LODIndex, z LODSize.
-//float _LODSize;
-//int _LODIndex;
+float4 _CurPastPos;//xy curPos ,zw pastPos.
+float4 _CurPastScale;//xy curScale(log2, 1) ,zw pastScale(log2, 1).
+float4 _OceanScale;//x 
+
 float _LODWaveAmpMul;
 float _Time;
 float _DeltaTime;
@@ -119,8 +120,8 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
     float Dzt = 0.0f;
 
     uint wavePerLOD = _WaveCount / LODCount;
-    uint startWave = wavePerLOD * LODIndex;
-    uint endbeforeWave = wavePerLOD * LODIndex + wavePerLOD;
+    uint startWave = wavePerLOD * (LODIndex + (int)_CurPastScale);
+    uint endbeforeWave = min(startWave + wavePerLOD, _WaveCount);
 
     [unroll(10)]
     for (uint i = startWave; i < endbeforeWave; i++)

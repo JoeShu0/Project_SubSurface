@@ -16,11 +16,13 @@ MonoBehaviour:
   oceanShader: {fileID: 4800000, guid: 36e0b36d9215e6943acb44f0b8fa26a5, type: 3}
   shapeShader: {fileID: 7200000, guid: 23a92af6619da4d43b3189705f55a9be, type: 3}
   getHeight: {fileID: 7200000, guid: 8c2a41e75b72cef4c933ac54d00261e4, type: 3}
-  OceanScale: {x: 0, y: 1}
-  OceanScaleTransition: -0.65
+  CurPastOceanScale:
+  - {x: 0, y: 1}
+  - {x: 0, y: 1}
+  OceanScaleTransition: -0.15500002
   CurAndPastPos:
-  - {x: -11.794334, y: -8.145182}
-  - {x: -11.794334, y: -8.145182}
+  - {x: 60.50567, y: -52.04518}
+  - {x: 60.50567, y: -52.04518}
   OceanCamExtend: 20
   OceanCamHeightStage: 20
   LODCount: 8
@@ -34,16 +36,16 @@ MonoBehaviour:
   foamParams:
     FadeTime: 3
     BandOffset: 0.677
-    BandPower: 5.38
+    BandPower: 6.2
   WaveAmplitudeTweak:
-  - 0.27
-  - 1.08
-  - 1.56
-  - 1.97
-  - 2.13
-  - 2.18
-  - 1.76
-  - 1.13
+  - 1.31
+  - 2.02
+  - 2.2
+  - 2.26
+  - 1.73
+  - 1.07
+  - 0.72
+  - 0.36
   debug: 11
   RegenerateWaveDatas: 0
   SpectrumWaves:

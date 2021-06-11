@@ -111,14 +111,18 @@ public class OceanRenderer :MonoBehaviour
 
         if(!hasOceanLOD)
             CreateOceanLODs();
-        if(!Application.isPlaying)
+        if (!Application.isPlaying)
+        {
+            UpdateOceantransform();
             RenderDisAndNormalMapsForLODs();
+        }
+        
 #endif
         //RenderDisAndNormalMapsForLODs();
         
         UpdateShaderGlobalParams();
-        
-        
+
+       
     }
 
     private void FixedUpdate()
@@ -134,27 +138,33 @@ public class OceanRenderer :MonoBehaviour
 
     private void LateUpdate()
     {
-
+        
+        //Debug.Log(ORS.CurPastOceanScale[0]);
     }
 
-    void UpdateOceantransform()
+    void UpdateOceantransform()//update in fixed update
     {
         //calculate ocean scale and position based on the camera
         Vector3 CameraFacing = OceanCam.transform.forward;
         Vector3 CameraPosition = OceanCam.transform.position;
         Vector3 OceanPostion = CameraPosition + CameraFacing * ORS.OceanCamExtend;
         int heightStage = Mathf.CeilToInt(Mathf.Max(Mathf.Log(Mathf.Abs(CameraPosition.y) / ORS.OceanCamHeightStage, 2), 0.1f) ) -1;
-        ORS.OceanScale = new Vector2(heightStage, (int)Mathf.Pow(2, heightStage));
 
-        float ScaleTransition = (Mathf.Abs(CameraPosition.y) - ORS.OceanScale.y * ORS.OceanCamHeightStage) / (ORS.OceanScale.y * ORS.OceanCamHeightStage);
+       
+        //record last frame pos and scale(pay attention to time step(normally in fixed update))
+        ORS.CurPastOceanScale[1] = ORS.CurPastOceanScale[0];
+        ORS.CurPastOceanScale[0] = new Vector2(heightStage, (int)Mathf.Pow(2, heightStage));
+        ORS.CurAndPastPos[1] = ORS.CurAndPastPos[0];
+        ORS.CurAndPastPos[0] = new Vector2(OceanPostion.x, OceanPostion.z);
+
+        //setOceanScale transition
+        float ScaleTransition = (Mathf.Abs(CameraPosition.y) - ORS.CurPastOceanScale[0].y * ORS.OceanCamHeightStage) / (ORS.CurPastOceanScale[0].y * ORS.OceanCamHeightStage);
         ORS.OceanScaleTransition = ScaleTransition;
-        //Debug.Log(ScaleTransition);
 
-        
         //update Ocean position
         gameObject.transform.position = new Vector3(OceanPostion.x, gameObject.transform.position.y, OceanPostion.z);
         //update ocean gameobject scale
-        gameObject.transform.localScale = new Vector3(ORS.OceanScale.y, ORS.OceanScale.y, ORS.OceanScale.y);
+        gameObject.transform.localScale = new Vector3(ORS.CurPastOceanScale[0].y, ORS.CurPastOceanScale[0].y, ORS.CurPastOceanScale[0].y);
     }
 
     void CreateOceanLODs()
@@ -312,7 +322,7 @@ public class OceanRenderer :MonoBehaviour
     {
         //update ocean rendering Global Material properties
         //center position for the ocean(following camerafront)
-        Shader.SetGlobalVector("_OceanScaleParams", new Vector4(ORS.OceanScale.x, ORS.OceanScale.y, ORS.OceanScaleTransition, 0.0f));
+        Shader.SetGlobalVector("_OceanScaleParams", new Vector4(ORS.CurPastOceanScale[0].x, ORS.CurPastOceanScale[0].y, ORS.OceanScaleTransition, 0.0f));
         //Shader.SetGlobalFloat("_LODCount", ORS.OceanScaleTransition);
 
         Shader.SetGlobalVector(centerPosId, transform.position);
@@ -348,7 +358,7 @@ public class OceanRenderer :MonoBehaviour
     }
 
 
-    void RenderDisAndNormalMapsForLODs()
+    void RenderDisAndNormalMapsForLODs()//update in fixed update
     {
         if (!ORS.shapeShader)
         {
@@ -356,8 +366,7 @@ public class OceanRenderer :MonoBehaviour
             return;
         }
 
-        ORS.CurAndPastPos[1] = ORS.CurAndPastPos[0];
-        ORS.CurAndPastPos[0] = new Vector2(transform.position.x, transform.position.z);
+        
 
         //new ComputeBuffer with the stride is 20 ??
         ComputeBuffer shapeWaveBufer = new ComputeBuffer(ORS.WaveCount, 20);
@@ -372,11 +381,16 @@ public class OceanRenderer :MonoBehaviour
         float inverstime = 1 / ORS.foamParams.FadeTime * Time.fixedDeltaTime;
         ORS.shapeShader.SetVector(foamParamId, 
             new Vector4(inverstime, ORS.foamParams.BandOffset,ORS.foamParams.BandPower, 0.0f));
-
+        
         ORS.shapeShader.SetVector("_CurPastPos", 
             new Vector4(
                 ORS.CurAndPastPos[0].x, ORS.CurAndPastPos[0].y,
                 ORS.CurAndPastPos[1].x, ORS.CurAndPastPos[1].y));
+
+        ORS.shapeShader.SetVector("_CurPastScale",
+            new Vector4(
+                ORS.CurPastOceanScale[0].x, ORS.CurPastOceanScale[0].y,
+                ORS.CurPastOceanScale[1].x, ORS.CurPastOceanScale[1].y));
 
         ORS.shapeShader.SetTexture(KIndex, "_DisplaceArray", ORS.LODDisplaceMapsArray);
         ORS.shapeShader.SetTexture(KIndex, "_DerivativeArray", ORS.LODDerivativeMapsArray);
@@ -397,7 +411,7 @@ public class OceanRenderer :MonoBehaviour
             //int SkipNum = Mathf.Min(WavePerLOD * i + Mathf.CeilToInt(Mathf.Log(ORS.OceanScale, 2)) * WavePerLOD, ORS.WaveCount - WavePerLOD);
             
 
-            float CurrentLODSize = ORS.GridSize * ORS.GridCountPerTile * 4 * Mathf.Pow(2, i) * ORS.OceanScale.y;//times ocean scale
+            float CurrentLODSize = ORS.GridSize * ORS.GridCountPerTile * 4 * Mathf.Pow(2, i) * ORS.CurPastOceanScale[0].y;//times ocean scale
             //ORS.shapeShader.SetFloat(lodSizeId, CurrentLODSize);
             //ORS.shapeShader.SetInt(lodIndexId, i);
             ORS.shapeShader.SetVector(lodParamsId,
