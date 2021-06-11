@@ -117,11 +117,13 @@ public class OceanRenderer :MonoBehaviour
         //RenderDisAndNormalMapsForLODs();
         
         UpdateShaderGlobalParams();
-        UpdateOceantransform();
+        
+        
     }
 
     private void FixedUpdate()
     {
+        UpdateOceantransform();
         RenderDisAndNormalMapsForLODs();
         // replave corotine with asnc await later
         if (!OHS.IsRetrivingGPUData)
