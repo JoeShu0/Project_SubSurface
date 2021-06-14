@@ -162,7 +162,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	color = lerp(color, _BrightColor, brightMask);
 
 	float foamCap = pow(abs(foam + 0.15f),100.0f);
-	float TailTex = _FoamTrailTexture.Sample(sampler_FoamTrailTexture, input.StaticUV * 0.05f).r * 2.0f;
+	float TailTex = _FoamTrailTexture.Sample(sampler_FoamTrailTexture, input.StaticUV * 0.1f).r * 2.0f;
 	float foamTrail = pow(abs(foam + _FoamFresnelOffsetPow.x),  _FoamFresnelOffsetPow.y) * TailTex;
 	float foamMask = clamp(
 		max(foamCap, foamTrail),

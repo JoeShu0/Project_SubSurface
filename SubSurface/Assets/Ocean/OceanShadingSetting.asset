@@ -29,7 +29,7 @@ MonoBehaviour:
     MultiPlier: 0
   Foam:
     color: {r: 0.36862746, g: 0.39607847, b: 0.48235297, a: 1}
-    bandingOffset: 0.6
+    bandingOffset: 0.45
     bandingPower: 10
     MultiPlier: 0
   Fresnel:
