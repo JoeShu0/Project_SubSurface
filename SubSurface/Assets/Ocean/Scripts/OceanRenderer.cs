@@ -352,7 +352,8 @@ public class OceanRenderer :MonoBehaviour
 
         Shader.SetGlobalTexture("_DispTexArray", ORS.LODDisplaceMapsArray);
         Shader.SetGlobalTexture("_NormalTexArray", ORS.LODNormalMapsArray);
-        //Shader.SetGlobalTexture("_NormalTexArray", ORS.LODDerivativeMapsArray);
+        
+        Shader.SetGlobalTexture("_FoamTrailTexture", OSS.FoamTrailTex);
 
         //Shader.SetGlobalTexture(detailNormalId, ORS.OceanDetailNoise);
     }

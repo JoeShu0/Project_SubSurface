@@ -38,4 +38,9 @@ public class OceanShadingSetting : ScriptableObject
 
     public Highlights highlights = new Highlights 
     { HighLightExp = 1 , HighLightBost  = 0};
+
+
+    public Texture FoamCapTex;
+
+    public Texture FoamTrailTex;
 }

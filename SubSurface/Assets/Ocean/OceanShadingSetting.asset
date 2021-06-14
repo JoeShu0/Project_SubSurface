@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: OceanShadingSetting
   m_EditorClassIdentifier: 
   Bright:
-    color: {r: 0.43137258, g: 0.6392157, b: 0.9294118, a: 1}
-    bandingOffset: 0.42
-    bandingPower: 500
+    color: {r: 0.1509879, g: 0.24152055, b: 0.3679245, a: 1}
+    bandingOffset: 0.4
+    bandingPower: 139.19
     MultiPlier: 0
   Base:
     color: {r: 0.18039216, g: 0.4666667, b: 0.7803922, a: 1}
     bandingOffset: 0
-    bandingPower: 500
+    bandingPower: 497.32
     MultiPlier: 0
   Dark:
     color: {r: 0.03137255, g: 0.11764707, b: 0.28235295, a: 0.7882353}
@@ -29,8 +29,8 @@ MonoBehaviour:
     MultiPlier: 0
   Foam:
     color: {r: 0.36862746, g: 0.39607847, b: 0.48235297, a: 1}
-    bandingOffset: 0
-    bandingPower: 5
+    bandingOffset: 0.6
+    bandingPower: 10
     MultiPlier: 0
   Fresnel:
     color: {r: 0.7506827, g: 0.79215693, b: 0.79215693, a: 1}
@@ -40,3 +40,5 @@ MonoBehaviour:
   highlights:
     HighLightExp: 86.8
     HighLightBost: 0
+  FoamCapTex: {fileID: 0}
+  FoamTrailTex: {fileID: 2800000, guid: 541cfcc1e6b36144d80a23e8bc729c56, type: 3}

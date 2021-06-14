@@ -65,7 +65,7 @@ struct GerstnerOut
     float4 VelocityVector;
 };
 
-float4 BilinearSamplerTextureArray(RWTexture2DArray<float4> TexArray, float2 UV, int PreviousLODIndex)
+float4 BilinearSamplerTextureArray(RWTexture2DArray<float4> TexArray, float2 UVcoord, int PreviousLODIndex)
 {
     int LODCount = (int)_LODParams.x;
     if (PreviousLODIndex > LODCount-1)
@@ -76,10 +76,10 @@ float4 BilinearSamplerTextureArray(RWTexture2DArray<float4> TexArray, float2 UV,
     //float2 UV = float2(coord.x * 0.5f + 0.25f * RTSize, coord.y * 0.5f + 0.25f * RTSize);
 
     //Bilinear Interpolation
-    uint2 P00 = uint2(floor(UV.x), floor(UV.y));
-    uint2 P10 = uint2(ceil(UV.x), floor(UV.y));
-    uint2 P01 = uint2(floor(UV.x), ceil(UV.y));
-    uint2 P11 = uint2(ceil(UV.x), ceil(UV.y));
+    uint2 P00 = uint2(floor(UVcoord.x), floor(UVcoord.y));
+    uint2 P10 = uint2(ceil(UVcoord.x), floor(UVcoord.y));
+    uint2 P01 = uint2(floor(UVcoord.x), ceil(UVcoord.y));
+    uint2 P11 = uint2(ceil(UVcoord.x), ceil(UVcoord.y));
 
     float4 sample00 = TexArray[uint3(P00, PreviousLODIndex)];
     
@@ -87,7 +87,7 @@ float4 BilinearSamplerTextureArray(RWTexture2DArray<float4> TexArray, float2 UV,
     float4 sample01 = TexArray[uint3(P01, PreviousLODIndex)];
     float4 sample11 = TexArray[uint3(P11, PreviousLODIndex)];
 
-    float2 xy = UV - floor(UV);
+    float2 xy = UVcoord - floor(UVcoord);
 
     float4 samplexy =
         sample00 * (1 - xy.x) * (1 - xy.y) +
@@ -218,6 +218,7 @@ void CSMain(uint3 id : SV_DispatchThreadID)
     uint width, height, elements;
     _DisplaceArray.GetDimensions(width, height, elements);
 
+    uint LODCount = (uint)_LODParams.x;
     float CurrentLODSize = _LODParams.z;
     float LODIndex = _LODParams.y;
 
@@ -238,22 +239,29 @@ void CSMain(uint3 id : SV_DispatchThreadID)
     float4 outNormalV = outputWaveVectors.normalVector;
     float4 outVelocityV = outputWaveVectors.VelocityVector;
 
-    
+    float FoamMask = clamp(pow(abs(outNormalV.a+ _FoamParams.y), _FoamParams.z),0.0,1.0);
+
     //foam banding and progressive fade
     //float2 pos = WPos.xz;
     float2 posdiff = _CurPastPos.xy - _CurPastPos.zw;
-    int2 coordDiff = int2(posdiff / CurrentLODSize * width);
-    float FoamMask = clamp(pow(abs(outNormalV.a+ _FoamParams.y), _FoamParams.z),0.0,1.0);
+    float scaleDiff =  _CurPastScale.y/_CurPastScale.w;
+    //scaleDiff = 0.5f;
+    float scaleOffset = (1-scaleDiff)*0.5f*width;
+    
     //FoamMask = max(FoamMask, _NormalArray[uint3(id.xy, LODIndex)].a * (1- _FoamParams.x));//this is not working!! for moving surface
-    float previousFoamMask = 0.0f;
-    uint2 newcoord = id.xy +coordDiff;
-    if (newcoord.x < width && newcoord.y < width &&
-        newcoord.x > 0 && newcoord.y > 0)
+    float2 UVsample = (float2(id.xy) + posdiff / CurrentLODSize * width) * scaleDiff + scaleOffset;
+    float previousFoamMask = BilinearSamplerTextureArray(_NormalArray, UVsample, LODIndex).a;
+    float previousFoamMaskNexrLOD = BilinearSamplerTextureArray(_NormalArray, (float2(id.xy) + posdiff / CurrentLODSize * width), min(LODIndex + 1, LODCount-1)).a;
+    
+    
+
+    if (UVsample.x > (float)width || UVsample.y > (float)width ||
+        UVsample.x < 0.0 || UVsample.y < 0.0)
     {
-        float2 UVsample = float2(id.xy) + posdiff / CurrentLODSize * width;
-        previousFoamMask = BilinearSamplerTextureArray(_NormalArray, UVsample, LODIndex).a;
-        //previousFoamMask = _NormalArray[uint3(newcoord, LODIndex)].a;
+        previousFoamMask = 0.0f;
     }
+
+    previousFoamMask = scaleDiff > 1.0 ? previousFoamMaskNexrLOD : previousFoamMask;
     
     FoamMask = max(FoamMask, previousFoamMask * (1- _FoamParams.x));//this is not working!! for moving surface
 

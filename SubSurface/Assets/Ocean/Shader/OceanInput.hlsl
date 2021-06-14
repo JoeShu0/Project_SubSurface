@@ -18,6 +18,11 @@ SAMPLER(sampler_NextLODNTex);
 TEXTURE2D(_DetailNormalNoise);
 SAMPLER(sampler_DetailNormalNoise);
 
+TEXTURE2D(_FoamCapTexture);
+SAMPLER(sampler_FoamCapTexture);
+TEXTURE2D(_FoamTrailTexture);
+SAMPLER(sampler_FoamTrailTexture);
+
 UNITY_INSTANCING_BUFFER_START(UnityPerMaterial)
     //UNITY_DEFINE_INSTANCED_PROP(float4, _BaseColor)
     UNITY_DEFINE_INSTANCED_PROP(float, _GridSize)
