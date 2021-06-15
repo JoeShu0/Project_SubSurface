@@ -102,8 +102,8 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	//Get the detail normal and combine with base normal
 	//detial normal need multi sample for distance fade and 
 	//panning to add dynamic, Also a multiplier to adjust effect 
-	float3 DetailTangentNormal = GetTangentDetailNormal(input.StaticUV * 0.1f);
-	//normalWS = DetailTangentNormalToWorld(DetailTangentNormal, normalWS);
+	float3 DetailTangentNormal = GetTangentDetailNormal(input.StaticUV * 0.025f);
+	normalWS = DetailTangentNormalToWorld(DetailTangentNormal, normalWS);
 
 
 	//******Surface setup******
@@ -161,7 +161,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 		1.0f);
 	color = lerp(color, _BrightColor, brightMask);
 
-	float foamCap = pow(abs(foam + 0.15f),100.0f);
+	float foamCap = pow(abs(foam + 0.3f),100.0f);
 	float TailTex = _FoamTrailTexture.Sample(sampler_FoamTrailTexture, input.StaticUV * 0.1f).r * 2.0f;
 	float foamTrail = pow(abs(foam + _FoamFresnelOffsetPow.x),  _FoamFresnelOffsetPow.y) * TailTex;
 	float foamMask = clamp(

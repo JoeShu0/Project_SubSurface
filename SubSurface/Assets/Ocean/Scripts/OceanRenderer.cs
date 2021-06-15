@@ -101,7 +101,7 @@ public class OceanRenderer :MonoBehaviour
 
     private void OnEnable()
     {
-        //if()
+        //SetWaveParticlesBuffer();
     }
 
     private void Update()
@@ -402,6 +402,8 @@ public class OceanRenderer :MonoBehaviour
 
         ORS.shapeGerstnerShader.SetInt(waveCountId, ORS.WaveCount);
         shapeWaveBufer.SetData(ORS.SpectrumWaves);
+        //this buffer is persistent on GPU and no modification needed
+        //should change this to only set and release ONCE
         ORS.shapeGerstnerShader.SetBuffer(KIndex, waveBufferId, shapeWaveBufer);
         for (int i = ORS.LODCount-1; i>=0; i--)
         {
@@ -445,19 +447,35 @@ public class OceanRenderer :MonoBehaviour
         
     }
 
+    void SetWaveParticlesBuffer()
+    {
+        
+    }
     void RenderWaveParticlesForLODs()
     {
+        //this buffer is persistent on GPU and no modification needed
+        //should change this to only set and release ONCE
+        ComputeBuffer shapeWaveParticleBuffer = new ComputeBuffer(ORS.WaveParticleCount, 20);
+        ORS.shapeWaveParticleShader.SetInt("_WaveParticleCount", ORS.WaveParticleCount);
+        shapeWaveParticleBuffer.SetData(ORS.WaveParticles);
+        ORS.shapeWaveParticleShader.SetBuffer(KIndex, "_WaveParticleBuffer", shapeWaveParticleBuffer);
+
+        ORS.shapeWaveParticleShader.SetVector("_TimeParams", new Vector4(Time.time, Time.fixedDeltaTime, 0.0f, 0.0f));
+
         ORS.shapeWaveParticleShader.SetTexture(KIndex, "_DisplaceArray", ORS.LODDisplaceMapsArray);
 
         ORS.shapeWaveParticleShader.SetFloats(centerPosId, new float[]
             { transform.position.x, transform.position.y, transform.position.z}
             );
+        for (int i = 0; i < 2; i++)
+        {
+            float CurrentLODSize_L = ORS.GridSize * ORS.GridCountPerTile * 4 * Mathf.Pow(2, i) * ORS.CurPastOceanScale[0].y;
+            ORS.shapeWaveParticleShader.SetVector(lodParamsId,
+                        new Vector4(ORS.LODCount, i, CurrentLODSize_L, 0.0f));
+            ORS.shapeWaveParticleShader.Dispatch(KIndex, threadGroupX, threadGroupY, 1);
+        }
+        
 
-
-        ORS.shapeWaveParticleShader.Dispatch(KIndex, threadGroupX, threadGroupY, 1);
-
-        float CurrentLODSize_L = ORS.GridSize * ORS.GridCountPerTile * 4 * Mathf.Pow(2, 0) * ORS.CurPastOceanScale[0].y;
-        ORS.shapeWaveParticleShader.SetVector(lodParamsId,
-                    new Vector4(ORS.LODCount, 0, CurrentLODSize_L, 0.0f));
+        shapeWaveParticleBuffer.Release();
     }
 }

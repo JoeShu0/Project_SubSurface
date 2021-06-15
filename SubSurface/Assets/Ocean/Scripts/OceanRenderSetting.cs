@@ -42,6 +42,8 @@ public class OceanRenderSetting : ScriptableObject
     //And We are getting each LOD to compute diff wave length so we fix the WaveCount to 64=8*8
     public int WaveCount = 128;
 
+    public int WaveParticleCount = 512;
+
     //EachLOD have 4 tiles
     public static int TilePerLOD = 4;
 
@@ -97,9 +99,8 @@ public class OceanRenderSetting : ScriptableObject
     [System.Serializable]
     public struct WaveParticle
     {
-        public float Radius;
-        public float Amplitude;
-        public float Speed;
+        public float DispersionAngle;
+        public Vector2 Direction;
         public Vector2 Origin;
     }
 
@@ -107,6 +108,8 @@ public class OceanRenderSetting : ScriptableObject
     public bool RegenerateWaveDatas = true;
     [SerializeField]
     public WaveData[] SpectrumWaves;
+
+    public WaveParticle[] WaveParticles;
 
     [Tooltip("Tick this box will regenerate All Meshtiles ")]
     public bool RegenerateTileMeshes = true;
@@ -184,6 +187,8 @@ public class OceanRenderSetting : ScriptableObject
         InitMaterials();
         InitOceanWaves();
 
+        InitWaveParticles();
+
         IsInit = true;
 
     }
@@ -200,6 +205,7 @@ public class OceanRenderSetting : ScriptableObject
         if (RegenerateWaveDatas)
         {
             InitOceanWaves();
+            InitWaveParticles();
             RegenerateWaveDatas = false;
         }
         if (RegenerateTileMeshes)
@@ -220,6 +226,17 @@ public class OceanRenderSetting : ScriptableObject
 
     }
 
+    private void InitWaveParticles()
+    {
+        WaveParticles = new WaveParticle[WaveParticleCount];
+
+        for (int i = 0; i < WaveParticleCount; i++)
+        {
+            WaveParticles[i].DispersionAngle = 0;
+            WaveParticles[i].Direction = new Vector2(0.0f,1.0f);
+            WaveParticles[i].Origin = new Vector2(2.0f*i, 0.0f);
+        }
+    }
 
     private void InitOceanWaves()
     {

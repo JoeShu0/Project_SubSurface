@@ -1,6 +1,11 @@
 // Each #kernel tells which function to compile; you can have many kernels
 #pragma kernel CSMain
 
+#define WaveParticleSpeed 2.0
+#define WaveParticleRadius 2.0
+#define WaveParticleAmp 1.0
+
+
 RWTexture2DArray<float4> _DisplaceArray;
 //RWTexture2DArray<float4> _DerivativeArray;
 //RWTexture2DArray<float4> _NormalArray;
@@ -12,8 +17,18 @@ RWTexture2DArray<float4> _DisplaceArray;
 //sampler 
 SamplerState linearClampSampler;
 
+uint _WaveParticleCount;
+struct WaveParticle
+{
+    float DispersionAngle;
+    float2 Direction;
+    float2 Origin;
+};
+StructuredBuffer<WaveParticle> _WaveParticleBuffer;
+
 float3 _CenterPos;
 float4 _LODParams;//x LODCOUNT ,y LODIndex, z LODSize.
+float4 _TimeParams;
 
 float DistanceSquared2(float2 pA, float2 pB)
 {
@@ -26,8 +41,8 @@ void CSMain (uint3 id : SV_DispatchThreadID)
     // TODO: insert actual code here!
     
     float2 WPPos = float2(5.0, 5.0);
-    float WPAmp = 2.0f;
-    float WRadius = 2.0f; 
+    float WPAmp = WaveParticleAmp;
+    float WRadius = WaveParticleRadius; 
 
     uint LODCount = (uint)_LODParams.x;
     float CurrentLODSize = _LODParams.z;
@@ -46,15 +61,18 @@ void CSMain (uint3 id : SV_DispatchThreadID)
 
     float4 DisplaceSample = _DisplaceArray[uint3(id.xy, LODIndex)];
 
-    for (int i = 0; i < 1; i++)
+    for (uint i = 0; i < _WaveParticleCount; i++)
     {
+        WPPos = _WaveParticleBuffer[i].Origin + WaveParticleSpeed * _WaveParticleBuffer[i].Direction * _TimeParams.x;
+        
         float distanceSqr = DistanceSquared2(WPPos, WPos.xz) / (WRadius * WRadius);
 
         float cheapstep = pow(1 - distanceSqr, 2);
+        float cheapstep_derivate = (1 - distanceSqr)*(-2*sqrt(distanceSqr));
 
         float displaceY = cheapstep * WPAmp;
         float2 toWP = WPPos - WPos.xz;
-        float2 displaceXZ = (1-cheapstep) * WPAmp * 0.25 * normalize(toWP)  * 0.5;
+        float2 displaceXZ = abs(cheapstep_derivate) * WPAmp * normalize(toWP)  * 0.25;
 
         float3 displace = float3(displaceXZ.x, displaceY, displaceXZ.y);
         DisplaceSample.xyz += distanceSqr > 1.0 ? 0.0 : displace;
