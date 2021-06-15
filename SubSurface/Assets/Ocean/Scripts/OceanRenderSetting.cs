@@ -12,8 +12,10 @@ public class OceanRenderSetting : ScriptableObject
 
     //Shader to render ocean
     public Shader oceanShader;
-    //Shader to render the displacement and normal maps
-    public ComputeShader shapeShader;
+    //Shader to render the displacement// and normal maps
+    public ComputeShader shapeGerstnerShader;
+    //Render wave particles for dynamic waves
+    public ComputeShader shapeWaveParticleShader;
     //The compute shader to sample RT for CPU physics
     public ComputeShader getHeight;
 
@@ -92,6 +94,15 @@ public class OceanRenderSetting : ScriptableObject
         public Vector2 Direction;
     }
 
+    [System.Serializable]
+    public struct WaveParticle
+    {
+        public float Radius;
+        public float Amplitude;
+        public float Speed;
+        public Vector2 Origin;
+    }
+
     [Tooltip("Tick this box will regenerate All WaveDatas")]
     public bool RegenerateWaveDatas = true;
     [SerializeField]
@@ -159,9 +170,9 @@ public class OceanRenderSetting : ScriptableObject
         {
             oceanShader = Shader.Find("Custom_RP/OceanShader");
         }
-        if (!shapeShader)
+        if (!shapeGerstnerShader)
         {
-            shapeShader = (ComputeShader)Resources.Load("OceanShapeShader");
+            shapeGerstnerShader = (ComputeShader)Resources.Load("OceanShapeShader");
         }
         if (!OceanDetailNoise)
         {

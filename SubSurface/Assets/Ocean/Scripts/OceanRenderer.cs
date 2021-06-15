@@ -115,6 +115,7 @@ public class OceanRenderer :MonoBehaviour
         {
             UpdateOceantransform();
             RenderDisAndNormalMapsForLODs();
+            RenderWaveParticlesForLODs();
         }
         
 #endif
@@ -129,6 +130,7 @@ public class OceanRenderer :MonoBehaviour
     {
         UpdateOceantransform();
         RenderDisAndNormalMapsForLODs();
+        RenderWaveParticlesForLODs();
         // replave corotine with asnc await later
         if (!OHS.IsRetrivingGPUData)
         {
@@ -361,7 +363,7 @@ public class OceanRenderer :MonoBehaviour
 
     void RenderDisAndNormalMapsForLODs()//update in fixed update
     {
-        if (!ORS.shapeShader)
+        if (!ORS.shapeGerstnerShader)
         {
             Debug.LogError("No Shapeshader in Ocean rendeing settings!!");
             return;
@@ -372,35 +374,35 @@ public class OceanRenderer :MonoBehaviour
         //new ComputeBuffer with the stride is 20 ??
         ComputeBuffer shapeWaveBufer = new ComputeBuffer(ORS.WaveCount, 20);
 
-        ORS.shapeShader.SetFloats(centerPosId, new float[]
+        ORS.shapeGerstnerShader.SetFloats(centerPosId, new float[]
             { transform.position.x, transform.position.y, transform.position.z}
             );
 
-        ORS.shapeShader.SetFloat(timeId, Time.time);
-        ORS.shapeShader.SetFloat(deltaTimeId, Time.deltaTime);
+        ORS.shapeGerstnerShader.SetFloat(timeId, Time.time);
+        ORS.shapeGerstnerShader.SetFloat(deltaTimeId, Time.deltaTime);
         //this function should be call in fixed update
         float inverstime = 1 / ORS.foamParams.FadeTime * Time.fixedDeltaTime;
-        ORS.shapeShader.SetVector(foamParamId, 
+        ORS.shapeGerstnerShader.SetVector(foamParamId, 
             new Vector4(inverstime, ORS.foamParams.BandOffset,ORS.foamParams.BandPower, 0.0f));
         
-        ORS.shapeShader.SetVector("_CurPastPos", 
+        ORS.shapeGerstnerShader.SetVector("_CurPastPos", 
             new Vector4(
                 ORS.CurAndPastPos[0].x, ORS.CurAndPastPos[0].y,
                 ORS.CurAndPastPos[1].x, ORS.CurAndPastPos[1].y));
 
-        ORS.shapeShader.SetVector("_CurPastScale",
+        ORS.shapeGerstnerShader.SetVector("_CurPastScale",
             new Vector4(
                 ORS.CurPastOceanScale[0].x, ORS.CurPastOceanScale[0].y,
                 ORS.CurPastOceanScale[1].x, ORS.CurPastOceanScale[1].y));
 
-        ORS.shapeShader.SetTexture(KIndex, "_DisplaceArray", ORS.LODDisplaceMapsArray);
-        ORS.shapeShader.SetTexture(KIndex, "_DerivativeArray", ORS.LODDerivativeMapsArray);
-        ORS.shapeShader.SetTexture(KIndex, "_NormalArray", ORS.LODNormalMapsArray);
-        ORS.shapeShader.SetTexture(KIndex, "_VelocityArray", ORS.LODVelocityMapsArray);
+        ORS.shapeGerstnerShader.SetTexture(KIndex, "_DisplaceArray", ORS.LODDisplaceMapsArray);
+        ORS.shapeGerstnerShader.SetTexture(KIndex, "_DerivativeArray", ORS.LODDerivativeMapsArray);
+        ORS.shapeGerstnerShader.SetTexture(KIndex, "_NormalArray", ORS.LODNormalMapsArray);
+        ORS.shapeGerstnerShader.SetTexture(KIndex, "_VelocityArray", ORS.LODVelocityMapsArray);
 
-        ORS.shapeShader.SetInt(waveCountId, ORS.WaveCount);
+        ORS.shapeGerstnerShader.SetInt(waveCountId, ORS.WaveCount);
         shapeWaveBufer.SetData(ORS.SpectrumWaves);
-        ORS.shapeShader.SetBuffer(KIndex, waveBufferId, shapeWaveBufer);
+        ORS.shapeGerstnerShader.SetBuffer(KIndex, waveBufferId, shapeWaveBufer);
         for (int i = ORS.LODCount-1; i>=0; i--)
         {
             //Graphics.CopyTexture(ORS.LODDisplaceMapsArray, Temp);
@@ -415,10 +417,10 @@ public class OceanRenderer :MonoBehaviour
             float CurrentLODSize = ORS.GridSize * ORS.GridCountPerTile * 4 * Mathf.Pow(2, i) * ORS.CurPastOceanScale[0].y;//times ocean scale
             //ORS.shapeShader.SetFloat(lodSizeId, CurrentLODSize);
             //ORS.shapeShader.SetInt(lodIndexId, i);
-            ORS.shapeShader.SetVector(lodParamsId,
+            ORS.shapeGerstnerShader.SetVector(lodParamsId,
                 new Vector4(ORS.LODCount, i, CurrentLODSize, 0.0f));
 
-            ORS.shapeShader.SetFloat(lodWaveAmpMulId, ORS.WaveAmplitudeTweak[i]);
+            ORS.shapeGerstnerShader.SetFloat(lodWaveAmpMulId, ORS.WaveAmplitudeTweak[i]);
 
             
 
@@ -433,11 +435,29 @@ public class OceanRenderer :MonoBehaviour
 
             //ORS.shapeShader.SetTexture(KIndex, "NoiseFoam", WaterFoamNoise);
 
-            ORS.shapeShader.Dispatch(KIndex, threadGroupX, threadGroupY, 1);
+            ORS.shapeGerstnerShader.Dispatch(KIndex, threadGroupX, threadGroupY, 1);
         }
 
         shapeWaveBufer.Release();
         //DerivativeMap.Release();
         //BaseDerivativeMap.Release();
+
+        
+    }
+
+    void RenderWaveParticlesForLODs()
+    {
+        ORS.shapeWaveParticleShader.SetTexture(KIndex, "_DisplaceArray", ORS.LODDisplaceMapsArray);
+
+        ORS.shapeWaveParticleShader.SetFloats(centerPosId, new float[]
+            { transform.position.x, transform.position.y, transform.position.z}
+            );
+
+
+        ORS.shapeWaveParticleShader.Dispatch(KIndex, threadGroupX, threadGroupY, 1);
+
+        float CurrentLODSize_L = ORS.GridSize * ORS.GridCountPerTile * 4 * Mathf.Pow(2, 0) * ORS.CurPastOceanScale[0].y;
+        ORS.shapeWaveParticleShader.SetVector(lodParamsId,
+                    new Vector4(ORS.LODCount, 0, CurrentLODSize_L, 0.0f));
     }
 }

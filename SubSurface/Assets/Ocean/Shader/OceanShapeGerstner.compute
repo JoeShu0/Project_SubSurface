@@ -82,7 +82,6 @@ float4 BilinearSamplerTextureArray(RWTexture2DArray<float4> TexArray, float2 UVc
     uint2 P11 = uint2(ceil(UVcoord.x), ceil(UVcoord.y));
 
     float4 sample00 = TexArray[uint3(P00, PreviousLODIndex)];
-    
     float4 sample10 = TexArray[uint3(P10, PreviousLODIndex)];
     float4 sample01 = TexArray[uint3(P01, PreviousLODIndex)];
     float4 sample11 = TexArray[uint3(P11, PreviousLODIndex)];
@@ -197,10 +196,10 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
     float3 tangent = normalize(float3(1.0f, 0.0f, 0.0f) + float3(Dxx, Dzx, Dxy));
     float3 binormal = normalize(float3(0.0f, 0.0f, 1.0f) + float3(Dxy, Dzy, Dyy));
     float3 normal = normalize(cross(binormal, tangent));
+    
     //Jacobian Det from "Ocean Wave Rendering with Whitcap in the Visual System of a Maritime Simulaor"
     float JacobianDet = (1 + Dxx) * (1 + Dyy) - (Dxy) * (Dxy);
     float foam = clamp(1.0f - JacobianDet,0.0, 1.0);
-
 
     GerstnerOut ReturnData;
     ReturnData.dispVector = float4(displace, Dxy);
@@ -234,13 +233,11 @@ void CSMain(uint3 id : SV_DispatchThreadID)
     //get all the in place data
     GerstnerOut outputWaveVectors = GetWaveDDNF(WPos, id.xy, width);//DDBF means Displace/Derivative/Normal/Foammask/Height/Velocity
 
-    float4 outDisplaceV = outputWaveVectors.dispVector;
-    float4 outDerivativeV = outputWaveVectors.derivativeVector;
     float4 outNormalV = outputWaveVectors.normalVector;
-    float4 outVelocityV = outputWaveVectors.VelocityVector;
 
     float FoamMask = clamp(pow(abs(outNormalV.a+ _FoamParams.y), _FoamParams.z),0.0,1.0);
 
+    //**********The resample of foam have to be optimized
     //foam banding and progressive fade
     //float2 pos = WPos.xz;
     float2 posdiff = _CurPastPos.xy - _CurPastPos.zw;
@@ -248,13 +245,12 @@ void CSMain(uint3 id : SV_DispatchThreadID)
     //scaleDiff = 0.5f;
     float scaleOffset = (1-scaleDiff)*0.5f*width;
     
-    //FoamMask = max(FoamMask, _NormalArray[uint3(id.xy, LODIndex)].a * (1- _FoamParams.x));//this is not working!! for moving surface
+    
     float2 UVsample = (float2(id.xy) + posdiff / CurrentLODSize * width) * scaleDiff + scaleOffset;
     float previousFoamMask = BilinearSamplerTextureArray(_NormalArray, UVsample, LODIndex).a;
     float previousFoamMaskNexrLOD = BilinearSamplerTextureArray(_NormalArray, (float2(id.xy) + posdiff / CurrentLODSize * width), min(LODIndex + 1, LODCount-1)).a;
     
     
-
     if (UVsample.x > (float)width || UVsample.y > (float)width ||
         UVsample.x < 0.0 || UVsample.y < 0.0)
     {
@@ -264,8 +260,10 @@ void CSMain(uint3 id : SV_DispatchThreadID)
     previousFoamMask = scaleDiff > 1.0 ? previousFoamMaskNexrLOD : previousFoamMask;
     
     FoamMask = max(FoamMask, previousFoamMask * (1- _FoamParams.x));//this is not working!! for moving surface
-
-    //Get the offset data(height and velocity)
+    //
+    //FoamMask = max(FoamMask, _NormalArray[uint3(id.xy, LODIndex)].a * (1- _FoamParams.x));//this is not working!! for moving surface
+    
+                                                                                          //Get the offset data(height and velocity)
     //float4 VelHVector = GetWaveHV(WPos + float3(outDisplaceV.x, 0, outDisplaceV.z), width);
     //assgin Temp map
     //_DisplaceMap[id.xy] = outDisplaceV;
@@ -273,10 +271,10 @@ void CSMain(uint3 id : SV_DispatchThreadID)
     //_BaseDerivativeMap[id.xy] = outDerivativeV;
 
     //assign maps for CPU process
-    _DisplaceArray[uint3(id.xy, LODIndex)] = outDisplaceV;
+    _DisplaceArray[uint3(id.xy, LODIndex)] = outputWaveVectors.dispVector;;
     _NormalArray[uint3(id.xy, LODIndex)] = float4(outNormalV.rgb, FoamMask);;
-    _DerivativeArray[uint3(id.xy, LODIndex)] = outDerivativeV;
-    _VelocityArray[uint3(id.xy, LODIndex)] = outVelocityV;
+    _DerivativeArray[uint3(id.xy, LODIndex)] = outputWaveVectors.derivativeVector;;
+    _VelocityArray[uint3(id.xy, LODIndex)] = outputWaveVectors.VelocityVector;;
     //debug
     //Displace[id.xy] = _WaveLengths[10];
     //Result[id.xy] = float4(1.0f, 0.0f, 0.0f, 1.0f);

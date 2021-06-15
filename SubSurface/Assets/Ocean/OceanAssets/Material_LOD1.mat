@@ -27,7 +27,6 @@ Material:
     - _GridSize: 0.4
     - _LODIndex: 1
     - _LODSize: 128
-    - _OceanScale: 1
     m_Colors:
     - _TransitionParam: {r: 54.4, g: 54.4, b: 6.4, a: 6.4}
   m_BuildTextureStacks: []
