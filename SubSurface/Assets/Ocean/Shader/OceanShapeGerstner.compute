@@ -182,7 +182,7 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
     
     Dxx += baseDerivativeV.x;
     Dyy += baseDerivativeV.y;
-    Dxy += baseDisplaceV.w;
+    Dxy += baseVelocityV.w;
     Dzx += baseDerivativeV.z;
     Dzy += baseDerivativeV.w;
     displace += baseDisplaceV.xyz;
@@ -202,10 +202,10 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
     float foam = clamp(1.0f - JacobianDet,0.0, 1.0);
 
     GerstnerOut ReturnData;
-    ReturnData.dispVector = float4(displace, Dxy);
+    ReturnData.dispVector = float4(displace, 0.0);
     ReturnData.normalVector = float4(normal, foam);
     ReturnData.derivativeVector = float4(Dxx, Dyy, Dzx, Dzy);
-    ReturnData.VelocityVector = float4(Dxt,Dyt,Dzt,1.0);
+    ReturnData.VelocityVector = float4(Dxt,Dyt,Dzt, Dxy);
 
     return ReturnData;
 }

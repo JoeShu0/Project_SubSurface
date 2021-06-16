@@ -447,10 +447,6 @@ public class OceanRenderer :MonoBehaviour
         
     }
 
-    void SetWaveParticlesBuffer()
-    {
-        
-    }
     void RenderWaveParticlesForLODs()
     {
         //this buffer is persistent on GPU and no modification needed
@@ -458,21 +454,28 @@ public class OceanRenderer :MonoBehaviour
         ComputeBuffer shapeWaveParticleBuffer = new ComputeBuffer(ORS.WaveParticleCount, 20);
         ORS.shapeWaveParticleShader.SetInt("_WaveParticleCount", ORS.WaveParticleCount);
         shapeWaveParticleBuffer.SetData(ORS.WaveParticles);
-        ORS.shapeWaveParticleShader.SetBuffer(KIndex, "_WaveParticleBuffer", shapeWaveParticleBuffer);
+        ORS.shapeWaveParticleShader.SetBuffer(0, "_WaveParticleBuffer", shapeWaveParticleBuffer);
 
         ORS.shapeWaveParticleShader.SetVector("_TimeParams", new Vector4(Time.time, Time.fixedDeltaTime, 0.0f, 0.0f));
 
-        ORS.shapeWaveParticleShader.SetTexture(KIndex, "_DisplaceArray", ORS.LODDisplaceMapsArray);
+        ORS.shapeWaveParticleShader.SetTexture(0, "_DisplaceArray", ORS.LODDisplaceMapsArray);
+        ORS.shapeWaveParticleShader.SetTexture(1, "_DisplaceArray", ORS.LODDisplaceMapsArray);
+        ORS.shapeWaveParticleShader.SetTexture(1, "_WaveParticleArray", ORS.LODWaveParticleMapsArray);
+
+        ORS.shapeWaveParticleShader.SetTexture(2, "_DisplaceArray", ORS.LODDisplaceMapsArray);
+        ORS.shapeWaveParticleShader.SetTexture(2, "_WaveParticleArray", ORS.LODWaveParticleMapsArray);
 
         ORS.shapeWaveParticleShader.SetFloats(centerPosId, new float[]
             { transform.position.x, transform.position.y, transform.position.z}
             );
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < ORS.LODCount; i++)
         {
             float CurrentLODSize_L = ORS.GridSize * ORS.GridCountPerTile * 4 * Mathf.Pow(2, i) * ORS.CurPastOceanScale[0].y;
             ORS.shapeWaveParticleShader.SetVector(lodParamsId,
                         new Vector4(ORS.LODCount, i, CurrentLODSize_L, 0.0f));
-            ORS.shapeWaveParticleShader.Dispatch(KIndex, threadGroupX, threadGroupY, 1);
+            ORS.shapeWaveParticleShader.Dispatch(0, ORS.WaveParticleCount/128, 1, 1);
+            ORS.shapeWaveParticleShader.Dispatch(1, threadGroupX, threadGroupY, 1);
+            ORS.shapeWaveParticleShader.Dispatch(2, threadGroupX, threadGroupY, 1);
         }
         
 

@@ -129,6 +129,7 @@ public class OceanRenderSetting : ScriptableObject
     public RenderTexture LODNormalMapsArray;
     public RenderTexture LODDerivativeMapsArray;
     public RenderTexture LODVelocityMapsArray;
+    public RenderTexture LODWaveParticleMapsArray;
 
     [Tooltip("Tick this box will regenerate All Materials for LODs ")]
     public bool RegenerateMODMaterials = true;
@@ -165,6 +166,7 @@ public class OceanRenderSetting : ScriptableObject
         LODNormalMapsArray.enableRandomWrite = true;
         LODDerivativeMapsArray.enableRandomWrite = true;
         LODVelocityMapsArray.enableRandomWrite = true;
+        LODWaveParticleMapsArray.enableRandomWrite = true;
     }
 #if UNITY_EDITOR
     public void Initialization()
@@ -234,7 +236,7 @@ public class OceanRenderSetting : ScriptableObject
         {
             WaveParticles[i].DispersionAngle = 0;
             WaveParticles[i].Direction = new Vector2(0.0f,1.0f);
-            WaveParticles[i].Origin = new Vector2(2.0f*i, 0.0f);
+            WaveParticles[i].Origin = new Vector2(3.0f*i, 0.0f);
         }
     }
 
@@ -419,6 +421,19 @@ public class OceanRenderSetting : ScriptableObject
         LODVelocityMapsArray.filterMode = FilterMode.Trilinear;
         LODVelocityMapsArray.Create();
         AssetDatabase.CreateAsset(LODVelocityMapsArray, RTPath);
+
+        RTPath = string.Format("Assets/Ocean/OceanAssets/LODWaveParticleMapArray.renderTexture");
+        AssetDatabase.DeleteAsset(RTPath);
+        LODWaveParticleMapsArray = new RenderTexture(RTSize, RTSize, 0,
+            RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear);
+        LODWaveParticleMapsArray.dimension = UnityEngine.Rendering.TextureDimension.Tex2DArray;
+        LODWaveParticleMapsArray.volumeDepth = LODCount;
+        LODWaveParticleMapsArray.enableRandomWrite = true;
+        LODWaveParticleMapsArray.antiAliasing = 1;
+        LODWaveParticleMapsArray.wrapMode = TextureWrapMode.Repeat;
+        LODWaveParticleMapsArray.filterMode = FilterMode.Trilinear;
+        LODWaveParticleMapsArray.Create();
+        AssetDatabase.CreateAsset(LODWaveParticleMapsArray, RTPath);
     }
 
     //this is for restore some of the settings for RTs
