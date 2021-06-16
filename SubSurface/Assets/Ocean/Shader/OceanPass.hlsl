@@ -103,7 +103,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	//detial normal need multi sample for distance fade and 
 	//panning to add dynamic, Also a multiplier to adjust effect 
 	float3 DetailTangentNormal = GetTangentDetailNormal(input.StaticUV * 0.025f);
-	normalWS = DetailTangentNormalToWorld(DetailTangentNormal, normalWS);
+	//normalWS = DetailTangentNormalToWorld(DetailTangentNormal, normalWS);
 
 
 	//******Surface setup******
@@ -136,7 +136,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	
 	//Basic lighting
 	float4 color = float4(surface.normal,1.0f);
-	//return float4(0.1f,0.1f,0.1f, 1.0f);
+	//return float4(normalWS, 1.0f);
 	
 	//return color;
 

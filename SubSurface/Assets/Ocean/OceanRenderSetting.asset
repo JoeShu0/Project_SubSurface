@@ -17,6 +17,7 @@ MonoBehaviour:
   shapeGerstnerShader: {fileID: 7200000, guid: 23a92af6619da4d43b3189705f55a9be, type: 3}
   shapeWaveParticleShader: {fileID: 7200000, guid: 05555fc8b1432d34da51b4e91b891be3,
     type: 3}
+  shapeNormalShader: {fileID: 7200000, guid: f473d11237c1cee488c06a369b426f24, type: 3}
   getHeight: {fileID: 7200000, guid: 8c2a41e75b72cef4c933ac54d00261e4, type: 3}
   CurPastOceanScale:
   - {x: 0, y: 1}
@@ -41,14 +42,14 @@ MonoBehaviour:
     BandOffset: 0.38
     BandPower: 5.8
   WaveAmplitudeTweak:
-  - 0
-  - 0.36
-  - 0.66
-  - 0.84
-  - 0.78
-  - 0.78
-  - 0.6
-  - 0.24
+  - 0.34
+  - 1.54
+  - 2.14
+  - 2.65
+  - 2.69
+  - 2.55
+  - 2.25
+  - 2.02
   debug: 11
   RegenerateWaveDatas: 0
   SpectrumWaves:

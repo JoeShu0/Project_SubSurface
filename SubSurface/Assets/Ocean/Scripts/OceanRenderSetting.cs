@@ -16,6 +16,8 @@ public class OceanRenderSetting : ScriptableObject
     public ComputeShader shapeGerstnerShader;
     //Render wave particles for dynamic waves
     public ComputeShader shapeWaveParticleShader;
+    //Render Normal map
+    public ComputeShader shapeNormalShader;
     //The compute shader to sample RT for CPU physics
     public ComputeShader getHeight;
 

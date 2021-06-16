@@ -5,7 +5,7 @@
 
 #define WAVEPARTICLESPEED 4
 #define WAVEPARTICLERADIUS 2.0
-#define WAVEPARTICLEAMP 0.5
+#define WAVEPARTICLEAMP 1.0
 
 
 RWTexture2DArray<float4> _DisplaceArray;
@@ -58,7 +58,7 @@ void ParticleToPoint(uint3 id : SV_DispatchThreadID)
 
     
     //WaveParticle
-    float2 ParticlePos = _WaveParticleBuffer[id.x].Origin + WAVEPARTICLESPEED * _WaveParticleBuffer[id.x].Direction * _TimeParams.x;
+    float2 ParticlePos = _WaveParticleBuffer[id.x].Origin;// + WAVEPARTICLESPEED * _WaveParticleBuffer[id.x].Direction * _TimeParams.x;
     float ParticleAmp = WAVEPARTICLEAMP;
     float ParticleRadius = WAVEPARTICLERADIUS;
 
@@ -216,7 +216,9 @@ void PointsToDisplacement_Y(uint3 id : SV_DispatchThreadID)
         float weight_X = cheapstep_derivative * 0.1;
 
         CombinedAmp += cheapstep * (neighbourDisplace_up.y + neighbourDisplace_down.y);
+        CombinedXoffset += cheapstep_derivative * neighbourDisplace_up.x + cheapstep_derivative * neighbourDisplace_down.x;
         CombinedYoffset += -cheapstep_derivative * neighbourDisplace_up.y + cheapstep_derivative * neighbourDisplace_down.y;
+
     }
 
     float4 WPDisplacement = float4(CombinedXoffset, CombinedAmp, CombinedYoffset, 0.0);

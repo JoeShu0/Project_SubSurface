@@ -116,6 +116,7 @@ public class OceanRenderer :MonoBehaviour
             UpdateOceantransform();
             RenderDisAndNormalMapsForLODs();
             RenderWaveParticlesForLODs();
+            RenderNormalForLODs();
         }
         
 #endif
@@ -131,6 +132,7 @@ public class OceanRenderer :MonoBehaviour
         UpdateOceantransform();
         RenderDisAndNormalMapsForLODs();
         RenderWaveParticlesForLODs();
+        RenderNormalForLODs();
         // replave corotine with asnc await later
         if (!OHS.IsRetrivingGPUData)
         {
@@ -480,5 +482,22 @@ public class OceanRenderer :MonoBehaviour
         
 
         shapeWaveParticleBuffer.Release();
+
+
+        
+    }
+
+    void RenderNormalForLODs()
+    {
+        ORS.shapeNormalShader.SetTexture(0, "_DisplaceArray", ORS.LODDisplaceMapsArray);
+        ORS.shapeNormalShader.SetTexture(0, "_NormalArray", ORS.LODNormalMapsArray);
+
+        for (int i = 0; i < ORS.LODCount; i++)
+        {
+            ORS.shapeNormalShader.SetInt("_LODIndex", i);
+
+            ORS.shapeNormalShader.Dispatch(0, threadGroupX, threadGroupX, 1);
+        }
+
     }
 }

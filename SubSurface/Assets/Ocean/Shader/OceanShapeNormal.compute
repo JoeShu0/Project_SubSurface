@@ -1,0 +1,46 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain
+
+//in LOD 0
+#define METER_PER_PIXEL 0.125 
+
+Texture2DArray<float4> _DisplaceArray;
+RWTexture2DArray<float4> _NormalArray;
+
+SamplerState linearClampSampler;
+
+int _LODIndex;
+
+[numthreads(32,32,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    //Get dims
+    uint width, height, elements;
+    _NormalArray.GetDimensions(width, height, elements);
+
+    //uint LODIndex = id.z;
+    float2 UV = (float2)id.xy/(float)width;
+
+    float soffset = 1.5;
+    float unit = METER_PER_PIXEL * pow(2, _LODIndex) * soffset;
+
+    float2 UV_BL = ((float2)id.xy + float2(0.5, 0.5)+ float2(-soffset, -soffset))/(float)width;
+    float2 UV_BR = ((float2)id.xy + float2(0.5, 0.5)+ float2(soffset, -soffset))/(float)width;
+    float2 UV_TL = ((float2)id.xy + float2(0.5, 0.5)+ float2(-soffset, soffset))/(float)width;
+    float2 UV_TR = ((float2)id.xy + float2(0.5, 0.5)+ float2(soffset, soffset))/(float)width;
+
+    //finite normal calculation
+    float3 pos_BL = _DisplaceArray.SampleLevel(linearClampSampler, float3(UV_BL, _LODIndex), 0).rgb + float3(-unit, 0.0, -unit);
+    float3 pos_BR = _DisplaceArray.SampleLevel(linearClampSampler, float3(UV_BR, _LODIndex), 0).rgb + float3(unit, 0.0, -unit);
+    float3 pos_TL = _DisplaceArray.SampleLevel(linearClampSampler, float3(UV_TL, _LODIndex), 0).rgb + float3(-unit, 0.0, unit);
+    float3 pos_TR = _DisplaceArray.SampleLevel(linearClampSampler, float3(UV_TR, _LODIndex), 0).rgb + float3(-unit, 0.0, -unit);
+
+    float3 normal =  normalize(cross(pos_TL-pos_BL , pos_BR-pos_BL));
+
+    //float3 UVW = float3((float2)id.xy/(float)width, 0);
+    //float3 displace = _DisplaceArray.SampleLevel(linearClampSampler, UVW, 0).rgb;
+
+    float4 NormalData =  _NormalArray[uint3(id.xy, _LODIndex)];
+    NormalData.xyz = normal;
+    _NormalArray[uint3(id.xy, _LODIndex)] = NormalData;
+}
