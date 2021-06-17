@@ -2,13 +2,17 @@
 #pragma kernel ParticleToPoint
 #pragma kernel PointsToDisplacement_X
 #pragma kernel PointsToDisplacement_Y
+#pragma kernel ApplyWaveParicles
 
 #define WAVEPARTICLESPEED 4
 #define WAVEPARTICLERADIUS 2.0
-#define WAVEPARTICLEAMP 1.0
+#define WAVEPARTICLEAMP 0.5
 
+#define METER_PER_PIXEL 0.125 
 
 RWTexture2DArray<float4> _DisplaceArray;
+RWTexture2DArray<float4> _DerivativeArray;
+RWTexture2DArray<float4> _VelocityArray;
 //RWTexture2DArray<float4> _DerivativeArray;
 //RWTexture2DArray<float4> _NormalArray;
 //RWTexture2DArray<float4> _VelocityArray;
@@ -58,7 +62,7 @@ void ParticleToPoint(uint3 id : SV_DispatchThreadID)
 
     
     //WaveParticle
-    float2 ParticlePos = _WaveParticleBuffer[id.x].Origin;// + WAVEPARTICLESPEED * _WaveParticleBuffer[id.x].Direction * _TimeParams.x;
+    float2 ParticlePos = _WaveParticleBuffer[id.x].Origin + WAVEPARTICLESPEED * _WaveParticleBuffer[id.x].Direction * _TimeParams.x;
     float ParticleAmp = WAVEPARTICLEAMP;
     float ParticleRadius = WAVEPARTICLERADIUS;
 
@@ -144,7 +148,7 @@ void PointsToDisplacement_X (uint3 id : SV_DispatchThreadID)
     float4 WPDisplacement = float4(CombinedXoffset, CombinedAmp, 0.0, 0.0);
 
 
-    _WaveParticleArray[uint3(id.x, id.y, LODIndex)] = WPDisplacement;
+    _WaveParticleArray[uint3(id.x, id.y, LODIndex + LODCount/2)] = WPDisplacement;
 
     /*
 
@@ -196,7 +200,7 @@ void PointsToDisplacement_Y(uint3 id : SV_DispatchThreadID)
 
     int UV_PRadius = floor(ParticleRadius / CurrentLODSize * width);
 
-    float4 WPDisplaceData = _WaveParticleArray[uint3(id.x, id.y, LODIndex)];
+    float4 WPDisplaceData = _WaveParticleArray[uint3(id.x, id.y, LODIndex + LODCount/2)];
     float CombinedAmp = WPDisplaceData.y;
     float CombinedXoffset = WPDisplaceData.x;
     float CombinedYoffset = 0.0;
@@ -205,8 +209,8 @@ void PointsToDisplacement_Y(uint3 id : SV_DispatchThreadID)
     for (int i = 1; i < UV_PRadius; i++)
     {
 
-        float4 neighbourDisplace_up = _WaveParticleArray[uint3(id.x, id.y + i, LODIndex)];
-        float4 neighbourDisplace_down = _WaveParticleArray[uint3(id.x, id.y - i, LODIndex)];
+        float4 neighbourDisplace_up = _WaveParticleArray[uint3(id.x, id.y + i, LODIndex + LODCount/2)];
+        float4 neighbourDisplace_down = _WaveParticleArray[uint3(id.x, id.y - i, LODIndex + LODCount/2)];
 
         float x = (float)i / (float)UV_PRadius;
         float cheapstep = pow(1.0 - x * x, 2);
@@ -216,13 +220,14 @@ void PointsToDisplacement_Y(uint3 id : SV_DispatchThreadID)
         float weight_X = cheapstep_derivative * 0.1;
 
         CombinedAmp += cheapstep * (neighbourDisplace_up.y + neighbourDisplace_down.y);
-        CombinedXoffset += cheapstep_derivative * neighbourDisplace_up.x + cheapstep_derivative * neighbourDisplace_down.x;
+        CombinedXoffset += cheapstep * neighbourDisplace_up.x + cheapstep * neighbourDisplace_down.x;
         CombinedYoffset += -cheapstep_derivative * neighbourDisplace_up.y + cheapstep_derivative * neighbourDisplace_down.y;
 
     }
 
     float4 WPDisplacement = float4(CombinedXoffset, CombinedAmp, CombinedYoffset, 0.0);
 
+    _WaveParticleArray[uint3(id.x, id.y, LODIndex)] = WPDisplacement;
 
     float4 Displace = _DisplaceArray[uint3(id.x, id.y, LODIndex)];
 
@@ -232,3 +237,38 @@ void PointsToDisplacement_Y(uint3 id : SV_DispatchThreadID)
     
 }
 
+[numthreads(32, 32, 1)]
+void ApplyWaveParicles(uint3 id : SV_DispatchThreadID)
+{
+    float ParticleRadius = WAVEPARTICLERADIUS;
+
+    uint LODCount = (uint)_LODParams.x;
+    float CurrentLODSize = _LODParams.z;
+    float LODIndex = _LODParams.y;
+
+    //Get dims
+    uint width, height, elements;
+    _DisplaceArray.GetDimensions(width, height, elements);
+
+    float3 WP_D_center = _WaveParticleArray[uint3(id.x, id.y, LODIndex)].rgb;
+    float3 WP_D_left = _WaveParticleArray[uint3(id.x-1, id.y, LODIndex)].rgb;
+    float3 WP_D_right = _WaveParticleArray[uint3(id.x+1, id.y, LODIndex)].rgb;
+    float3 WP_D_up = _WaveParticleArray[uint3(id.x, id.y+1, LODIndex)].rgb;
+    float3 WP_D_down = _WaveParticleArray[uint3(id.x, id.y-1, LODIndex)].rgb;
+
+    float unit = METER_PER_PIXEL * pow(2, LODIndex)*2;
+
+    float Dxx = (WP_D_right.x - WP_D_left.x)/unit;
+    float Dyy = (WP_D_up.y - WP_D_down.y)/unit;
+    float Dxy = (WP_D_up.x - WP_D_down.x)/unit;
+    float Dyx = (WP_D_right.y - WP_D_left.y)/unit;
+    float Dzx = (WP_D_right.z - WP_D_left.z)/unit;
+    float Dzy = (WP_D_up.z - WP_D_down.z)/unit;
+    
+    float4 derivates = _DerivativeArray[uint3(id.x, id.y, LODIndex)];
+    float4 velocities = _VelocityArray[uint3(id.x, id.y, LODIndex)];
+    derivates += float4(Dxx, Dyy, Dzx, Dzy);
+    velocities += float4(0.0, 0.0, Dxy, Dyx);
+    _DerivativeArray[uint3(id.x, id.y, LODIndex)] = derivates;
+    _VelocityArray[uint3(id.x, id.y, LODIndex)] = velocities;
+}

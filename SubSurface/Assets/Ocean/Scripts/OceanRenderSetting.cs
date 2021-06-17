@@ -44,7 +44,7 @@ public class OceanRenderSetting : ScriptableObject
     //And We are getting each LOD to compute diff wave length so we fix the WaveCount to 64=8*8
     public int WaveCount = 128;
 
-    public int WaveParticleCount = 4096;
+    public int WaveParticleCount = 1024;
 
     //EachLOD have 4 tiles
     public static int TilePerLOD = 4;
@@ -237,8 +237,8 @@ public class OceanRenderSetting : ScriptableObject
         for (int i = 0; i < WaveParticleCount; i++)
         {
             WaveParticles[i].DispersionAngle = 0;
-            WaveParticles[i].Direction = new Vector2(0.0f,1.0f);
-            WaveParticles[i].Origin = new Vector2(2.0f*i, 0.0f);
+            WaveParticles[i].Direction = new Vector2(-1.0f,1.0f);
+            WaveParticles[i].Origin = new Vector2(1.0f*i, 1.0f * i);
         }
     }
 

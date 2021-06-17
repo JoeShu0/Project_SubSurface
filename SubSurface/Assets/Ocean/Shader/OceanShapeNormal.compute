@@ -7,22 +7,84 @@
 Texture2DArray<float4> _DisplaceArray;
 RWTexture2DArray<float4> _NormalArray;
 
+RWTexture2DArray<float4> _DerivativeArray;
+RWTexture2DArray<float4> _VelocityArray;
+
 SamplerState linearClampSampler;
 
-int _LODIndex;
+float4 _LODParams;//x LODCOUNT ,y LODIndex, z LODSize.
+float4 _FoamParams;
+float4 _CurPastPos;//xy curPos ,zw pastPos.
+float4 _CurPastScale;//xy curScale(log2, 1) ,zw pastScale(log2, 1).
+
+float4 BilinearSamplerTextureArray(RWTexture2DArray<float4> TexArray, float2 UVcoord, int PreviousLODIndex)
+{
+    int LODCount = (int)_LODParams.x;
+    if (PreviousLODIndex > LODCount-1)
+    {
+        return float4(0.0, 0.0, 0.0, 0.0);
+    }
+
+    //float2 UV = float2(coord.x * 0.5f + 0.25f * RTSize, coord.y * 0.5f + 0.25f * RTSize);
+
+    //Bilinear Interpolation
+    uint2 P00 = uint2(floor(UVcoord.x), floor(UVcoord.y));
+    uint2 P10 = uint2(ceil(UVcoord.x), floor(UVcoord.y));
+    uint2 P01 = uint2(floor(UVcoord.x), ceil(UVcoord.y));
+    uint2 P11 = uint2(ceil(UVcoord.x), ceil(UVcoord.y));
+
+    float4 sample00 = TexArray[uint3(P00, PreviousLODIndex)];
+    float4 sample10 = TexArray[uint3(P10, PreviousLODIndex)];
+    float4 sample01 = TexArray[uint3(P01, PreviousLODIndex)];
+    float4 sample11 = TexArray[uint3(P11, PreviousLODIndex)];
+
+    float2 xy = UVcoord - floor(UVcoord);
+
+    float4 samplexy =
+        sample00 * (1 - xy.x) * (1 - xy.y) +
+        sample10 * (xy.x) * (1 - xy.y) +
+        sample01 * (1 - xy.x) * (xy.y) +
+        sample11 * (xy.x) * (xy.y);
+
+   return samplexy;
+   //return sample00;
+}
 
 [numthreads(32,32,1)]
 void CSMain (uint3 id : SV_DispatchThreadID)
 {
+    //LOD
+    uint LODCount = (uint)_LODParams.x;
+    float CurrentLODSize = _LODParams.z;
+    float LODIndex = _LODParams.y;
+    
     //Get dims
     uint width, height, elements;
     _NormalArray.GetDimensions(width, height, elements);
 
+    float4 derivates = _DerivativeArray[uint3(id.x, id.y, LODIndex)];
+    float4 velocities = _VelocityArray[uint3(id.x, id.y, LODIndex)];
+    float Dxx = derivates.x;
+    float Dyy = derivates.y;
+    float Dxy = velocities.z;
+    float Dyx = velocities.w;
+    float Dzx = derivates.z;
+    float Dzy = derivates.w;
+    float Dxt = velocities.x;
+    float Dyt = velocities.y;
+
+    float3 tangent = normalize(float3(1.0f, 0.0f, 0.0f) + float3(Dxx, Dzx, Dyx));
+    float3 binormal = normalize(float3(0.0f, 0.0f, 1.0f) + float3(Dxy, Dzy, Dyy));
+    float3 normal = normalize(cross(binormal, tangent));
+
+    float JacobianDet = (1 + Dxx) * (1 + Dyy) - (Dxy) * (Dyx);
+    float foam = clamp(1.0f - JacobianDet,0.0, 1.0);
+    /*
     //uint LODIndex = id.z;
     float2 UV = (float2)id.xy/(float)width;
 
     float soffset = 1.5;
-    float unit = METER_PER_PIXEL * pow(2, _LODIndex) * soffset;
+    float unit = METER_PER_PIXEL * pow(2, LODIndex) * soffset;
 
     float2 UV_BL = ((float2)id.xy + float2(0.5, 0.5)+ float2(-soffset, -soffset))/(float)width;
     float2 UV_BR = ((float2)id.xy + float2(0.5, 0.5)+ float2(soffset, -soffset))/(float)width;
@@ -30,17 +92,40 @@ void CSMain (uint3 id : SV_DispatchThreadID)
     float2 UV_TR = ((float2)id.xy + float2(0.5, 0.5)+ float2(soffset, soffset))/(float)width;
 
     //finite normal calculation
-    float3 pos_BL = _DisplaceArray.SampleLevel(linearClampSampler, float3(UV_BL, _LODIndex), 0).rgb + float3(-unit, 0.0, -unit);
-    float3 pos_BR = _DisplaceArray.SampleLevel(linearClampSampler, float3(UV_BR, _LODIndex), 0).rgb + float3(unit, 0.0, -unit);
-    float3 pos_TL = _DisplaceArray.SampleLevel(linearClampSampler, float3(UV_TL, _LODIndex), 0).rgb + float3(-unit, 0.0, unit);
-    float3 pos_TR = _DisplaceArray.SampleLevel(linearClampSampler, float3(UV_TR, _LODIndex), 0).rgb + float3(-unit, 0.0, -unit);
+    float3 pos_BL = _DisplaceArray.SampleLevel(linearClampSampler, float3(UV_BL, LODIndex), 0).rgb + float3(-unit, 0.0, -unit);
+    float3 pos_BR = _DisplaceArray.SampleLevel(linearClampSampler, float3(UV_BR, LODIndex), 0).rgb + float3(unit, 0.0, -unit);
+    float3 pos_TL = _DisplaceArray.SampleLevel(linearClampSampler, float3(UV_TL, LODIndex), 0).rgb + float3(-unit, 0.0, unit);
+    float3 pos_TR = _DisplaceArray.SampleLevel(linearClampSampler, float3(UV_TR, LODIndex), 0).rgb + float3(-unit, 0.0, -unit);
 
     float3 normal =  normalize(cross(pos_TL-pos_BL , pos_BR-pos_BL));
 
     //float3 UVW = float3((float2)id.xy/(float)width, 0);
     //float3 displace = _DisplaceArray.SampleLevel(linearClampSampler, UVW, 0).rgb;
+    */
 
-    float4 NormalData =  _NormalArray[uint3(id.xy, _LODIndex)];
-    NormalData.xyz = normal;
-    _NormalArray[uint3(id.xy, _LODIndex)] = NormalData;
+    float FoamMask = clamp(pow(abs(foam + _FoamParams.y), _FoamParams.z),0.0,1.0);
+
+    //**********The resample of foam have to be optimized
+    //foam banding and progressive fade
+    //float2 pos = WPos.xz;
+    float2 posdiff = _CurPastPos.xy - _CurPastPos.zw;
+    float scaleDiff =  _CurPastScale.y/_CurPastScale.w;
+    //scaleDiff = 0.5f;
+    float scaleOffset = (1-scaleDiff)*0.5f*width;
+    
+    float2 UVsample = (float2(id.xy) + posdiff / CurrentLODSize * width) * scaleDiff + scaleOffset;
+    float previousFoamMask = BilinearSamplerTextureArray(_NormalArray, UVsample, LODIndex).a;
+    float previousFoamMaskNexrLOD = BilinearSamplerTextureArray(_NormalArray, (float2(id.xy) + posdiff / CurrentLODSize * width), min(LODIndex + 1, LODCount-1)).a;
+    if (UVsample.x > (float)width || UVsample.y > (float)width ||
+        UVsample.x < 0.0 || UVsample.y < 0.0)
+    {
+        previousFoamMask = 0.0f;
+    }
+    previousFoamMask = scaleDiff > 1.0 ? previousFoamMaskNexrLOD : previousFoamMask;
+    FoamMask = max(FoamMask, previousFoamMask * (1- _FoamParams.x));
+
+
+    float4 NormalData =  _NormalArray[uint3(id.xy, LODIndex)];
+    NormalData = float4(normal, FoamMask);
+    _NormalArray[uint3(id.xy, LODIndex)] = NormalData;
 }

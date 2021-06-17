@@ -111,6 +111,7 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
     float Dxx = 0.0f;
     float Dyy = 0.0f;
     float Dxy = 0.0f;
+    float Dyx = 0.0f;
     float Dzx = 0.0f;
     float Dzy = 0.0f;
     
@@ -148,8 +149,9 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
 
         Dxt += _Direction.x * _Steepness * sin(f) * _Speed;
         Dyt += _Direction.y * _Steepness * sin(f) * _Speed;
-        Dzt += -_Steepness * cos(f) * _Speed;
+        //Dzt += -_Steepness * cos(f) * _Speed;
     }
+    Dyx = Dxy;
     
     //Sample the data (disp and derivative from Base LOD)
     float2 UV = float2(float(coord.x + 0.5f) / RTSize * 0.5f + 0.25f, float(coord.y + 0.5f) / RTSize * 0.5f + 0.25f);
@@ -182,30 +184,31 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
     
     Dxx += baseDerivativeV.x;
     Dyy += baseDerivativeV.y;
-    Dxy += baseVelocityV.w;
+    Dxy += baseVelocityV.z;
+    Dyx += baseVelocityV.w;
     Dzx += baseDerivativeV.z;
     Dzy += baseDerivativeV.w;
     displace += baseDisplaceV.xyz;
     Dxt += baseVelocityV.x;
     Dyt += baseVelocityV.y;
-    Dzt += baseVelocityV.z;
+    //Dzt += baseVelocityV.z;
     
 
     //adding 1 is because we are calculating the D of offset
     //D(x+ dx01 + dx02)'x = 1+dxx01+dxx02 
-    float3 tangent = normalize(float3(1.0f, 0.0f, 0.0f) + float3(Dxx, Dzx, Dxy));
-    float3 binormal = normalize(float3(0.0f, 0.0f, 1.0f) + float3(Dxy, Dzy, Dyy));
-    float3 normal = normalize(cross(binormal, tangent));
+    //float3 tangent = normalize(float3(1.0f, 0.0f, 0.0f) + float3(Dxx, Dzx, Dyx));
+    //float3 binormal = normalize(float3(0.0f, 0.0f, 1.0f) + float3(Dxy, Dzy, Dyy));
+    //float3 normal = normalize(cross(binormal, tangent));
     
     //Jacobian Det from "Ocean Wave Rendering with Whitcap in the Visual System of a Maritime Simulaor"
-    float JacobianDet = (1 + Dxx) * (1 + Dyy) - (Dxy) * (Dxy);
-    float foam = clamp(1.0f - JacobianDet,0.0, 1.0);
+    //float JacobianDet = (1 + Dxx) * (1 + Dyy) - (Dxy) * (Dyx);
+    //float foam = clamp(1.0f - JacobianDet,0.0, 1.0);
 
     GerstnerOut ReturnData;
     ReturnData.dispVector = float4(displace, 0.0);
-    ReturnData.normalVector = float4(normal, foam);
+    ReturnData.normalVector = float4(0.0,0.0,0.0,0.0);//float4(normal, foam);
     ReturnData.derivativeVector = float4(Dxx, Dyy, Dzx, Dzy);
-    ReturnData.VelocityVector = float4(Dxt,Dyt,Dzt, Dxy);
+    ReturnData.VelocityVector = float4(Dxt,Dyt, Dxy, Dyx);
 
     return ReturnData;
 }
@@ -233,6 +236,7 @@ void CSMain(uint3 id : SV_DispatchThreadID)
     //get all the in place data
     GerstnerOut outputWaveVectors = GetWaveDDNF(WPos, id.xy, width);//DDBF means Displace/Derivative/Normal/Foammask/Height/Velocity
 
+    /*
     float4 outNormalV = outputWaveVectors.normalVector;
 
     float FoamMask = clamp(pow(abs(outNormalV.a+ _FoamParams.y), _FoamParams.z),0.0,1.0);
@@ -260,6 +264,7 @@ void CSMain(uint3 id : SV_DispatchThreadID)
     previousFoamMask = scaleDiff > 1.0 ? previousFoamMaskNexrLOD : previousFoamMask;
     
     FoamMask = max(FoamMask, previousFoamMask * (1- _FoamParams.x));//this is not working!! for moving surface
+    */
     //
     //FoamMask = max(FoamMask, _NormalArray[uint3(id.xy, LODIndex)].a * (1- _FoamParams.x));//this is not working!! for moving surface
     
@@ -272,7 +277,7 @@ void CSMain(uint3 id : SV_DispatchThreadID)
 
     //assign maps for CPU process
     _DisplaceArray[uint3(id.xy, LODIndex)] = outputWaveVectors.dispVector;;
-    _NormalArray[uint3(id.xy, LODIndex)] = float4(outNormalV.rgb, FoamMask);;
+    //_NormalArray[uint3(id.xy, LODIndex)] = float4(outNormalV.rgb, FoamMask);;
     _DerivativeArray[uint3(id.xy, LODIndex)] = outputWaveVectors.derivativeVector;;
     _VelocityArray[uint3(id.xy, LODIndex)] = outputWaveVectors.VelocityVector;;
     //debug

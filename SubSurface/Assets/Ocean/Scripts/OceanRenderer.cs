@@ -461,16 +461,22 @@ public class OceanRenderer :MonoBehaviour
         ORS.shapeWaveParticleShader.SetVector("_TimeParams", new Vector4(Time.time, Time.fixedDeltaTime, 0.0f, 0.0f));
 
         ORS.shapeWaveParticleShader.SetTexture(0, "_DisplaceArray", ORS.LODDisplaceMapsArray);
+
         ORS.shapeWaveParticleShader.SetTexture(1, "_DisplaceArray", ORS.LODDisplaceMapsArray);
         ORS.shapeWaveParticleShader.SetTexture(1, "_WaveParticleArray", ORS.LODWaveParticleMapsArray);
 
         ORS.shapeWaveParticleShader.SetTexture(2, "_DisplaceArray", ORS.LODDisplaceMapsArray);
         ORS.shapeWaveParticleShader.SetTexture(2, "_WaveParticleArray", ORS.LODWaveParticleMapsArray);
 
+        ORS.shapeWaveParticleShader.SetTexture(3, "_DisplaceArray", ORS.LODDisplaceMapsArray);
+        ORS.shapeWaveParticleShader.SetTexture(3, "_WaveParticleArray", ORS.LODWaveParticleMapsArray);
+        ORS.shapeWaveParticleShader.SetTexture(3, "_DerivativeArray", ORS.LODDerivativeMapsArray);
+        ORS.shapeWaveParticleShader.SetTexture(3, "_VelocityArray", ORS.LODVelocityMapsArray);
+
         ORS.shapeWaveParticleShader.SetFloats(centerPosId, new float[]
             { transform.position.x, transform.position.y, transform.position.z}
             );
-        for (int i = 0; i < ORS.LODCount; i++)
+        for (int i = 0; i < ORS.LODCount/ 2; i++)
         {
             float CurrentLODSize_L = ORS.GridSize * ORS.GridCountPerTile * 4 * Mathf.Pow(2, i) * ORS.CurPastOceanScale[0].y;
             ORS.shapeWaveParticleShader.SetVector(lodParamsId,
@@ -478,6 +484,7 @@ public class OceanRenderer :MonoBehaviour
             ORS.shapeWaveParticleShader.Dispatch(0, ORS.WaveParticleCount/128, 1, 1);
             ORS.shapeWaveParticleShader.Dispatch(1, threadGroupX, threadGroupY, 1);
             ORS.shapeWaveParticleShader.Dispatch(2, threadGroupX, threadGroupY, 1);
+            ORS.shapeWaveParticleShader.Dispatch(3, threadGroupX, threadGroupY, 1);
         }
         
 
@@ -491,10 +498,28 @@ public class OceanRenderer :MonoBehaviour
     {
         ORS.shapeNormalShader.SetTexture(0, "_DisplaceArray", ORS.LODDisplaceMapsArray);
         ORS.shapeNormalShader.SetTexture(0, "_NormalArray", ORS.LODNormalMapsArray);
+        ORS.shapeNormalShader.SetTexture(0, "_DerivativeArray", ORS.LODDerivativeMapsArray);
+        ORS.shapeNormalShader.SetTexture(0, "_VelocityArray", ORS.LODVelocityMapsArray);
+
+        float inverstime = 1 / ORS.foamParams.FadeTime * Time.fixedDeltaTime;
+        ORS.shapeNormalShader.SetVector(foamParamId,
+            new Vector4(inverstime, ORS.foamParams.BandOffset, ORS.foamParams.BandPower, 0.0f));
+
+        ORS.shapeNormalShader.SetVector("_CurPastPos",
+            new Vector4(
+                ORS.CurAndPastPos[0].x, ORS.CurAndPastPos[0].y,
+                ORS.CurAndPastPos[1].x, ORS.CurAndPastPos[1].y));
+
+        ORS.shapeNormalShader.SetVector("_CurPastScale",
+            new Vector4(
+                ORS.CurPastOceanScale[0].x, ORS.CurPastOceanScale[0].y,
+                ORS.CurPastOceanScale[1].x, ORS.CurPastOceanScale[1].y));
 
         for (int i = 0; i < ORS.LODCount; i++)
         {
-            ORS.shapeNormalShader.SetInt("_LODIndex", i);
+            float CurrentLODSize_L = ORS.GridSize * ORS.GridCountPerTile * 4 * Mathf.Pow(2, i) * ORS.CurPastOceanScale[0].y;
+            ORS.shapeNormalShader.SetVector(lodParamsId,
+                        new Vector4(ORS.LODCount, i, CurrentLODSize_L, 0.0f));
 
             ORS.shapeNormalShader.Dispatch(0, threadGroupX, threadGroupX, 1);
         }
