@@ -515,14 +515,18 @@ public class OceanRenderer :MonoBehaviour
                 ORS.CurPastOceanScale[0].x, ORS.CurPastOceanScale[0].y,
                 ORS.CurPastOceanScale[1].x, ORS.CurPastOceanScale[1].y));
 
+        float CurrentLOD0Size_L = ORS.GridSize * ORS.GridCountPerTile * 4  * ORS.CurPastOceanScale[0].y;
+        ORS.shapeNormalShader.SetVector(lodParamsId,
+            new Vector4(ORS.LODCount, 0, CurrentLOD0Size_L, 0.0f));
+
+
         for (int i = 0; i < ORS.LODCount; i++)
         {
-            float CurrentLODSize_L = ORS.GridSize * ORS.GridCountPerTile * 4 * Mathf.Pow(2, i) * ORS.CurPastOceanScale[0].y;
-            ORS.shapeNormalShader.SetVector(lodParamsId,
-                        new Vector4(ORS.LODCount, i, CurrentLODSize_L, 0.0f));
-
-            ORS.shapeNormalShader.Dispatch(0, threadGroupX, threadGroupX, 1);
+            
+            
         }
+
+        ORS.shapeNormalShader.Dispatch(0, threadGroupX, threadGroupX, 8);
 
     }
 }

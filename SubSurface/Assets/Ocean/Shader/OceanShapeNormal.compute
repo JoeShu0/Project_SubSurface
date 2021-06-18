@@ -12,7 +12,7 @@ RWTexture2DArray<float4> _VelocityArray;
 
 SamplerState linearClampSampler;
 
-float4 _LODParams;//x LODCOUNT ,y LODIndex, z LODSize.
+float4 _LODParams;//x LODCOUNT ,y , z LOD0Size.
 float4 _FoamParams;
 float4 _CurPastPos;//xy curPos ,zw pastPos.
 float4 _CurPastScale;//xy curScale(log2, 1) ,zw pastScale(log2, 1).
@@ -55,8 +55,9 @@ void CSMain (uint3 id : SV_DispatchThreadID)
 {
     //LOD
     uint LODCount = (uint)_LODParams.x;
-    float CurrentLODSize = _LODParams.z;
-    float LODIndex = _LODParams.y;
+    float LODIndex = id.z;
+    float CurrentLODSize = _LODParams.z * pow(2, LODIndex);
+    //float LODIndex = _LODParams.y;
     
     //Get dims
     uint width, height, elements;
@@ -115,13 +116,13 @@ void CSMain (uint3 id : SV_DispatchThreadID)
     
     float2 UVsample = (float2(id.xy) + posdiff / CurrentLODSize * width) * scaleDiff + scaleOffset;
     float previousFoamMask = BilinearSamplerTextureArray(_NormalArray, UVsample, LODIndex).a;
-    float previousFoamMaskNexrLOD = BilinearSamplerTextureArray(_NormalArray, (float2(id.xy) + posdiff / CurrentLODSize * width), min(LODIndex + 1, LODCount-1)).a;
-    if (UVsample.x > (float)width || UVsample.y > (float)width ||
-        UVsample.x < 0.0 || UVsample.y < 0.0)
-    {
-        previousFoamMask = 0.0f;
-    }
-    previousFoamMask = scaleDiff > 1.0 ? previousFoamMaskNexrLOD : previousFoamMask;
+    //float previousFoamMaskNexrLOD = BilinearSamplerTextureArray(_NormalArray, (float2(id.xy) + posdiff / CurrentLODSize * width), min(LODIndex + 1, LODCount-1)).a;
+    //if (UVsample.x > (float)width || UVsample.y > (float)width ||
+        //UVsample.x < 0.0 || UVsample.y < 0.0)
+    //{
+        //previousFoamMask = 0.0f;
+    //}
+    //previousFoamMask = scaleDiff > 1.0 ? previousFoamMaskNexrLOD : previousFoamMask;
     FoamMask = max(FoamMask, previousFoamMask * (1- _FoamParams.x));
 
 

@@ -277,7 +277,7 @@ void CSMain(uint3 id : SV_DispatchThreadID)
 
     //assign maps for CPU process
     _DisplaceArray[uint3(id.xy, LODIndex)] = outputWaveVectors.dispVector;;
-    //_NormalArray[uint3(id.xy, LODIndex)] = float4(outNormalV.rgb, FoamMask);;
+    //_NormalArray[uint3(id.xy, LODIndex)] = float4(0.0,0.0,0.0,0.0);
     _DerivativeArray[uint3(id.xy, LODIndex)] = outputWaveVectors.derivativeVector;;
     _VelocityArray[uint3(id.xy, LODIndex)] = outputWaveVectors.VelocityVector;;
     //debug
