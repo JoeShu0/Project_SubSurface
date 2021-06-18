@@ -101,6 +101,9 @@ public class OceanRenderSetting : ScriptableObject
     [System.Serializable]
     public struct WaveParticle
     {
+        public float Amplitude;
+        public float Radius;
+        public float BirthTime;
         public float DispersionAngle;
         public Vector2 Direction;
         public Vector2 Origin;
@@ -110,7 +113,7 @@ public class OceanRenderSetting : ScriptableObject
     public bool RegenerateWaveDatas = true;
     [SerializeField]
     public WaveData[] SpectrumWaves;
-
+    [HideInInspector]
     public WaveParticle[] WaveParticles;
 
     [Tooltip("Tick this box will regenerate All Meshtiles ")]
@@ -236,10 +239,16 @@ public class OceanRenderSetting : ScriptableObject
 
         for (int i = 0; i < WaveParticleCount; i++)
         {
+            WaveParticles[i].Amplitude = 0.0f;
+            WaveParticles[i].Radius = 4.0f;
+            WaveParticles[i].BirthTime = 0.0f;
+
             WaveParticles[i].DispersionAngle = 0;
             WaveParticles[i].Direction = new Vector2(-1.0f,1.0f);
             WaveParticles[i].Origin = new Vector2(1.0f*i, 1.0f * i);
         }
+
+
     }
 
     private void InitOceanWaves()

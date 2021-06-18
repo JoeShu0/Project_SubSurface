@@ -5,8 +5,9 @@
 #pragma kernel ApplyWaveParicles
 
 #define WAVEPARTICLESPEED 4
-#define WAVEPARTICLERADIUS 2.0
+#define WAVEPARTICLERADIUS 4
 #define WAVEPARTICLEAMP 0.5
+#define WP_HORI_MUL 0.5
 
 #define METER_PER_PIXEL 0.125 
 
@@ -26,14 +27,17 @@ SamplerState linearClampSampler;
 uint _WaveParticleCount;
 struct WaveParticle
 {
+    float Amplitude;
+    float Radius;
+    float BirthTime;
     float DispersionAngle;
     float2 Direction;
     float2 Origin;
 };
-StructuredBuffer<WaveParticle> _WaveParticleBuffer;
+RWStructuredBuffer<WaveParticle> _WaveParticleBuffer;
 
 float3 _CenterPos;
-float4 _LODParams;//x LODCOUNT ,y LODIndex, z LODSize.
+float4 _LODParams;//x LODCOUNT ,y , z LOD0Size.
 float4 _TimeParams;
 
 float DistanceSquared2(float2 pA, float2 pB)
@@ -62,14 +66,13 @@ void ParticleToPoint(uint3 id : SV_DispatchThreadID)
 
     
     //WaveParticle
-    float2 ParticlePos = _WaveParticleBuffer[id.x].Origin + WAVEPARTICLESPEED * _WaveParticleBuffer[id.x].Direction * _TimeParams.x;
+    float2 ParticlePos = _WaveParticleBuffer[id.x].Origin;// + WAVEPARTICLESPEED * _WaveParticleBuffer[id.x].Direction * _TimeParams.x;
     float ParticleAmp = WAVEPARTICLEAMP;
     float ParticleRadius = WAVEPARTICLERADIUS;
 
     //LOD
-    float CurrentLODSize = _LODParams.z;
-    float LODIndex = _LODParams.y;
-    
+    float LODIndex = id.z;
+    float CurrentLODSize = _LODParams.z * pow(2, LODIndex);
 
     //Get dims
     uint width, height, elements;
@@ -115,8 +118,9 @@ void PointsToDisplacement_X (uint3 id : SV_DispatchThreadID)
     
 
     uint LODCount = (uint)_LODParams.x;
-    float CurrentLODSize = _LODParams.z;
-    float LODIndex = _LODParams.y;
+    float LODIndex = id.z;
+    float CurrentLODSize = _LODParams.z * pow(2, LODIndex);
+    
 
     //Get dims
     uint width, height, elements;
@@ -139,10 +143,10 @@ void PointsToDisplacement_X (uint3 id : SV_DispatchThreadID)
         float cheapstep_derivative = (1.0 - x * x) * (-2*x);
 
         float weight_height = cheapstep;
-        float weight_X = cheapstep_derivative * 0.1;
+        float weight_X = cheapstep_derivative * WP_HORI_MUL;
 
         CombinedAmp += cheapstep * (neighbouroffset_left + neighbouroffset_right);
-        CombinedXoffset +=  -cheapstep_derivative * neighbouroffset_right + cheapstep_derivative * neighbouroffset_left;
+        CombinedXoffset +=  -weight_X * neighbouroffset_right + weight_X * neighbouroffset_left;
     }
 
     float4 WPDisplacement = float4(CombinedXoffset, CombinedAmp, 0.0, 0.0);
@@ -150,39 +154,6 @@ void PointsToDisplacement_X (uint3 id : SV_DispatchThreadID)
 
     _WaveParticleArray[uint3(id.x, id.y, LODIndex + LODCount/2)] = WPDisplacement;
 
-    /*
-
-    GetCheapStepWeightInRadius(UV_PRadius, )
-    //D3D CoordSystem
-    float3 WPos = float3(
-        (id.x / float(width) - 0.5f) * CurrentLODSize,
-        0.0f,
-        (id.y / float(height) - 0.5f) * CurrentLODSize
-        ) + _CenterPos;
-
-    float4 DisplaceSample = _DisplaceArray[uint3(id.xy, LODIndex)];
-
-    for (uint i = 0; i < _WaveParticleCount; i++)
-    {
-        WPPos = _WaveParticleBuffer[i].Origin + WAVEPARTICLESPEED * _WaveParticleBuffer[i].Direction * _TimeParams.x;
-        
-        float distanceSqr = DistanceSquared2(WPPos, WPos.xz) / (WRadius * WRadius);
-
-        float cheapstep = pow(1 - distanceSqr, 2);
-        float cheapstep_derivate = (1 - distanceSqr)*(-2*sqrt(distanceSqr));
-
-        float displaceY = cheapstep * WPAmp;
-        float2 toWP = WPPos - WPos.xz;
-        float2 displaceXZ = abs(cheapstep_derivate) * WPAmp * normalize(toWP)  * 0.25;
-
-        float3 displace = float3(displaceXZ.x, displaceY, displaceXZ.y);
-        DisplaceSample.xyz += distanceSqr > 1.0 ? 0.0 : displace;
-    }
-
-    
-
-    _DisplaceArray[uint3(id.xy, LODIndex)] = DisplaceSample;
-    */
 }
 
 [numthreads(32, 32, 1)]
@@ -191,8 +162,8 @@ void PointsToDisplacement_Y(uint3 id : SV_DispatchThreadID)
     float ParticleRadius = WAVEPARTICLERADIUS;
 
     uint LODCount = (uint)_LODParams.x;
-    float CurrentLODSize = _LODParams.z;
-    float LODIndex = _LODParams.y;
+    float LODIndex = id.z;
+    float CurrentLODSize = _LODParams.z * pow(2, LODIndex);
 
     //Get dims
     uint width, height, elements;
@@ -217,11 +188,11 @@ void PointsToDisplacement_Y(uint3 id : SV_DispatchThreadID)
         float cheapstep_derivative = (1.0 - x * x) * (-2 * x);
 
         float weight_height = cheapstep;
-        float weight_X = cheapstep_derivative * 0.1;
+        float weight_Y = cheapstep_derivative * WP_HORI_MUL;
 
         CombinedAmp += cheapstep * (neighbourDisplace_up.y + neighbourDisplace_down.y);
         CombinedXoffset += cheapstep * neighbourDisplace_up.x + cheapstep * neighbourDisplace_down.x;
-        CombinedYoffset += -cheapstep_derivative * neighbourDisplace_up.y + cheapstep_derivative * neighbourDisplace_down.y;
+        CombinedYoffset += -weight_Y * neighbourDisplace_up.y + weight_Y * neighbourDisplace_down.y;
 
     }
 
@@ -243,8 +214,8 @@ void ApplyWaveParicles(uint3 id : SV_DispatchThreadID)
     float ParticleRadius = WAVEPARTICLERADIUS;
 
     uint LODCount = (uint)_LODParams.x;
-    float CurrentLODSize = _LODParams.z;
-    float LODIndex = _LODParams.y;
+    float LODIndex = id.z;
+    float CurrentLODSize = _LODParams.z * pow(2, LODIndex);
 
     //Get dims
     uint width, height, elements;

@@ -42,3600 +42,6672 @@ MonoBehaviour:
     BandOffset: 0.38
     BandPower: 5.8
   WaveAmplitudeTweak:
-  - 0.52
-  - 1.78
-  - 2.63
-  - 3.07
-  - 3.19
-  - 3.14
-  - 2.96
-  - 2.55
+  - 0.51
+  - 1.29
+  - 1.9
+  - 2.25
+  - 2.42
+  - 2.35
+  - 2.23
+  - 2.1
   debug: 11
   RegenerateWaveDatas: 0
   SpectrumWaves:
-  - WaveLength: 0.87651074
-    Amplitude: 0.0043825535
-    Speed: 1.1692352
-    Direction: {x: 0.14470239, y: -0.98947525}
-  - WaveLength: 0.61745006
-    Amplitude: 0.0030872503
-    Speed: 0.9813506
-    Direction: {x: 0.9442414, y: -0.329254}
-  - WaveLength: 0.9507745
-    Amplitude: 0.0047538723
-    Speed: 1.2177609
-    Direction: {x: 0.39316288, y: -0.9194688}
-  - WaveLength: 0.63847023
-    Amplitude: 0.0031923512
-    Speed: 0.99791515
-    Direction: {x: 0.9145159, y: -0.40454987}
-  - WaveLength: 0.9769459
-    Amplitude: 0.004884729
-    Speed: 1.2344074
-    Direction: {x: -0.128053, y: -0.99176735}
-  - WaveLength: 0.7504615
-    Amplitude: 0.0037523075
-    Speed: 1.081901
-    Direction: {x: -0.2821474, y: -0.9593711}
-  - WaveLength: 0.72282624
-    Amplitude: 0.0036141311
-    Speed: 1.0617939
-    Direction: {x: 0.7256075, y: -0.6881088}
-  - WaveLength: 0.92737126
-    Amplitude: 0.0046368563
-    Speed: 1.20268
-    Direction: {x: -0.22258098, y: -0.9749142}
-  - WaveLength: 0.72795033
-    Amplitude: 0.0036397516
-    Speed: 1.0655508
-    Direction: {x: 0.25658306, y: -0.96652216}
-  - WaveLength: 0.9374566
-    Amplitude: 0.0046872827
-    Speed: 1.209202
-    Direction: {x: -0.12765716, y: -0.99181837}
-  - WaveLength: 0.55903065
-    Amplitude: 0.0027951533
-    Speed: 0.9337725
-    Direction: {x: 0.121716745, y: -0.99256486}
-  - WaveLength: 0.82884586
-    Amplitude: 0.004144229
-    Speed: 1.1369992
-    Direction: {x: 0.84047586, y: -0.54184896}
-  - WaveLength: 0.64152926
-    Amplitude: 0.0032076463
-    Speed: 1.0003029
-    Direction: {x: 0.2986215, y: -0.95437163}
-  - WaveLength: 0.7986646
-    Amplitude: 0.003993323
-    Speed: 1.1161062
-    Direction: {x: 0.40948007, y: -0.91231906}
-  - WaveLength: 0.7881931
-    Amplitude: 0.0039409655
-    Speed: 1.1087652
-    Direction: {x: 0.94897246, y: -0.315359}
-  - WaveLength: 0.8399373
-    Amplitude: 0.0041996865
-    Speed: 1.1445816
-    Direction: {x: -0.6002824, y: -0.7997881}
-  - WaveLength: 1.3168908
-    Amplitude: 0.006584454
-    Speed: 1.4331715
-    Direction: {x: 0.6838873, y: -0.7295877}
-  - WaveLength: 1.4194475
-    Amplitude: 0.0070972377
-    Speed: 1.4879316
-    Direction: {x: 0.5452696, y: -0.8382607}
-  - WaveLength: 1.7183728
-    Amplitude: 0.008591864
-    Speed: 1.6371255
-    Direction: {x: 0.9937699, y: -0.11145164}
-  - WaveLength: 1.7542279
-    Amplitude: 0.008771139
-    Speed: 1.6541172
-    Direction: {x: -0.6508051, y: -0.7592448}
-  - WaveLength: 1.8419132
-    Amplitude: 0.009209566
-    Speed: 1.6949538
-    Direction: {x: 0.7858895, y: -0.6183669}
-  - WaveLength: 1.6019188
-    Amplitude: 0.008009594
-    Speed: 1.5806785
-    Direction: {x: 0.74083644, y: -0.67168546}
-  - WaveLength: 1.907966
-    Amplitude: 0.00953983
-    Speed: 1.7250774
-    Direction: {x: 0.99059117, y: -0.13685423}
-  - WaveLength: 1.6501048
-    Amplitude: 0.008250523
-    Speed: 1.6042758
-    Direction: {x: -0.9697178, y: -0.24422823}
-  - WaveLength: 1.3740754
-    Amplitude: 0.006870377
-    Speed: 1.4639578
-    Direction: {x: -0.91669637, y: -0.39958447}
-  - WaveLength: 1.9160252
-    Amplitude: 0.009580126
-    Speed: 1.728717
-    Direction: {x: -0.40407637, y: -0.91472524}
-  - WaveLength: 1.2522652
-    Amplitude: 0.006261326
-    Speed: 1.3975631
-    Direction: {x: -0.94936734, y: -0.31416824}
-  - WaveLength: 1.2343638
-    Amplitude: 0.006171819
-    Speed: 1.387538
-    Direction: {x: -0.5140566, y: -0.85775626}
-  - WaveLength: 1.7956436
-    Amplitude: 0.008978218
-    Speed: 1.6735294
-    Direction: {x: -0.8447292, y: -0.53519404}
-  - WaveLength: 1.7196312
-    Amplitude: 0.008598155
-    Speed: 1.6377249
-    Direction: {x: 0.9989268, y: -0.046316564}
-  - WaveLength: 1.635439
-    Amplitude: 0.008177195
-    Speed: 1.5971308
-    Direction: {x: -0.8132272, y: -0.5819464}
-  - WaveLength: 1.6981521
-    Amplitude: 0.00849076
-    Speed: 1.6274647
-    Direction: {x: 0.7614507, y: -0.6482228}
-  - WaveLength: 2.34764
-    Amplitude: 0.0117382
-    Speed: 1.9135466
-    Direction: {x: -0.94239986, y: -0.33448848}
-  - WaveLength: 3.392592
-    Amplitude: 0.016962958
-    Speed: 2.3003244
-    Direction: {x: -0.47959247, y: -0.87749135}
-  - WaveLength: 2.2866347
-    Amplitude: 0.011433173
-    Speed: 1.8885204
-    Direction: {x: -0.45523804, y: -0.8903698}
-  - WaveLength: 3.3536787
-    Amplitude: 0.016768394
-    Speed: 2.2870939
-    Direction: {x: -0.39894938, y: -0.91697294}
-  - WaveLength: 3.8828783
-    Amplitude: 0.019414391
-    Speed: 2.460935
-    Direction: {x: 0.800934, y: -0.5987526}
-  - WaveLength: 2.2620482
-    Amplitude: 0.011310241
-    Speed: 1.87834
-    Direction: {x: -0.016009111, y: -0.99987185}
-  - WaveLength: 3.7712488
-    Amplitude: 0.018856244
-    Speed: 2.4253023
-    Direction: {x: 0.8933732, y: -0.44931546}
-  - WaveLength: 3.7509007
-    Amplitude: 0.018754503
-    Speed: 2.4187505
-    Direction: {x: -0.6539099, y: -0.7565724}
-  - WaveLength: 3.3998096
-    Amplitude: 0.016999047
-    Speed: 2.3027701
-    Direction: {x: 0.5253317, y: -0.85089755}
-  - WaveLength: 3.4120054
-    Amplitude: 0.017060027
-    Speed: 2.3068967
-    Direction: {x: -0.69829416, y: -0.7158109}
-  - WaveLength: 3.9074483
-    Amplitude: 0.01953724
-    Speed: 2.468709
-    Direction: {x: -0.9347676, y: -0.35525975}
-  - WaveLength: 3.7662044
-    Amplitude: 0.018831022
-    Speed: 2.4236796
-    Direction: {x: 0.04866443, y: -0.9988152}
-  - WaveLength: 2.8058
-    Amplitude: 0.014029
-    Speed: 2.0919516
-    Direction: {x: 0.60389733, y: -0.7970621}
-  - WaveLength: 2.434836
-    Amplitude: 0.012174179
-    Speed: 1.948759
-    Direction: {x: -0.5655535, y: -0.8247116}
-  - WaveLength: 2.5879903
-    Amplitude: 0.012939951
-    Speed: 2.009114
-    Direction: {x: -0.21835412, y: -0.9758696}
-  - WaveLength: 2.4780984
-    Amplitude: 0.012390492
-    Speed: 1.9659957
-    Direction: {x: -0.7745632, y: -0.63249654}
-  - WaveLength: 6.7039747
-    Amplitude: 0.03351987
-    Speed: 3.2336235
-    Direction: {x: 0.96760786, y: -0.25245807}
-  - WaveLength: 7.701352
-    Amplitude: 0.03850676
-    Speed: 3.465826
-    Direction: {x: -0.98160446, y: -0.19092573}
-  - WaveLength: 7.5057173
-    Amplitude: 0.037528586
-    Speed: 3.4215224
-    Direction: {x: -0.15991539, y: -0.9871307}
-  - WaveLength: 4.7791696
-    Amplitude: 0.023895847
-    Speed: 2.7302318
-    Direction: {x: -0.87097186, y: -0.49133295}
-  - WaveLength: 5.7912483
-    Amplitude: 0.02895624
-    Speed: 3.005449
-    Direction: {x: 0.53681827, y: -0.8436979}
-  - WaveLength: 5.0168867
-    Amplitude: 0.025084432
-    Speed: 2.797309
-    Direction: {x: -0.32453775, y: -0.9458727}
-  - WaveLength: 7.1696434
-    Amplitude: 0.035848215
-    Speed: 3.3440447
-    Direction: {x: -0.8523219, y: -0.5230175}
-  - WaveLength: 7.3711224
-    Amplitude: 0.036855612
-    Speed: 3.3907056
-    Direction: {x: 0.8922794, y: -0.45148373}
-  - WaveLength: 7.535857
-    Amplitude: 0.037679285
-    Speed: 3.4283853
-    Direction: {x: -0.99935156, y: -0.03600567}
-  - WaveLength: 4.51654
-    Amplitude: 0.0225827
-    Speed: 2.6541545
-    Direction: {x: -0.89309025, y: -0.4498775}
-  - WaveLength: 5.2953453
-    Amplitude: 0.026476726
-    Speed: 2.8738918
-    Direction: {x: 0.4836907, y: -0.875239}
-  - WaveLength: 6.907333
-    Amplitude: 0.034536663
-    Speed: 3.2823014
-    Direction: {x: 0.9224885, y: -0.3860246}
-  - WaveLength: 5.276971
-    Amplitude: 0.026384853
-    Speed: 2.8689015
-    Direction: {x: -0.47342578, y: -0.88083375}
-  - WaveLength: 7.4898386
-    Amplitude: 0.037449192
-    Speed: 3.4179013
-    Direction: {x: 0.9622083, y: -0.27231455}
-  - WaveLength: 7.8460636
-    Amplitude: 0.039230317
-    Speed: 3.4982367
-    Direction: {x: 0.1253262, y: -0.9921156}
-  - WaveLength: 7.8983502
-    Amplitude: 0.03949175
-    Speed: 3.5098734
-    Direction: {x: 0.2622584, y: -0.9649977}
-  - WaveLength: 13.227529
-    Amplitude: 0.06613764
-    Speed: 4.542162
-    Direction: {x: 0.7364686, y: -0.6764717}
-  - WaveLength: 14.663179
-    Amplitude: 0.073315896
-    Speed: 4.7823057
-    Direction: {x: 0.44601026, y: -0.8950278}
-  - WaveLength: 12.872915
-    Amplitude: 0.064364575
-    Speed: 4.4808636
-    Direction: {x: 0.99922997, y: -0.039235357}
-  - WaveLength: 14.436012
-    Amplitude: 0.07218006
-    Speed: 4.7451167
-    Direction: {x: 0.90332556, y: -0.4289556}
-  - WaveLength: 10.789444
-    Amplitude: 0.053947218
-    Speed: 4.1022563
-    Direction: {x: -0.73572415, y: -0.6772813}
-  - WaveLength: 14.394197
-    Amplitude: 0.071970984
-    Speed: 4.7382393
-    Direction: {x: 0.078501925, y: -0.99691397}
-  - WaveLength: 9.915595
-    Amplitude: 0.049577974
-    Speed: 3.9326262
-    Direction: {x: -0.83613545, y: -0.548523}
-  - WaveLength: 10.07975
-    Amplitude: 0.05039875
-    Speed: 3.9650452
-    Direction: {x: -0.99244165, y: -0.1227173}
-  - WaveLength: 15.520826
-    Amplitude: 0.07760413
-    Speed: 4.9201765
-    Direction: {x: -0.5196841, y: -0.8543585}
-  - WaveLength: 12.271608
-    Amplitude: 0.061358042
-    Speed: 4.3749595
-    Direction: {x: 0.94858605, y: -0.31651944}
-  - WaveLength: 13.547794
-    Amplitude: 0.06773897
-    Speed: 4.596821
-    Direction: {x: -0.48671395, y: -0.8735614}
-  - WaveLength: 8.941577
-    Amplitude: 0.044707883
-    Speed: 3.7344818
-    Direction: {x: 0.9757019, y: -0.21910214}
-  - WaveLength: 10.801757
-    Amplitude: 0.054008782
-    Speed: 4.1045966
-    Direction: {x: -0.95861983, y: -0.2846893}
-  - WaveLength: 8.820776
-    Amplitude: 0.04410388
-    Speed: 3.7091694
-    Direction: {x: -0.9994403, y: -0.033451602}
-  - WaveLength: 9.500808
-    Amplitude: 0.047504038
-    Speed: 3.849493
-    Direction: {x: -0.9396121, y: -0.3422413}
-  - WaveLength: 10.400858
-    Amplitude: 0.05200429
-    Speed: 4.027707
-    Direction: {x: -0.7647166, y: -0.64436674}
-  - WaveLength: 22.480446
-    Amplitude: 0.11240223
-    Speed: 5.921418
-    Direction: {x: 0.89150584, y: -0.45300922}
-  - WaveLength: 24.234358
-    Amplitude: 0.12117179
-    Speed: 6.148073
-    Direction: {x: -0.792943, y: -0.6092958}
-  - WaveLength: 20.035734
-    Amplitude: 0.10017867
-    Speed: 5.5901814
-    Direction: {x: -0.09675173, y: -0.9953085}
-  - WaveLength: 19.60939
-    Amplitude: 0.09804695
-    Speed: 5.5303845
-    Direction: {x: 0.46028763, y: -0.8877698}
-  - WaveLength: 31.018457
-    Amplitude: 0.15509228
-    Speed: 6.9555807
-    Direction: {x: 0.920053, y: -0.3917939}
-  - WaveLength: 29.79332
-    Amplitude: 0.1489666
-    Speed: 6.816834
-    Direction: {x: 0.8157404, y: -0.57841814}
-  - WaveLength: 23.706663
-    Amplitude: 0.11853331
-    Speed: 6.080769
-    Direction: {x: -0.9987645, y: -0.0496937}
-  - WaveLength: 18.564127
-    Amplitude: 0.09282063
-    Speed: 5.3809695
-    Direction: {x: -0.94930005, y: -0.3143715}
-  - WaveLength: 31.690735
-    Amplitude: 0.15845367
-    Speed: 7.030552
-    Direction: {x: 0.9510113, y: -0.30915618}
-  - WaveLength: 29.564535
-    Amplitude: 0.14782268
-    Speed: 6.7906103
-    Direction: {x: 0.9999935, y: -0.0036070903}
-  - WaveLength: 21.544422
-    Amplitude: 0.10772211
-    Speed: 5.796832
-    Direction: {x: -0.22835173, y: -0.9735787}
-  - WaveLength: 22.6948
-    Amplitude: 0.113474
-    Speed: 5.949582
-    Direction: {x: -0.23463595, y: -0.97208333}
-  - WaveLength: 20.638432
-    Amplitude: 0.10319216
-    Speed: 5.673638
-    Direction: {x: 0.94457126, y: -0.32830653}
-  - WaveLength: 25.197556
-    Amplitude: 0.12598777
-    Speed: 6.269061
-    Direction: {x: -0.9992, y: -0.03999248}
-  - WaveLength: 22.249668
-    Amplitude: 0.11124834
-    Speed: 5.8909464
-    Direction: {x: 0.94878566, y: -0.3159205}
-  - WaveLength: 30.559868
-    Amplitude: 0.15279934
-    Speed: 6.903972
-    Direction: {x: 0.4795444, y: -0.87751764}
-  - WaveLength: 39.37575
-    Amplitude: 0.19687875
-    Speed: 7.836781
-    Direction: {x: -0.8926146, y: -0.4508205}
-  - WaveLength: 47.44696
-    Amplitude: 0.2372348
-    Speed: 8.602555
-    Direction: {x: -0.32305935, y: -0.9463787}
-  - WaveLength: 60.577362
-    Amplitude: 0.3028868
-    Speed: 9.720273
-    Direction: {x: 0.99896264, y: -0.045537755}
-  - WaveLength: 48.70946
-    Amplitude: 0.2435473
-    Speed: 8.716255
-    Direction: {x: -0.05189708, y: -0.99865246}
-  - WaveLength: 52.49685
-    Amplitude: 0.26248425
-    Speed: 9.048778
-    Direction: {x: 0.008513836, y: -0.99996376}
-  - WaveLength: 58.981174
-    Amplitude: 0.29490587
-    Speed: 9.591355
-    Direction: {x: 0.99928087, y: -0.037916932}
-  - WaveLength: 46.63849
-    Amplitude: 0.23319244
-    Speed: 8.528949
-    Direction: {x: 0.99383885, y: -0.11083464}
-  - WaveLength: 55.93245
-    Amplitude: 0.27966225
-    Speed: 9.340179
-    Direction: {x: 0.13127618, y: -0.9913458}
-  - WaveLength: 41.19957
-    Amplitude: 0.20599784
-    Speed: 8.01622
-    Direction: {x: 0.93705714, y: -0.34917605}
-  - WaveLength: 45.993233
-    Amplitude: 0.22996616
-    Speed: 8.469743
-    Direction: {x: -0.5287401, y: -0.8487838}
-  - WaveLength: 59.01957
-    Amplitude: 0.29509783
-    Speed: 9.594477
-    Direction: {x: -0.4289519, y: -0.90332735}
-  - WaveLength: 40.603317
-    Amplitude: 0.20301658
-    Speed: 7.9580016
-    Direction: {x: -0.73069865, y: -0.68270016}
-  - WaveLength: 54.368576
-    Amplitude: 0.27184287
-    Speed: 9.208677
-    Direction: {x: 0.81843996, y: -0.5745921}
-  - WaveLength: 61.79702
-    Amplitude: 0.30898508
-    Speed: 9.817638
-    Direction: {x: 0.7609884, y: -0.6487655}
-  - WaveLength: 52.25589
-    Amplitude: 0.26127943
-    Speed: 9.027987
-    Direction: {x: 0.40226725, y: -0.9155223}
-  - WaveLength: 39.65949
-    Amplitude: 0.19829744
-    Speed: 7.8649654
-    Direction: {x: 0.15949695, y: -0.9871984}
-  - WaveLength: 73.80319
-    Amplitude: 0.36901596
-    Speed: 10.729039
-    Direction: {x: -0.7838288, y: -0.620977}
-  - WaveLength: 98.20949
-    Amplitude: 0.49104744
-    Speed: 12.376561
-    Direction: {x: -0.9506108, y: -0.31038532}
-  - WaveLength: 87.32925
-    Amplitude: 0.43664622
-    Speed: 11.670867
-    Direction: {x: -0.48626277, y: -0.8738126}
-  - WaveLength: 74.1609
-    Amplitude: 0.37080446
-    Speed: 10.755009
-    Direction: {x: 0.8672769, y: -0.49782604}
-  - WaveLength: 119.86076
-    Amplitude: 0.5993038
-    Speed: 13.672936
-    Direction: {x: 0.86498773, y: -0.50179297}
-  - WaveLength: 75.283356
-    Amplitude: 0.37641677
-    Speed: 10.836094
-    Direction: {x: 0.52431697, y: -0.85152316}
-  - WaveLength: 75.704254
-    Amplitude: 0.37852126
-    Speed: 10.8663435
-    Direction: {x: 0.5955299, y: -0.8033331}
-  - WaveLength: 87.16972
-    Amplitude: 0.4358486
-    Speed: 11.660203
-    Direction: {x: 0.14358927, y: -0.9896374}
-  - WaveLength: 99.692055
-    Amplitude: 0.49846026
-    Speed: 12.469629
-    Direction: {x: -0.2856186, y: -0.9583434}
-  - WaveLength: 92.26079
-    Amplitude: 0.46130392
-    Speed: 11.995873
-    Direction: {x: 0.49151272, y: -0.8708704}
-  - WaveLength: 81.86643
-    Amplitude: 0.40933216
-    Speed: 11.299942
-    Direction: {x: 0.77209073, y: -0.63551235}
-  - WaveLength: 76.55635
-    Amplitude: 0.38278174
-    Speed: 10.927326
-    Direction: {x: -0.47530007, y: -0.87982374}
-  - WaveLength: 98.279884
-    Amplitude: 0.4913994
-    Speed: 12.380996
-    Direction: {x: -0.99666244, y: -0.081633076}
-  - WaveLength: 88.530594
-    Amplitude: 0.44265297
-    Speed: 11.750869
-    Direction: {x: 0.7663636, y: -0.64240706}
-  - WaveLength: 122.18982
-    Amplitude: 0.6109491
-    Speed: 13.805139
-    Direction: {x: 0.96840733, y: -0.24937376}
-  - WaveLength: 87.412674
-    Amplitude: 0.43706337
-    Speed: 11.67644
-    Direction: {x: 0.18359917, y: -0.9830012}
+  - WaveLength: 0.8978278
+    Amplitude: 0.0044891387
+    Speed: 1.183368
+    Direction: {x: -0.93760693, y: -0.3476971}
+  - WaveLength: 0.98129547
+    Amplitude: 0.0049064774
+    Speed: 1.2371523
+    Direction: {x: 0.44384858, y: -0.8961018}
+  - WaveLength: 0.98564136
+    Amplitude: 0.0049282066
+    Speed: 1.2398888
+    Direction: {x: -0.904593, y: -0.4262763}
+  - WaveLength: 0.8014746
+    Amplitude: 0.0040073725
+    Speed: 1.1180679
+    Direction: {x: 0.15973984, y: -0.98715913}
+  - WaveLength: 0.8670033
+    Amplitude: 0.0043350165
+    Speed: 1.1628767
+    Direction: {x: 0.9995513, y: -0.029953117}
+  - WaveLength: 0.80566525
+    Amplitude: 0.0040283264
+    Speed: 1.120987
+    Direction: {x: -0.23721974, y: -0.971456}
+  - WaveLength: 0.62296915
+    Amplitude: 0.0031148456
+    Speed: 0.9857268
+    Direction: {x: 0.90392685, y: -0.4276871}
+  - WaveLength: 0.6802559
+    Amplitude: 0.0034012794
+    Speed: 1.0300527
+    Direction: {x: -0.06687176, y: -0.9977616}
+  - WaveLength: 0.858472
+    Amplitude: 0.00429236
+    Speed: 1.1571412
+    Direction: {x: 0.35103342, y: -0.9363629}
+  - WaveLength: 0.5915407
+    Amplitude: 0.0029577033
+    Speed: 0.9605403
+    Direction: {x: -0.74474424, y: -0.66735}
+  - WaveLength: 0.6527138
+    Amplitude: 0.0032635687
+    Speed: 1.0089849
+    Direction: {x: 0.4703097, y: -0.8825014}
+  - WaveLength: 0.64345264
+    Amplitude: 0.0032172631
+    Speed: 1.0018013
+    Direction: {x: 0.42421913, y: -0.9055596}
+  - WaveLength: 0.6880498
+    Amplitude: 0.0034402488
+    Speed: 1.0359367
+    Direction: {x: -0.6482829, y: -0.76139957}
+  - WaveLength: 0.8374572
+    Amplitude: 0.004187286
+    Speed: 1.1428905
+    Direction: {x: -0.5694733, y: -0.8220098}
+  - WaveLength: 0.705819
+    Amplitude: 0.003529095
+    Speed: 1.0492282
+    Direction: {x: 0.97720355, y: -0.2123047}
+  - WaveLength: 0.5927727
+    Amplitude: 0.0029638635
+    Speed: 0.96154004
+    Direction: {x: 0.13543344, y: -0.99078643}
+  - WaveLength: 1.6049801
+    Amplitude: 0.0080249
+    Speed: 1.582188
+    Direction: {x: 0.9274082, y: -0.37405083}
+  - WaveLength: 1.5704367
+    Amplitude: 0.007852184
+    Speed: 1.565069
+    Direction: {x: -0.9441953, y: -0.32938617}
+  - WaveLength: 1.3688099
+    Amplitude: 0.0068440493
+    Speed: 1.4611502
+    Direction: {x: -0.98521733, y: -0.17130893}
+  - WaveLength: 1.3276652
+    Amplitude: 0.0066383258
+    Speed: 1.4390224
+    Direction: {x: 0.56096184, y: -0.82784164}
+  - WaveLength: 1.1738381
+    Amplitude: 0.0058691907
+    Speed: 1.3530922
+    Direction: {x: 0.9136719, y: -0.40645245}
+  - WaveLength: 1.3742042
+    Amplitude: 0.0068710204
+    Speed: 1.4640263
+    Direction: {x: 0.46553636, y: -0.8850288}
+  - WaveLength: 1.6786765
+    Amplitude: 0.008393383
+    Speed: 1.6181053
+    Direction: {x: 0.9879987, y: -0.15446211}
+  - WaveLength: 1.6671665
+    Amplitude: 0.0083358325
+    Speed: 1.6125485
+    Direction: {x: -0.1726835, y: -0.98497736}
+  - WaveLength: 1.8185685
+    Amplitude: 0.009092842
+    Speed: 1.6841785
+    Direction: {x: -0.95385396, y: -0.3002708}
+  - WaveLength: 1.6624043
+    Amplitude: 0.008312021
+    Speed: 1.6102437
+    Direction: {x: 0.86300176, y: -0.5052009}
+  - WaveLength: 1.8912272
+    Amplitude: 0.009456136
+    Speed: 1.7174937
+    Direction: {x: 0.21096921, y: -0.9774927}
+  - WaveLength: 1.9987402
+    Amplitude: 0.0099937
+    Speed: 1.765637
+    Direction: {x: -0.9742711, y: -0.22537917}
+  - WaveLength: 1.5376434
+    Amplitude: 0.007688217
+    Speed: 1.5486423
+    Direction: {x: 0.55925775, y: -0.82899386}
+  - WaveLength: 1.9333882
+    Amplitude: 0.009666941
+    Speed: 1.7365321
+    Direction: {x: 0.41796216, y: -0.90846443}
+  - WaveLength: 1.8386033
+    Amplitude: 0.009193016
+    Speed: 1.6934301
+    Direction: {x: 0.7422032, y: -0.6701749}
+  - WaveLength: 1.4739385
+    Amplitude: 0.007369692
+    Speed: 1.5162226
+    Direction: {x: 0.9551582, y: -0.29609597}
+  - WaveLength: 3.7489684
+    Amplitude: 0.018744841
+    Speed: 2.4181273
+    Direction: {x: 0.1822875, y: -0.98324525}
+  - WaveLength: 3.9213474
+    Amplitude: 0.019606736
+    Speed: 2.473096
+    Direction: {x: 0.6449212, y: -0.7642491}
+  - WaveLength: 2.4973695
+    Amplitude: 0.012486847
+    Speed: 1.9736252
+    Direction: {x: -0.71762943, y: -0.6964252}
+  - WaveLength: 3.0490518
+    Amplitude: 0.015245259
+    Speed: 2.180749
+    Direction: {x: 0.83184767, y: -0.555004}
+  - WaveLength: 3.8044443
+    Amplitude: 0.01902222
+    Speed: 2.435953
+    Direction: {x: -0.96617794, y: -0.25787637}
+  - WaveLength: 3.2313724
+    Amplitude: 0.016156862
+    Speed: 2.2450023
+    Direction: {x: -0.016103514, y: -0.9998703}
+  - WaveLength: 3.539823
+    Amplitude: 0.017699115
+    Speed: 2.3497088
+    Direction: {x: -0.1321804, y: -0.99122566}
+  - WaveLength: 3.2090192
+    Amplitude: 0.016045095
+    Speed: 2.2372239
+    Direction: {x: -0.5884723, y: -0.8085174}
+  - WaveLength: 2.2101169
+    Amplitude: 0.011050584
+    Speed: 1.8566537
+    Direction: {x: 0.9995582, y: -0.02972243}
+  - WaveLength: 3.3295205
+    Amplitude: 0.016647602
+    Speed: 2.2788415
+    Direction: {x: 0.78083116, y: -0.6247421}
+  - WaveLength: 2.650216
+    Amplitude: 0.01325108
+    Speed: 2.0331242
+    Direction: {x: 0.85056955, y: -0.5258626}
+  - WaveLength: 3.257549
+    Amplitude: 0.016287744
+    Speed: 2.2540772
+    Direction: {x: -0.7842203, y: -0.62048256}
+  - WaveLength: 3.0664968
+    Amplitude: 0.015332484
+    Speed: 2.1869786
+    Direction: {x: 0.9983024, y: -0.058243975}
+  - WaveLength: 3.3091192
+    Amplitude: 0.016545596
+    Speed: 2.2718492
+    Direction: {x: -0.7730701, y: -0.63432056}
+  - WaveLength: 2.571034
+    Amplitude: 0.012855169
+    Speed: 2.0025215
+    Direction: {x: -0.99965626, y: -0.026217643}
+  - WaveLength: 2.598869
+    Amplitude: 0.012994345
+    Speed: 2.0133324
+    Direction: {x: -0.90439004, y: -0.42670673}
+  - WaveLength: 5.9248543
+    Amplitude: 0.02962427
+    Speed: 3.0399196
+    Direction: {x: -0.4209783, y: -0.9070707}
+  - WaveLength: 4.624852
+    Amplitude: 0.02312426
+    Speed: 2.685791
+    Direction: {x: 0.9836415, y: -0.18013722}
+  - WaveLength: 6.1383533
+    Amplitude: 0.030691765
+    Speed: 3.094206
+    Direction: {x: 0.4701662, y: -0.8825779}
+  - WaveLength: 5.701969
+    Amplitude: 0.028509846
+    Speed: 2.9821928
+    Direction: {x: -0.9634443, y: -0.2679087}
+  - WaveLength: 4.823147
+    Amplitude: 0.024115734
+    Speed: 2.7427645
+    Direction: {x: 0.97132456, y: -0.23775735}
+  - WaveLength: 6.5784082
+    Amplitude: 0.03289204
+    Speed: 3.2031972
+    Direction: {x: 0.76584107, y: -0.64302987}
+  - WaveLength: 5.211711
+    Amplitude: 0.026058555
+    Speed: 2.8511064
+    Direction: {x: 0.9056927, y: -0.42393482}
+  - WaveLength: 7.0123043
+    Amplitude: 0.03506152
+    Speed: 3.3071482
+    Direction: {x: -0.9999974, y: -0.0022779366}
+  - WaveLength: 6.2326603
+    Amplitude: 0.031163301
+    Speed: 3.1178844
+    Direction: {x: -0.92497915, y: -0.3800179}
+  - WaveLength: 7.8846083
+    Amplitude: 0.03942304
+    Speed: 3.506819
+    Direction: {x: 0.89079624, y: -0.454403}
+  - WaveLength: 7.8228335
+    Amplitude: 0.039114166
+    Speed: 3.4930542
+    Direction: {x: 0.99669296, y: -0.081259504}
+  - WaveLength: 5.580542
+    Amplitude: 0.02790271
+    Speed: 2.950268
+    Direction: {x: 0.8477528, y: -0.5303915}
+  - WaveLength: 5.6909766
+    Amplitude: 0.028454883
+    Speed: 2.9793167
+    Direction: {x: -0.6857829, y: -0.72780615}
+  - WaveLength: 7.2928786
+    Amplitude: 0.036464393
+    Speed: 3.3726616
+    Direction: {x: 0.9991517, y: -0.041181184}
+  - WaveLength: 6.7106037
+    Amplitude: 0.03355302
+    Speed: 3.2352219
+    Direction: {x: -0.98798436, y: -0.15455376}
+  - WaveLength: 7.881156
+    Amplitude: 0.039405778
+    Speed: 3.506051
+    Direction: {x: -0.6469516, y: -0.76253104}
+  - WaveLength: 11.306408
+    Amplitude: 0.05653204
+    Speed: 4.199384
+    Direction: {x: -0.5637231, y: -0.82596385}
+  - WaveLength: 14.005494
+    Amplitude: 0.07002747
+    Speed: 4.6738253
+    Direction: {x: -0.8453815, y: -0.53416306}
+  - WaveLength: 9.765562
+    Amplitude: 0.04882781
+    Speed: 3.9027605
+    Direction: {x: 0.71292573, y: -0.7012396}
+  - WaveLength: 10.484919
+    Amplitude: 0.05242459
+    Speed: 4.0439506
+    Direction: {x: 0.0052175405, y: -0.9999864}
+  - WaveLength: 9.154645
+    Amplitude: 0.045773223
+    Speed: 3.778714
+    Direction: {x: 0.12789837, y: -0.99178725}
+  - WaveLength: 15.265444
+    Amplitude: 0.07632722
+    Speed: 4.87953
+    Direction: {x: -0.9993568, y: -0.035860803}
+  - WaveLength: 12.452208
+    Amplitude: 0.062261038
+    Speed: 4.4070344
+    Direction: {x: 0.9720811, y: -0.23464507}
+  - WaveLength: 9.467711
+    Amplitude: 0.047338556
+    Speed: 3.8427823
+    Direction: {x: -0.41830173, y: -0.90830815}
+  - WaveLength: 11.382774
+    Amplitude: 0.05691387
+    Speed: 4.213542
+    Direction: {x: -0.31029433, y: -0.95064056}
+  - WaveLength: 9.625893
+    Amplitude: 0.04812946
+    Speed: 3.8747509
+    Direction: {x: -0.9438971, y: -0.33023965}
+  - WaveLength: 12.049541
+    Amplitude: 0.060247704
+    Speed: 4.335194
+    Direction: {x: -0.11053198, y: -0.9938726}
+  - WaveLength: 15.350569
+    Amplitude: 0.07675284
+    Speed: 4.893116
+    Direction: {x: -0.71363586, y: -0.7005168}
+  - WaveLength: 11.667585
+    Amplitude: 0.058337927
+    Speed: 4.26593
+    Direction: {x: 0.68550265, y: -0.72807014}
+  - WaveLength: 15.386498
+    Amplitude: 0.07693249
+    Speed: 4.898839
+    Direction: {x: 0.7813237, y: -0.6241261}
+  - WaveLength: 10.7998495
+    Amplitude: 0.053999245
+    Speed: 4.104234
+    Direction: {x: -0.6649414, y: -0.74689555}
+  - WaveLength: 12.122854
+    Amplitude: 0.06061427
+    Speed: 4.3483624
+    Direction: {x: -0.15958683, y: -0.98718387}
+  - WaveLength: 25.587036
+    Amplitude: 0.12793517
+    Speed: 6.3173256
+    Direction: {x: 0.2943973, y: -0.9556831}
+  - WaveLength: 23.613106
+    Amplitude: 0.11806553
+    Speed: 6.068758
+    Direction: {x: -0.6703003, y: -0.7420899}
+  - WaveLength: 23.373728
+    Amplitude: 0.11686864
+    Speed: 6.0379186
+    Direction: {x: -0.6881484, y: -0.72556996}
+  - WaveLength: 22.168718
+    Amplitude: 0.11084359
+    Speed: 5.88022
+    Direction: {x: 0.96740663, y: -0.25322804}
+  - WaveLength: 19.111147
+    Amplitude: 0.09555573
+    Speed: 5.459673
+    Direction: {x: 0.9995898, y: -0.02863904}
+  - WaveLength: 22.98769
+    Amplitude: 0.114938445
+    Speed: 5.98785
+    Direction: {x: 0.5207555, y: -0.8537059}
+  - WaveLength: 23.086542
+    Amplitude: 0.11543271
+    Speed: 6.000711
+    Direction: {x: -0.84900725, y: -0.52838117}
+  - WaveLength: 25.370945
+    Amplitude: 0.12685472
+    Speed: 6.290593
+    Direction: {x: -0.2749271, y: -0.96146506}
+  - WaveLength: 21.942848
+    Amplitude: 0.10971424
+    Speed: 5.8501873
+    Direction: {x: -0.99636954, y: -0.08513346}
+  - WaveLength: 29.135244
+    Amplitude: 0.14567623
+    Speed: 6.7411284
+    Direction: {x: 0.9995412, y: -0.03028675}
+  - WaveLength: 18.10981
+    Amplitude: 0.090549044
+    Speed: 5.314718
+    Direction: {x: -0.5504474, y: -0.83486986}
+  - WaveLength: 31.083214
+    Amplitude: 0.15541607
+    Speed: 6.962837
+    Direction: {x: -0.9996092, y: -0.027954362}
+  - WaveLength: 23.025558
+    Amplitude: 0.11512779
+    Speed: 5.9927807
+    Direction: {x: 0.89664936, y: -0.4427414}
+  - WaveLength: 22.749374
+    Amplitude: 0.11374687
+    Speed: 5.9567313
+    Direction: {x: 0.52533334, y: -0.85089654}
+  - WaveLength: 22.615211
+    Amplitude: 0.11307605
+    Speed: 5.939141
+    Direction: {x: 0.13884509, y: -0.9903141}
+  - WaveLength: 24.358864
+    Amplitude: 0.12179431
+    Speed: 6.163846
+    Direction: {x: 0.82206285, y: -0.56939673}
+  - WaveLength: 58.2415
+    Amplitude: 0.2912075
+    Speed: 9.531024
+    Direction: {x: -0.98410845, y: -0.1775684}
+  - WaveLength: 59.752617
+    Amplitude: 0.29876307
+    Speed: 9.653876
+    Direction: {x: 0.9107672, y: -0.4129202}
+  - WaveLength: 44.12843
+    Amplitude: 0.22064215
+    Speed: 8.296263
+    Direction: {x: -0.50237703, y: -0.86464864}
+  - WaveLength: 48.89554
+    Amplitude: 0.24447769
+    Speed: 8.732888
+    Direction: {x: 0.81047887, y: -0.58576787}
+  - WaveLength: 58.468384
+    Amplitude: 0.29234192
+    Speed: 9.54957
+    Direction: {x: -0.65236086, y: -0.7579085}
+  - WaveLength: 49.77944
+    Amplitude: 0.24889721
+    Speed: 8.811468
+    Direction: {x: -0.42459086, y: -0.9053853}
+  - WaveLength: 52.76764
+    Amplitude: 0.2638382
+    Speed: 9.072085
+    Direction: {x: 0.6992704, y: -0.7148572}
+  - WaveLength: 44.127518
+    Amplitude: 0.22063759
+    Speed: 8.296178
+    Direction: {x: -0.06524501, y: -0.99786925}
+  - WaveLength: 42.673157
+    Amplitude: 0.21336578
+    Speed: 8.1583185
+    Direction: {x: -0.99575895, y: -0.09200047}
+  - WaveLength: 50.92256
+    Amplitude: 0.2546128
+    Speed: 8.9120655
+    Direction: {x: -0.36459118, y: -0.93116766}
+  - WaveLength: 51.76815
+    Amplitude: 0.25884074
+    Speed: 8.985756
+    Direction: {x: -0.68427235, y: -0.7292266}
+  - WaveLength: 46.513996
+    Amplitude: 0.23256998
+    Speed: 8.517558
+    Direction: {x: 0.6969146, y: -0.7171541}
+  - WaveLength: 43.283855
+    Amplitude: 0.21641928
+    Speed: 8.216489
+    Direction: {x: 0.5282904, y: -0.84906375}
+  - WaveLength: 57.25577
+    Amplitude: 0.28627884
+    Speed: 9.450024
+    Direction: {x: 0.17487788, y: -0.9845901}
+  - WaveLength: 57.032204
+    Amplitude: 0.28516102
+    Speed: 9.431557
+    Direction: {x: -0.8485373, y: -0.5291356}
+  - WaveLength: 60.39438
+    Amplitude: 0.30197188
+    Speed: 9.705581
+    Direction: {x: 0.24592292, y: -0.96928936}
+  - WaveLength: 82.20126
+    Amplitude: 0.4110063
+    Speed: 11.323027
+    Direction: {x: -0.25651163, y: -0.9665412}
+  - WaveLength: 123.03064
+    Amplitude: 0.6151532
+    Speed: 13.852556
+    Direction: {x: -0.5644507, y: -0.82546675}
+  - WaveLength: 115.45584
+    Amplitude: 0.5772792
+    Speed: 13.419342
+    Direction: {x: 0.20180906, y: -0.9794249}
+  - WaveLength: 83.50543
+    Amplitude: 0.41752714
+    Speed: 11.412497
+    Direction: {x: 0.052747566, y: -0.9986079}
+  - WaveLength: 88.40612
+    Amplitude: 0.44203058
+    Speed: 11.742604
+    Direction: {x: -0.68387544, y: -0.72959876}
+  - WaveLength: 80.50778
+    Amplitude: 0.4025389
+    Speed: 11.205783
+    Direction: {x: -0.35250998, y: -0.93580806}
+  - WaveLength: 123.12637
+    Amplitude: 0.6156319
+    Speed: 13.8579445
+    Direction: {x: -0.81009364, y: -0.5863005}
+  - WaveLength: 80.46918
+    Amplitude: 0.40234587
+    Speed: 11.203096
+    Direction: {x: 0.9495951, y: -0.31347913}
+  - WaveLength: 105.5099
+    Amplitude: 0.5275495
+    Speed: 12.828323
+    Direction: {x: 0.50235355, y: -0.8646623}
+  - WaveLength: 87.03595
+    Amplitude: 0.43517974
+    Speed: 11.651252
+    Direction: {x: 0.29635164, y: -0.9550789}
+  - WaveLength: 112.768616
+    Amplitude: 0.5638431
+    Speed: 13.262256
+    Direction: {x: -0.7488846, y: -0.6627004}
+  - WaveLength: 74.24216
+    Amplitude: 0.37121078
+    Speed: 10.7609
+    Direction: {x: 0.87078613, y: -0.49166203}
+  - WaveLength: 106.89325
+    Amplitude: 0.5344662
+    Speed: 12.912146
+    Direction: {x: -0.9747268, y: -0.22340034}
+  - WaveLength: 104.77814
+    Amplitude: 0.5238907
+    Speed: 12.78376
+    Direction: {x: 0.9294069, y: -0.36905673}
+  - WaveLength: 103.17888
+    Amplitude: 0.51589435
+    Speed: 12.685824
+    Direction: {x: -0.8200868, y: -0.5722392}
+  - WaveLength: 114.25015
+    Amplitude: 0.57125074
+    Speed: 13.349091
+    Direction: {x: -0.9956959, y: -0.09268086}
   WaveParticles:
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 0, y: 0}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 1, y: 1}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 2, y: 2}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 3, y: 3}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 4, y: 4}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 5, y: 5}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 6, y: 6}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 7, y: 7}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 8, y: 8}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 9, y: 9}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 10, y: 10}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 11, y: 11}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 12, y: 12}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 13, y: 13}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 14, y: 14}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 15, y: 15}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 16, y: 16}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 17, y: 17}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 18, y: 18}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 19, y: 19}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 20, y: 20}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 21, y: 21}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 22, y: 22}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 23, y: 23}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 24, y: 24}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 25, y: 25}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 26, y: 26}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 27, y: 27}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 28, y: 28}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 29, y: 29}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 30, y: 30}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 31, y: 31}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 32, y: 32}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 33, y: 33}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 34, y: 34}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 35, y: 35}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 36, y: 36}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 37, y: 37}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 38, y: 38}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 39, y: 39}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 40, y: 40}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 41, y: 41}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 42, y: 42}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 43, y: 43}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 44, y: 44}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 45, y: 45}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 46, y: 46}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 47, y: 47}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 48, y: 48}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 49, y: 49}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 50, y: 50}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 51, y: 51}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 52, y: 52}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 53, y: 53}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 54, y: 54}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 55, y: 55}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 56, y: 56}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 57, y: 57}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 58, y: 58}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 59, y: 59}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 60, y: 60}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 61, y: 61}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 62, y: 62}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 63, y: 63}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 64, y: 64}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 65, y: 65}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 66, y: 66}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 67, y: 67}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 68, y: 68}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 69, y: 69}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 70, y: 70}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 71, y: 71}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 72, y: 72}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 73, y: 73}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 74, y: 74}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 75, y: 75}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 76, y: 76}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 77, y: 77}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 78, y: 78}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 79, y: 79}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 80, y: 80}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 81, y: 81}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 82, y: 82}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 83, y: 83}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 84, y: 84}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 85, y: 85}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 86, y: 86}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 87, y: 87}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 88, y: 88}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 89, y: 89}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 90, y: 90}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 91, y: 91}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 92, y: 92}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 93, y: 93}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 94, y: 94}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 95, y: 95}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 96, y: 96}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 97, y: 97}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 98, y: 98}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 99, y: 99}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 100, y: 100}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 101, y: 101}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 102, y: 102}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 103, y: 103}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 104, y: 104}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 105, y: 105}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 106, y: 106}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 107, y: 107}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 108, y: 108}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 109, y: 109}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 110, y: 110}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 111, y: 111}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 112, y: 112}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 113, y: 113}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 114, y: 114}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 115, y: 115}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 116, y: 116}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 117, y: 117}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 118, y: 118}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 119, y: 119}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 120, y: 120}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 121, y: 121}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 122, y: 122}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 123, y: 123}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 124, y: 124}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 125, y: 125}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 126, y: 126}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 127, y: 127}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 128, y: 128}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 129, y: 129}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 130, y: 130}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 131, y: 131}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 132, y: 132}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 133, y: 133}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 134, y: 134}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 135, y: 135}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 136, y: 136}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 137, y: 137}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 138, y: 138}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 139, y: 139}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 140, y: 140}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 141, y: 141}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 142, y: 142}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 143, y: 143}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 144, y: 144}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 145, y: 145}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 146, y: 146}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 147, y: 147}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 148, y: 148}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 149, y: 149}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 150, y: 150}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 151, y: 151}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 152, y: 152}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 153, y: 153}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 154, y: 154}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 155, y: 155}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 156, y: 156}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 157, y: 157}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 158, y: 158}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 159, y: 159}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 160, y: 160}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 161, y: 161}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 162, y: 162}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 163, y: 163}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 164, y: 164}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 165, y: 165}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 166, y: 166}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 167, y: 167}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 168, y: 168}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 169, y: 169}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 170, y: 170}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 171, y: 171}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 172, y: 172}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 173, y: 173}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 174, y: 174}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 175, y: 175}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 176, y: 176}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 177, y: 177}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 178, y: 178}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 179, y: 179}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 180, y: 180}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 181, y: 181}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 182, y: 182}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 183, y: 183}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 184, y: 184}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 185, y: 185}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 186, y: 186}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 187, y: 187}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 188, y: 188}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 189, y: 189}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 190, y: 190}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 191, y: 191}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 192, y: 192}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 193, y: 193}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 194, y: 194}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 195, y: 195}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 196, y: 196}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 197, y: 197}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 198, y: 198}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 199, y: 199}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 200, y: 200}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 201, y: 201}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 202, y: 202}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 203, y: 203}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 204, y: 204}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 205, y: 205}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 206, y: 206}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 207, y: 207}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 208, y: 208}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 209, y: 209}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 210, y: 210}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 211, y: 211}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 212, y: 212}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 213, y: 213}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 214, y: 214}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 215, y: 215}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 216, y: 216}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 217, y: 217}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 218, y: 218}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 219, y: 219}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 220, y: 220}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 221, y: 221}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 222, y: 222}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 223, y: 223}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 224, y: 224}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 225, y: 225}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 226, y: 226}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 227, y: 227}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 228, y: 228}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 229, y: 229}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 230, y: 230}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 231, y: 231}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 232, y: 232}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 233, y: 233}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 234, y: 234}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 235, y: 235}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 236, y: 236}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 237, y: 237}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 238, y: 238}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 239, y: 239}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 240, y: 240}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 241, y: 241}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 242, y: 242}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 243, y: 243}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 244, y: 244}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 245, y: 245}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 246, y: 246}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 247, y: 247}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 248, y: 248}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 249, y: 249}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 250, y: 250}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 251, y: 251}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 252, y: 252}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 253, y: 253}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 254, y: 254}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 255, y: 255}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 256, y: 256}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 257, y: 257}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 258, y: 258}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 259, y: 259}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 260, y: 260}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 261, y: 261}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 262, y: 262}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 263, y: 263}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 264, y: 264}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 265, y: 265}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 266, y: 266}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 267, y: 267}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 268, y: 268}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 269, y: 269}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 270, y: 270}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 271, y: 271}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 272, y: 272}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 273, y: 273}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 274, y: 274}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 275, y: 275}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 276, y: 276}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 277, y: 277}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 278, y: 278}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 279, y: 279}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 280, y: 280}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 281, y: 281}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 282, y: 282}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 283, y: 283}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 284, y: 284}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 285, y: 285}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 286, y: 286}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 287, y: 287}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 288, y: 288}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 289, y: 289}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 290, y: 290}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 291, y: 291}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 292, y: 292}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 293, y: 293}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 294, y: 294}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 295, y: 295}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 296, y: 296}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 297, y: 297}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 298, y: 298}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 299, y: 299}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 300, y: 300}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 301, y: 301}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 302, y: 302}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 303, y: 303}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 304, y: 304}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 305, y: 305}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 306, y: 306}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 307, y: 307}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 308, y: 308}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 309, y: 309}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 310, y: 310}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 311, y: 311}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 312, y: 312}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 313, y: 313}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 314, y: 314}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 315, y: 315}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 316, y: 316}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 317, y: 317}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 318, y: 318}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 319, y: 319}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 320, y: 320}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 321, y: 321}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 322, y: 322}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 323, y: 323}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 324, y: 324}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 325, y: 325}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 326, y: 326}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 327, y: 327}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 328, y: 328}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 329, y: 329}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 330, y: 330}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 331, y: 331}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 332, y: 332}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 333, y: 333}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 334, y: 334}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 335, y: 335}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 336, y: 336}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 337, y: 337}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 338, y: 338}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 339, y: 339}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 340, y: 340}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 341, y: 341}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 342, y: 342}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 343, y: 343}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 344, y: 344}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 345, y: 345}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 346, y: 346}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 347, y: 347}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 348, y: 348}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 349, y: 349}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 350, y: 350}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 351, y: 351}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 352, y: 352}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 353, y: 353}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 354, y: 354}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 355, y: 355}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 356, y: 356}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 357, y: 357}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 358, y: 358}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 359, y: 359}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 360, y: 360}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 361, y: 361}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 362, y: 362}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 363, y: 363}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 364, y: 364}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 365, y: 365}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 366, y: 366}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 367, y: 367}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 368, y: 368}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 369, y: 369}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 370, y: 370}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 371, y: 371}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 372, y: 372}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 373, y: 373}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 374, y: 374}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 375, y: 375}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 376, y: 376}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 377, y: 377}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 378, y: 378}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 379, y: 379}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 380, y: 380}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 381, y: 381}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 382, y: 382}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 383, y: 383}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 384, y: 384}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 385, y: 385}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 386, y: 386}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 387, y: 387}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 388, y: 388}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 389, y: 389}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 390, y: 390}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 391, y: 391}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 392, y: 392}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 393, y: 393}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 394, y: 394}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 395, y: 395}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 396, y: 396}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 397, y: 397}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 398, y: 398}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 399, y: 399}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 400, y: 400}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 401, y: 401}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 402, y: 402}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 403, y: 403}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 404, y: 404}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 405, y: 405}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 406, y: 406}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 407, y: 407}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 408, y: 408}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 409, y: 409}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 410, y: 410}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 411, y: 411}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 412, y: 412}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 413, y: 413}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 414, y: 414}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 415, y: 415}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 416, y: 416}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 417, y: 417}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 418, y: 418}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 419, y: 419}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 420, y: 420}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 421, y: 421}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 422, y: 422}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 423, y: 423}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 424, y: 424}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 425, y: 425}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 426, y: 426}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 427, y: 427}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 428, y: 428}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 429, y: 429}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 430, y: 430}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 431, y: 431}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 432, y: 432}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 433, y: 433}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 434, y: 434}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 435, y: 435}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 436, y: 436}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 437, y: 437}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 438, y: 438}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 439, y: 439}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 440, y: 440}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 441, y: 441}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 442, y: 442}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 443, y: 443}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 444, y: 444}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 445, y: 445}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 446, y: 446}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 447, y: 447}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 448, y: 448}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 449, y: 449}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 450, y: 450}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 451, y: 451}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 452, y: 452}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 453, y: 453}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 454, y: 454}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 455, y: 455}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 456, y: 456}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 457, y: 457}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 458, y: 458}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 459, y: 459}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 460, y: 460}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 461, y: 461}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 462, y: 462}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 463, y: 463}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 464, y: 464}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 465, y: 465}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 466, y: 466}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 467, y: 467}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 468, y: 468}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 469, y: 469}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 470, y: 470}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 471, y: 471}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 472, y: 472}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 473, y: 473}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 474, y: 474}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 475, y: 475}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 476, y: 476}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 477, y: 477}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 478, y: 478}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 479, y: 479}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 480, y: 480}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 481, y: 481}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 482, y: 482}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 483, y: 483}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 484, y: 484}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 485, y: 485}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 486, y: 486}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 487, y: 487}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 488, y: 488}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 489, y: 489}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 490, y: 490}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 491, y: 491}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 492, y: 492}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 493, y: 493}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 494, y: 494}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 495, y: 495}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 496, y: 496}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 497, y: 497}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 498, y: 498}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 499, y: 499}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 500, y: 500}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 501, y: 501}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 502, y: 502}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 503, y: 503}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 504, y: 504}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 505, y: 505}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 506, y: 506}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 507, y: 507}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 508, y: 508}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 509, y: 509}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 510, y: 510}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 511, y: 511}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 512, y: 512}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 513, y: 513}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 514, y: 514}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 515, y: 515}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 516, y: 516}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 517, y: 517}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 518, y: 518}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 519, y: 519}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 520, y: 520}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 521, y: 521}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 522, y: 522}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 523, y: 523}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 524, y: 524}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 525, y: 525}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 526, y: 526}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 527, y: 527}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 528, y: 528}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 529, y: 529}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 530, y: 530}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 531, y: 531}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 532, y: 532}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 533, y: 533}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 534, y: 534}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 535, y: 535}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 536, y: 536}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 537, y: 537}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 538, y: 538}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 539, y: 539}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 540, y: 540}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 541, y: 541}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 542, y: 542}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 543, y: 543}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 544, y: 544}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 545, y: 545}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 546, y: 546}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 547, y: 547}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 548, y: 548}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 549, y: 549}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 550, y: 550}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 551, y: 551}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 552, y: 552}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 553, y: 553}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 554, y: 554}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 555, y: 555}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 556, y: 556}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 557, y: 557}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 558, y: 558}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 559, y: 559}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 560, y: 560}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 561, y: 561}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 562, y: 562}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 563, y: 563}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 564, y: 564}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 565, y: 565}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 566, y: 566}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 567, y: 567}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 568, y: 568}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 569, y: 569}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 570, y: 570}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 571, y: 571}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 572, y: 572}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 573, y: 573}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 574, y: 574}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 575, y: 575}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 576, y: 576}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 577, y: 577}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 578, y: 578}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 579, y: 579}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 580, y: 580}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 581, y: 581}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 582, y: 582}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 583, y: 583}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 584, y: 584}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 585, y: 585}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 586, y: 586}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 587, y: 587}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 588, y: 588}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 589, y: 589}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 590, y: 590}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 591, y: 591}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 592, y: 592}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 593, y: 593}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 594, y: 594}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 595, y: 595}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 596, y: 596}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 597, y: 597}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 598, y: 598}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 599, y: 599}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 600, y: 600}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 601, y: 601}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 602, y: 602}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 603, y: 603}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 604, y: 604}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 605, y: 605}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 606, y: 606}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 607, y: 607}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 608, y: 608}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 609, y: 609}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 610, y: 610}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 611, y: 611}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 612, y: 612}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 613, y: 613}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 614, y: 614}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 615, y: 615}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 616, y: 616}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 617, y: 617}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 618, y: 618}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 619, y: 619}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 620, y: 620}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 621, y: 621}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 622, y: 622}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 623, y: 623}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 624, y: 624}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 625, y: 625}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 626, y: 626}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 627, y: 627}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 628, y: 628}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 629, y: 629}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 630, y: 630}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 631, y: 631}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 632, y: 632}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 633, y: 633}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 634, y: 634}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 635, y: 635}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 636, y: 636}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 637, y: 637}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 638, y: 638}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 639, y: 639}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 640, y: 640}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 641, y: 641}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 642, y: 642}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 643, y: 643}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 644, y: 644}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 645, y: 645}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 646, y: 646}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 647, y: 647}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 648, y: 648}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 649, y: 649}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 650, y: 650}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 651, y: 651}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 652, y: 652}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 653, y: 653}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 654, y: 654}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 655, y: 655}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 656, y: 656}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 657, y: 657}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 658, y: 658}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 659, y: 659}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 660, y: 660}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 661, y: 661}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 662, y: 662}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 663, y: 663}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 664, y: 664}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 665, y: 665}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 666, y: 666}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 667, y: 667}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 668, y: 668}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 669, y: 669}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 670, y: 670}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 671, y: 671}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 672, y: 672}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 673, y: 673}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 674, y: 674}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 675, y: 675}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 676, y: 676}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 677, y: 677}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 678, y: 678}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 679, y: 679}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 680, y: 680}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 681, y: 681}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 682, y: 682}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 683, y: 683}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 684, y: 684}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 685, y: 685}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 686, y: 686}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 687, y: 687}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 688, y: 688}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 689, y: 689}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 690, y: 690}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 691, y: 691}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 692, y: 692}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 693, y: 693}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 694, y: 694}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 695, y: 695}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 696, y: 696}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 697, y: 697}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 698, y: 698}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 699, y: 699}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 700, y: 700}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 701, y: 701}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 702, y: 702}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 703, y: 703}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 704, y: 704}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 705, y: 705}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 706, y: 706}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 707, y: 707}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 708, y: 708}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 709, y: 709}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 710, y: 710}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 711, y: 711}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 712, y: 712}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 713, y: 713}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 714, y: 714}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 715, y: 715}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 716, y: 716}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 717, y: 717}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 718, y: 718}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 719, y: 719}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 720, y: 720}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 721, y: 721}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 722, y: 722}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 723, y: 723}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 724, y: 724}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 725, y: 725}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 726, y: 726}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 727, y: 727}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 728, y: 728}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 729, y: 729}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 730, y: 730}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 731, y: 731}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 732, y: 732}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 733, y: 733}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 734, y: 734}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 735, y: 735}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 736, y: 736}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 737, y: 737}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 738, y: 738}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 739, y: 739}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 740, y: 740}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 741, y: 741}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 742, y: 742}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 743, y: 743}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 744, y: 744}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 745, y: 745}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 746, y: 746}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 747, y: 747}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 748, y: 748}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 749, y: 749}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 750, y: 750}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 751, y: 751}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 752, y: 752}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 753, y: 753}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 754, y: 754}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 755, y: 755}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 756, y: 756}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 757, y: 757}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 758, y: 758}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 759, y: 759}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 760, y: 760}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 761, y: 761}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 762, y: 762}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 763, y: 763}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 764, y: 764}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 765, y: 765}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 766, y: 766}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 767, y: 767}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 768, y: 768}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 769, y: 769}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 770, y: 770}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 771, y: 771}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 772, y: 772}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 773, y: 773}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 774, y: 774}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 775, y: 775}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 776, y: 776}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 777, y: 777}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 778, y: 778}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 779, y: 779}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 780, y: 780}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 781, y: 781}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 782, y: 782}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 783, y: 783}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 784, y: 784}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 785, y: 785}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 786, y: 786}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 787, y: 787}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 788, y: 788}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 789, y: 789}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 790, y: 790}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 791, y: 791}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 792, y: 792}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 793, y: 793}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 794, y: 794}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 795, y: 795}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 796, y: 796}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 797, y: 797}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 798, y: 798}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 799, y: 799}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 800, y: 800}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 801, y: 801}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 802, y: 802}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 803, y: 803}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 804, y: 804}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 805, y: 805}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 806, y: 806}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 807, y: 807}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 808, y: 808}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 809, y: 809}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 810, y: 810}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 811, y: 811}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 812, y: 812}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 813, y: 813}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 814, y: 814}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 815, y: 815}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 816, y: 816}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 817, y: 817}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 818, y: 818}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 819, y: 819}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 820, y: 820}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 821, y: 821}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 822, y: 822}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 823, y: 823}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 824, y: 824}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 825, y: 825}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 826, y: 826}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 827, y: 827}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 828, y: 828}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 829, y: 829}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 830, y: 830}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 831, y: 831}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 832, y: 832}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 833, y: 833}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 834, y: 834}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 835, y: 835}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 836, y: 836}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 837, y: 837}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 838, y: 838}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 839, y: 839}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 840, y: 840}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 841, y: 841}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 842, y: 842}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 843, y: 843}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 844, y: 844}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 845, y: 845}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 846, y: 846}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 847, y: 847}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 848, y: 848}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 849, y: 849}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 850, y: 850}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 851, y: 851}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 852, y: 852}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 853, y: 853}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 854, y: 854}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 855, y: 855}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 856, y: 856}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 857, y: 857}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 858, y: 858}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 859, y: 859}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 860, y: 860}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 861, y: 861}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 862, y: 862}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 863, y: 863}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 864, y: 864}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 865, y: 865}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 866, y: 866}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 867, y: 867}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 868, y: 868}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 869, y: 869}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 870, y: 870}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 871, y: 871}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 872, y: 872}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 873, y: 873}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 874, y: 874}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 875, y: 875}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 876, y: 876}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 877, y: 877}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 878, y: 878}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 879, y: 879}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 880, y: 880}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 881, y: 881}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 882, y: 882}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 883, y: 883}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 884, y: 884}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 885, y: 885}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 886, y: 886}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 887, y: 887}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 888, y: 888}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 889, y: 889}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 890, y: 890}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 891, y: 891}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 892, y: 892}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 893, y: 893}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 894, y: 894}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 895, y: 895}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 896, y: 896}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 897, y: 897}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 898, y: 898}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 899, y: 899}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 900, y: 900}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 901, y: 901}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 902, y: 902}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 903, y: 903}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 904, y: 904}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 905, y: 905}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 906, y: 906}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 907, y: 907}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 908, y: 908}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 909, y: 909}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 910, y: 910}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 911, y: 911}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 912, y: 912}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 913, y: 913}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 914, y: 914}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 915, y: 915}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 916, y: 916}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 917, y: 917}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 918, y: 918}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 919, y: 919}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 920, y: 920}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 921, y: 921}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 922, y: 922}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 923, y: 923}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 924, y: 924}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 925, y: 925}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 926, y: 926}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 927, y: 927}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 928, y: 928}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 929, y: 929}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 930, y: 930}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 931, y: 931}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 932, y: 932}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 933, y: 933}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 934, y: 934}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 935, y: 935}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 936, y: 936}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 937, y: 937}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 938, y: 938}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 939, y: 939}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 940, y: 940}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 941, y: 941}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 942, y: 942}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 943, y: 943}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 944, y: 944}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 945, y: 945}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 946, y: 946}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 947, y: 947}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 948, y: 948}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 949, y: 949}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 950, y: 950}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 951, y: 951}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 952, y: 952}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 953, y: 953}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 954, y: 954}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 955, y: 955}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 956, y: 956}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 957, y: 957}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 958, y: 958}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 959, y: 959}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 960, y: 960}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 961, y: 961}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 962, y: 962}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 963, y: 963}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 964, y: 964}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 965, y: 965}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 966, y: 966}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 967, y: 967}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 968, y: 968}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 969, y: 969}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 970, y: 970}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 971, y: 971}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 972, y: 972}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 973, y: 973}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 974, y: 974}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 975, y: 975}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 976, y: 976}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 977, y: 977}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 978, y: 978}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 979, y: 979}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 980, y: 980}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 981, y: 981}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 982, y: 982}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 983, y: 983}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 984, y: 984}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 985, y: 985}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 986, y: 986}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 987, y: 987}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 988, y: 988}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 989, y: 989}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 990, y: 990}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 991, y: 991}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 992, y: 992}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 993, y: 993}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 994, y: 994}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 995, y: 995}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 996, y: 996}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 997, y: 997}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 998, y: 998}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 999, y: 999}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 1000, y: 1000}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 1001, y: 1001}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 1002, y: 1002}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 1003, y: 1003}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 1004, y: 1004}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 1005, y: 1005}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 1006, y: 1006}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 1007, y: 1007}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 1008, y: 1008}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 1009, y: 1009}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 1010, y: 1010}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 1011, y: 1011}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 1012, y: 1012}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 1013, y: 1013}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 1014, y: 1014}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 1015, y: 1015}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 1016, y: 1016}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 1017, y: 1017}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 1018, y: 1018}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 1019, y: 1019}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 1020, y: 1020}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 1021, y: 1021}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 1022, y: 1022}
-  - DispersionAngle: 0
+  - Amplitude: 0
+    Radius: 0
+    BirthTime: 0
+    DispersionAngle: 0
     Direction: {x: -1, y: 1}
     Origin: {x: 1023, y: 1023}
   RegenerateTileMeshes: 0

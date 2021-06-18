@@ -27,7 +27,7 @@ public class OceanRenderer :MonoBehaviour
     //temp solution
     private int KIndex = 0;
 
-    
+    private ComputeBuffer WaveParticleBuffer;
 
     //*****Ocean Render Shader LOD related*****
     int gridSizeId = Shader.PropertyToID("_GridSize");
@@ -101,7 +101,14 @@ public class OceanRenderer :MonoBehaviour
 
     private void OnEnable()
     {
-        //SetWaveParticlesBuffer();
+        SetWaveParticlesBuffer();
+        //print("ORR Enabled!");
+    }
+
+    private void OnDisable()
+    {
+        //print("ORR disabled!");
+        ReleaseWaveParticlesBuffer();
     }
 
     private void Update()
@@ -126,6 +133,8 @@ public class OceanRenderer :MonoBehaviour
 
        
     }
+
+
 
     private void FixedUpdate()
     {
@@ -449,14 +458,28 @@ public class OceanRenderer :MonoBehaviour
         
     }
 
+    void SetWaveParticlesBuffer()
+    {
+        WaveParticleBuffer = new ComputeBuffer(ORS.WaveParticleCount, 32);
+        WaveParticleBuffer.SetData(ORS.WaveParticles);
+
+        ORS.shapeWaveParticleShader.SetInt("_WaveParticleCount", ORS.WaveParticleCount);
+        ORS.shapeWaveParticleShader.SetBuffer(0, "_WaveParticleBuffer", WaveParticleBuffer);
+    }
+
+    void ReleaseWaveParticlesBuffer()
+    {
+        WaveParticleBuffer.Release();
+    }
+
     void RenderWaveParticlesForLODs()
     {
         //this buffer is persistent on GPU and no modification needed
         //should change this to only set and release ONCE
-        ComputeBuffer shapeWaveParticleBuffer = new ComputeBuffer(ORS.WaveParticleCount, 20);
-        ORS.shapeWaveParticleShader.SetInt("_WaveParticleCount", ORS.WaveParticleCount);
-        shapeWaveParticleBuffer.SetData(ORS.WaveParticles);
-        ORS.shapeWaveParticleShader.SetBuffer(0, "_WaveParticleBuffer", shapeWaveParticleBuffer);
+        //ComputeBuffer shapeWaveParticleBuffer = new ComputeBuffer(ORS.WaveParticleCount, 20);
+        //ORS.shapeWaveParticleShader.SetInt("_WaveParticleCount", ORS.WaveParticleCount);
+        //shapeWaveParticleBuffer.SetData(ORS.WaveParticles);
+        //ORS.shapeWaveParticleShader.SetBuffer(0, "_WaveParticleBuffer", shapeWaveParticleBuffer);
 
         ORS.shapeWaveParticleShader.SetVector("_TimeParams", new Vector4(Time.time, Time.fixedDeltaTime, 0.0f, 0.0f));
 
@@ -476,19 +499,25 @@ public class OceanRenderer :MonoBehaviour
         ORS.shapeWaveParticleShader.SetFloats(centerPosId, new float[]
             { transform.position.x, transform.position.y, transform.position.z}
             );
+
+        /*
         for (int i = 0; i < ORS.LODCount/ 2; i++)
         {
-            float CurrentLODSize_L = ORS.GridSize * ORS.GridCountPerTile * 4 * Mathf.Pow(2, i) * ORS.CurPastOceanScale[0].y;
-            ORS.shapeWaveParticleShader.SetVector(lodParamsId,
-                        new Vector4(ORS.LODCount, i, CurrentLODSize_L, 0.0f));
-            ORS.shapeWaveParticleShader.Dispatch(0, ORS.WaveParticleCount/128, 1, 1);
-            ORS.shapeWaveParticleShader.Dispatch(1, threadGroupX, threadGroupY, 1);
-            ORS.shapeWaveParticleShader.Dispatch(2, threadGroupX, threadGroupY, 1);
-            ORS.shapeWaveParticleShader.Dispatch(3, threadGroupX, threadGroupY, 1);
-        }
-        
 
-        shapeWaveParticleBuffer.Release();
+        }*/
+
+        int WaveParticleLODs = ORS.LODCount / 2;
+
+        float CurrentLODSize_L = ORS.GridSize * ORS.GridCountPerTile * 4 * ORS.CurPastOceanScale[0].y;
+        ORS.shapeWaveParticleShader.SetVector(lodParamsId,
+                    new Vector4(ORS.LODCount, 0, CurrentLODSize_L, 0.0f));
+        ORS.shapeWaveParticleShader.Dispatch(0, ORS.WaveParticleCount / 128, 1, WaveParticleLODs);
+        ORS.shapeWaveParticleShader.Dispatch(1, threadGroupX, threadGroupY, WaveParticleLODs);
+        ORS.shapeWaveParticleShader.Dispatch(2, threadGroupX, threadGroupY, WaveParticleLODs);
+        ORS.shapeWaveParticleShader.Dispatch(3, threadGroupX, threadGroupY, WaveParticleLODs);
+
+
+        //shapeWaveParticleBuffer.Release();
 
 
         
@@ -519,12 +548,12 @@ public class OceanRenderer :MonoBehaviour
         ORS.shapeNormalShader.SetVector(lodParamsId,
             new Vector4(ORS.LODCount, 0, CurrentLOD0Size_L, 0.0f));
 
-
+        /*
         for (int i = 0; i < ORS.LODCount; i++)
         {
             
             
-        }
+        }*/
 
         ORS.shapeNormalShader.Dispatch(0, threadGroupX, threadGroupX, 8);
 
