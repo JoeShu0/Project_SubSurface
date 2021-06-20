@@ -35,6 +35,7 @@ struct WaveParticle
     float2 Origin;
 };
 RWStructuredBuffer<WaveParticle> _WaveParticleBuffer;
+RWStructuredBuffer<float2> _WaveParticleParamsBuffer;
 
 float3 _CenterPos;
 float4 _LODParams;//x LODCOUNT ,y , z LOD0Size.
@@ -58,6 +59,51 @@ float4 GetBilinearWeight(float2 UV)
         (xy.x) * (xy.y));
 
     return Weightxy;
+}
+
+float4 BilinearSamplerTextureArray(RWTexture2DArray<float4> TexArray, float2 UVcoord, int PreviousLODIndex)
+{
+    int LODCount = (int)_LODParams.x;
+    if (PreviousLODIndex > LODCount-1)
+    {
+        return float4(0.0, 0.0, 0.0, 0.0);
+    }
+
+    //float2 UV = float2(coord.x * 0.5f + 0.25f * RTSize, coord.y * 0.5f + 0.25f * RTSize);
+
+    //Bilinear Interpolation
+    uint2 P00 = uint2(floor(UVcoord.x), floor(UVcoord.y));
+    uint2 P10 = uint2(ceil(UVcoord.x), floor(UVcoord.y));
+    uint2 P01 = uint2(floor(UVcoord.x), ceil(UVcoord.y));
+    uint2 P11 = uint2(ceil(UVcoord.x), ceil(UVcoord.y));
+
+    float4 sample00 = TexArray[uint3(P00, PreviousLODIndex)];
+    float4 sample10 = TexArray[uint3(P10, PreviousLODIndex)];
+    float4 sample01 = TexArray[uint3(P01, PreviousLODIndex)];
+    float4 sample11 = TexArray[uint3(P11, PreviousLODIndex)];
+
+    float2 xy = UVcoord - floor(UVcoord);
+
+    float4 samplexy =
+        sample00 * (1 - xy.x) * (1 - xy.y) +
+        sample10 * (xy.x) * (1 - xy.y) +
+        sample01 * (1 - xy.x) * (xy.y) +
+        sample11 * (xy.x) * (xy.y);
+
+   return samplexy;
+   //return sample00;
+}
+
+int GetWaveLODOnPos(float3 ReltivePos)
+{
+    //float3 ReltivePos = PositionWS - _OceanLODParams.xyz;
+    float EdgeBuffer = 5.0f;
+    int LODx = ceil(log2(abs(ReltivePos.x + EdgeBuffer)/(_LODParams.z*0.5f)));
+    int LODy = ceil(log2(abs(ReltivePos.z + EdgeBuffer)/(_LODParams.z*0.5f)));
+    
+    int LODMax = max(max(LODx, LODy), 0);
+    
+    return LODMax;
 }
 
 [numthreads(128, 1, 1)]
@@ -242,4 +288,45 @@ void ApplyWaveParicles(uint3 id : SV_DispatchThreadID)
     velocities += float4(0.0, 0.0, Dxy, Dyx);
     _DerivativeArray[uint3(id.x, id.y, LODIndex)] = derivates;
     _VelocityArray[uint3(id.x, id.y, LODIndex)] = velocities;
+}
+
+[numthreads(4, 1, 1)]
+void UpdateWaveParicles(uint3 id : SV_DispatchThreadID)
+{
+    //LEts first try *a sphere *on surface *constant speed
+
+    float3 positionWS = float3(10.0,0.0,35.0);
+    float3 velocity = float3(1.0,0.0,0.0);
+    float radius = 1.0;
+
+    float3 ReltivePos = positionWS - _CenterPos;
+    float LOD0Size = _LODParams.z;
+
+    //*******Get displace and Vel*****
+    int lodIndex = GetWaveLODOnPos(ReltivePos);
+    float2 UV  = ReltivePos.xz/(LOD0Size * pow(2, lodIndex)) + 0.5f;
+    float4 Displace = BilinearSamplerTextureArray(_DisplaceArray, UV, lodIndex);
+    //!!!!compensate offset??!!!!
+    ReltivePos.xz -= Displace.xz;
+    UV = ReltivePos.xz/(LOD0Size * pow(2, lodIndex)) + 0.5f;
+    //Displace = _DisplaceLOD.SampleLevel(linearClampSampler, UV, 0);
+    Displace = BilinearSamplerTextureArray(_DisplaceArray, UV, lodIndex);
+    float3 WaterVelocity = BilinearSamplerTextureArray(_VelocityArray, UV, lodIndex).rgb;
+    float3 relativeVelocity = velocity - WaterVelocity;
+
+
+    //*****Generate Wave paricles******
+    //generate WP in parallal is going to get race condition.
+    /*
+        float Amplitude;
+    float Radius;
+    float BirthTime;
+    float DispersionAngle;
+    float2 Direction;
+    float2 Origin;
+    WaveParticle wp = WaveParticle(1.0, _TimeParams.x, 180.0, normalize(relativeVelocity), positionWS.xz);
+
+    uint WP_pointer = 
+    _WaveParticleBuffer[_WaveParticleParamsBuffer]
+    */
 }

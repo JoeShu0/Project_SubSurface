@@ -6,7 +6,7 @@ public class CameraPanner : MonoBehaviour
 {
     [Range(2.0f, 50.0f)]
     public float radius = 1.0f;
-    [Range(2.0f, 50.0f)]
+    [Range(0.0f, 50.0f)]
     public float Height = 1.0f;
 
     [Range(1.0f, 10.0f)]

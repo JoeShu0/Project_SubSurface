@@ -40,8 +40,7 @@ void CSMain (uint3 id : SV_DispatchThreadID)
 
     float4 Displace = _DisplaceArray.SampleLevel(linearClampSampler, float3(UV, lodIndex), 0);
 
-    //compensate offset??
-  
+    //!!!!compensate offset??!!!!
     ReltivePos.xz -= Displace.xz;
     UV = ReltivePos.xz/(LOD0Size * pow(2, lodIndex)) + 0.5f;
     //Displace = _DisplaceLOD.SampleLevel(linearClampSampler, UV, 0);

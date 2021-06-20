@@ -28,6 +28,7 @@ public class OceanRenderer :MonoBehaviour
     private int KIndex = 0;
 
     private ComputeBuffer WaveParticleBuffer;
+    private ComputeBuffer WaveParticleParamsBuffer;
 
     //*****Ocean Render Shader LOD related*****
     int gridSizeId = Shader.PropertyToID("_GridSize");
@@ -459,17 +460,21 @@ public class OceanRenderer :MonoBehaviour
     }
 
     void SetWaveParticlesBuffer()
-    {
+    { 
         WaveParticleBuffer = new ComputeBuffer(ORS.WaveParticleCount, 32);
         WaveParticleBuffer.SetData(ORS.WaveParticles);
-
         ORS.shapeWaveParticleShader.SetInt("_WaveParticleCount", ORS.WaveParticleCount);
         ORS.shapeWaveParticleShader.SetBuffer(0, "_WaveParticleBuffer", WaveParticleBuffer);
+
+        WaveParticleParamsBuffer = new ComputeBuffer(1, 8);
+        WaveParticleParamsBuffer.SetData( new Vector2[] { new Vector2(0.0f, 1.0f) });
+        ORS.shapeWaveParticleShader.SetBuffer(0, "_WaveParticleParamsBuffer", WaveParticleParamsBuffer);
     }
 
     void ReleaseWaveParticlesBuffer()
     {
         WaveParticleBuffer.Release();
+        WaveParticleParamsBuffer.Release();
     }
 
     void RenderWaveParticlesForLODs()
