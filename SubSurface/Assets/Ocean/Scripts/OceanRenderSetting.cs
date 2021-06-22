@@ -102,12 +102,15 @@ public class OceanRenderSetting : ScriptableObject
     public struct WaveParticle
     {
         public float Amplitude;
-        public float Radius;
         public float BirthTime;
         public float DispersionAngle;
+        public float Padding;
         public Vector2 Direction;
         public Vector2 Origin;
     }
+    //this must be kept the same with the setting in computeshader
+    public static float WaveParticleSpeed = 4.0f;
+    public static float WaveParticleRadius = 4.0f;
 
     [Tooltip("Tick this box will regenerate All WaveDatas")]
     public bool RegenerateWaveDatas = true;
@@ -115,6 +118,9 @@ public class OceanRenderSetting : ScriptableObject
     public WaveData[] SpectrumWaves;
     [HideInInspector]
     public WaveParticle[] WaveParticles;
+    [HideInInspector]
+    public int WaveParticleEnd;
+
 
     [Tooltip("Tick this box will regenerate All Meshtiles ")]
     public bool RegenerateTileMeshes = true;
@@ -240,7 +246,7 @@ public class OceanRenderSetting : ScriptableObject
         for (int i = 0; i < WaveParticleCount; i++)
         {
             WaveParticles[i].Amplitude = 0.0f;
-            WaveParticles[i].Radius = 4.0f;
+            //WaveParticles[i].Radius = 4.0f;
             WaveParticles[i].BirthTime = 0.0f;
 
             WaveParticles[i].DispersionAngle = 0;
@@ -248,7 +254,7 @@ public class OceanRenderSetting : ScriptableObject
             WaveParticles[i].Origin = new Vector2(1.0f*i, 1.0f * i);
         }
 
-
+        WaveParticleEnd = 0;
     }
 
     private void InitOceanWaves()

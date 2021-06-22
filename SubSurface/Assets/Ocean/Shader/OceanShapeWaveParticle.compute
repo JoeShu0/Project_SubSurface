@@ -4,8 +4,9 @@
 #pragma kernel PointsToDisplacement_Y
 #pragma kernel ApplyWaveParicles
 
-#define WAVEPARTICLESPEED 4
-#define WAVEPARTICLERADIUS 4
+
+#define WAVEPARTICLERADIUS 4//This max be fixed
+#define WAVEPARTICLESPEED 4//the speed is also fixed?
 #define WAVEPARTICLEAMP 0.5
 #define WP_HORI_MUL 0.5
 
@@ -28,14 +29,14 @@ uint _WaveParticleCount;
 struct WaveParticle
 {
     float Amplitude;
-    float Radius;
     float BirthTime;
     float DispersionAngle;
+    float Padding;
     float2 Direction;
     float2 Origin;
 };
 RWStructuredBuffer<WaveParticle> _WaveParticleBuffer;
-RWStructuredBuffer<float2> _WaveParticleParamsBuffer;
+//RWStructuredBuffer<float2> _WaveParticleParamsBuffer;
 
 float3 _CenterPos;
 float4 _LODParams;//x LODCOUNT ,y , z LOD0Size.
@@ -112,8 +113,8 @@ void ParticleToPoint(uint3 id : SV_DispatchThreadID)
 
     
     //WaveParticle
-    float2 ParticlePos = _WaveParticleBuffer[id.x].Origin;// + WAVEPARTICLESPEED * _WaveParticleBuffer[id.x].Direction * _TimeParams.x;
-    float ParticleAmp = WAVEPARTICLEAMP;
+    float2 ParticlePos = _WaveParticleBuffer[id.x].Origin + WAVEPARTICLESPEED * _WaveParticleBuffer[id.x].Direction * _TimeParams.x;
+    float ParticleAmp = _WaveParticleBuffer[id.x].Amplitude;
     float ParticleRadius = WAVEPARTICLERADIUS;
 
     //LOD
