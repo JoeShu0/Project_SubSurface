@@ -108,7 +108,7 @@ public class OceanRenderer :MonoBehaviour
     private void Start()
     {
         ORS.WaveParticleEnd = 0;
-
+        /*
         WaveParticle nWP = new WaveParticle();
         nWP.BirthTime = Time.time;
         nWP.Amplitude = 10.0f;
@@ -120,6 +120,7 @@ public class OceanRenderer :MonoBehaviour
         nWP.Amplitude = -10.0f;
         nWP.Direction = new Vector2(-1.0f, 0.0f);
         SpawnWaveParticles(nWP);
+        */
     }
 
     private void OnDisable()
@@ -585,10 +586,15 @@ public class OceanRenderer :MonoBehaviour
 
     }
 
-    void SpawnWaveParticles(WaveParticle newWP)
+    public void SpawnWaveParticles(WaveParticle newWP)
     {
+        if (ORS.WaveParticleEnd >= ORS.WaveParticleCount)
+        {
+            ORS.WaveParticleEnd = ORS.WaveParticleEnd % ORS.WaveParticleCount;
+        }
         ORS.WaveParticles[ORS.WaveParticleEnd] = newWP;
         ORS.WaveParticleEnd++;
+        Debug.Log("Add WP!");
     }
 
     void UpdateWaveParticles()

@@ -105,7 +105,7 @@ public class OceanRenderSetting : ScriptableObject
         public float BirthTime;
         public float DispersionAngle;
         public float Padding;
-        public Vector2 Direction;
+        public Vector2 Direction;//maybe we should use angle for direction, this makes subdivide easier
         public Vector2 Origin;
     }
     //this must be kept the same with the setting in computeshader

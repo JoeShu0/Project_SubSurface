@@ -77,6 +77,10 @@ public class OceanBuoyancy : MonoBehaviour
     {
         ApplyBuoyancy();
         ApplyDrag();
+
+        RB.AddForceAtPosition(new Vector3(50.0f, 0.0f, 0.0f), transform.position+RB.centerOfMass);
+
+        TestSpawnWaveParticles();
     }
 
     private void OnDestroy()
@@ -174,5 +178,38 @@ public class OceanBuoyancy : MonoBehaviour
         //basic drag system
         RB.drag = WaterDrag.y * ((float)submergedBPCount / (float)BuoyancyPoints.Length) + WaterDrag.x;
         RB.angularDrag = WaterADrag.y * ((float)submergedBPCount / (float)BuoyancyPoints.Length) + WaterADrag.x;
+    }
+
+    void TestSpawnWaveParticles()
+    {
+        Vector3 relativeVel = Vector3.Normalize(new Vector3 (RB.velocity.x, 0, RB.velocity.z));
+
+        if (relativeVel.magnitude > 0.1f)
+        {
+            int subd = 24;
+            float subAngle = 360.0f / (float)subd;
+
+            for (int i = 0; i < subd; i++)
+            {
+                float angle = subAngle * i;
+                Quaternion RotationLeft = Quaternion.Euler(0, angle, 0);
+                Vector3 direction = Vector3.Normalize(RotationLeft * relativeVel);
+                float amp = Vector3.Dot(relativeVel, direction)*0.1f;
+
+                OceanRenderSetting.WaveParticle NewWPs = new OceanRenderSetting.WaveParticle();
+
+                NewWPs.Amplitude = amp;
+                NewWPs.BirthTime = Time.time;
+                NewWPs.DispersionAngle = subAngle;
+                NewWPs.Direction = new Vector2(direction.x, direction.z);
+                NewWPs.Origin = new Vector2(transform.position.x, transform.position.z);
+
+                OceanRenderer.Instance.SpawnWaveParticles(NewWPs);
+            }
+
+            
+        }
+
+
     }
 }
