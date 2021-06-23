@@ -119,7 +119,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	surface.fresnelStrength = 1;
 	surface.viewDirection = normalize(_WorldSpaceCameraPos - input.positionWS);
 	surface.depth = -TransformWorldToView(input.positionWS).z;
-	//surface.dither = InterleavedGradientNoise(config.fragment.positionSS, 0);
+	surface.dither = InterleavedGradientNoise(input.positionCS_SS, 0);
 	surface.renderingLayerMask = asuint(unity_RenderingLayer.x);// treat float as uint
 
 	//BRDF brdf = GetBRDF(surface);
@@ -173,7 +173,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 		pow(abs(1-ViewNormalGradient + _FoamFresnelOffsetPow.z), _FoamFresnelOffsetPow.w),
 		0.0f,
 		1.0f);
-	//color = lerp(color, _FresnelColor, fresnelMask);
+	color = lerp(color, _FresnelColor, fresnelMask);
 	
 	color += clamp(pow(abs(SunReflect + 0.25), 100), 0 ,1) * pow(abs(1-foamMask),5) * 1.5f;
 	

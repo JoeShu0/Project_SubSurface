@@ -5,8 +5,8 @@
 #pragma kernel ApplyWaveParicles
 
 
-#define WAVEPARTICLERADIUS 4//This max be fixed
-#define WAVEPARTICLESPEED 4//the speed is also fixed?
+#define WAVEPARTICLERADIUS 8//This max be fixed
+#define WAVEPARTICLESPEED 8//the speed is also fixed?
 #define WAVEPARTICLEAMP 0.5
 #define WP_HORI_MUL 0.5
 
@@ -113,7 +113,9 @@ void ParticleToPoint(uint3 id : SV_DispatchThreadID)
 
     
     //WaveParticle
-    float2 ParticlePos = _WaveParticleBuffer[id.x].Origin + WAVEPARTICLESPEED * _WaveParticleBuffer[id.x].Direction * _TimeParams.x;
+    float2 ParticlePos = _WaveParticleBuffer[id.x].Origin + 
+        WAVEPARTICLESPEED * _WaveParticleBuffer[id.x].Direction * 
+        (_TimeParams.x- _WaveParticleBuffer[id.x].BirthTime);
     float ParticleAmp = _WaveParticleBuffer[id.x].Amplitude;
     float ParticleRadius = WAVEPARTICLERADIUS;
 
@@ -151,9 +153,9 @@ void ParticleToPoint(uint3 id : SV_DispatchThreadID)
         displaceP11.a += ParticleAmp * B_Weight[3];
 
         _DisplaceArray[uint3(P00, LODIndex)] = displaceP00;
-        _DisplaceArray[uint3(P01, LODIndex)] = displaceP01;
-        _DisplaceArray[uint3(P10, LODIndex)] = displaceP10;
-        _DisplaceArray[uint3(P11, LODIndex)] = displaceP11;
+        //_DisplaceArray[uint3(P01, LODIndex)] = displaceP01;
+        //_DisplaceArray[uint3(P10, LODIndex)] = displaceP10;
+        //_DisplaceArray[uint3(P11, LODIndex)] = displaceP11;
     }
 }
 

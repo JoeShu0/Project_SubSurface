@@ -33,9 +33,9 @@ MonoBehaviour:
     bandingPower: 10
     MultiPlier: 0
   Fresnel:
-    color: {r: 0.7506827, g: 0.79215693, b: 0.79215693, a: 1}
+    color: {r: 1.8850881, g: 1.8850881, b: 1.8850881, a: 1}
     bandingOffset: 0
-    bandingPower: 50
+    bandingPower: 100
     MultiPlier: 0
   highlights:
     HighLightExp: 86.8

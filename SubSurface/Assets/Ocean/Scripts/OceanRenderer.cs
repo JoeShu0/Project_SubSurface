@@ -66,6 +66,8 @@ public class OceanRenderer :MonoBehaviour
     int centerPosId = Shader.PropertyToID("_CenterPos");
     //int CameraProjParamsId = Shader.PropertyToID("_CamProjectionParams");
 
+
+
     //*****this class is a singleton*****
     private static OceanRenderer _instance;
     public static OceanRenderer Instance
@@ -129,6 +131,19 @@ public class OceanRenderer :MonoBehaviour
         //ReleaseWaveParticlesBuffer();
     }
 
+    private void OnDrawGizmos()
+    {
+        /*
+        for (int i = 0; i < ORS.WaveParticleCount; i++)
+        {
+            Vector2 position = ORS.WaveParticles[i].Origin + 
+                ORS.WaveParticles[i].Direction * OceanRenderSetting.WaveParticleSpeed * 
+                (Time.time - ORS.WaveParticles[i].BirthTime);
+
+            Gizmos.DrawSphere(new Vector3(position.x,0.0f, position.y), 0.1f);
+        }
+        */
+    }
     private void Update()
     {
 #if UNITY_EDITOR
@@ -140,7 +155,7 @@ public class OceanRenderer :MonoBehaviour
         {
             UpdateOceantransform();
             RenderDisAndNormalMapsForLODs();
-            RenderWaveParticlesForLODs();
+            //RenderWaveParticlesForLODs();
             RenderNormalForLODs();
 
             
@@ -160,7 +175,7 @@ public class OceanRenderer :MonoBehaviour
     {
         UpdateOceantransform();
         RenderDisAndNormalMapsForLODs();
-        RenderWaveParticlesForLODs();
+        //RenderWaveParticlesForLODs();
         RenderNormalForLODs();
 
         UpdateWaveParticles();
@@ -594,12 +609,14 @@ public class OceanRenderer :MonoBehaviour
         }
         ORS.WaveParticles[ORS.WaveParticleEnd] = newWP;
         ORS.WaveParticleEnd++;
-        Debug.Log("Add WP!");
+        //Debug.Log("Add WP!");
+
+
     }
 
     void UpdateWaveParticles()
     {
-        for (int i = 0; i < ORS.WaveParticleCount; i++)
+        for (int i = 0; i < Mathf.Min(ORS.WaveParticleCount, ORS.WaveParticleEnd); i++)
         {
             float LifeTime = Time.time - ORS.WaveParticles[i].BirthTime;
             float Span = ORS.WaveParticles[i].DispersionAngle * Mathf.PI / 180.0f * OceanRenderSetting.WaveParticleSpeed * LifeTime;
@@ -617,21 +634,21 @@ public class OceanRenderer :MonoBehaviour
 
                 OceanRenderSetting.WaveParticle leftnewWP = new WaveParticle();
                 leftnewWP.Amplitude = newAmplitude;
-                leftnewWP.BirthTime = Time.time;
+                leftnewWP.BirthTime = ORS.WaveParticles[i].BirthTime;
                 leftnewWP.DispersionAngle = newDispersionAngle;
                 leftnewWP.Origin = ORS.WaveParticles[i].Origin;
                 leftnewWP.Direction = new Vector2(leftDirection3.x, leftDirection3.z);
 
                 OceanRenderSetting.WaveParticle rightnewWP = new WaveParticle();
                 rightnewWP.Amplitude = newAmplitude;
-                rightnewWP.BirthTime = Time.time;
+                rightnewWP.BirthTime = ORS.WaveParticles[i].BirthTime;
                 rightnewWP.DispersionAngle = newDispersionAngle;
                 rightnewWP.Origin = ORS.WaveParticles[i].Origin;
                 rightnewWP.Direction = new Vector2(rightDirection3.x, rightDirection3.z);
 
                 ORS.WaveParticles[i].Amplitude = newAmplitude;
                 ORS.WaveParticles[i].DispersionAngle = newDispersionAngle;
-                ORS.WaveParticles[i].BirthTime = Time.time;
+                //ORS.WaveParticles[i].BirthTime = Time.time;
 
                 /*
                 ORS.WaveParticles[ORS.WaveParticleEnd] = leftnewWP;
@@ -651,6 +668,6 @@ public class OceanRenderer :MonoBehaviour
             
         }
 
-        Debug.Log("WaveParticle Count: " + ORS.WaveParticleEnd);
+        //Debug.Log("WaveParticle Count: " + ORS.WaveParticleEnd);
     }
 }

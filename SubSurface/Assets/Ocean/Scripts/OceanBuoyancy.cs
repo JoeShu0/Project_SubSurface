@@ -24,7 +24,9 @@ public class OceanBuoyancy : MonoBehaviour
     public Vector3 COMoffset = Vector3.zero;
     [SerializeField]
     public BuoyancyPoint[] BuoyancyPoints;
-    
+
+    float timer = 0;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -78,9 +80,15 @@ public class OceanBuoyancy : MonoBehaviour
         ApplyBuoyancy();
         ApplyDrag();
 
-        RB.AddForceAtPosition(new Vector3(50.0f, 0.0f, 0.0f), transform.position+RB.centerOfMass);
+        RB.AddForceAtPosition(new Vector3(100.0f, 0.0f, 0.0f), transform.position+RB.centerOfMass);
 
-        TestSpawnWaveParticles();
+        timer += Time.fixedDeltaTime;
+        if (timer > 0.15f)
+        {
+            timer = 0.0f;
+            TestSpawnWaveParticles();
+        }
+        
     }
 
     private void OnDestroy()
@@ -194,8 +202,8 @@ public class OceanBuoyancy : MonoBehaviour
                 float angle = subAngle * i;
                 Quaternion RotationLeft = Quaternion.Euler(0, angle, 0);
                 Vector3 direction = Vector3.Normalize(RotationLeft * relativeVel);
-                float amp = Vector3.Dot(relativeVel, direction)*0.1f;
-
+                float amp = Vector3.Dot(relativeVel, direction)*0.5f;
+                //direction *= Mathf.Sign(amp);
                 OceanRenderSetting.WaveParticle NewWPs = new OceanRenderSetting.WaveParticle();
 
                 NewWPs.Amplitude = amp;
