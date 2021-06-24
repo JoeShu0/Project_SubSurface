@@ -20,7 +20,7 @@ MonoBehaviour:
   Base:
     color: {r: 0.18039216, g: 0.4666667, b: 0.7803922, a: 1}
     bandingOffset: 0
-    bandingPower: 497.32
+    bandingPower: 100
     MultiPlier: 0
   Dark:
     color: {r: 0.03137255, g: 0.11764707, b: 0.28235295, a: 0.7882353}
@@ -34,7 +34,7 @@ MonoBehaviour:
     MultiPlier: 0
   Fresnel:
     color: {r: 1.8850881, g: 1.8850881, b: 1.8850881, a: 1}
-    bandingOffset: 0
+    bandingOffset: 0.15
     bandingPower: 100
     MultiPlier: 0
   highlights:

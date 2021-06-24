@@ -95,7 +95,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	
 	
 	float4 NormalFoam = GetOceanNormal(input.UV);
-	float3 normalWS = normalize(NormalFoam.xyz);
+	float3 baseNormalWS = normalize(NormalFoam.xyz);
 	float foam = NormalFoam.w;
 
 	
@@ -103,30 +103,34 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	//detial normal need multi sample for distance fade and 
 	//panning to add dynamic, Also a multiplier to adjust effect 
 	float3 DetailTangentNormal = GetTangentDetailNormal(input.StaticUV * 0.025f);
-	//normalWS = DetailTangentNormalToWorld(DetailTangentNormal, normalWS);
+	//float3 normalWS = DetailTangentNormalToWorld(DetailTangentNormal, baseNormalWS);
 
 
 	//******Surface setup******
 	Surface surface;
 	surface.position = input.positionWS;
-	surface.normal = normalWS;
+	surface.normal = baseNormalWS;
+	surface.interpolatedNormalWS = baseNormalWS;
 
 	surface.color = _BaseColor.rgb;
 	surface.alpha = 1.0f;
 	surface.metallic = 0;
 	surface.occlusion = 1;
-	surface.smoothness = 0.5;
+	surface.smoothness = 1.0;
 	surface.fresnelStrength = 1;
 	surface.viewDirection = normalize(_WorldSpaceCameraPos - input.positionWS);
 	surface.depth = -TransformWorldToView(input.positionWS).z;
 	surface.dither = InterleavedGradientNoise(input.positionCS_SS, 0);
 	surface.renderingLayerMask = asuint(unity_RenderingLayer.x);// treat float as uint
 
-	//BRDF brdf = GetBRDF(surface);
+	BRDF brdf = GetBRDF(surface);
 
-	//GI gi = GetGI(GI_FRAGMENT_DATA(input), surface, brdf);
+	GI gi = GetGI(GI_FRAGMENT_DATA(input), surface, brdf);
+	//temp solution to disable GI diffuse
+	gi.diffuse = 0;
+	
 
-	//float3 color = GetLighting(surface, brdf, gi);
+	float3 objcolor = GetLighting(surface, brdf, gi);
 
 	//?????Dont konw why the OrthographicDepthBufferToLinear cause the tile to offsets?????
 	//bufferDepth = IsOrthographicCamera() ?
@@ -136,7 +140,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	
 	//Basic lighting
 	float4 color = float4(surface.normal,1.0f);
-	//return float4(normalWS, 1.0f);
+	//return float4(objcolor, 1.0f);
 	
 	//return color;
 
