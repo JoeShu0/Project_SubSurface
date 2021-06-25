@@ -50,6 +50,16 @@ float3 IndirectTRDF(Surface surface, TRDF trdf, float3 GIdiffuse, float3 GIspecu
 	return (GIdiffuse * trdf.diffuse + reflection) * surface.occlusion;
 }
 
+float3 GetSubSurfaceColor(Surface surface, Light light)
+{
+	//add fake SSS
+    float3 SSSCol = _SSSColor.rgb;
+    float TLight = pow(saturate( dot(normalize(-light.direction), normalize(surface.viewDirection))),2.0f);
+    float FakeSSS = saturate( dot(normalize(-light.direction), normalize(surface.normal))+0.55f);
+	float mask = clamp(pow(abs(TLight * FakeSSS + _SSSOffsetPow.x), _SSSOffsetPow.y), 0, 1);
+	return SSSCol * mask;// *(_FoamMask + 1.0f);
+}
+
 TRDF GetTRDF(inout Surface surface)
 {
 	//energe distribute to diffuse, reflection and refraction

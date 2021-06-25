@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: OceanShadingSetting
   m_EditorClassIdentifier: 
   Bright:
-    color: {r: 0.1509879, g: 0.24152055, b: 0.3679245, a: 1}
-    bandingOffset: 0.4
-    bandingPower: 139.19
+    color: {r: 0.1224635, g: 0.24360174, b: 0.3773585, a: 1}
+    bandingOffset: 0.1
+    bandingPower: 250
     MultiPlier: 0
   Base:
-    color: {r: 0.18039216, g: 0.4666667, b: 0.7803922, a: 1}
-    bandingOffset: 0
-    bandingPower: 100
+    color: {r: 0.03137255, g: 0.105882354, b: 0.25490198, a: 0.7882353}
+    bandingOffset: 0.85
+    bandingPower: 250
     MultiPlier: 0
   Dark:
-    color: {r: 0.03244037, g: 0.10720613, b: 0.254717, a: 0.7882353}
+    color: {r: 0.009300461, g: 0.04079152, b: 0.103773594, a: 0.7882353}
     bandingOffset: 0
     bandingPower: 1
     MultiPlier: 0
@@ -35,7 +35,12 @@ MonoBehaviour:
   Fresnel:
     color: {r: 1.0592737, g: 1.0592737, b: 1.0592737, a: 1}
     bandingOffset: 0.025
-    bandingPower: 11.35
+    bandingPower: 1
+    MultiPlier: 0
+  SSS:
+    color: {r: 0.16015485, g: 0.37411135, b: 0.5566038, a: 0}
+    bandingOffset: 0
+    bandingPower: 1
     MultiPlier: 0
   highlights:
     HighLightExp: 86.8

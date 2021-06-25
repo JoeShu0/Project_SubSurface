@@ -386,8 +386,9 @@ public class OceanRenderer :MonoBehaviour
         Shader.SetGlobalColor(darkColorId, OSS.Dark.color);
         Shader.SetGlobalColor(foamColorId, OSS.Foam.color);
         Shader.SetGlobalColor(fresnelColorId, OSS.Fresnel.color);
+        Shader.SetGlobalColor("_SSSColor", OSS.SSS.color);
         //Shader.SetGlobalVectorArray
-        Shader.SetGlobalVector("_BrightOffsetPow", new Vector4(
+        Shader.SetGlobalVector("_BandingOffsetPow", new Vector4(
             OSS.Base.bandingOffset,
             OSS.Base.bandingPower,
             OSS.Bright.bandingOffset,
@@ -398,6 +399,12 @@ public class OceanRenderer :MonoBehaviour
             OSS.Foam.bandingPower,
             OSS.Fresnel.bandingOffset,
             OSS.Fresnel.bandingPower
+            ));
+
+        Shader.SetGlobalVector("_SSSOffsetPow", new Vector4(
+            OSS.SSS.bandingOffset,
+            OSS.SSS.bandingPower,
+            0.0f,0.0f
             ));
 
         Shader.SetGlobalTexture("_DispTexArray", ORS.LODDisplaceMapsArray);

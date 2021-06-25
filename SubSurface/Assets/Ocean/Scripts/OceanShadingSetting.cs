@@ -32,6 +32,7 @@ public class OceanShadingSetting : ScriptableObject
     public ColorBanding Dark;
     public ColorBanding Foam;
     public ColorBanding Fresnel;
+    public ColorBanding SSS;
 
 
 

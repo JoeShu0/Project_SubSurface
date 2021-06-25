@@ -17,9 +17,9 @@ float3 GetOceanLighting(Surface surface, TRDF trdf, Light light)
 	return IncomingLightForOcean(surface, light) * DirectTRDF(surface, trdf, light);
 }
 
-float GetOceanLightDirectHightLight(Surface surface, TRDF trdf, Light light)
+float3 GetOceanLightDirectHightLight(Surface surface, TRDF trdf, Light light)
 {
-	return DirectHighLight(surface, trdf, light);
+	return DirectHighLight(surface, trdf, light) * light.color;
 }
 
 
@@ -30,9 +30,10 @@ bool RenderingLayerMaskOverlap(Surface surface, Light light)
 }
 
 void GenerateDirectionalLightEffectData(Surface surface, TRDF trdf, Light light,
-	inout float3 ColorTint, inout float Gradient, inout float Highlight)
+	inout float3 ColorTint, inout float Gradient, inout float3 Highlight)
 {
 	Highlight += DirectHighLight(surface, trdf, light);
+	Highlight += GetSubSurfaceColor(surface, light);
 	Gradient += IncomingLightGradient(surface, light);
 	ColorTint += light.attenuation* light.color;
 }
@@ -42,19 +43,21 @@ float3 GetOceanColorBanding( float Gradient)
 	float3 color = _DarkColor.rgb;
 
 	float baseMask = clamp(
-		pow(abs(Gradient + _BrightOffsetPow.x), _BrightOffsetPow.y),
+		pow(abs(Gradient + _BandingOffsetPow.x), _BandingOffsetPow.y),
 		0.0f,
 		1.0f);
 	color = lerp(color, _BaseColor.rgb, baseMask);
 
 	float brightMask = clamp(
-		pow(abs(Gradient + _BrightOffsetPow.z), _BrightOffsetPow.w),
+		pow(abs(Gradient + _BandingOffsetPow.z), _BandingOffsetPow.w),
 		0.0f,
 		1.0f);
 	color = lerp(color, _BrightColor.rgb, brightMask);
 	
 	return color;
 }
+
+
 
 float3 GetOceanLighting(Surface surfaceWS, TRDF trdf, GI gi)
 {
@@ -68,7 +71,7 @@ float3 GetOceanLighting(Surface surfaceWS, TRDF trdf, GI gi)
 	float3 ColorTint = float3(0.0, 0.0, 0.0);
 	//return color;
 	float Gradient = 0.0;
-	float Highlight = 0.0;
+	float3 Highlight = float3(0.0, 0.0, 0.0);
 	//loop for directional lighing
 	for (int i = 0; i < GetDirectionalLightCount(); i++)
 	{
@@ -83,7 +86,8 @@ float3 GetOceanLighting(Surface surfaceWS, TRDF trdf, GI gi)
 	//gradient does not take light intensity into count.addint directional light in runtime will cause problem
 	Gradient /= (float)GetDirectionalLightCount();
 	float3 color = GetOceanColorBanding(Gradient);
-	color += surfaceWS.foamMask;
+	//this add makes the foam too stand out....
+	color += surfaceWS.foamMask * clamp(Gradient+0.05f, 0,1);
 	color += Highlight;
 	color *= ColorTint;
 

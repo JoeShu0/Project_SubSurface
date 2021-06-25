@@ -141,8 +141,8 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	surface.dither = InterleavedGradientNoise(input.positionCS_SS.xy, 0);
 	surface.renderingLayerMask = asuint(unity_RenderingLayer.x);// treat float as uint
 	surface.foamMask = foamMask;
-	surface.transparency = 0.05f;
-	surface.smoothness = 0.95f;
+	surface.transparency = 0.25f;
+	surface.smoothness = 0.85f;
 
 	TRDF trdf = GetTRDF(surface);
 
@@ -160,7 +160,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	//return float4(INPUT_PROP(_BaseColor).rgb, 0.5);
 	
 	//Basic lighting
-	float4 color = float4(surface.normal,1.0f);
+	float4 color = float4(surface.normal,1- surface.transparency);
 	//return float4(objcolor, 1.0f);
 	
 	//return color;
