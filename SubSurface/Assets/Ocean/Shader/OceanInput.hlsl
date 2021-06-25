@@ -47,6 +47,7 @@ CBUFFER_START(_OceanGlobalData)
     float4 _FoamColor;
     float4 _FresnelColor;
 
+    //change this into bandingoffsetpow
     float4 _BrightOffsetPow;
     float4 _FoamFresnelOffsetPow;
 

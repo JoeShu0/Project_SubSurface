@@ -153,7 +153,7 @@ float4 LitPassFragment(Varyings input) : SV_TARGET
 		//return float4(1.0, 0.0, 0.0, GetFinalAlpha(surface.alpha));
 	//}
 
-	float4 OceanDelta01 = clamp(-OceanDepthDelta*5000, 0.0, 1.0);//!!!!this breaks when the render scale changes!!!!
+	float4 OceanDelta01 = clamp(-OceanDepthDelta*1000, 0.0, 1.0);//!!!!this breaks when the render scale changes!!!!
 	
 	return lerp(float4(color, GetFinalAlpha(surface.alpha)),float4(_DarkColor.rgb, GetFinalAlpha(surface.alpha)), OceanDelta01);
 }

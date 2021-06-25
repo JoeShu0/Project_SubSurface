@@ -87,9 +87,10 @@
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\CustomRP\Shader\Particles_Unlit.shader" />
+     <None Include="Assets\Ocean\ShaderLib\OceanSurface.hlsl" />
      <None Include="Assets\CustomRP\Shader\Post FX Stack.shader" />
      <None Include="Assets\CustomRP\Shader\LitPass.hlsl" />
-     <None Include="Assets\Ocean\Shader\OceanLighting.hlsl" />
+     <None Include="Assets\Ocean\ShaderLib\OceanLighting.hlsl" />
      <None Include="Assets\Ocean\Shader\OceanShapeGerstner.compute" />
      <None Include="Assets\CustomRP\ShaderLib\Common.hlsl" />
      <None Include="Assets\CustomRP\Shader\UnlitPass.hlsl" />
@@ -100,11 +101,13 @@
      <None Include="Assets\Ocean\Shader\OceanShapeWaveParticle.compute" />
      <None Include="Assets\Ocean\Shader\OceanInput.hlsl" />
      <None Include="Assets\CustomRP\Shader\MetaPass.hlsl" />
+     <None Include="Assets\Ocean\ShaderLib\OceanTRDF.hlsl" />
      <None Include="Assets\Ocean\Shader\OceanShader.shader" />
      <None Include="Assets\CustomRP\ShaderLib\Lighting.hlsl" />
      <None Include="Assets\CustomRP\Shader\PostFXStackPasses.hlsl" />
      <None Include="Assets\CustomRP\Shader\Lit.shader" />
      <None Include="Assets\CustomRP\Shader\FXAAPass.hlsl" />
+     <None Include="Assets\Ocean\ShaderLib\OceanGI.hlsl" />
      <None Include="Assets\CustomRP\ShaderLib\Shadows.hlsl" />
      <None Include="Assets\Ocean\Shader\OceanPass.hlsl" />
      <None Include="Assets\CustomRP\Shader\LitInput.hlsl" />

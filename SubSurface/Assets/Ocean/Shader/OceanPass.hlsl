@@ -1,12 +1,17 @@
 #ifndef CUSTOM_OCEAN_PASS_INCLUDED
 #define CUSTOM_OCEAN_PASS_INCLUDED
 
-#include "../../CustomRP/ShaderLib/Surface.hlsl"
+
+#include "../ShaderLib/OceanSurface.hlsl"
+//Shared part
 #include "../../CustomRP/ShaderLib/Shadows.hlsl"
 #include "../../CustomRP/ShaderLib/Light.hlsl"
-#include "../../CustomRP/ShaderLib/BRDF.hlsl"
-#include "../../CustomRP/ShaderLib/GI.hlsl"
-#include "../../CustomRP/ShaderLib/Lighting.hlsl"
+//Unique to Ocean
+#include "../ShaderLib/OceanTRDF.hlsl"
+//Shared part
+#include "../ShaderLib/OceanGI.hlsl"
+//Unique to Ocean
+#include "../ShaderLib/OceanLighting.hlsl"
 
 struct Attributes
 {
@@ -89,48 +94,64 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	UNITY_SETUP_INSTANCE_ID(input);
 	//Depth10 for ocean depth(not used in here)
 	float OceanDepth10 = LOAD_TEXTURE2D(_CameraOceanDepthTexture, input.positionCS_SS.xy).a;
-	//float OceanDepthDelta = input.depth01 - OceanDepth10;
-	//float4 OceanDelta01 = clamp(-OceanDepthDelta*5000, 0.0, 1.0);//!!!!this breaks when the render scale changes!!!!
-	//clip(OceanDelta01 > 0.5);
+	float OceanDepthDelta = input.depth01 - OceanDepth10;
+	//!!!!this breaks when the render scale changes!!!!
+	//Also water fog should take effect
+	float4 OceanDelta01 = clamp(-OceanDepthDelta*5000, 0.0, 1.0);
+	//clip water to avoid render water layer when the tiles are high
+	clip(OceanDepthDelta < 0.0 ? -1 : 1);
 	
-	
+	//sample normal foam mask 
 	float4 NormalFoam = GetOceanNormal(input.UV);
 	float3 baseNormalWS = normalize(NormalFoam.xyz);
 	float foam = NormalFoam.w;
 
+	//sample foam cap tex and foam trail tex and cal the final foam MASK
+	float foamCap = pow(abs(foam + 0.3f), 100.0f);
+	float TailTex = _FoamTrailTexture.Sample(sampler_FoamTrailTexture, input.StaticUV * 0.1f).r * 2.0f;
+	float foamTrail = pow(abs(foam + _FoamFresnelOffsetPow.x), _FoamFresnelOffsetPow.y) * TailTex;
+	float foamMask = clamp(max(foamCap, foamTrail), 0.0f, 1.0f);
 	
 	//Get the detail normal and combine with base normal
 	//detial normal need multi sample for distance fade and 
 	//panning to add dynamic, Also a multiplier to adjust effect 
 	float3 DetailTangentNormal = GetTangentDetailNormal(input.StaticUV * 0.025f);
-	//float3 normalWS = DetailTangentNormalToWorld(DetailTangentNormal, baseNormalWS);
+	float3 normalWS = DetailTangentNormalToWorld(DetailTangentNormal, baseNormalWS);
 
+	//Waht do we need
+	//banding color on Water surface with foam(color changes based on sun and other lights
+	//	sun direction indicate Banding, strength&color indicate color tint, other lights uses additive*(1-tranparency)*diffuse? to color) 
+	//limited tranparency on the water (Depth clip (relative to water surface) in object side)
+	//limited tranparency but better view range below the water (Depth clip in object side) In another pass
+	//specular from directional light(only sun)
+	//specular reflection only relate to sky box and in frsnel&distance
+	//frsnel on edge
 
 	//******Surface setup******
 	Surface surface;
 	surface.position = input.positionWS;
-	surface.normal = baseNormalWS;
+	surface.normal = normalWS;
 	surface.interpolatedNormalWS = baseNormalWS;
 
-	surface.color = _BaseColor.rgb;
 	surface.alpha = 1.0f;
-	surface.metallic = 0;
 	surface.occlusion = 1;
-	surface.smoothness = 1.0;
 	surface.fresnelStrength = 1;
 	surface.viewDirection = normalize(_WorldSpaceCameraPos - input.positionWS);
 	surface.depth = -TransformWorldToView(input.positionWS).z;
-	surface.dither = InterleavedGradientNoise(input.positionCS_SS, 0);
+	surface.dither = InterleavedGradientNoise(input.positionCS_SS.xy, 0);
 	surface.renderingLayerMask = asuint(unity_RenderingLayer.x);// treat float as uint
+	surface.foamMask = foamMask;
+	surface.transparency = 0.05f;
+	surface.smoothness = 0.95f;
 
-	BRDF brdf = GetBRDF(surface);
+	TRDF trdf = GetTRDF(surface);
 
-	GI gi = GetGI(GI_FRAGMENT_DATA(input), surface, brdf);
+	GI gi = GetGI(GI_FRAGMENT_DATA(input), surface, trdf);
 	//temp solution to disable GI diffuse
-	gi.diffuse = 0;
+	//gi.diffuse = 0;
 	
 
-	float3 objcolor = GetLighting(surface, brdf, gi);
+	float3 objcolor = GetOceanLighting(surface, trdf, gi);
 
 	//?????Dont konw why the OrthographicDepthBufferToLinear cause the tile to offsets?????
 	//bufferDepth = IsOrthographicCamera() ?
@@ -143,7 +164,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	//return float4(objcolor, 1.0f);
 	
 	//return color;
-
+	/*
 	//**********experimental part**********
 	float3 sunDirection = float3(-0.5,-0.5,0.0);
 
@@ -180,9 +201,14 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	color = lerp(color, _FresnelColor, fresnelMask);
 	
 	color += clamp(pow(abs(SunReflect + 0.25), 100), 0 ,1) * pow(abs(1-foamMask),5) * 1.5f;
-	
+	*/
+
+	//brdf.diffuse = _BaseColor;
+	//float3 objcolor = GetOceanLighting(surface, brdf, gi);
+
 	//return float4(LightNormalGradient, 0.0,0.0,1.0);
-	return float4(color.rgb, max(color.a, 1-ViewNormalGradient));//
+	//max(color.a, 1-ViewNormalGradient)
+	return float4(objcolor,1-surface.transparency);//
 	//SunReflect = dot(normalize(float3(-0.5, -0.5, 0.0)), reflectDir);
 
 	//return float4(SunReflect, 0.0, 0.0,1.0f) + float4(0.1f,0.1f,0.1f,0.0f);
