@@ -44,9 +44,6 @@ Varyings OceanPassVertex(Attributes input)
 	//Snap tp 2*unit grid(Should be scaled by whole ocean)
 	positionWS = SnapToWorldPosition(positionWS);
 
-	//StaticUV for detail tex, current scale and transiton fixed!
-	float2 S_UV = positionWS.xz * 0.5f;
-
 	//Transition at the edge of LODs
 	positionWS = TransitionLOD(positionWS);
 
@@ -55,9 +52,11 @@ Varyings OceanPassVertex(Attributes input)
     //float2 UV = (positionWS.xz - _CenterPos.xz) / (_LODSize*INPUT_PROP(_OceanScale)) + 0.5f;
     //float2 UV_n = (positionWS.xz - _CenterPos.xz) / (_LODSize*INPUT_PROP(_OceanScale)) * 0.5f + 0.5f;
 	
+	//StaticUV for detail tex, current scale and transiton fixed!
+	float2 S_UV = positionWS.xz * 0.5f;
 	
-	float3 debugDisplacecolor = GetOceanDisplacement(UVn);
-	positionWS += debugDisplacecolor;
+	float3 Displace = GetOceanDisplacement(UVn);
+	positionWS += Displace;
 
 
 	float3 localPos = mul(unity_WorldToObject, float4(positionWS, 1.0)).xyz;
@@ -72,7 +71,7 @@ Varyings OceanPassVertex(Attributes input)
 	output.depth01 = depth01;
 	output.UV = UVn;
 	output.StaticUV = S_UV;
-	output.DebugColor = float4(debugDisplacecolor, 1.0f);
+	output.DebugColor = float4(Displace, 1.0f);
 	return output;
 }
 
@@ -161,9 +160,10 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	
 	//Basic lighting
 	float4 color = float4(surface.normal,1- surface.transparency);
-	//return float4(objcolor, 1.0f);
 	
-	//return color;
+	//return float4(normalWS, 1.0f);
+	
+	//return float4(input.UV.xy % 0.07f * 10.0f+float2(0.01,0.01), 0.0,1.0);
 	/*
 	//**********experimental part**********
 	float3 sunDirection = float3(-0.5,-0.5,0.0);
