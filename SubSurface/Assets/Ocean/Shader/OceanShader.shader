@@ -19,6 +19,7 @@
         _DetailNormalNoise("FFTDetailNormalTex", 2D) = "white" {}
 
         //_DispTexArray("DisplaceTextureArray", 2D)
+        [Toggle(_RECEIVE_SHADOWS)] _ReceiveShadows("ReceiveShadows", Float) = 1
     }
     SubShader
     {
@@ -47,7 +48,7 @@
             //make unity complie 2 shader with and without GPU instancing
             #pragma multi_compile_instancing
 
-
+            #pragma shader_feature _RECEIVE_SHADOWS
 
             //per object lights
             #pragma multi_compile _ _LIGHTS_PER_OBJECT

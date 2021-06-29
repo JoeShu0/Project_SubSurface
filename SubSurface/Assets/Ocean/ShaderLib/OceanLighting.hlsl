@@ -30,12 +30,12 @@ bool RenderingLayerMaskOverlap(Surface surface, Light light)
 }
 
 void GenerateDirectionalLightEffectData(Surface surface, TRDF trdf, Light light,
-	inout float3 ColorTint, inout float Gradient, inout float3 Highlight)
+	inout float3 ColorTint, inout float Gradient, inout float3 Highlight, inout float3 Subsurface)
 {
-	Highlight += DirectHighLight(surface, trdf, light);
-	Highlight += GetSubSurfaceColor(surface, light);
-	Gradient += IncomingLightGradient(surface, light);
-	ColorTint += light.attenuation* light.color;
+	Highlight += DirectHighLight(surface, trdf, light) * clamp(light.attenuation + 0.001f, 0.0, 1.0) * light.color;
+	Subsurface += GetSubSurfaceColor(surface, light) * clamp(light.attenuation + 0.1f, 0, 1);
+	Gradient += IncomingLightGradient(surface, light) * clamp(light.attenuation + 0.1f, 0, 1);
+	ColorTint += light.color;
 }
 
 float3 GetOceanColorBanding( float Gradient)
@@ -72,14 +72,16 @@ float3 GetOceanLighting(Surface surfaceWS, TRDF trdf, GI gi)
 	//return color;
 	float Gradient = 0.0;
 	float3 Highlight = float3(0.0, 0.0, 0.0);
+	float3 Subsurface = float3(0.0, 0.0, 0.0);
 	//loop for directional lighing
+
 	for (int i = 0; i < GetDirectionalLightCount(); i++)
 	{
 		Light light = GetDirectionalLight(i, surfaceWS, shadowData);
 		//color += light.attenuation;
 		if (RenderingLayerMaskOverlap(surfaceWS, light))
 		{
-			GenerateDirectionalLightEffectData(surfaceWS, trdf, light, ColorTint, Gradient, Highlight);
+			GenerateDirectionalLightEffectData(surfaceWS, trdf, light, ColorTint, Gradient, Highlight, Subsurface);
 		}
 	}
 
@@ -89,6 +91,7 @@ float3 GetOceanLighting(Surface surfaceWS, TRDF trdf, GI gi)
 	//this add makes the foam too stand out....
 	color += surfaceWS.foamMask * clamp(Gradient+0.05f, 0,1);
 	color += Highlight;
+	color += Subsurface;
 	color *= ColorTint;
 
 	

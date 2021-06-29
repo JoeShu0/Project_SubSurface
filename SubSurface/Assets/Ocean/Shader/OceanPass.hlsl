@@ -133,7 +133,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	surface.interpolatedNormalWS = baseNormalWS;
 
 	surface.alpha = 1.0f;
-	surface.occlusion = 1;
+	surface.occlusion = 1.0f;
 	surface.fresnelStrength = 1;
 	surface.viewDirection = normalize(_WorldSpaceCameraPos - input.positionWS);
 	surface.depth = -TransformWorldToView(input.positionWS).z;

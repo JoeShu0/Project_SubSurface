@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Material_LOD6
   m_Shader: {fileID: 4800000, guid: 36e0b36d9215e6943acb44f0b8fa26a5, type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: _RECEIVE_SHADOWS
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
@@ -27,6 +27,7 @@ Material:
     - _GridSize: 12.8
     - _LODIndex: 6
     - _LODSize: 4096
+    - _ReceiveShadows: 1
     m_Colors:
     - _TransitionParam: {r: 1740.8, g: 1740.8, b: 204.8, a: 204.8}
   m_BuildTextureStacks: []
