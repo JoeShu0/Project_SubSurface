@@ -78,6 +78,7 @@
     <Compile Include="Assets\CustomRP\Runtime\CameraBufferSettings.cs" />
     <Compile Include="Assets\CustomRP\Examples\MeshBall.cs" />
     <Compile Include="Assets\CustomRP\Runtime\CameraRenderer.Editor.cs" />
+    <Compile Include="Assets\Ocean\Objects\WaveTester.cs" />
     <Compile Include="Assets\Ocean\Scripts\OceanRenderSetting.cs" />
     <Compile Include="Assets\CustomRP\Runtime\CustomRenderPipelineAsset.Editor.cs" />
     <Compile Include="Assets\Ocean\Scripts\PerTileMaterialProperty.cs" />
@@ -118,6 +119,7 @@
      <None Include="Assets\Ocean\Shader\OceanSampler.compute" />
      <None Include="Assets\CustomRP\ShaderLib\GI.hlsl" />
      <None Include="Assets\CustomRP\ShaderLib\Fragment.hlsl" />
+     <None Include="Assets\Ocean\Objects\finiteWaterCompute.compute" />
      <None Include="Assets\CustomRP\Shader\UnlitInput.hlsl" />
      <None Include="Assets\CustomRP\Shader\UICustomBlending.shader" />
      <None Include="Assets\CustomRP\ShaderLib\BRDF.hlsl" />

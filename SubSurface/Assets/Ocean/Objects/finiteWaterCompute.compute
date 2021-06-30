@@ -1,0 +1,108 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel posToPoints
+#pragma kernel pointToWave
+//#pragma kernel FiniteWater
+//#pragma kernel CopyBtoA
+
+// Create a RenderTexture with enableRandomWrite flag and set it
+// with cs.SetTexture
+RWTexture2D<float4> frameA;
+RWTexture2D<float4> frameB;
+RWTexture2D<int> frameP;
+
+StructuredBuffer<float4> _WavePoints;
+
+float4 _AddPosition;
+float4 _TimeParams; // deltatime, 1/detltatime, fixedDeltatime, 1/fixedDeltatime
+float4 _OceanLODParams; // center pos and LOD0Size
+
+float DistanceSquared2(float2 pA, float2 pB)
+{
+    return dot(pA - pB, pA - pB);
+}
+/*
+[numthreads(32,32,1)]
+void FiniteWater (uint3 id : SV_DispatchThreadID)
+{
+    uint width, height;
+    frameA.GetDimensions(width, height);
+
+    //u is elevation (stored in x) 
+    //du is verticle speed(stored in y)
+    float2 udu = frameA[id.xy].xy;
+    float u = udu.x;
+    float du = udu.y;
+    //Finite differences
+    float ux = frameA[float2(id.x + 1, id.y)].x;
+    float umx = frameA[float2(id.x - 1, id.y)].x;
+    float uy = frameA[float2(id.x, id.y + 1)].x;
+    float umy = frameA[float2(id.x, id.y - 1)].x;
+
+    float dt2 = _TimeParams.z * _TimeParams.z;
+    float celerity2 = 500.0f;
+    float dx2 = 1.0;
+
+    float nu = u + du + (dt2* celerity2/ dx2) * (umx + ux + umy + uy - 4.0f * u);
+    nu = 0.999 * nu;
+    
+    frameB[id.xy] = float4(nu, nu - u, 0.0, 0.0);
+    
+    //frameB[id.xy] = float4(1.0, 0.5, 0.0, 0.0);
+}
+
+[numthreads(32, 32, 1)]
+void CopyBtoA(uint3 id : SV_DispatchThreadID)
+{
+    frameA[id.xy] = frameB[id.xy];
+}
+*/
+[numthreads(32, 32, 1)]
+void posToPoints(uint3 id : SV_DispatchThreadID)
+{
+    uint width, height;
+    frameP.GetDimensions(width, height);
+    
+    float4 wavePoint = _WavePoints[id.x];
+
+    float2 RelPos = (wavePoint.xyz - _OceanLODParams.xyz).xz;
+
+    uint2 UV = uint2((RelPos / wavePoint.w + 0.5f) * width);
+    
+    int cwavepoint;
+    
+    //frameP[UV] = wavePoint.w;
+    //InterlockedAdd(frameP[UV], wavePoint.w, cwavepoint);
+    frameA[id.xy ] =float4(1.0,0.0,0.0,0.0);
+    
+        /*
+    float2 udu = frameA[id.xy].xy;
+
+    float2 Ap = _AddPosition.xy;
+    float2 Cp = id.xy;
+    float dist2 = DistanceSquared2(Ap, Cp);
+
+    //float addValue = 1 - clamp(dist2 / (AddPosition.z * AddPosition.z), 0.0, 1.0) * AddPosition.w;
+    float addValue = dist2 > (_AddPosition.z * _AddPosition.z) ? 0.0: _AddPosition.w;
+
+    float nu = max(addValue, udu.x);
+
+    frameA[id.xy] = float4(nu, udu.y,0.0,0.0);
+    */
+
+}
+
+[numthreads(32, 32, 1)]
+void pointToWave(uint3 id : SV_DispatchThreadID)
+{
+    uint width, height;
+    frameA.GetDimensions(width, height);
+    
+    int sum = 0;
+    for (int i = 1; i < 20; i++)
+    {
+        sum += frameP[uint2(id.x + i, id.y)];
+        sum += frameP[uint2(id.x - i, id.y)];
+    }
+    
+    frameA[id.xy] = float4(sum, 0.0, 0.0, 0.0);
+}

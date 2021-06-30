@@ -133,6 +133,8 @@ public class OceanBuoyancy : MonoBehaviour
             
             BuoyancyPoints[i].BPindex = OceanRenderer.Instance.OHS.RegisterOceanSamplePoint(BuoyancyPoints[i].transform);
             //Debug.Log(BuoyancyPoints[i].BPindex);
+
+            WaveTester.Instance.RegisterOceanSamplePoint(BuoyancyPoints[i].transform);
         }
     }
 
