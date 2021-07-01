@@ -23,11 +23,11 @@ public class OceanRenderSetting : ScriptableObject
 
     //OceanSacle for the whole gameobject
     [HideInInspector]
-    public Vector2[] CurPastOceanScale = new Vector2[2];
+    public Vector2[] CurPastOceanScale = new Vector2[2];//X cur scale log 2, Y cur scale, z past scale log2, w past scale 
     [HideInInspector]
     public float OceanScaleTransition = 0;
     [HideInInspector]
-    public Vector2[] CurAndPastPos = new Vector2[2];//X cur scale log 2, Y cur scale, z past scale log2, w past scale 
+    public Vector2[] CurAndPastPos = new Vector2[2];
 
     //the camera ocean always follow
     public float OceanCamExtend = 10.0f;

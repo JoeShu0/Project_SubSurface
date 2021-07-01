@@ -1,6 +1,11 @@
 // Each #kernel tells which function to compile; you can have many kernels
+
+#pragma kernel CLearFPToBalck
 #pragma kernel posToPoints
-#pragma kernel pointToWave
+#pragma kernel pointToWaveX
+#pragma kernel pointToWaveY
+#pragma kernel WavePropagate
+
 //#pragma kernel FiniteWater
 //#pragma kernel CopyBtoA
 
@@ -8,18 +13,38 @@
 // with cs.SetTexture
 RWTexture2D<float4> frameA;
 RWTexture2D<float4> frameB;
-RWTexture2D<int> frameP;
+RWTexture2D<int> framePA;
+RWTexture2D<int> framePB;
 
-StructuredBuffer<float4> _WavePoints;
+StructuredBuffer<float4> _WavePoints; //Pos and Amp
+
+//float4 midBuffer[512][512];
 
 float4 _AddPosition;
 float4 _TimeParams; // deltatime, 1/detltatime, fixedDeltatime, 1/fixedDeltatime
 float4 _OceanLODParams; // center pos and LOD0Size
+float4 _CurAndPastPos;
 
 float DistanceSquared2(float2 pA, float2 pB)
 {
     return dot(pA - pB, pA - pB);
 }
+
+float4 GetBilinearWeight(float2 UV)
+{
+    float2 xy = UV - floor(UV);
+
+    //Weights for p00,p01,p10,p11
+
+    float4 Weightxy = float4(
+        (1 - xy.x) * (1 - xy.y),
+        (1 - xy.x) * (xy.y),
+        (xy.x) * (1 - xy.y),
+        (xy.x) * (xy.y));
+
+    return Weightxy;
+}
+
 /*
 [numthreads(32,32,1)]
 void FiniteWater (uint3 id : SV_DispatchThreadID)
@@ -49,30 +74,55 @@ void FiniteWater (uint3 id : SV_DispatchThreadID)
     
     //frameB[id.xy] = float4(1.0, 0.5, 0.0, 0.0);
 }
-
-[numthreads(32, 32, 1)]
-void CopyBtoA(uint3 id : SV_DispatchThreadID)
-{
-    frameA[id.xy] = frameB[id.xy];
-}
 */
 [numthreads(32, 32, 1)]
+void CLearFPToBalck(uint3 id : SV_DispatchThreadID)
+{
+    framePB[id.xy] = 0;
+    framePA[id.xy] = 0;
+    frameA[id.xy] = frameB[id.xy];
+}
+
+[numthreads(32, 1, 1)]
 void posToPoints(uint3 id : SV_DispatchThreadID)
 {
     uint width, height;
-    frameP.GetDimensions(width, height);
+    framePA.GetDimensions(width, height);
     
     float4 wavePoint = _WavePoints[id.x];
 
-    float2 RelPos = (wavePoint.xyz - _OceanLODParams.xyz).xz;
+    float2 RelPos = wavePoint.xz - _CurAndPastPos.xy;
 
-    uint2 UV = uint2((RelPos / wavePoint.w + 0.5f) * width);
+    uint2 UVuint = uint2((RelPos / _OceanLODParams.w + 0.5f) * width);
+    float2 UV = float2((RelPos / _OceanLODParams.w + 0.5f) * width);
     
     int cwavepoint;
+
+    //frameP[UV] =1;
+    //InterlockedAdd(frameP[UVuint], asint(wavePoint.w), cwavepoint);
+    //frameP[id.xy] = 1;
     
-    //frameP[UV] = wavePoint.w;
-    //InterlockedAdd(frameP[UV], wavePoint.w, cwavepoint);
-    frameA[id.xy ] =float4(1.0,0.0,0.0,0.0);
+    if (max(UV.x, UV.y) < (float)width)
+    {
+        float4 B_Weight = GetBilinearWeight(UV);
+
+        uint2 P00 = uint2(floor(UV.x), floor(UV.y));
+        uint2 P01 = uint2(floor(UV.x), ceil(UV.y));
+        uint2 P10 = uint2(ceil(UV.x), floor(UV.y));
+        uint2 P11 = uint2(ceil(UV.x), ceil(UV.y));
+
+        float ampP00 = wavePoint.w * B_Weight[0];
+        float ampP01 = wavePoint.w * B_Weight[1];
+        float ampP10 = wavePoint.w * B_Weight[2];
+        float ampP11 = wavePoint.w * B_Weight[3];
+
+        //InterlockedAdd(frameP[P00], asint(wavePoint.w), cwavepoint);
+
+        InterlockedAdd(framePA[P00], asint(ampP00), cwavepoint);
+        InterlockedAdd(framePA[P01], asint(ampP01), cwavepoint);
+        InterlockedAdd(framePA[P10], asint(ampP10), cwavepoint);
+        InterlockedAdd(framePA[P11], asint(ampP11), cwavepoint);
+    }
     
         /*
     float2 udu = frameA[id.xy].xy;
@@ -92,17 +142,72 @@ void posToPoints(uint3 id : SV_DispatchThreadID)
 }
 
 [numthreads(32, 32, 1)]
-void pointToWave(uint3 id : SV_DispatchThreadID)
+void pointToWaveX(uint3 id : SV_DispatchThreadID)
+{
+    uint width, height;
+    framePA.GetDimensions(width, height);
+    
+    float sum = 0;
+    sum += asfloat(framePA[uint2(id.x, id.y)]);
+    
+    for (int i = 1; i < 2; i++)
+    {
+        sum += asfloat(framePA[uint2(id.x + i, id.y)]);
+        sum += asfloat(framePA[uint2(id.x - i, id.y)]);
+    }
+
+    framePB[id.xy] = asint(sum);
+}
+
+[numthreads(32, 32, 1)]
+void pointToWaveY(uint3 id : SV_DispatchThreadID)
 {
     uint width, height;
     frameA.GetDimensions(width, height);
-    
-    int sum = 0;
-    for (int i = 1; i < 20; i++)
+
+    float sum = 0;
+    sum += asfloat(framePB[uint2(id.x, id.y)]);
+    for (int i = 1; i < 2; i++)
     {
-        sum += frameP[uint2(id.x + i, id.y)];
-        sum += frameP[uint2(id.x - i, id.y)];
+        sum += asfloat(framePB[uint2(id.x, id.y + i)]);
+        sum += asfloat(framePB[uint2(id.x, id.y - i)]);
     }
-    
-    frameA[id.xy] = float4(sum, 0.0, 0.0, 0.0);
+    frameA[id.xy] += float4(sum, 0.0, 0.0, 0.0);
 }
+
+[numthreads(32, 32, 1)]
+void WavePropagate(uint3 id : SV_DispatchThreadID)
+{
+    uint width, height;
+    frameA.GetDimensions(width, height);
+
+    float2 offset = ((_CurAndPastPos.xy - _CurAndPastPos.zw) / _OceanLODParams.w) * width;
+    int2 offsetUint = uint2(offset);
+
+    //u is elevation (stored in x) 
+    //du is verticle speed(stored in y)
+    float2 udu = frameA[id.xy].xy;
+    float u = udu.x;
+    float du = udu.y;
+    //Finite differences
+    float ux = frameA[uint2(id.x + 1, id.y) + offsetUint].x;
+    float umx = frameA[uint2(id.x - 1, id.y) + offsetUint].x;
+    float uy = frameA[uint2(id.x, id.y + 1) + offsetUint].x;
+    float umy = frameA[uint2(id.x, id.y - 1) + offsetUint].x;
+
+    float dt2 = _TimeParams.z * _TimeParams.z;
+    float celerity2 = 500.0f;
+    float dx2 = 1.0;
+
+    float stabelcrit = dt2 * celerity2 / dx2;
+    if (stabelcrit > 0.5)
+    {
+        stabelcrit = 0;
+    }
+
+    float nu = u + du + (dt2 * celerity2 / dx2) * (umx + ux + umy + uy - 4.0f * u);
+    nu = 0.99 * nu;
+
+    frameB[id.xy] = float4(nu, nu - u, 0.0, 0.0);
+}
+
