@@ -28,6 +28,7 @@ public class OceanRenderer :MonoBehaviour
 
     //private ComputeBuffer WaveParticleBuffer;
     //private ComputeBuffer WaveParticleParamsBuffer;
+    RenderTexture temppointframe;
 
     //*****Ocean Render Shader LOD related*****
     int gridSizeId = Shader.PropertyToID("_GridSize");
@@ -105,6 +106,11 @@ public class OceanRenderer :MonoBehaviour
     {
         //SetWaveParticlesBuffer();
         //print("ORR Enabled!");
+        temppointframe =  new RenderTexture(512, 512, 0, RenderTextureFormat.RInt, RenderTextureReadWrite.Linear);
+        temppointframe.enableRandomWrite = true;
+        temppointframe.dimension = UnityEngine.Rendering.TextureDimension.Tex2DArray;
+        temppointframe.volumeDepth = 8;
+        temppointframe.Create();
     }
 
     private void Start()
@@ -155,7 +161,7 @@ public class OceanRenderer :MonoBehaviour
         {
             UpdateOceantransform();
             RenderDisAndNormalMapsForLODs();
-            //RenderWaveParticlesForLODs();
+            RenderWaveParticlesForLODs();
             RenderNormalForLODs();
 
             
@@ -175,7 +181,7 @@ public class OceanRenderer :MonoBehaviour
     {
         UpdateOceantransform();
         RenderDisAndNormalMapsForLODs();
-        //RenderWaveParticlesForLODs();
+        RenderWaveParticlesForLODs();
         RenderNormalForLODs();
 
         UpdateWaveParticles();
@@ -533,8 +539,10 @@ public class OceanRenderer :MonoBehaviour
         ORS.shapeWaveParticleShader.SetVector("_TimeParams", new Vector4(Time.time, Time.fixedDeltaTime, 0.0f, 0.0f));
 
         ORS.shapeWaveParticleShader.SetTexture(0, "_DisplaceArray", ORS.LODDisplaceMapsArray);
+        ORS.shapeWaveParticleShader.SetTexture(0, "_PointFrame", temppointframe);
 
         ORS.shapeWaveParticleShader.SetTexture(1, "_DisplaceArray", ORS.LODDisplaceMapsArray);
+        ORS.shapeWaveParticleShader.SetTexture(1, "_PointFrame", temppointframe);
         ORS.shapeWaveParticleShader.SetTexture(1, "_WaveParticleArray", ORS.LODWaveParticleMapsArray);
 
         ORS.shapeWaveParticleShader.SetTexture(2, "_DisplaceArray", ORS.LODDisplaceMapsArray);

@@ -22,6 +22,9 @@ RWTexture2DArray<float4> _VelocityArray;
 //RWTexture2D<float4> _BaseDerivativeMap;//Previous LOD DeriMap ,R: Dxx, G:Dyy, B:Dzx, A:Dzy
 //Texture2D<float4> _BaseDerivativeMap_Sample;//Same as _BaseDerivativeMap just for sampling
 RWTexture2DArray<float4> _WaveParticleArray;
+
+RWTexture2DArray<int> _PointFrame;
+
 //sampler 
 SamplerState linearClampSampler;
 
@@ -132,6 +135,7 @@ void ParticleToPoint(uint3 id : SV_DispatchThreadID)
 
     //_DisplaceArray[uint3(id.x, 0, LODIndex)] = float4(1.0, 100.0, 1.0, 1.0);
 
+    int cva;
 
     if (max(UV.x, UV.y) < (float)width)
     {
@@ -152,6 +156,12 @@ void ParticleToPoint(uint3 id : SV_DispatchThreadID)
         displaceP10.a += ParticleAmp * B_Weight[2];
         displaceP11.a += ParticleAmp * B_Weight[3];
 
+        float ampP00 = ParticleAmp * B_Weight[0];
+        float ampP01 = ParticleAmp * B_Weight[1];
+        float ampP10 = ParticleAmp * B_Weight[2];
+        float ampP11 = ParticleAmp * B_Weight[3];
+
+        InterlockedAdd(_PointFrame[uint3(P00, LODIndex)], 1, cva);
         _DisplaceArray[uint3(P00, LODIndex)] = displaceP00;
         //_DisplaceArray[uint3(P01, LODIndex)] = displaceP01;
         //_DisplaceArray[uint3(P10, LODIndex)] = displaceP10;
@@ -177,15 +187,16 @@ void PointsToDisplacement_X (uint3 id : SV_DispatchThreadID)
 
     int UV_PRadius = floor(ParticleRadius / CurrentLODSize * width);
     
-    //float4 DisplaceData = _DisplaceArray[uint3(id.x, id.y, LODIndex)];
-    float CombinedAmp = _DisplaceArray[uint3(id.x, id.y, LODIndex)].w;
+
+    //float CombinedAmp = _DisplaceArray[uint3(id.x, id.y, LODIndex)].a;
+    float CombinedAmp = _PointFrame[uint3(id.x, id.y, LODIndex)];
     float CombinedXoffset = 0.0;
     //unroll[16]
     for (int i = 1; i < UV_PRadius; i++)
     {
 
-        float neighbouroffset_right = _DisplaceArray[uint3(id.x + i, id.y, LODIndex)].a;
-        float neighbouroffset_left = _DisplaceArray[uint3(id.x - i, id.y, LODIndex)].a;
+        float neighbouroffset_right = _PointFrame[uint3(id.x + i, id.y, LODIndex)];
+        float neighbouroffset_left = _PointFrame[uint3(id.x - i, id.y, LODIndex)];
           
         float x = (float)i / (float)UV_PRadius;
         float cheapstep = pow(1.0 - x*x, 2);
@@ -301,7 +312,7 @@ void UpdateWaveParicles(uint3 id : SV_DispatchThreadID)
     float3 positionWS = float3(10.0,0.0,35.0);
     float3 velocity = float3(1.0,0.0,0.0);
     float radius = 1.0;
-
+     
     float3 ReltivePos = positionWS - _CenterPos;
     float LOD0Size = _LODParams.z;
 
