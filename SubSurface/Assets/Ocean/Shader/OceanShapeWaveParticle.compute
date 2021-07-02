@@ -3,10 +3,11 @@
 #pragma kernel PointsToDisplacement_X
 #pragma kernel PointsToDisplacement_Y
 #pragma kernel ApplyWaveParicles
+#pragma kernel ClearIntTex
 
 
 #define WAVEPARTICLERADIUS 8//This max be fixed
-#define WAVEPARTICLESPEED 8//the speed is also fixed?
+#define WAVEPARTICLESPEED 2//the speed is also fixed?
 #define WAVEPARTICLEAMP 0.5
 #define WP_HORI_MUL 0.5
 
@@ -48,6 +49,18 @@ float4 _TimeParams;
 float DistanceSquared2(float2 pA, float2 pB)
 {
     return dot(pA - pB, pA - pB);
+}
+//custom convertion
+//float range should be -100.0 ~ 100.0
+//int range is -2147483648 ~ 2147483647
+float Custom_IntToFloat(int value)
+{
+    return float(value) / 2147483647.0 * 100.0;
+}
+
+int Custom_FloatToInt(float value)
+{
+    return int(value / 100.0 * 2147483647.0);
 }
 
 float4 GetBilinearWeight(float2 UV)
@@ -161,8 +174,11 @@ void ParticleToPoint(uint3 id : SV_DispatchThreadID)
         float ampP10 = ParticleAmp * B_Weight[2];
         float ampP11 = ParticleAmp * B_Weight[3];
 
-        InterlockedAdd(_PointFrame[uint3(P00, LODIndex)], 1, cva);
-        _DisplaceArray[uint3(P00, LODIndex)] = displaceP00;
+        InterlockedAdd(_PointFrame[uint3(P00, LODIndex)], Custom_FloatToInt(ampP00), cva);
+        InterlockedAdd(_PointFrame[uint3(P01, LODIndex)], Custom_FloatToInt(ampP01), cva);
+        InterlockedAdd(_PointFrame[uint3(P10, LODIndex)], Custom_FloatToInt(ampP10), cva);
+        InterlockedAdd(_PointFrame[uint3(P11, LODIndex)], Custom_FloatToInt(ampP11), cva);
+        //_DisplaceArray[uint3(P00, LODIndex)] = displaceP00;
         //_DisplaceArray[uint3(P01, LODIndex)] = displaceP01;
         //_DisplaceArray[uint3(P10, LODIndex)] = displaceP10;
         //_DisplaceArray[uint3(P11, LODIndex)] = displaceP11;
@@ -189,14 +205,15 @@ void PointsToDisplacement_X (uint3 id : SV_DispatchThreadID)
     
 
     //float CombinedAmp = _DisplaceArray[uint3(id.x, id.y, LODIndex)].a;
-    float CombinedAmp = _PointFrame[uint3(id.x, id.y, LODIndex)];
+    float CombinedAmp = Custom_IntToFloat(_PointFrame[uint3(id.x, id.y, LODIndex)]);
     float CombinedXoffset = 0.0;
+    
     //unroll[16]
     for (int i = 1; i < UV_PRadius; i++)
     {
 
-        float neighbouroffset_right = _PointFrame[uint3(id.x + i, id.y, LODIndex)];
-        float neighbouroffset_left = _PointFrame[uint3(id.x - i, id.y, LODIndex)];
+        float neighbouroffset_right = Custom_IntToFloat(_PointFrame[uint3(id.x + i, id.y, LODIndex)]);
+        float neighbouroffset_left = Custom_IntToFloat(_PointFrame[uint3(id.x - i, id.y, LODIndex)]);
           
         float x = (float)i / (float)UV_PRadius;
         float cheapstep = pow(1.0 - x*x, 2);
@@ -208,7 +225,7 @@ void PointsToDisplacement_X (uint3 id : SV_DispatchThreadID)
         CombinedAmp += cheapstep * (neighbouroffset_left + neighbouroffset_right);
         CombinedXoffset +=  -weight_X * neighbouroffset_right + weight_X * neighbouroffset_left;
     }
-
+    
     float4 WPDisplacement = float4(CombinedXoffset, CombinedAmp, 0.0, 0.0);
 
 
@@ -255,7 +272,7 @@ void PointsToDisplacement_Y(uint3 id : SV_DispatchThreadID)
         CombinedYoffset += -weight_Y * neighbourDisplace_up.y + weight_Y * neighbourDisplace_down.y;
 
     }
-
+    
     float4 WPDisplacement = float4(CombinedXoffset, CombinedAmp, CombinedYoffset, 0.0);
 
     _WaveParticleArray[uint3(id.x, id.y, LODIndex)] = WPDisplacement;
@@ -343,4 +360,10 @@ void UpdateWaveParicles(uint3 id : SV_DispatchThreadID)
     uint WP_pointer = 
     _WaveParticleBuffer[_WaveParticleParamsBuffer]
     */
+}
+
+[numthreads(32, 32, 1)]
+void ClearIntTex(uint3 id : SV_DispatchThreadID)
+{
+    _PointFrame[id.xyz] = 0;
 }

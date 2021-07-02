@@ -134,7 +134,7 @@ public class OceanBuoyancy : MonoBehaviour
             BuoyancyPoints[i].BPindex = OceanRenderer.Instance.OHS.RegisterOceanSamplePoint(BuoyancyPoints[i].transform);
             //Debug.Log(BuoyancyPoints[i].BPindex);
 
-            WaveTester.Instance.RegisterOceanSamplePoint(BuoyancyPoints[i].transform);
+            //WaveTester.Instance.RegisterOceanSamplePoint(BuoyancyPoints[i].transform);
         }
     }
 
@@ -204,15 +204,18 @@ public class OceanBuoyancy : MonoBehaviour
                 float angle = subAngle * i;
                 Quaternion RotationLeft = Quaternion.Euler(0, angle, 0);
                 Vector3 direction = Vector3.Normalize(RotationLeft * relativeVel);
-                float amp = Vector3.Dot(relativeVel, direction)*0.5f;
+                float amp = Mathf.Sign(Vector3.Dot(relativeVel, direction)) * 0.25f * relativeVel.magnitude;
                 //direction *= Mathf.Sign(amp);
                 OceanRenderSetting.WaveParticle NewWPs = new OceanRenderSetting.WaveParticle();
+                if (amp < 0)
+                    continue;
 
-                NewWPs.Amplitude = amp;
-                NewWPs.BirthTime = Time.time;
+                NewWPs.Amplitude = amp*0.5f;
+                NewWPs.BirthTime = Time.time-1.0f;
                 NewWPs.DispersionAngle = subAngle;
                 NewWPs.Direction = new Vector2(direction.x, direction.z);
                 NewWPs.Origin = new Vector2(transform.position.x, transform.position.z);
+
 
                 OceanRenderer.Instance.SpawnWaveParticles(NewWPs);
             }

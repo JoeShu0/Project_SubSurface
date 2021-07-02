@@ -109,7 +109,7 @@ public class OceanRenderSetting : ScriptableObject
         public Vector2 Origin;
     }
     //this must be kept the same with the setting in computeshader
-    public static float WaveParticleSpeed = 8.0f;
+    public static float WaveParticleSpeed = 2.0f;
     public static float WaveParticleRadius = 8.0f;
 
     [Tooltip("Tick this box will regenerate All WaveDatas")]

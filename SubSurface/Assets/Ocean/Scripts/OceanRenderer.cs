@@ -139,7 +139,7 @@ public class OceanRenderer :MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        /*
+        
         for (int i = 0; i < ORS.WaveParticleCount; i++)
         {
             Vector2 position = ORS.WaveParticles[i].Origin + 
@@ -148,7 +148,7 @@ public class OceanRenderer :MonoBehaviour
 
             Gizmos.DrawSphere(new Vector3(position.x,0.0f, position.y), 0.1f);
         }
-        */
+        
     }
     private void Update()
     {
@@ -553,6 +553,8 @@ public class OceanRenderer :MonoBehaviour
         ORS.shapeWaveParticleShader.SetTexture(3, "_DerivativeArray", ORS.LODDerivativeMapsArray);
         ORS.shapeWaveParticleShader.SetTexture(3, "_VelocityArray", ORS.LODVelocityMapsArray);
 
+        ORS.shapeWaveParticleShader.SetTexture(4, "_PointFrame", temppointframe);
+
         ORS.shapeWaveParticleShader.SetFloats(centerPosId, new float[]
             { transform.position.x, transform.position.y, transform.position.z}
             );
@@ -572,6 +574,8 @@ public class OceanRenderer :MonoBehaviour
         ORS.shapeWaveParticleShader.Dispatch(1, threadGroupX, threadGroupY, WaveParticleLODs);
         ORS.shapeWaveParticleShader.Dispatch(2, threadGroupX, threadGroupY, WaveParticleLODs);
         ORS.shapeWaveParticleShader.Dispatch(3, threadGroupX, threadGroupY, WaveParticleLODs);
+
+        ORS.shapeWaveParticleShader.Dispatch(4, threadGroupX, threadGroupY, WaveParticleLODs);
 
 
         shapeWaveParticleBuffer.Release();
