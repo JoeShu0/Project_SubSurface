@@ -206,7 +206,7 @@ public class OceanBuoyancy : MonoBehaviour
                 Vector3 direction = Vector3.Normalize(RotationLeft * relativeVel);
                 float amp = Mathf.Sign(Vector3.Dot(relativeVel, direction)) * 0.25f * relativeVel.magnitude;
                 //direction *= Mathf.Sign(amp);
-                OceanRenderSetting.WaveParticle NewWPs = new OceanRenderSetting.WaveParticle();
+                OceanWaveParticleRender.WaveParticle NewWPs = new OceanWaveParticleRender.WaveParticle();
                 if (amp < 0)
                     continue;
 
@@ -217,7 +217,7 @@ public class OceanBuoyancy : MonoBehaviour
                 NewWPs.Origin = new Vector2(transform.position.x, transform.position.z);
 
 
-                OceanRenderer.Instance.SpawnWaveParticles(NewWPs);
+                OceanRenderer.Instance.OWPR.SpawnWaveParticles(NewWPs);
             }
 
             

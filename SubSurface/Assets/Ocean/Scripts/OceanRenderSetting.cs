@@ -45,6 +45,9 @@ public class OceanRenderSetting : ScriptableObject
     public int WaveCount = 128;
 
     public int WaveParticleCount = 1024;
+    //this must be kept the same with the setting in computeshader
+    public float WaveParticleSpeed = 2.0f;
+    public float WaveParticleRadius = 8.0f;
 
     //EachLOD have 4 tiles
     public static int TilePerLOD = 4;
@@ -98,26 +101,10 @@ public class OceanRenderSetting : ScriptableObject
         public Vector2 Direction;
     }
 
-    [System.Serializable]
-    public struct WaveParticle
-    {
-        public float Amplitude;
-        public float BirthTime;
-        public float DispersionAngle;
-        public float Padding;
-        public Vector2 Direction;//maybe we should use angle for direction, this makes subdivide easier
-        public Vector2 Origin;
-    }
-    //this must be kept the same with the setting in computeshader
-    public static float WaveParticleSpeed = 2.0f;
-    public static float WaveParticleRadius = 8.0f;
-
     [Tooltip("Tick this box will regenerate All WaveDatas")]
     public bool RegenerateWaveDatas = true;
     [SerializeField]
     public WaveData[] SpectrumWaves;
-    [HideInInspector]
-    public WaveParticle[] WaveParticles;
     [HideInInspector]
     public int WaveParticleEnd;
 
@@ -200,7 +187,7 @@ public class OceanRenderSetting : ScriptableObject
         InitMaterials();
         InitOceanWaves();
 
-        InitWaveParticles();
+        //InitWaveParticles();
 
         IsInit = true;
 
@@ -218,7 +205,7 @@ public class OceanRenderSetting : ScriptableObject
         if (RegenerateWaveDatas)
         {
             InitOceanWaves();
-            InitWaveParticles();
+            //InitWaveParticles();
             RegenerateWaveDatas = false;
         }
         if (RegenerateTileMeshes)
@@ -239,23 +226,7 @@ public class OceanRenderSetting : ScriptableObject
 
     }
 
-    private void InitWaveParticles()
-    {
-        WaveParticles = new WaveParticle[WaveParticleCount];
 
-        for (int i = 0; i < WaveParticleCount; i++)
-        {
-            WaveParticles[i].Amplitude = 0.0f;
-            //WaveParticles[i].Radius = 4.0f;
-            WaveParticles[i].BirthTime = 0.0f;
-
-            WaveParticles[i].DispersionAngle = 0;
-            WaveParticles[i].Direction = new Vector2(-1.0f,1.0f);
-            WaveParticles[i].Origin = new Vector2(1.0f*i, 1.0f * i);
-        }
-
-        WaveParticleEnd = 0;
-    }
 
     private void InitOceanWaves()
     {

@@ -15,6 +15,8 @@ public class OceanRenderer :MonoBehaviour
     public OceanShadingSetting OSS;
     //[HideInInspector]
     public OceanHeightSampler OHS;
+    //[HideInInspector]
+    public OceanWaveParticleRender OWPR;
 
     [Tooltip("Tick this box will regenerate All LOD meshes and Materials")]
     public bool hasOceanLOD = false;
@@ -28,7 +30,6 @@ public class OceanRenderer :MonoBehaviour
 
     //private ComputeBuffer WaveParticleBuffer;
     //private ComputeBuffer WaveParticleParamsBuffer;
-    RenderTexture temppointframe;
 
     //*****Ocean Render Shader LOD related*****
     int gridSizeId = Shader.PropertyToID("_GridSize");
@@ -96,7 +97,7 @@ public class OceanRenderer :MonoBehaviour
 
         //init the Ocean sampler
         OHS = new OceanHeightSampler(ORS, transform, ORS.getHeight);
-        
+        OWPR = new OceanWaveParticleRender(ORS, transform, ORS.shapeWaveParticleShader);
 
         //the render RT part should be moved into a separate class
         this.threadGroupX = threadGroupY = Mathf.CeilToInt(ORS.RTSize / 32.0f);
@@ -106,11 +107,7 @@ public class OceanRenderer :MonoBehaviour
     {
         //SetWaveParticlesBuffer();
         //print("ORR Enabled!");
-        temppointframe =  new RenderTexture(512, 512, 0, RenderTextureFormat.RInt, RenderTextureReadWrite.Linear);
-        temppointframe.enableRandomWrite = true;
-        temppointframe.dimension = UnityEngine.Rendering.TextureDimension.Tex2DArray;
-        temppointframe.volumeDepth = 8;
-        temppointframe.Create();
+
     }
 
     private void Start()
@@ -142,9 +139,9 @@ public class OceanRenderer :MonoBehaviour
         
         for (int i = 0; i < ORS.WaveParticleCount; i++)
         {
-            Vector2 position = ORS.WaveParticles[i].Origin + 
-                ORS.WaveParticles[i].Direction * OceanRenderSetting.WaveParticleSpeed * 
-                (Time.time - ORS.WaveParticles[i].BirthTime);
+            Vector2 position = OWPR.WaveParticles[i].Origin + 
+                OWPR.WaveParticles[i].Direction * ORS.WaveParticleSpeed * 
+                (Time.time - OWPR.WaveParticles[i].BirthTime);
 
             Gizmos.DrawSphere(new Vector3(position.x,0.0f, position.y), 0.1f);
         }
@@ -161,7 +158,7 @@ public class OceanRenderer :MonoBehaviour
         {
             UpdateOceantransform();
             RenderDisAndNormalMapsForLODs();
-            //RenderWaveParticlesForLODs();
+            OWPR.RenderWaveParticlesForLODs();
             RenderNormalForLODs();
 
             
@@ -181,10 +178,10 @@ public class OceanRenderer :MonoBehaviour
     {
         UpdateOceantransform();
         RenderDisAndNormalMapsForLODs();
-        RenderWaveParticlesForLODs();
+        OWPR.RenderWaveParticlesForLODs();
         RenderNormalForLODs();
 
-        UpdateWaveParticles();
+        //UpdateWaveParticles();
         // replave corotine with asnc await later
         if (!OHS.IsRetrivingGPUData)
         {
@@ -528,61 +525,7 @@ public class OceanRenderer :MonoBehaviour
         WaveParticleParamsBuffer.Release();
     }
     */
-    void RenderWaveParticlesForLODs()
-    {
-        
-        ComputeBuffer shapeWaveParticleBuffer = new ComputeBuffer(ORS.WaveParticleCount, 32);
-        ORS.shapeWaveParticleShader.SetInt("_WaveParticleCount", ORS.WaveParticleCount);
-        shapeWaveParticleBuffer.SetData(ORS.WaveParticles);
-        ORS.shapeWaveParticleShader.SetBuffer(0, "_WaveParticleBuffer", shapeWaveParticleBuffer);
-
-        ORS.shapeWaveParticleShader.SetVector("_TimeParams", new Vector4(Time.time, Time.fixedDeltaTime, 0.0f, 0.0f));
-
-        ORS.shapeWaveParticleShader.SetTexture(0, "_DisplaceArray", ORS.LODDisplaceMapsArray);
-        ORS.shapeWaveParticleShader.SetTexture(0, "_PointFrame", temppointframe);
-
-        ORS.shapeWaveParticleShader.SetTexture(1, "_DisplaceArray", ORS.LODDisplaceMapsArray);
-        ORS.shapeWaveParticleShader.SetTexture(1, "_PointFrame", temppointframe);
-        ORS.shapeWaveParticleShader.SetTexture(1, "_WaveParticleArray", ORS.LODWaveParticleMapsArray);
-
-        ORS.shapeWaveParticleShader.SetTexture(2, "_DisplaceArray", ORS.LODDisplaceMapsArray);
-        ORS.shapeWaveParticleShader.SetTexture(2, "_WaveParticleArray", ORS.LODWaveParticleMapsArray);
-
-        ORS.shapeWaveParticleShader.SetTexture(3, "_DisplaceArray", ORS.LODDisplaceMapsArray);
-        ORS.shapeWaveParticleShader.SetTexture(3, "_WaveParticleArray", ORS.LODWaveParticleMapsArray);
-        ORS.shapeWaveParticleShader.SetTexture(3, "_DerivativeArray", ORS.LODDerivativeMapsArray);
-        ORS.shapeWaveParticleShader.SetTexture(3, "_VelocityArray", ORS.LODVelocityMapsArray);
-
-        ORS.shapeWaveParticleShader.SetTexture(4, "_PointFrame", temppointframe);
-
-        ORS.shapeWaveParticleShader.SetFloats(centerPosId, new float[]
-            { transform.position.x, transform.position.y, transform.position.z}
-            );
-
-        /*
-        for (int i = 0; i < ORS.LODCount/ 2; i++)
-        {
-
-        }*/
-
-        int WaveParticleLODs = ORS.LODCount / 2;
-
-        float CurrentLODSize_L = ORS.GridSize * ORS.GridCountPerTile * 4 * ORS.CurPastOceanScale[0].y;
-        ORS.shapeWaveParticleShader.SetVector(lodParamsId,
-                    new Vector4(ORS.LODCount, 0, CurrentLODSize_L, 0.0f));
-        ORS.shapeWaveParticleShader.Dispatch(0, ORS.WaveParticleCount / 128, 1, WaveParticleLODs);
-        ORS.shapeWaveParticleShader.Dispatch(1, threadGroupX, threadGroupY, WaveParticleLODs);
-        ORS.shapeWaveParticleShader.Dispatch(2, threadGroupX, threadGroupY, WaveParticleLODs);
-        ORS.shapeWaveParticleShader.Dispatch(3, threadGroupX, threadGroupY, WaveParticleLODs);
-
-        ORS.shapeWaveParticleShader.Dispatch(4, threadGroupX, threadGroupY, WaveParticleLODs);
-
-
-        shapeWaveParticleBuffer.Release();
-
-
-        
-    }
+   
 
     void RenderNormalForLODs()
     {
@@ -620,73 +563,7 @@ public class OceanRenderer :MonoBehaviour
 
     }
 
-    public void SpawnWaveParticles(WaveParticle newWP)
-    {
-        if (ORS.WaveParticleEnd >= ORS.WaveParticleCount)
-        {
-            ORS.WaveParticleEnd = ORS.WaveParticleEnd % ORS.WaveParticleCount;
-        }
-        ORS.WaveParticles[ORS.WaveParticleEnd] = newWP;
-        ORS.WaveParticleEnd++;
-        //Debug.Log("Add WP!");
 
 
-    }
-
-    void UpdateWaveParticles()
-    {
-        for (int i = 0; i < Mathf.Min(ORS.WaveParticleCount, ORS.WaveParticleEnd); i++)
-        {
-            float LifeTime = Time.time - ORS.WaveParticles[i].BirthTime;
-            float Span = ORS.WaveParticles[i].DispersionAngle * Mathf.PI / 180.0f * OceanRenderSetting.WaveParticleSpeed * LifeTime;
-            if (Span >= OceanRenderSetting.WaveParticleRadius * 0.5f)
-            {
-                float newDispersionAngle = ORS.WaveParticles[i].DispersionAngle / 3.0f;
-                float newAmplitude = ORS.WaveParticles[i].Amplitude / 3.0f;
-
-                Quaternion RotationLeft = Quaternion.Euler(0, newDispersionAngle, 0);
-                Quaternion RotationRight = Quaternion.Euler(0, -newDispersionAngle, 0);
-                Vector2 originalDirection = ORS.WaveParticles[i].Direction;
-                Vector3 leftDirection3 = RotationLeft * new Vector3(originalDirection.x, 0, originalDirection.y);
-                Vector3 rightDirection3 = RotationRight * new Vector3(originalDirection.x, 0, originalDirection.y);
-
-
-                OceanRenderSetting.WaveParticle leftnewWP = new WaveParticle();
-                leftnewWP.Amplitude = newAmplitude;
-                leftnewWP.BirthTime = ORS.WaveParticles[i].BirthTime;
-                leftnewWP.DispersionAngle = newDispersionAngle;
-                leftnewWP.Origin = ORS.WaveParticles[i].Origin;
-                leftnewWP.Direction = new Vector2(leftDirection3.x, leftDirection3.z);
-
-                OceanRenderSetting.WaveParticle rightnewWP = new WaveParticle();
-                rightnewWP.Amplitude = newAmplitude;
-                rightnewWP.BirthTime = ORS.WaveParticles[i].BirthTime;
-                rightnewWP.DispersionAngle = newDispersionAngle;
-                rightnewWP.Origin = ORS.WaveParticles[i].Origin;
-                rightnewWP.Direction = new Vector2(rightDirection3.x, rightDirection3.z);
-
-                ORS.WaveParticles[i].Amplitude = newAmplitude;
-                ORS.WaveParticles[i].DispersionAngle = newDispersionAngle;
-                //ORS.WaveParticles[i].BirthTime = Time.time;
-
-                /*
-                ORS.WaveParticles[ORS.WaveParticleEnd] = leftnewWP;
-                ORS.WaveParticles[ORS.WaveParticleEnd] = rightnewWP;
-
-                ORS.WaveParticleEnd += 2;
-                */
-                SpawnWaveParticles(leftnewWP);
-                SpawnWaveParticles(rightnewWP);
-
-                if (ORS.WaveParticleEnd >= ORS.WaveParticleCount)
-                {
-                    ORS.WaveParticleEnd = ORS.WaveParticleEnd % ORS.WaveParticleCount;
-                }
-            }
-
-            
-        }
-
-        //Debug.Log("WaveParticle Count: " + ORS.WaveParticleEnd);
-    }
+   
 }
