@@ -161,7 +161,7 @@ public class OceanRenderer :MonoBehaviour
         {
             UpdateOceantransform();
             RenderDisAndNormalMapsForLODs();
-            RenderWaveParticlesForLODs();
+            //RenderWaveParticlesForLODs();
             RenderNormalForLODs();
 
             

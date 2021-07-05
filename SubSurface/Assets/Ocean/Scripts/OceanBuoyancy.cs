@@ -83,7 +83,7 @@ public class OceanBuoyancy : MonoBehaviour
         RB.AddForceAtPosition(new Vector3(100.0f, 0.0f, 0.0f), transform.position+RB.centerOfMass);
 
         timer += Time.fixedDeltaTime;
-        if (timer > 0.15f)
+        if (timer > 0.05f)
         {
             timer = 0.0f;
             TestSpawnWaveParticles();
@@ -210,7 +210,7 @@ public class OceanBuoyancy : MonoBehaviour
                 if (amp < 0)
                     continue;
 
-                NewWPs.Amplitude = amp*0.5f;
+                NewWPs.Amplitude = amp*0.125f;
                 NewWPs.BirthTime = Time.time-1.0f;
                 NewWPs.DispersionAngle = subAngle;
                 NewWPs.Direction = new Vector2(direction.x, direction.z);
