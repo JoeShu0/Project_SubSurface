@@ -45,13 +45,13 @@ public class OceanWaveParticleRender
 
         for (int i = 0; i < ORS.WaveParticleCount; i++)
         {
-            WaveParticles[i].Amplitude = 0.0f;
+            WaveParticles[i].Amplitude = 0.5f;
             //WaveParticles[i].Radius = 4.0f;
             WaveParticles[i].BirthTime = 0.0f;
 
             WaveParticles[i].DispersionAngle = 0;
             WaveParticles[i].Direction = new Vector2(-1.0f, 1.0f);
-            WaveParticles[i].Origin = new Vector2(1.0f * i, 1.0f * i);
+            WaveParticles[i].Origin = new Vector2(1.0f * i, 0.0f * i);
         }
 
         ORS.WaveParticleEnd = 0;

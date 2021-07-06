@@ -80,7 +80,7 @@ public class OceanBuoyancy : MonoBehaviour
         ApplyBuoyancy();
         ApplyDrag();
 
-        RB.AddForceAtPosition(new Vector3(100.0f, 0.0f, 0.0f), transform.position+RB.centerOfMass);
+        RB.AddForceAtPosition(new Vector3(75.0f, 0.0f, 75.0f), transform.position+RB.centerOfMass);
 
         timer += Time.fixedDeltaTime;
         if (timer > 0.05f)
