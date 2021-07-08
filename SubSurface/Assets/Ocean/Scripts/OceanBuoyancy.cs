@@ -207,8 +207,8 @@ public class OceanBuoyancy : MonoBehaviour
                 float amp = Mathf.Sign(Vector3.Dot(relativeVel, direction)) * 0.25f * relativeVel.magnitude;
                 //direction *= Mathf.Sign(amp);
                 OceanWaveParticleRender.WaveParticle NewWPs = new OceanWaveParticleRender.WaveParticle();
-                if (amp < 0)
-                    continue;
+                //if (amp < 0)
+                    //continue;
 
                 NewWPs.Amplitude = amp*0.125f;
                 NewWPs.BirthTime = Time.time-1.0f;

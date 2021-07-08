@@ -4,7 +4,7 @@
 //in LOD 0
 #define METER_PER_PIXEL 0.125 
 
-Texture2DArray<float4> _DisplaceArray;
+RWTexture2DArray<float4> _DisplaceArray;
 RWTexture2DArray<float4> _NormalArray;
 
 RWTexture2DArray<float4> _DerivativeArray;
@@ -65,6 +65,7 @@ void CSMain (uint3 id : SV_DispatchThreadID)
 
     float4 derivates = _DerivativeArray[uint3(id.x, id.y, LODIndex)];
     float4 velocities = _VelocityArray[uint3(id.x, id.y, LODIndex)];
+    float4 displace = _DisplaceArray[uint3(id.x, id.y, LODIndex)];
     float Dxx = derivates.x;
     float Dyy = derivates.y;
     float Dxy = velocities.z;
@@ -123,7 +124,7 @@ void CSMain (uint3 id : SV_DispatchThreadID)
         //previousFoamMask = 0.0f;
     //}
     //previousFoamMask = scaleDiff > 1.0 ? previousFoamMaskNexrLOD : previousFoamMask;
-    FoamMask = max(FoamMask, previousFoamMask * (1- _FoamParams.x));
+    FoamMask = max(FoamMask+ displace.a * 0.5 , previousFoamMask * (1- _FoamParams.x));
 
 
     float4 NormalData =  _NormalArray[uint3(id.xy, LODIndex)];

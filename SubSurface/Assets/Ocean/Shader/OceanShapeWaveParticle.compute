@@ -273,9 +273,14 @@ void PointsToDisplacement_Y(uint3 id : SV_DispatchThreadID)
 
     }
     
-    float4 WPDisplacement = float4(CombinedXoffset, CombinedAmp, CombinedYoffset, 0.0);
+    float4 WPDisplacement = float4(CombinedXoffset, CombinedAmp, CombinedYoffset, CombinedAmp);
 
     _WaveParticleArray[uint3(id.x, id.y, LODIndex)] = WPDisplacement;
+
+    //derivates debug
+    //float4 Derivative = _DerivativeArray[uint3(id.x, id.y, LODIndex)];
+    //WPDisplacement = float4(0.0,Derivative.y,0.0,0.0) * 100.0;
+    //debug end
 
     float4 Displace = _DisplaceArray[uint3(id.x, id.y, LODIndex)];
 

@@ -83,6 +83,8 @@ public class OceanWaveParticleRender
 
         ORS.shapeWaveParticleShader.SetTexture(2, "_DisplaceArray", ORS.LODDisplaceMapsArray);
         ORS.shapeWaveParticleShader.SetTexture(2, "_WaveParticleArray", ORS.LODWaveParticleMapsArray);
+        //debug
+        //ORS.shapeWaveParticleShader.SetTexture(2, "_DerivativeArray", ORS.LODDerivativeMapsArray);
 
         ORS.shapeWaveParticleShader.SetTexture(3, "_DisplaceArray", ORS.LODDisplaceMapsArray);
         ORS.shapeWaveParticleShader.SetTexture(3, "_WaveParticleArray", ORS.LODWaveParticleMapsArray);

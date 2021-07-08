@@ -161,7 +161,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	//Basic lighting
 	float4 color = float4(surface.normal,1- surface.transparency);
 	
-	return float4(foam,0.0f,0.0f, 1.0f);
+	//return float4(foam,0.0f,0.0f, 1.0f);
 	
 	//return float4(input.UV.xy % 0.07f * 10.0f+float2(0.01,0.01), 0.0,1.0);
 	/*
