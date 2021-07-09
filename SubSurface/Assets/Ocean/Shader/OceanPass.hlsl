@@ -111,7 +111,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	float4 OceanDelta01 = clamp(-OceanDepthDelta*5000, 0.0, 1.0);
 	//clip water to avoid render water layer when the tiles are high
 	clip(OceanDepthDelta < 0.0 ? -1 : 1);
-	
+
 	//sample normal foam mask 
 	float4 NormalFoam = GetOceanNormal(input.UV);
 	float3 baseNormalWS = normalize(NormalFoam.xyz);
@@ -220,7 +220,10 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 
 	//return float4(LightNormalGradient, 0.0,0.0,1.0);
 	//max(color.a, 1-ViewNormalGradient)
-	return float4(objcolor,1-surface.transparency);//
+	Fragment frag = GetFragment(input.positionCS_SS);
+	float3 buffercolor = GetBufferColor(frag).rgb;
+	return float4(buffercolor, 0.5);
+	//return float4(objcolor,1-surface.transparency);//
 	//SunReflect = dot(normalize(float3(-0.5, -0.5, 0.0)), reflectDir);
 
 	//return float4(SunReflect, 0.0, 0.0,1.0f) + float4(0.1f,0.1f,0.1f,0.0f);

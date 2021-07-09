@@ -160,13 +160,13 @@ public partial class CameraRenderer
         Setup();
 
         //Draw ocean depth to RT
-        DrawOceanSurfacePrePass(useDynameicBatching, useGPUInstancing, useLightPerObject, cameraSettings.RenderingLayerMask);
+        //DrawOceanSurfacePrePass(useDynameicBatching, useGPUInstancing, useLightPerObject, cameraSettings.RenderingLayerMask);
 
 
         DrawVisibleGeometry(useDynameicBatching, useGPUInstancing, useLightPerObject, cameraSettings.RenderingLayerMask);
 
 
-        DrawOceanSurfacePostPass(useDynameicBatching, useGPUInstancing, useLightPerObject, cameraSettings.RenderingLayerMask);
+        //DrawOceanSurfacePostPass(useDynameicBatching, useGPUInstancing, useLightPerObject, cameraSettings.RenderingLayerMask);
 
         //this makes the Legacy shader draw upon the tranparent object
         //makes it wired, but they are not supported who cares~
@@ -319,6 +319,8 @@ public partial class CameraRenderer
     void DrawVisibleGeometry(bool useDynameicBatching, bool useGPUInstancing, bool useLightPerObject,
         int renderingLayerMask)
     {
+        DrawOceanSurfacePrePass(useDynameicBatching, useGPUInstancing, useLightPerObject, renderingLayerMask);
+
         //per Object light data stuff
         PerObjectData lightPerObjectFlags = useLightPerObject ?
             PerObjectData.LightData | PerObjectData.LightIndices :
@@ -355,7 +357,8 @@ public partial class CameraRenderer
         //we are drawing in order like opaque->skybox->tranparent
         context.DrawSkybox(camera);
 
-        //Draw Ocean Shading Here
+        
+
 
         //copy the depth and color of all opaque and sky
         //so if the opaque object tries to sample the _CameraDepthTexture or _CameraColorTexture, 
@@ -364,6 +367,10 @@ public partial class CameraRenderer
         {
             CopyAttachments();
         }
+
+        //Draw Ocean Shading Here
+        DrawOceanSurfacePostPass(useDynameicBatching, useGPUInstancing, useLightPerObject, renderingLayerMask);
+
         //draw transparent
         sortingSettings.criteria = SortingCriteria.CommonTransparent;
         drawingSettings.sortingSettings = sortingSettings;
@@ -372,7 +379,7 @@ public partial class CameraRenderer
             cullingResults, ref drawingSettings, ref filteringSettings);
         
         //Draw wireframe Overlay after all staff is drawn
-        //context.DrawWireOverlay(camera);
+        context.DrawWireOverlay(camera);
 
         buffer.ReleaseTemporaryRT(oceanDepthTextureId);
     }
@@ -407,26 +414,15 @@ public partial class CameraRenderer
         };
         //drawingSettings.SetShaderPassName(1, LitShaderTagId);
         drawingSettings.SetShaderPassName(1, OceanShaderTagId);
-
-
-        //Draw Ocean Shading Here
-
-        //copy the depth and color of all opaque and sky
-        //so if the opaque object tries to sample the _CameraDepthTexture or _CameraColorTexture, 
-        //result will be invalid
-        if (useColorTexture || useDepthTexture)
-        {
-            CopyAttachments();
-        }
         drawingSettings.sortingSettings = sortingSettings;
         var filteringSettings = new FilteringSettings(RenderQueueRange.transparent, renderingLayerMask: (uint)renderingLayerMask);
         context.DrawRenderers(
             cullingResults, ref drawingSettings, ref filteringSettings);
 
         //Draw wireframe Overlay after all staff is drawn
-        context.DrawWireOverlay(camera);
+        //context.DrawWireOverlay(camera);
 
-        buffer.ReleaseTemporaryRT(oceanDepthTextureId);
+        //buffer.ReleaseTemporaryRT(oceanDepthTextureId);
     }
 
 

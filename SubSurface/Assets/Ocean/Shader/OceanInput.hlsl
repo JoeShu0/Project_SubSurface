@@ -184,5 +184,17 @@ float3 DetailTangentNormalToWorld(float3 tangentDetailNormal, float3 worldBaseNo
     //return tangentDetailNormal;
     return normalize(FinalNormal);
 }
+/*
+float4 GetBufferColor(float2 Position_SS, float2 uvOffset = float2(0.0, 0.0))
+{
+    float2 uv = Position_SS + uvOffset;
+    return SAMPLE_TEXTURE2D_LOD(_CameraColorTexture, sampler_linear_clamp, uv, 0);
+}
+
+float4 GetBufferDepth(float2 Position_SS, float2 uvOffset = float2(0.0, 0.0))
+{
+    float2 uv = Position_SS + uvOffset;
+    return SAMPLE_TEXTURE2D_LOD(_CameraDepthTexture, sampler_linear_clamp, uv, 0);
+}*/
 
 #endif
