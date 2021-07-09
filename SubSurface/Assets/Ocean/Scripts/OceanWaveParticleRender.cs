@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class OceanWaveParticleRender
@@ -7,6 +8,8 @@ public class OceanWaveParticleRender
     private OceanRenderSetting ORS;
     private Transform OceanCenter;
     private ComputeShader WaveParticleCompute;
+
+    public bool IsUpdatingWaveParticles = false;
 
     public OceanWaveParticleRender(
         OceanRenderSetting ORS,
@@ -45,7 +48,7 @@ public class OceanWaveParticleRender
 
         for (int i = 0; i < ORS.WaveParticleCount; i++)
         {
-            WaveParticles[i].Amplitude = 0.5f;
+            WaveParticles[i].Amplitude = 0.0f;
             //WaveParticles[i].Radius = 4.0f;
             WaveParticles[i].BirthTime = 0.0f;
 
@@ -185,6 +188,27 @@ public class OceanWaveParticleRender
         }
 
 
+    }
+
+    public async void TestAsyncUpdate()
+    {
+        IsUpdatingWaveParticles = true;
+        var result = await Task.Run(()=> 
+        {
+            Debug.Log("Start Wait");
+            float sum = 0;
+            for (int i = 0; i < 16384; i++)
+            {
+                for (int n = 0; n < 2; n++)
+                {
+                    sum += Mathf.Sqrt(i * n + 1);
+                }
+                    
+            }
+            return sum;
+        });
+        IsUpdatingWaveParticles = false;
+        Debug.Log(result);
     }
 
 }

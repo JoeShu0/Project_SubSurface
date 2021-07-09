@@ -44,6 +44,7 @@ public class OceanRenderSetting : ScriptableObject
     //And We are getting each LOD to compute diff wave length so we fix the WaveCount to 64=8*8
     public int WaveCount = 128;
 
+    public bool DynamicWaveSim = true;
     public int WaveParticleCount = 1024;
     //this must be kept the same with the setting in computeshader
     public float WaveParticleSpeed = 2.0f;

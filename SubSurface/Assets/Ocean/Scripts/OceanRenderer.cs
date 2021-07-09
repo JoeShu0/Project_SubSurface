@@ -136,7 +136,7 @@ public class OceanRenderer :MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        
+        /*
         for (int i = 0; i < ORS.WaveParticleCount; i++)
         {
             Vector2 position = OWPR.WaveParticles[i].Origin + 
@@ -145,7 +145,7 @@ public class OceanRenderer :MonoBehaviour
 
             Gizmos.DrawSphere(new Vector3(position.x,0.0f, position.y), 0.1f);
         }
-        
+        */
     }
     private void Update()
     {
@@ -158,7 +158,8 @@ public class OceanRenderer :MonoBehaviour
         {
             UpdateOceantransform();
             RenderDisAndNormalMapsForLODs();
-            OWPR.RenderWaveParticlesForLODs();
+            if(ORS.DynamicWaveSim)
+                OWPR.RenderWaveParticlesForLODs();
             RenderNormalForLODs();
 
             
@@ -178,10 +179,17 @@ public class OceanRenderer :MonoBehaviour
     {
         UpdateOceantransform();
         RenderDisAndNormalMapsForLODs();
-        OWPR.RenderWaveParticlesForLODs();
+        if (ORS.DynamicWaveSim)
+            OWPR.RenderWaveParticlesForLODs();
         RenderNormalForLODs();
 
-        //UpdateWaveParticles();
+        //OWPR.UpdateWaveParticles();
+        if(!OWPR.IsUpdatingWaveParticles)
+        {
+            //OWPR.TestAsyncUpdate();
+            //OWPR.RenderWaveParticlesForLODs();
+        }
+        
         // replave corotine with asnc await later
         if (!OHS.IsRetrivingGPUData)
         {
