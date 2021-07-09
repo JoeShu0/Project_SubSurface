@@ -87,6 +87,18 @@ float4 OceanDepthPassFragment(Varyings input) : SV_TARGET
 	//return depth;
 }
 
+float4 OceanBackPassFragment(Varyings input) : SV_TARGET
+{
+	//Setup the instance ID for Input
+	UNITY_SETUP_INSTANCE_ID(input);
+	//IsOrthographicCamera() ?
+	//OrthographicDepthBufferToLinear(input.positionCS_SS.z): 
+	//input.positionCS_SS.w;
+	return float4(1.0,0.0,0.0,1.0);
+	//return depth;
+}
+
+
 float4 OceanPassFragment(Varyings input) : SV_TARGET 
 {
 	//Setup the instance ID for Input
@@ -141,7 +153,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	surface.renderingLayerMask = asuint(unity_RenderingLayer.x);// treat float as uint
 	surface.foamMask = foamMask;
 	surface.transparency = 0.25f;
-	surface.smoothness = 0.85f;
+	surface.smoothness = 0.9f;
 
 	TRDF trdf = GetTRDF(surface);
 

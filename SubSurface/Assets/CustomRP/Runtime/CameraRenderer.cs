@@ -18,6 +18,7 @@ public partial class CameraRenderer
     static ShaderTagId unlitShaderTagId = new ShaderTagId("SRPDefaultUnlit");
     static ShaderTagId LitShaderTagId = new ShaderTagId("CustomLit");
     static ShaderTagId OceanShaderTagId = new ShaderTagId("OceanShading");
+    static ShaderTagId OceanBackShaderTagId = new ShaderTagId("OceanShadingBack");
     static ShaderTagId OceanDepthShaderTagId = new ShaderTagId("OceanDepthShading");
 
     //static int frameBufferId = Shader.PropertyToID("_CameraFrameBuffer");
@@ -159,13 +160,13 @@ public partial class CameraRenderer
         Setup();
 
         //Draw ocean depth to RT
-        DrawOceanSurfaceDepth(useDynameicBatching, useGPUInstancing, useLightPerObject, cameraSettings.RenderingLayerMask);
+        DrawOceanSurfacePrePass(useDynameicBatching, useGPUInstancing, useLightPerObject, cameraSettings.RenderingLayerMask);
 
 
         DrawVisibleGeometry(useDynameicBatching, useGPUInstancing, useLightPerObject, cameraSettings.RenderingLayerMask);
 
-        
 
+        DrawOceanSurfacePostPass(useDynameicBatching, useGPUInstancing, useLightPerObject, cameraSettings.RenderingLayerMask);
 
         //this makes the Legacy shader draw upon the tranparent object
         //makes it wired, but they are not supported who cares~
@@ -255,7 +256,8 @@ public partial class CameraRenderer
     
 
     //Draw the depth of the ocean in camera view on to a texture
-    void DrawOceanSurfaceDepth(bool useDynameicBatching, bool useGPUInstancing, bool useLightPerObject,
+    //And draw the back face of water surfa
+    void DrawOceanSurfacePrePass(bool useDynameicBatching, bool useGPUInstancing, bool useLightPerObject,
         int renderingLayerMask)
     {
         buffer.GetTemporaryRT(oceanDepthTextureId, 
@@ -271,7 +273,7 @@ public partial class CameraRenderer
 
         var sortingSettings = new SortingSettings(camera)
         {
-            criteria = SortingCriteria.CommonTransparent
+            criteria = SortingCriteria.CommonOpaque
         };
 
         var drawingSettings = new DrawingSettings(OceanDepthShaderTagId, sortingSettings)
@@ -298,6 +300,18 @@ public partial class CameraRenderer
                 RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store,
                 depthAttachmentId,
                 RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store);
+        ExecuteBuffer();
+
+        //Draw ocean back face
+        var backdrawingSettings = new DrawingSettings(OceanBackShaderTagId, sortingSettings)
+        {
+            enableDynamicBatching = useDynameicBatching,
+            enableInstancing = useGPUInstancing,
+            perObjectData =
+                lightPerObjectFlags
+        };
+        context.DrawRenderers(
+            cullingResults, ref backdrawingSettings, ref filteringSettings);
         ExecuteBuffer();
 
     }
@@ -328,7 +342,7 @@ public partial class CameraRenderer
                 lightPerObjectFlags
         };
         drawingSettings.SetShaderPassName(1, LitShaderTagId);
-        drawingSettings.SetShaderPassName(2, OceanShaderTagId);
+        //drawingSettings.SetShaderPassName(2, OceanShaderTagId);
 
         //filter object queue as well as RenderingLayerMask
         var filteringSettings = new FilteringSettings(RenderQueueRange.opaque, renderingLayerMask:(uint)renderingLayerMask);
@@ -357,6 +371,58 @@ public partial class CameraRenderer
         context.DrawRenderers(
             cullingResults, ref drawingSettings, ref filteringSettings);
         
+        //Draw wireframe Overlay after all staff is drawn
+        //context.DrawWireOverlay(camera);
+
+        buffer.ReleaseTemporaryRT(oceanDepthTextureId);
+    }
+
+    void DrawOceanSurfacePostPass(bool useDynameicBatching, bool useGPUInstancing, bool useLightPerObject,
+        int renderingLayerMask)
+    {
+        //per Object light data stuff
+        PerObjectData lightPerObjectFlags = useLightPerObject ?
+            PerObjectData.LightData | PerObjectData.LightIndices :
+            PerObjectData.None;
+
+        //draw opaque
+        var sortingSettings = new SortingSettings(camera)
+        {
+            criteria = SortingCriteria.CommonOpaque
+        };
+
+        //drawing setting what kind of shader should be draw
+        var drawingSettings = new DrawingSettings(unlitShaderTagId, sortingSettings)
+        {
+            enableDynamicBatching = useDynameicBatching,
+            enableInstancing = useGPUInstancing,
+            perObjectData = PerObjectData.Lightmaps |//lightmap UV
+                PerObjectData.LightProbe |//lighting Probe coefficient
+                PerObjectData.LightProbeProxyVolume |// LPPV data
+                PerObjectData.ShadowMask |//shadowmask texture
+                PerObjectData.OcclusionProbe |//for using lightmap on dynamic assets
+                PerObjectData.OcclusionProbeProxyVolume |//same above for LPPV
+                PerObjectData.ReflectionProbes |//send reflection probes to GPU
+                lightPerObjectFlags
+        };
+        //drawingSettings.SetShaderPassName(1, LitShaderTagId);
+        drawingSettings.SetShaderPassName(1, OceanShaderTagId);
+
+
+        //Draw Ocean Shading Here
+
+        //copy the depth and color of all opaque and sky
+        //so if the opaque object tries to sample the _CameraDepthTexture or _CameraColorTexture, 
+        //result will be invalid
+        if (useColorTexture || useDepthTexture)
+        {
+            CopyAttachments();
+        }
+        drawingSettings.sortingSettings = sortingSettings;
+        var filteringSettings = new FilteringSettings(RenderQueueRange.transparent, renderingLayerMask: (uint)renderingLayerMask);
+        context.DrawRenderers(
+            cullingResults, ref drawingSettings, ref filteringSettings);
+
         //Draw wireframe Overlay after all staff is drawn
         context.DrawWireOverlay(camera);
 

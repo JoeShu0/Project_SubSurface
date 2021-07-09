@@ -38,7 +38,8 @@
             }
             
             //for Alpha blend type We will use One OneMinusSrcAlpha
-            Blend SrcAlpha OneMinusSrcAlpha
+            //Blend SrcAlpha OneMinusSrcAlpha
+            Blend One Zero
             Cull Back
             ZWrite On
             HLSLPROGRAM
@@ -55,6 +56,35 @@
 
             #pragma vertex OceanPassVertex
             #pragma fragment OceanPassFragment
+            #include "./OceanPass.hlsl"
+            ENDHLSL
+        }
+
+        Pass
+        {
+            Tags
+            {
+            //make the back face of water surface not transparent
+            //only direct light and Indirect light
+            "LightMode" = "OceanShadingBack"
+        }
+
+            //for Alpha blend type We will use One OneMinusSrcAlpha
+            Blend SrcAlpha OneMinusSrcAlpha
+            Cull Front
+            ZWrite On
+            HLSLPROGRAM
+            #pragma target 3.5
+            #pragma shader_feature _PREMULTIPLY_ALPHA
+
+            //make unity complie 2 shader with and without GPU instancing
+            #pragma multi_compile_instancing
+
+            //per object lights
+            #pragma multi_compile _ _LIGHTS_PER_OBJECT
+
+            #pragma vertex OceanPassVertex
+            #pragma fragment OceanBackPassFragment
             #include "./OceanPass.hlsl"
             ENDHLSL
         }
