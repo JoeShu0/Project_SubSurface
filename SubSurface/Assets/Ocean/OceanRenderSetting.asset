@@ -22,10 +22,10 @@ MonoBehaviour:
   CurPastOceanScale:
   - {x: 0, y: 1}
   - {x: 0, y: 1}
-  OceanScaleTransition: -0.685
+  OceanScaleTransition: -0.36999997
   CurAndPastPos:
-  - {x: 0.30854797, y: -3.9404964}
-  - {x: 0.30854797, y: -3.9404964}
+  - {x: -14.028206, y: -27.547163}
+  - {x: -14.028206, y: -27.547163}
   OceanCamExtend: 20
   OceanCamHeightStage: 20
   LODCount: 8

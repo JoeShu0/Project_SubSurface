@@ -260,8 +260,9 @@ public partial class CameraRenderer
     void DrawOceanSurfacePrePass(bool useDynameicBatching, bool useGPUInstancing, bool useLightPerObject,
         int renderingLayerMask)
     {
-        buffer.GetTemporaryRT(oceanDepthTextureId, 
-            camera.pixelWidth, camera.pixelHeight, 1, 
+
+        buffer.GetTemporaryRT(oceanDepthTextureId,
+            bufferSize.x, bufferSize.y, 1, 
             FilterMode.Point, RenderTextureFormat.ARGBFloat);
 
         buffer.SetRenderTarget(oceanDepthTextureId);

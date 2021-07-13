@@ -8,7 +8,10 @@ float GetWaterExpFogBlendValue(float Depth)
 
 float GetWaterTempBlendValue(float DepthDelta)
 {
-	//return 1.0;
+	if(DepthDelta>0.0001)
+		return 0.0;
+	else
+		return 1.0;
 	return clamp(-DepthDelta * 10000, 0.0, 1.0);
 }
 
