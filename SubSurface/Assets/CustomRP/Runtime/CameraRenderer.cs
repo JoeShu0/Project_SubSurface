@@ -302,6 +302,7 @@ public partial class CameraRenderer
                 RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store);
         ExecuteBuffer();
 
+        
         //Draw ocean back face
         var backdrawingSettings = new DrawingSettings(OceanBackShaderTagId, sortingSettings)
         {
@@ -313,7 +314,7 @@ public partial class CameraRenderer
         context.DrawRenderers(
             cullingResults, ref backdrawingSettings, ref filteringSettings);
         ExecuteBuffer();
-
+        
     }
 
     void DrawVisibleGeometry(bool useDynameicBatching, bool useGPUInstancing, bool useLightPerObject,

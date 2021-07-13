@@ -98,6 +98,7 @@
      <None Include="Assets\CustomRP\Shader\UnlitPass.hlsl" />
      <None Include="Assets\CustomRP\Shader\ShadowCasterPass.hlsl" />
      <None Include="Assets\CustomRP\ShaderLib\Surface.hlsl" />
+     <None Include="Assets\Ocean\ShaderLib\Expofog.hlsl" />
      <None Include="Assets\CustomRP\Shader\Unlit.shader" />
      <None Include="Assets\Ocean\Shader\OceanShapeNormal.compute" />
      <None Include="Assets\Ocean\Shader\OceanShapeWaveParticle.compute" />

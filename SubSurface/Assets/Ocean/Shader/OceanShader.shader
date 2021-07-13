@@ -41,7 +41,7 @@
             //Blend SrcAlpha OneMinusSrcAlpha
             Blend One Zero
             Cull Back
-            ZWrite On
+            ZWrite Off
             HLSLPROGRAM
             #pragma target 3.5
             #pragma shader_feature _PREMULTIPLY_ALPHA

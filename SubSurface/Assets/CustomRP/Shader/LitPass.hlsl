@@ -8,6 +8,8 @@
 #include "../ShaderLib/GI.hlsl"
 #include "../ShaderLib/Lighting.hlsl"
 
+#include "../../Ocean/ShaderLib/Expofog.hlsl"
+
 CBUFFER_START(_OceanGlobalData)
     float4 _DarkColor;
 CBUFFER_END
@@ -153,7 +155,9 @@ float4 LitPassFragment(Varyings input) : SV_TARGET
 		//return float4(1.0, 0.0, 0.0, GetFinalAlpha(surface.alpha));
 	//}
 
-	float4 OceanDelta01 = clamp(-OceanDepthDelta*2000, 0.0, 1.0);//!!!!this breaks when the render scale changes!!!!
+	float4 OceanDelta01 = GetWaterTempBlendValue(OceanDepthDelta);//!!!!this breaks when the render scale changes!!!!
+	
+	//float4 OceanDelta01 = clamp(-OceanDepthDelta*2000, 0.0, 1.0);
 	
 	return lerp(float4(color, GetFinalAlpha(surface.alpha)),float4(_DarkColor.rgb, GetFinalAlpha(surface.alpha)), OceanDelta01);
 }

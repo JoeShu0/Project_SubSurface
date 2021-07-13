@@ -222,7 +222,9 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	//max(color.a, 1-ViewNormalGradient)
 	Fragment frag = GetFragment(input.positionCS_SS);
 	float3 buffercolor = GetBufferColor(frag).rgb;
-	return float4(buffercolor, 0.5);
+
+	objcolor = lerp(objcolor, buffercolor, surface.transparency);
+	return float4(objcolor, 1.0f);
 	//return float4(objcolor,1-surface.transparency);//
 	//SunReflect = dot(normalize(float3(-0.5, -0.5, 0.0)), reflectDir);
 
