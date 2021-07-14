@@ -99,8 +99,9 @@
 
             //for Alpha blend type We will use One OneMinusSrcAlpha
             Blend One Zero
-            ZWrite Off
+            ZWrite On
             Cull Off
+            //Cull Back
             HLSLPROGRAM
             #pragma target 3.5
             #pragma shader_feature _PREMULTIPLY_ALPHA

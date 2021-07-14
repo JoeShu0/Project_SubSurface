@@ -255,68 +255,7 @@ public partial class CameraRenderer
     
     
 
-    //Draw the depth of the ocean in camera view on to a texture
-    //And draw the back face of water surfa
-    void DrawOceanSurfacePrePass(bool useDynameicBatching, bool useGPUInstancing, bool useLightPerObject,
-        int renderingLayerMask)
-    {
 
-        buffer.GetTemporaryRT(oceanDepthTextureId,
-            bufferSize.x, bufferSize.y, 1, 
-            FilterMode.Point, RenderTextureFormat.ARGBFloat);
-
-        buffer.SetRenderTarget(oceanDepthTextureId);
-        ExecuteBuffer();
-        //per Object light data stuff
-        PerObjectData lightPerObjectFlags = useLightPerObject ?
-            PerObjectData.LightData | PerObjectData.LightIndices :
-            PerObjectData.None;
-
-        var sortingSettings = new SortingSettings(camera)
-        {
-            criteria = SortingCriteria.CommonOpaque
-        };
-
-        var drawingSettings = new DrawingSettings(OceanDepthShaderTagId, sortingSettings)
-        {
-            enableDynamicBatching = useDynameicBatching,
-            enableInstancing = useGPUInstancing,
-            perObjectData = PerObjectData.Lightmaps |//lightmap UV
-                PerObjectData.LightProbe |//lighting Probe coefficient
-                PerObjectData.LightProbeProxyVolume |// LPPV data
-                PerObjectData.ShadowMask |//shadowmask texture
-                PerObjectData.OcclusionProbe |//for using lightmap on dynamic assets
-                PerObjectData.OcclusionProbeProxyVolume |//same above for LPPV
-                PerObjectData.ReflectionProbes |//send reflection probes to GPU
-                lightPerObjectFlags
-        };
-        var filteringSettings = new FilteringSettings(RenderQueueRange.transparent, 
-            renderingLayerMask: (uint)renderingLayerMask);
-
-        context.DrawRenderers(
-            cullingResults, ref drawingSettings, ref filteringSettings);
-
-
-        buffer.SetRenderTarget(colorAttachmentId,
-                RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store,
-                depthAttachmentId,
-                RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store);
-        ExecuteBuffer();
-
-        
-        //Draw ocean back face
-        var backdrawingSettings = new DrawingSettings(OceanBackShaderTagId, sortingSettings)
-        {
-            enableDynamicBatching = useDynameicBatching,
-            enableInstancing = useGPUInstancing,
-            perObjectData =
-                lightPerObjectFlags
-        };
-        context.DrawRenderers(
-            cullingResults, ref backdrawingSettings, ref filteringSettings);
-        ExecuteBuffer();
-        
-    }
 
     void DrawVisibleGeometry(bool useDynameicBatching, bool useGPUInstancing, bool useLightPerObject,
         int renderingLayerMask)
@@ -384,6 +323,75 @@ public partial class CameraRenderer
         context.DrawWireOverlay(camera);
 
         buffer.ReleaseTemporaryRT(oceanDepthTextureId);
+
+        ExecuteBuffer();
+    }
+
+    //Draw the depth of the ocean in camera view on to a texture
+    //And draw the back face of water surfa
+    void DrawOceanSurfacePrePass(bool useDynameicBatching, bool useGPUInstancing, bool useLightPerObject,
+        int renderingLayerMask)
+    {
+
+        buffer.GetTemporaryRT(oceanDepthTextureId,
+            bufferSize.x, bufferSize.y, 1,
+            FilterMode.Point, RenderTextureFormat.ARGBFloat);
+
+        buffer.SetRenderTarget(oceanDepthTextureId);
+        //clear the ocean depth buffer, otherwise it will load the last frame,
+        //since we have alpha info on it, the data is messed up
+        buffer.ClearRenderTarget(true, true, Color.clear);
+
+        ExecuteBuffer();
+        //per Object light data stuff
+        PerObjectData lightPerObjectFlags = useLightPerObject ?
+            PerObjectData.LightData | PerObjectData.LightIndices :
+            PerObjectData.None;
+
+        var sortingSettings = new SortingSettings(camera)
+        {
+            criteria = SortingCriteria.CommonOpaque
+        };
+
+        var drawingSettings = new DrawingSettings(OceanDepthShaderTagId, sortingSettings)
+        {
+            enableDynamicBatching = useDynameicBatching,
+            enableInstancing = useGPUInstancing,
+            perObjectData = PerObjectData.Lightmaps |//lightmap UV
+                PerObjectData.LightProbe |//lighting Probe coefficient
+                PerObjectData.LightProbeProxyVolume |// LPPV data
+                PerObjectData.ShadowMask |//shadowmask texture
+                PerObjectData.OcclusionProbe |//for using lightmap on dynamic assets
+                PerObjectData.OcclusionProbeProxyVolume |//same above for LPPV
+                PerObjectData.ReflectionProbes |//send reflection probes to GPU
+                lightPerObjectFlags
+        };
+        var filteringSettings = new FilteringSettings(RenderQueueRange.transparent,
+            renderingLayerMask: (uint)renderingLayerMask);
+
+        context.DrawRenderers(
+            cullingResults, ref drawingSettings, ref filteringSettings);
+
+
+        buffer.SetRenderTarget(colorAttachmentId,
+                RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store,
+                depthAttachmentId,
+                RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store);
+        ExecuteBuffer();
+
+
+        //Draw ocean back face
+        var backdrawingSettings = new DrawingSettings(OceanBackShaderTagId, sortingSettings)
+        {
+            enableDynamicBatching = useDynameicBatching,
+            enableInstancing = useGPUInstancing,
+            perObjectData =
+                lightPerObjectFlags
+        };
+        context.DrawRenderers(
+            cullingResults, ref backdrawingSettings, ref filteringSettings);
+        ExecuteBuffer();
+
     }
 
     void DrawOceanSurfacePostPass(bool useDynameicBatching, bool useGPUInstancing, bool useLightPerObject,

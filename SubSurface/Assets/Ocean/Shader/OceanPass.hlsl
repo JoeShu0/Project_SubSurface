@@ -79,11 +79,18 @@ float4 OceanDepthPassFragment(Varyings input) : SV_TARGET
 {
 	//Setup the instance ID for Input
 	UNITY_SETUP_INSTANCE_ID(input);
-	//float depth10 = 1 - ;
-		//IsOrthographicCamera() ?
-		//OrthographicDepthBufferToLinear(input.positionCS_SS.z): 
-		//input.positionCS_SS.w;
-	return float4(0.0,0.0,0.0, input.depth01);
+	//GetNormal
+	//float4 NormalFoam = GetOceanNormal(input.UV);
+	//float3 baseNormalWS = normalize(NormalFoam.xyz);
+
+	//float3 viewDirection = -normalize(_WorldSpaceCameraPos - input.positionWS);
+
+	//float Facing = dot(baseNormalWS, viewDirection);
+
+	//reconstruct Normal
+	float3 N = cross(ddx(input.positionWS), ddy(input.positionWS));
+
+	return float4(0.0, N.y, 0.0, input.depth01);
 	//return depth;
 }
 

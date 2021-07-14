@@ -515,9 +515,9 @@ public class OceanRenderSetting : ScriptableObject
             for (int i = 0; i < vertices.Length; i++)
             {
                 if (vertices[i].x - 0.5f * TileSizeX > 0.1f)
-                    vertices[i].x *= 50.0f;
+                    vertices[i].x *= 5000.0f;
                 if (vertices[i].z - 0.5f * TileSizeZ > 0.1f)
-                    vertices[i].z *= 50.0f;
+                    vertices[i].z *= 5000.0f;
             }
         tilemesh.vertices = vertices;
 
