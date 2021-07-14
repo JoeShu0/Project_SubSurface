@@ -22,10 +22,10 @@ MonoBehaviour:
   CurPastOceanScale:
   - {x: 0, y: 1}
   - {x: 0, y: 1}
-  OceanScaleTransition: 0.325
+  OceanScaleTransition: -0.751
   CurAndPastPos:
-  - {x: -26.390398, y: -55.81516}
-  - {x: -26.390398, y: -55.81516}
+  - {x: 5.302722, y: -7.817154}
+  - {x: 5.302722, y: -7.817154}
   OceanCamExtend: 20
   OceanCamHeightStage: 20
   LODCount: 8
@@ -45,14 +45,14 @@ MonoBehaviour:
     BandOffset: 0.481
     BandPower: 7.73
   WaveAmplitudeTweak:
-  - 0.47
-  - 1.14
-  - 1.59
-  - 1.92
-  - 1.89
-  - 1.77
-  - 1.56
-  - 1.14
+  - 0.48
+  - 1.19
+  - 1.85
+  - 1.91
+  - 1.97
+  - 2.21
+  - 2.09
+  - 2.68
   debug: 11
   RegenerateWaveDatas: 0
   SpectrumWaves:

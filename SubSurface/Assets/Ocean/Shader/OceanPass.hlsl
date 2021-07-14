@@ -30,7 +30,7 @@ struct Varyings
 	UNITY_VERTEX_INPUT_INSTANCE_ID
 };
 
-Varyings OceanPassVertex(Attributes input)
+Varyings OceanPassVertexFunction(Attributes input)
 {
 	Varyings output;
 	//Setup the instance ID for Input
@@ -75,6 +75,18 @@ Varyings OceanPassVertex(Attributes input)
 	return output;
 }
 
+Varyings OceanPassVertex(Attributes input)
+{
+	return OceanPassVertexFunction(input);
+}
+
+Varyings OceanDepthPassVertex(Attributes input)
+{
+	Varyings ShiftedOut;
+	ShiftedOut = OceanPassVertexFunction(input);
+	return ShiftedOut;
+}
+
 float4 OceanDepthPassFragment(Varyings input) : SV_TARGET
 {
 	//Setup the instance ID for Input
@@ -87,7 +99,7 @@ float4 OceanDepthPassFragment(Varyings input) : SV_TARGET
 
 	//float Facing = dot(baseNormalWS, viewDirection);
 
-	//reconstruct Normal
+	//reconstruct Normal This may be the cause of that seam at horizal!!!
 	float3 N = cross(ddx(input.positionWS), ddy(input.positionWS));
 
 	return float4(0.0, N.y, 0.0, input.depth01);
@@ -101,7 +113,13 @@ float4 OceanBackPassFragment(Varyings input) : SV_TARGET
 	//IsOrthographicCamera() ?
 	//OrthographicDepthBufferToLinear(input.positionCS_SS.z): 
 	//input.positionCS_SS.w;
-	return float4(1.0,0.0,0.0,1.0);
+	float3 ToplightDir = float3(0.0,1.0,0.0);
+	float LightGradient = dot( 
+		normalize(ToplightDir + GetOceanNormal(input.UV).xyz),  
+		-normalize(_WorldSpaceCameraPos - input.positionWS));
+	
+	LightGradient = pow(LightGradient,  5.0);
+	return float4(0.0,0.0,LightGradient,1.0);
 	//return depth;
 }
 
@@ -117,7 +135,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	//Also water fog should take effect
 	float4 OceanDelta01 = clamp(-OceanDepthDelta*5000, 0.0, 1.0);
 	//clip water to avoid render water layer when the tiles are high
-	clip(OceanDepthDelta < 0.0 ? -1 : 1);
+	//clip(OceanDepthDelta < 0.0 ? -1 : 1);
 
 	//sample normal foam mask 
 	float4 NormalFoam = GetOceanNormal(input.UV);

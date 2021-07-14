@@ -114,7 +114,7 @@
             //per object lights
             #pragma multi_compile _ _LIGHTS_PER_OBJECT
 
-            #pragma vertex OceanPassVertex
+            #pragma vertex OceanDepthPassVertex
             #pragma fragment OceanDepthPassFragment
             #include "./OceanPass.hlsl"
             ENDHLSL
