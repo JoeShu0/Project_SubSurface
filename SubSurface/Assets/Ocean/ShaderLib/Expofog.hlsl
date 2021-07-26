@@ -32,7 +32,7 @@ float GetWaterTempBlendValue(float2 ScreenUV, float PixelDepth01, float3 viewDir
 	}
 	else
 	{
-		OceanDepthDelta = (-NormalY >= 0.0) ? OceanDepth01 - PixelDepth01 : PixelDepth01;
+		OceanDepthDelta = (NormalY >= 0.0) ? OceanDepth01 - PixelDepth01 : PixelDepth01;
 	}
 	/*
 	if (OceanFacing => 0.0)

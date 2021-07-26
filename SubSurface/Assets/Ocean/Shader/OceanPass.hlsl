@@ -27,6 +27,7 @@ struct Varyings
 	float4 UV : VAR_OCEANUV;
 	float2 StaticUV : VAR_DETAILUV;
 	float4 DebugColor : VertexDebug;
+	//half facing : VFACE;
 	UNITY_VERTEX_INPUT_INSTANCE_ID
 };
 
@@ -80,14 +81,48 @@ Varyings OceanPassVertex(Attributes input)
 	return OceanPassVertexFunction(input);
 }
 
-Varyings OceanDepthPassVertex(Attributes input)
+Varyings OceanDepthPassVertexFront(Attributes input)
 {
 	Varyings ShiftedOut;
 	ShiftedOut = OceanPassVertexFunction(input);
 	return ShiftedOut;
 }
 
-float4 OceanDepthPassFragment(Varyings input) : SV_TARGET
+Varyings OceanDepthPassVertexBack(Attributes input)
+{
+	Varyings ShiftedOut;
+	ShiftedOut = OceanPassVertexFunction(input);
+	//push the back side of the water face by 1 unit in the depth buffer, this reduce the 
+	//flicking pixel due depth test fail cased by pixels in the same position
+	ShiftedOut.positionCS_SS = TransformWorldToHClip(ShiftedOut.positionWS + float3(0.0,-1.0,0.0));
+	return ShiftedOut;
+}
+
+//Geo shader to get the normal for every triangle
+[maxvertexcount(3)]
+void OceanDepthPassGeometry(
+	triangle Varyings i[3],
+	inout TriangleStream<Varyings> stream)
+{
+	float3 p0 = i[0].positionWS;
+	float3 p1 = i[1].positionWS;
+	float3 p2 = i[2].positionWS;
+
+	float ViewDirection = normalize(p0 - _WorldSpaceCameraPos);
+	float3 N = normalize(cross(p1 - p0, p2 - p0));
+	float3 doubledNormal = float3(0.0, 0.0, 0.0);
+	faceforward(doubledNormal, ViewDirection, N);
+
+	//i[0].DebugColor.w = doubledNormal.y;
+	//i[1].DebugColor.w = doubledNormal.y;
+	//i[2].DebugColor.w = doubledNormal.y;
+	
+	stream.Append(i[0]);
+	stream.Append(i[1]);
+	stream.Append(i[2]);
+}
+
+float4 OceanDepthPassFragmentFront(Varyings input) : SV_TARGET
 {
 	//Setup the instance ID for Input
 	UNITY_SETUP_INSTANCE_ID(input);
@@ -100,10 +135,16 @@ float4 OceanDepthPassFragment(Varyings input) : SV_TARGET
 	//float Facing = dot(baseNormalWS, viewDirection);
 
 	//reconstruct Normal This may be the cause of that seam at horizal!!!
-	float3 N = cross(ddx(input.positionWS), ddy(input.positionWS));
-
-	return float4(0.0, N.y, 0.0, input.depth01);
+	return float4(0.0, 1.0, 0.0, input.depth01);
 	//return depth;
+}
+
+float4 OceanDepthPassFragmentBack(Varyings input) : SV_TARGET
+{
+	//Setup the instance ID for Input
+	UNITY_SETUP_INSTANCE_ID(input);
+	return float4(0.0, -1.0, 0.0, input.depth01);
+
 }
 
 float4 OceanBackPassFragment(Varyings input) : SV_TARGET

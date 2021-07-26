@@ -19,7 +19,8 @@ public partial class CameraRenderer
     static ShaderTagId LitShaderTagId = new ShaderTagId("CustomLit");
     static ShaderTagId OceanShaderTagId = new ShaderTagId("OceanShading");
     static ShaderTagId OceanBackShaderTagId = new ShaderTagId("OceanShadingBack");
-    static ShaderTagId OceanDepthShaderTagId = new ShaderTagId("OceanDepthShading");
+    static ShaderTagId OceanDepthShaderFTagId = new ShaderTagId("OceanDepthShadingFront");
+    static ShaderTagId OceanDepthShaderBTagId = new ShaderTagId("OceanDepthShadingBack");
 
     //static int frameBufferId = Shader.PropertyToID("_CameraFrameBuffer");
     static int colorAttachmentId = Shader.PropertyToID("_CameraColorAttachment");
@@ -353,7 +354,7 @@ public partial class CameraRenderer
             criteria = SortingCriteria.CommonOpaque
         };
 
-        var drawingSettings = new DrawingSettings(OceanDepthShaderTagId, sortingSettings)
+        var drawingSettings = new DrawingSettings(OceanDepthShaderFTagId, sortingSettings)
         {
             enableDynamicBatching = useDynameicBatching,
             enableInstancing = useGPUInstancing,
@@ -366,6 +367,8 @@ public partial class CameraRenderer
                 PerObjectData.ReflectionProbes |//send reflection probes to GPU
                 lightPerObjectFlags
         };
+        drawingSettings.SetShaderPassName(1, OceanDepthShaderBTagId);
+
         var filteringSettings = new FilteringSettings(RenderQueueRange.transparent,
             renderingLayerMask: (uint)renderingLayerMask);
 

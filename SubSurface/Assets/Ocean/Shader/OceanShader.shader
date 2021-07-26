@@ -89,21 +89,22 @@
             ENDHLSL
         }
 
-        Pass//currently this pass breaks when the render scale is changed!!!!!!!
+        Pass//currently this pass
         {
             Tags
             {
-                "LightMode" = "OceanDepthShading"//indicate we are using custom lighting model
+                "LightMode" = "OceanDepthShadingFront"//indicate we are using custom lighting model
                 //"LightMode" = "OceanShading"
             }
 
             //for Alpha blend type We will use One OneMinusSrcAlpha
             Blend One Zero
             ZWrite On
-            Cull Off
+            Cull Back
+            ZTest Less//the front and back surface are to close, culling may fail
             //Cull Back
             HLSLPROGRAM
-            #pragma target 3.5
+            #pragma target 4.0
             #pragma shader_feature _PREMULTIPLY_ALPHA
 
             //make unity complie 2 shader with and without GPU instancing
@@ -114,10 +115,44 @@
             //per object lights
             #pragma multi_compile _ _LIGHTS_PER_OBJECT
 
-            #pragma vertex OceanDepthPassVertex
-            #pragma fragment OceanDepthPassFragment
+            #pragma vertex OceanDepthPassVertexFront
+            //#pragma geometry OceanDepthPassGeometry
+            #pragma fragment OceanDepthPassFragmentFront
             #include "./OceanPass.hlsl"
             ENDHLSL
         }
+
+        Pass//currently this pass
+        {
+            Tags
+            {
+                "LightMode" = "OceanDepthShadingBack"//indicate we are using custom lighting model
+                //"LightMode" = "OceanShading"
+            }
+
+            //for Alpha blend type We will use One OneMinusSrcAlpha
+            Blend One Zero
+            ZWrite On
+            Cull Front
+            ZTest Less//the front and back surface are to close, culling may fail
+            //Cull Back
+            HLSLPROGRAM
+            #pragma target 4.0
+            #pragma shader_feature _PREMULTIPLY_ALPHA
+
+            //make unity complie 2 shader with and without GPU instancing
+            #pragma multi_compile_instancing
+
+
+
+            //per object lights
+            #pragma multi_compile _ _LIGHTS_PER_OBJECT
+
+            #pragma vertex OceanDepthPassVertexBack
+            //#pragma geometry OceanDepthPassGeometry
+            #pragma fragment OceanDepthPassFragmentBack
+            #include "./OceanPass.hlsl"
+            ENDHLSL
+    }
     }
 }
