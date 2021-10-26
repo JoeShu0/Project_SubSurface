@@ -367,7 +367,6 @@ public partial class CameraRenderer
                 PerObjectData.ReflectionProbes |//send reflection probes to GPU
                 lightPerObjectFlags
         };
-        drawingSettings.SetShaderPassName(1, OceanDepthShaderBTagId);
 
         var filteringSettings = new FilteringSettings(RenderQueueRange.transparent,
             renderingLayerMask: (uint)renderingLayerMask);
@@ -375,15 +374,23 @@ public partial class CameraRenderer
         context.DrawRenderers(
             cullingResults, ref drawingSettings, ref filteringSettings);
 
+        //try issuing 2 draw batch, this separate the Depth front pass and the back pass.
+        //to Avoid 2 pass of depth pass(due to we need to distiguish the front and back face)
+        drawingSettings.SetShaderPassName(0, OceanDepthShaderBTagId);
+        context.DrawRenderers(
+            cullingResults, ref drawingSettings, ref filteringSettings);
+        
 
+        //set the Render Target Back to Color buffer and Depth buffer
         buffer.SetRenderTarget(colorAttachmentId,
                 RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store,
                 depthAttachmentId,
                 RenderBufferLoadAction.DontCare, RenderBufferStoreAction.Store);
         ExecuteBuffer();
 
-
         //Draw ocean back face
+        //Since we made the back side of water Opaque, we draw it Here, This will lose the Ocean culling
+        //this will make anything above water be culled, when cam is under water. 
         var backdrawingSettings = new DrawingSettings(OceanBackShaderTagId, sortingSettings)
         {
             enableDynamicBatching = useDynameicBatching,

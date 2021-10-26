@@ -122,7 +122,7 @@
             ENDHLSL
         }
 
-        Pass//currently this pass
+        Pass
         {
             Tags
             {
