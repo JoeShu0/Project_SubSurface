@@ -22,10 +22,10 @@ MonoBehaviour:
   CurPastOceanScale:
   - {x: 0, y: 1}
   - {x: 0, y: 1}
-  OceanScaleTransition: -0.751
+  OceanScaleTransition: -0.705
   CurAndPastPos:
-  - {x: 5.302722, y: -7.817154}
-  - {x: 5.302722, y: -7.817154}
+  - {x: 20.326786, y: -4.3879147}
+  - {x: 20.326786, y: -4.3879147}
   OceanCamExtend: 20
   OceanCamHeightStage: 20
   LODCount: 8
@@ -35,8 +35,8 @@ MonoBehaviour:
   WaveCount: 128
   DynamicWaveSim: 0
   WaveParticleCount: 4096
-  WaveParticleSpeed: 2
-  WaveParticleRadius: 8
+  WaveParticleSpeed: 4
+  WaveParticleRadius: 6
   AnimeWindAngle: 90
   WaveDirAngleRange: 180
   WaveLengthRange: {x: 128, y: 0.5}
@@ -45,14 +45,14 @@ MonoBehaviour:
     BandOffset: 0.481
     BandPower: 7.73
   WaveAmplitudeTweak:
-  - 0.48
-  - 1.19
-  - 1.85
-  - 1.91
+  - 0.22
+  - 0.96
+  - 1.55
+  - 1.9
   - 1.97
-  - 2.21
-  - 2.09
-  - 2.68
+  - 1.95
+  - 1.33
+  - 0.5
   debug: 11
   RegenerateWaveDatas: 0
   SpectrumWaves:

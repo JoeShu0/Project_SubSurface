@@ -136,7 +136,7 @@ public class OceanRenderer :MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        /*
+        //Draw Gizmo for wave particle debugging~
         for (int i = 0; i < ORS.WaveParticleCount; i++)
         {
             Vector2 position = OWPR.WaveParticles[i].Origin + 
@@ -145,7 +145,7 @@ public class OceanRenderer :MonoBehaviour
 
             Gizmos.DrawSphere(new Vector3(position.x,0.0f, position.y), 0.1f);
         }
-        */
+        
     }
     private void Update()
     {
@@ -183,11 +183,11 @@ public class OceanRenderer :MonoBehaviour
             OWPR.RenderWaveParticlesForLODs();
         RenderNormalForLODs();
 
-        //OWPR.UpdateWaveParticles();
+        OWPR.UpdateWaveParticles();
         if(!OWPR.IsUpdatingWaveParticles)
         {
             //OWPR.TestAsyncUpdate();
-            //OWPR.RenderWaveParticlesForLODs();
+            OWPR.RenderWaveParticlesForLODs();
         }
         
         // replave corotine with asnc await later

@@ -48,7 +48,7 @@ public class OceanWaveParticleRender
 
         for (int i = 0; i < ORS.WaveParticleCount; i++)
         {
-            WaveParticles[i].Amplitude = 0.0f;
+            WaveParticles[i].Amplitude = 0.25f;
             //WaveParticles[i].Radius = 4.0f;
             WaveParticles[i].BirthTime = 0.0f;
 

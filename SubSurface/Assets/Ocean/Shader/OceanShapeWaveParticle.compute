@@ -6,8 +6,8 @@
 #pragma kernel ClearIntTex
 
 
-#define WAVEPARTICLERADIUS 8//This max be fixed
-#define WAVEPARTICLESPEED 2//the speed is also fixed?
+#define WAVEPARTICLERADIUS 6//This must be fixed
+#define WAVEPARTICLESPEED 4//the speed is also fixed?
 #define WAVEPARTICLEAMP 0.5
 #define WP_HORI_MUL 0.5
 
