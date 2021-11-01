@@ -136,6 +136,7 @@ public class OceanRenderer :MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        /*
         //Draw Gizmo for wave particle debugging~
         for (int i = 0; i < ORS.WaveParticleCount; i++)
         {
@@ -145,7 +146,8 @@ public class OceanRenderer :MonoBehaviour
 
             Gizmos.DrawSphere(new Vector3(position.x,0.0f, position.y), 0.1f);
         }
-        
+        */
+
     }
     private void Update()
     {

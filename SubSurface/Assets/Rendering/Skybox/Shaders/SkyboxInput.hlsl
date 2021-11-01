@@ -1,0 +1,8 @@
+#ifndef CUSTOM_SKYBOX_INPUT_INCLUDED
+#define CUSTOM_SKYBOX_INPUT_INCLUDED
+
+CBUFFER_START(_OceanGlobalData)
+float4 _DarkColor;
+CBUFFER_END
+
+#endif

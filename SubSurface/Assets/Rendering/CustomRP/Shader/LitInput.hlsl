@@ -41,6 +41,11 @@ CBUFFER_START(_OceanData)
     float4 _CenterPos;
     float4 _CamProjectionParams;
 CBUFFER_END
+
+CBUFFER_START(_OceanGlobalData)
+	float4 _DarkColor;
+CBUFFER_END
+
 //combine the data to tide up the data feeding into the Getter functions
 struct InputConfig
 {

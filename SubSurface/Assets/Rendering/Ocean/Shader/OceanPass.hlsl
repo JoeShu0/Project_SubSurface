@@ -108,7 +108,7 @@ void OceanDepthPassGeometry(
 	float3 p1 = i[1].positionWS;
 	float3 p2 = i[2].positionWS;
 
-	float ViewDirection = normalize(p0 - _WorldSpaceCameraPos);
+	float3 ViewDirection = normalize(p0 - _WorldSpaceCameraPos);
 	float3 N = normalize(cross(p1 - p0, p2 - p0));
 	float3 doubledNormal = float3(0.0, 0.0, 0.0);
 	faceforward(doubledNormal, ViewDirection, N);
@@ -159,8 +159,8 @@ float4 OceanBackPassFragment(Varyings input) : SV_TARGET
 		normalize(ToplightDir + GetOceanNormal(input.UV).xyz),  
 		-normalize(_WorldSpaceCameraPos - input.positionWS));
 	
-	LightGradient = pow(LightGradient,  5.0);
-	return float4(0.0,0.0,LightGradient,1.0);
+    LightGradient = pow(LightGradient, 5.0);
+    return float4(LightGradient, LightGradient, LightGradient, 1.0) + _DarkColor;
 	//return depth;
 }
 

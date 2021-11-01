@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,78 +53,79 @@
     <UnityVersion>2020.3.19f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Compile Include="Assets\Rendering\CustomRP\Runtime\ReinterpretExtensions.cs" />
+    <Compile Include="Assets\Rendering\CustomRP\Runtime\CameraSettings.cs" />
+    <Compile Include="Assets\Rendering\CustomRP\Runtime\PostFXStack.Editor.cs" />
+    <Compile Include="Assets\Rendering\Ocean\Objects\CameraPanner.cs" />
+    <Compile Include="Assets\Rendering\CustomRP\Runtime\RenderingLayerMaskFieldAttribute.cs" />
+    <Compile Include="Assets\Rendering\CustomRP\Runtime\CameraRenderer.cs" />
+    <Compile Include="Assets\Rendering\Ocean\Scripts\OceanRenderer.cs" />
+    <Compile Include="Assets\Rendering\Ocean\Scripts\OceanShadingSetting.cs" />
+    <Compile Include="Assets\Rendering\Ocean\Scripts\OceanBuoyancy.cs" />
+    <Compile Include="Assets\Rendering\CustomRP\Runtime\CustomRenderPipelineCamera.cs" />
+    <Compile Include="Assets\Rendering\CustomRP\Runtime\Lighting.cs" />
+    <Compile Include="Assets\Rendering\CustomRP\Runtime\CustomRenderPipelineAsset.cs" />
+    <Compile Include="Assets\Rendering\CustomRP\Examples\PerObjectMaterialProperties.cs" />
+    <Compile Include="Assets\Rendering\CustomRP\Runtime\Shadows.cs" />
+    <Compile Include="Assets\Rendering\CustomRP\Runtime\CustomRenderPipeline.Editor.cs" />
+    <Compile Include="Assets\Rendering\Ocean\Scripts\OceanHeightSampler.cs" />
+    <Compile Include="Assets\Rendering\Ocean\Scripts\OceanWaveParticleRender.cs" />
+    <Compile Include="Assets\Rendering\CustomRP\Examples\ControlScriptable.cs" />
+    <Compile Include="Assets\Rendering\CustomRP\Runtime\PostFXSettings.cs" />
+    <Compile Include="Assets\Rendering\CustomRP\Runtime\PostFXStack.cs" />
+    <Compile Include="Assets\Rendering\CustomRP\Runtime\CameraBufferSettings.cs" />
+    <Compile Include="Assets\Rendering\CustomRP\Examples\MeshBall.cs" />
+    <Compile Include="Assets\Rendering\CustomRP\Runtime\CameraRenderer.Editor.cs" />
+    <Compile Include="Assets\Rendering\Ocean\Objects\WaveTester.cs" />
+    <Compile Include="Assets\Rendering\Ocean\Scripts\OceanRenderSetting.cs" />
+    <Compile Include="Assets\Rendering\CustomRP\Runtime\CustomRenderPipelineAsset.Editor.cs" />
+    <Compile Include="Assets\Rendering\Ocean\Scripts\PerTileMaterialProperty.cs" />
+    <Compile Include="Assets\Rendering\CustomRP\Runtime\CustomRenderPipeline.cs" />
+    <Compile Include="Assets\Rendering\CustomRP\Runtime\ShadowSettings.cs" />
+    <Compile Include="Assets\Rendering\Ocean\Objects\HeightSampler.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\CustomRP\Runtime\ReinterpretExtensions.cs" />
-    <Compile Include="Assets\CustomRP\Runtime\CameraSettings.cs" />
-    <Compile Include="Assets\CustomRP\Runtime\PostFXStack.Editor.cs" />
-    <Compile Include="Assets\Ocean\Objects\CameraPanner.cs" />
-    <Compile Include="Assets\CustomRP\Runtime\RenderingLayerMaskFieldAttribute.cs" />
-    <Compile Include="Assets\CustomRP\Runtime\CameraRenderer.cs" />
-    <Compile Include="Assets\Ocean\Scripts\OceanRenderer.cs" />
-    <Compile Include="Assets\Ocean\Scripts\OceanShadingSetting.cs" />
-    <Compile Include="Assets\Ocean\Scripts\OceanBuoyancy.cs" />
-    <Compile Include="Assets\CustomRP\Runtime\CustomRenderPipelineCamera.cs" />
-    <Compile Include="Assets\CustomRP\Runtime\Lighting.cs" />
-    <Compile Include="Assets\CustomRP\Runtime\CustomRenderPipelineAsset.cs" />
-    <Compile Include="Assets\CustomRP\Examples\PerObjectMaterialProperties.cs" />
-    <Compile Include="Assets\CustomRP\Runtime\Shadows.cs" />
-    <Compile Include="Assets\CustomRP\Runtime\CustomRenderPipeline.Editor.cs" />
-    <Compile Include="Assets\Ocean\Scripts\OceanHeightSampler.cs" />
-    <Compile Include="Assets\Ocean\Scripts\OceanWaveParticleRender.cs" />
-    <Compile Include="Assets\CustomRP\Examples\ControlScriptable.cs" />
-    <Compile Include="Assets\CustomRP\Runtime\PostFXSettings.cs" />
-    <Compile Include="Assets\CustomRP\Runtime\PostFXStack.cs" />
-    <Compile Include="Assets\CustomRP\Runtime\CameraBufferSettings.cs" />
-    <Compile Include="Assets\CustomRP\Examples\MeshBall.cs" />
-    <Compile Include="Assets\CustomRP\Runtime\CameraRenderer.Editor.cs" />
-    <Compile Include="Assets\Ocean\Objects\WaveTester.cs" />
-    <Compile Include="Assets\Ocean\Scripts\OceanRenderSetting.cs" />
-    <Compile Include="Assets\CustomRP\Runtime\CustomRenderPipelineAsset.Editor.cs" />
-    <Compile Include="Assets\Ocean\Scripts\PerTileMaterialProperty.cs" />
-    <Compile Include="Assets\CustomRP\Runtime\CustomRenderPipeline.cs" />
-    <Compile Include="Assets\CustomRP\Runtime\ShadowSettings.cs" />
-    <Compile Include="Assets\Ocean\Objects\HeightSampler.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Assets\CustomRP\Shader\Particles_Unlit.shader" />
-    <None Include="Assets\Ocean\ShaderLib\OceanSurface.hlsl" />
-    <None Include="Assets\CustomRP\Shader\Post FX Stack.shader" />
-    <None Include="Assets\CustomRP\Shader\LitPass.hlsl" />
-    <None Include="Assets\Ocean\ShaderLib\OceanLighting.hlsl" />
-    <None Include="Assets\Ocean\Shader\OceanShapeGerstner.compute" />
-    <None Include="Assets\CustomRP\ShaderLib\Common.hlsl" />
-    <None Include="Assets\CustomRP\Shader\UnlitPass.hlsl" />
-    <None Include="Assets\CustomRP\Shader\ShadowCasterPass.hlsl" />
-    <None Include="Assets\CustomRP\ShaderLib\Surface.hlsl" />
-    <None Include="Assets\Ocean\ShaderLib\Expofog.hlsl" />
-    <None Include="Assets\CustomRP\Shader\Unlit.shader" />
-    <None Include="Assets\Ocean\Shader\OceanShapeNormal.compute" />
-    <None Include="Assets\Ocean\Shader\OceanShapeWaveParticle.compute" />
-    <None Include="Assets\Ocean\Shader\OceanInput.hlsl" />
-    <None Include="Assets\CustomRP\Shader\MetaPass.hlsl" />
-    <None Include="Assets\Ocean\ShaderLib\OceanTRDF.hlsl" />
-    <None Include="Assets\Ocean\Shader\OceanShader.shader" />
-    <None Include="Assets\CustomRP\ShaderLib\Lighting.hlsl" />
-    <None Include="Assets\CustomRP\Shader\PostFXStackPasses.hlsl" />
-    <None Include="Assets\CustomRP\Shader\Lit.shader" />
-    <None Include="Assets\CustomRP\Shader\FXAAPass.hlsl" />
-    <None Include="Assets\Ocean\ShaderLib\OceanGI.hlsl" />
-    <None Include="Assets\CustomRP\ShaderLib\Shadows.hlsl" />
-    <None Include="Assets\Ocean\Shader\OceanPass.hlsl" />
-    <None Include="Assets\CustomRP\Shader\LitInput.hlsl" />
-    <None Include="Assets\CustomRP\ShaderLib\Light.hlsl" />
-    <None Include="Assets\CustomRP\Shader\CameraRendererPasses.hlsl" />
-    <None Include="Assets\CustomRP\Shader\CameraRenderer.shader" />
-    <None Include="Assets\CustomRP\ShaderLib\UnityInput.hlsl" />
-    <None Include="Assets\Ocean\Shader\OceanSampler.compute" />
-    <None Include="Assets\CustomRP\ShaderLib\GI.hlsl" />
-    <None Include="Assets\CustomRP\ShaderLib\Fragment.hlsl" />
-    <None Include="Assets\Ocean\Objects\finiteWaterCompute.compute" />
-    <None Include="Assets\CustomRP\Shader\UnlitInput.hlsl" />
-    <None Include="Assets\CustomRP\Shader\UICustomBlending.shader" />
-    <None Include="Assets\CustomRP\ShaderLib\BRDF.hlsl" />
+    <None Include="Assets\Rendering\CustomRP\Shader\Particles_Unlit.shader" />
+    <None Include="Assets\Rendering\Ocean\ShaderLib\OceanSurface.hlsl" />
+    <None Include="Assets\Rendering\Skybox\Shaders\SkyboxInput.hlsl" />
+    <None Include="Assets\Rendering\CustomRP\Shader\Post FX Stack.shader" />
+    <None Include="Assets\Rendering\Skybox\Shaders\NewUnlitShader.shader" />
+    <None Include="Assets\Rendering\CustomRP\Shader\LitPass.hlsl" />
+    <None Include="Assets\Rendering\Ocean\ShaderLib\OceanLighting.hlsl" />
+    <None Include="Assets\Rendering\Ocean\Shader\OceanShapeGerstner.compute" />
+    <None Include="Assets\Rendering\CustomRP\ShaderLib\Common.hlsl" />
+    <None Include="Assets\Rendering\CustomRP\Shader\UnlitPass.hlsl" />
+    <None Include="Assets\Rendering\CustomRP\Shader\ShadowCasterPass.hlsl" />
+    <None Include="Assets\Rendering\CustomRP\ShaderLib\Surface.hlsl" />
+    <None Include="Assets\Rendering\Ocean\ShaderLib\Expofog.hlsl" />
+    <None Include="Assets\Rendering\CustomRP\Shader\Unlit.shader" />
+    <None Include="Assets\Rendering\Ocean\Shader\OceanShapeNormal.compute" />
+    <None Include="Assets\Rendering\Ocean\Shader\OceanShapeWaveParticle.compute" />
+    <None Include="Assets\Rendering\Ocean\Shader\OceanInput.hlsl" />
+    <None Include="Assets\Rendering\CustomRP\Shader\MetaPass.hlsl" />
+    <None Include="Assets\Rendering\Ocean\ShaderLib\OceanTRDF.hlsl" />
+    <None Include="Assets\Rendering\Ocean\Shader\OceanShader.shader" />
+    <None Include="Assets\Rendering\CustomRP\ShaderLib\Lighting.hlsl" />
+    <None Include="Assets\Rendering\CustomRP\Shader\PostFXStackPasses.hlsl" />
+    <None Include="Assets\Rendering\CustomRP\Shader\Lit.shader" />
+    <None Include="Assets\Rendering\CustomRP\Shader\FXAAPass.hlsl" />
+    <None Include="Assets\Rendering\Ocean\ShaderLib\OceanGI.hlsl" />
+    <None Include="Assets\Rendering\Skybox\Shaders\SkyboxPass.hlsl" />
+    <None Include="Assets\Rendering\CustomRP\ShaderLib\Shadows.hlsl" />
+    <None Include="Assets\Rendering\Ocean\Shader\OceanPass.hlsl" />
+    <None Include="Assets\Rendering\CustomRP\Shader\LitInput.hlsl" />
+    <None Include="Assets\Rendering\CustomRP\ShaderLib\Light.hlsl" />
+    <None Include="Assets\Rendering\CustomRP\Shader\CameraRendererPasses.hlsl" />
+    <None Include="Assets\Rendering\CustomRP\Shader\CameraRenderer.shader" />
+    <None Include="Assets\Rendering\CustomRP\ShaderLib\UnityInput.hlsl" />
+    <None Include="Assets\Rendering\Ocean\Shader\OceanSampler.compute" />
+    <None Include="Assets\Rendering\CustomRP\ShaderLib\GI.hlsl" />
+    <None Include="Assets\Rendering\Skybox\Shaders\SkyBoxShader.shader" />
+    <None Include="Assets\Rendering\CustomRP\ShaderLib\Fragment.hlsl" />
+    <None Include="Assets\Rendering\Ocean\Objects\finiteWaterCompute.compute" />
+    <None Include="Assets\Rendering\CustomRP\Shader\UnlitInput.hlsl" />
+    <None Include="Assets\Rendering\CustomRP\Shader\UICustomBlending.shader" />
+    <None Include="Assets\Rendering\CustomRP\ShaderLib\BRDF.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

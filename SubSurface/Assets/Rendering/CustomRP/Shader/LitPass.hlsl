@@ -10,10 +10,6 @@
 
 #include "../../Ocean/ShaderLib/Expofog.hlsl"
 
-CBUFFER_START(_OceanGlobalData)
-    float4 _DarkColor;
-CBUFFER_END
-
 struct Attributes
 {
 	float3 positionOS : POSITION;

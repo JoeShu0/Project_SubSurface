@@ -1,4 +1,4 @@
-﻿Shader "Custom_RP/OceanShader"
+﻿Shader "Ocean/OceanShader"
 {
     Properties
     {

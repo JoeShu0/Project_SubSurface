@@ -45,14 +45,14 @@ MonoBehaviour:
     BandOffset: 0.481
     BandPower: 7.73
   WaveAmplitudeTweak:
-  - 0.22
-  - 0.96
-  - 1.55
-  - 1.9
-  - 1.97
+  - 1.67
+  - 2.34
+  - 2.69
+  - 2.69
+  - 2.45
   - 1.95
-  - 1.33
-  - 0.5
+  - 1.24
+  - 0.17
   debug: 11
   RegenerateWaveDatas: 0
   SpectrumWaves:

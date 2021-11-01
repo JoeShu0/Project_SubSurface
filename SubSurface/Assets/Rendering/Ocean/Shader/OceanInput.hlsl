@@ -1,5 +1,5 @@
-#ifndef CUSTOM_OCEAN_INPUT_PASS_INCLUDED
-#define CUSTOM_OCEAN_INPUT_PASS_INCLUDED
+#ifndef CUSTOM_OCEAN_INPUT_INCLUDED
+#define CUSTOM_OCEAN_INPUT_INCLUDED
 
 //short cut unity access per material property
 #define INPUT_PROP(name) UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, name)
