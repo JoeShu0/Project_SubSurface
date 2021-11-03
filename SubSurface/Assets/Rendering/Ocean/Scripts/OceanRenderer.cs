@@ -186,7 +186,7 @@ public class OceanRenderer :MonoBehaviour
         RenderNormalForLODs();
 
         OWPR.UpdateWaveParticles();
-        if(!OWPR.IsUpdatingWaveParticles)
+        if(!OWPR.IsUpdatingWaveParticles && ORS.DynamicWaveSim)
         {
             //OWPR.TestAsyncUpdate();
             OWPR.RenderWaveParticlesForLODs();

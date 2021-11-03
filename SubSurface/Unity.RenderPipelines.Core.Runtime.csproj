@@ -11,10 +11,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{0C1FB7D6-902B-7191-DB04-F29FF0E5045C}</ProjectGuid>
+    <ProjectGuid>{E29C2996-4359-EEF0-E9CB-CAAD8CDDC6FD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>UnityEngine.UI</AssemblyName>
+    <AssemblyName>Unity.RenderPipelines.Core.Runtime</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -28,7 +28,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
-    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -37,7 +37,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
-    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
     <NoConfig>true</NoConfig>
@@ -47,92 +47,106 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Toggle.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Text.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\GraphicRaycaster.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Image.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Navigation.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Layout\ContentSizeFitter.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\VertexModifiers\Outline.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Culling\ClipperRegistry.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Layout\LayoutElement.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\IGraphicEnabledDisabled.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Selectable.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Layout\VerticalLayoutGroup.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Slider.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Layout\HorizontalLayoutGroup.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\VertexModifiers\Shadow.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\IMaskable.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\InputModules\BaseInput.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\Raycasters\Physics2DRaycaster.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\VertexModifiers\PositionAsUV1.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Utility\VertexHelper.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\ExecuteEvents.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Layout\ILayoutElement.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\EventData\BaseEventData.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\EventData\PointerEventData.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Utility\ListPool.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\EventTrigger.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\VertexModifiers\IMeshModifier.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\MoveDirection.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\FontData.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Dropdown.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\MaskUtilities.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\UIBehaviour.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\GraphicRegistry.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\CanvasUpdateRegistry.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\GraphicRebuildTracker.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Utility\ReflectionMethodsCache.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Animation\CoroutineTween.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Layout\LayoutUtility.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\SpriteState.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Mask.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\RawImage.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Culling\RectangularVertexClipper.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\EventInterfaces.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Culling\Clipping.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\ScrollRect.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\Raycasters\PhysicsRaycaster.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Graphic.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Layout\CanvasScaler.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\MaterialModifiers\IMaterialModifier.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\RectMask2D.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Utility\ObjectPool.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\SetPropertyUtility.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\DefaultControls.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Layout\AspectRatioFitter.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\EventSystem.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\StencilMaterial.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Culling\IClipRegion.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\EventData\AxisEventData.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\Raycasters\BaseRaycaster.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\SpecializedCollections\IndexedSet.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\EventTriggerType.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Misc.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\MaskableGraphic.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\MultipleDisplayUtilities.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\InputField.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\VertexModifiers\BaseMeshEffect.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Layout\LayoutRebuilder.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\AnimationTriggers.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\Properties\AssemblyInfo.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\IMask.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Layout\HorizontalOrVerticalLayoutGroup.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\EventHandle.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\InputModules\StandaloneInputModule.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Layout\LayoutGroup.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Scrollbar.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\FontUpdateTracker.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\ToggleGroup.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\RaycastResult.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Button.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\InputModules\BaseInputModule.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\Layout\GridLayoutGroup.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\InputModules\PointerInputModule.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\InputModules\TouchInputModule.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\UI\Core\ColorBlock.cs" />
-     <Compile Include="Packages\com.unity.ugui\Runtime\EventSystem\RaycasterManager.cs" />
-     <None Include="Packages\com.unity.ugui\Runtime\UnityEngine.UI.asmdef" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerVector2.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerColor.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerEnumField.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Volume\VolumeProfile.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Common\ConstantBuffer.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Textures\RTHandle.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Camera\FreeCamera.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\DebugManager.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerContainer.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerRow.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Common\DynamicResolutionHandler.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\RenderGraph\RenderGraphPass.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Common\XRGraphics.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\DebugUI.Containers.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\DebugUI.Panel.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Utilities\ResourceReloader.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Common\CoreAttributes.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerVector3.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerVBox.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerIndirectToggle.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Common\ObservableList.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\RenderGraph\RenderGraphObjectPool.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\XR\XRGraphicsAutomatedTests.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerToggleHistory.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\MousePositionDebug.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Volume\VolumeParameter.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Utilities\BitArray.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\RenderGraph\RenderGraphResourcePool.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Common\CommandBufferPool.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Utilities\HaltonSequence.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\RenderGraph\RenderGraphProfileId.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Utilities\CameraCaptureBridge.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\LookDev\IDataProvider.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerUIntField.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerFloatField.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerPanel.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Utilities\DelegateUtility.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Textures\BufferedRTHandleSystem.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Volume\VolumeManager.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Textures\RTHandleSystem.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Textures\DepthBits.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Volume\VolumeComponent.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerToggle.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Textures\TextureXR.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Textures\RTHandles.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Utilities\TileLayoutUtils.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\Prefabs\Scripts\UIFoldout.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerPersistentCanvas.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\RenderGraph\RenderGraphResources.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerGroup.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Common\SerializedDictionary.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Textures\MSAASamples.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\ShaderGenerator\ShaderGeneratorAttributes.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Utilities\CoreMatrixUtils.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Utilities\SceneRenderPipeline.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Common\CommonStructs.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Documentation.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Utilities\MaterialQuality.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Common\CoreUnsafeUtils.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Utilities\CoreUtils.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\RenderGraph\RenderGraph.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerValue.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\DebugUI.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Common\DynamicArray.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerEnumHistory.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerButton.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\AssemblyInfo.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Inputs\InputRegistering.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerHBox.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerIntField.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerWidget.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\RendererList\RendererList.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Utilities\CoreRenderPipelinePreferences.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Common\ComponentSingleton.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerVector4.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Volume\Volume.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Utilities\TextureCurve.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Utilities\ColorUtils.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Common\ListBuffer.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerIndirectFloatField.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Utilities\XRUtils.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerBitField.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\RenderGraph\RenderGraphBuilder.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Camera\CameraSwitcher.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerFoldout.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\DebugManager.Actions.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Common\GlobalDynamicResolutionSettings.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\DebugShapes.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\RenderGraph\RenderGraphResourceRegistry.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Utilities\HableCurve.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\RenderGraph\RenderGraphLogger.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\ProfilingScope.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Volume\VolumeStack.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\DebugUpdater.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\Prefabs\Scripts\DebugUIHandlerCanvas.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Debugging\DebugUI.Fields.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Common\ObjectPools.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\RenderGraph\RenderGraphDefaultResources.cs" />
+     <Compile Include="Packages\com.unity.render-pipelines.core\Runtime\Common\IVirtualTexturingEnabledRenderPipeline.cs" />
+     <None Include="Packages\com.unity.render-pipelines.core\Runtime\Unity.RenderPipelines.Core.Runtime.asmdef" />
  <Reference Include="UnityEngine">
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.21f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>
@@ -709,6 +723,18 @@
  <Reference Include="mscorlib">
  <HintPath>/Applications/Unity/Hub/Editor/2020.3.21f1/Unity.app/Contents/NetStandard/compat/2.0.0/shims/netfx/mscorlib.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="UnityEditor.UI.csproj">
+      <Project>{831F2FBA-C2BE-39FC-2F3C-9D8CFC4F192D}</Project>
+      <Name>UnityEditor.UI</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.UI.csproj">
+      <Project>{0C1FB7D6-902B-7191-DB04-F29FF0E5045C}</Project>
+      <Name>UnityEngine.UI</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
