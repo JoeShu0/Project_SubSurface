@@ -150,7 +150,7 @@
 
             #pragma vertex OceanDepthPassVertexBack
             //#pragma geometry OceanDepthPassGeometry
-            #pragma fragment OceanDepthPassFragmentBack
+            #pragma fragment OceanDepthPassFragmentFront
             #include "./OceanPass.hlsl"
             ENDHLSL
     }
