@@ -69,6 +69,9 @@ public class OceanRenderer :MonoBehaviour
     //int CameraProjParamsId = Shader.PropertyToID("_CamProjectionParams");
 
 
+    //temp Counter
+    int NormalUpdateCounter = 0;
+
 
     //*****this class is a singleton*****
     private static OceanRenderer _instance;
@@ -539,6 +542,16 @@ public class OceanRenderer :MonoBehaviour
 
     void RenderNormalForLODs()
     {
+        if (NormalUpdateCounter >= 10)//Did this save any time??
+        {
+            NormalUpdateCounter = 0;
+            return;
+        }
+        else
+        {
+            NormalUpdateCounter++;
+        }
+        
         ORS.shapeNormalShader.SetTexture(0, "_DisplaceArray", ORS.LODDisplaceMapsArray);
         ORS.shapeNormalShader.SetTexture(0, "_NormalArray", ORS.LODNormalMapsArray);
         ORS.shapeNormalShader.SetTexture(0, "_DerivativeArray", ORS.LODDerivativeMapsArray);
