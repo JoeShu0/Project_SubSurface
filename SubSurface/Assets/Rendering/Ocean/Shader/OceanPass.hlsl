@@ -122,7 +122,7 @@ void OceanDepthPassGeometry(
 	stream.Append(i[2]);
 }
 
-float4 OceanDepthPassFragmentFront(Varyings input) : SV_TARGET
+float4 OceanDepthPassFragmentFront(Varyings input, bool IsFront:SV_IsFrontFace) : SV_TARGET
 {
 	//Setup the instance ID for Input
 	UNITY_SETUP_INSTANCE_ID(input);
@@ -135,14 +135,16 @@ float4 OceanDepthPassFragmentFront(Varyings input) : SV_TARGET
 	//float Facing = dot(baseNormalWS, viewDirection);
 
 	//reconstruct Normal This may be the cause of that seam at horizal!!!
-	return float4(0.0, 1.0, 0.0, input.depth01);
+	float Facing = IsFront ? 1.0 : -1.0;
+	return float4(0.0, Facing, 0.0, input.depth01);
 	//return depth;
 }
 
-float4 OceanDepthPassFragmentBack(Varyings input) : SV_TARGET
+float4 OceanDepthPassFragmentBack(Varyings input, bool IsFront:SV_IsFrontFace) : SV_TARGET
 {
 	//Setup the instance ID for Input
 	UNITY_SETUP_INSTANCE_ID(input);
+
 	return float4(0.0, -1.0, 0.0, input.depth01);
 
 }
