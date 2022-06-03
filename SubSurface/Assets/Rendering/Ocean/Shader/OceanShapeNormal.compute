@@ -74,6 +74,8 @@ void CSMain (uint3 id : SV_DispatchThreadID)
     float Dzy = derivates.w;
     float Dxt = velocities.x;
     float Dyt = velocities.y;
+    
+    //float4 normals = _NormalArray[uint3(id.x, id.y, LODIndex)];
 
     float3 tangent = normalize(float3(1.0f, 0.0f, 0.0f) + float3(Dxx, Dzx, Dyx));
     float3 binormal = normalize(float3(0.0f, 0.0f, 1.0f) + float3(Dxy, Dzy, Dyy));

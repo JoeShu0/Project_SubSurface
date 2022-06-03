@@ -32,6 +32,7 @@ UNITY_INSTANCING_BUFFER_START(UnityPerMaterial)
     //UNITY_DEFINE_INSTANCED_PROP(float4, _CenterPos)
     UNITY_DEFINE_INSTANCED_PROP(float, _LODSize)
 UNITY_INSTANCING_BUFFER_END(UnityPerMaterial)
+
 //specify the buffer, use the Shader.setglobal~ to set buffers 
 CBUFFER_START(_OceanGlobalData)
     float4 _OceanScaleParams;//x scale log2, y scale, z transition

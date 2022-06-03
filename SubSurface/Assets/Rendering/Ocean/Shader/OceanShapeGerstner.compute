@@ -179,8 +179,12 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
     float4 baseDisplaceV = BilinearSamplerTextureArray(_DisplaceArray, UVPreviousLOD, LODIndex + 1);
     float4 baseDerivativeV = BilinearSamplerTextureArray(_DerivativeArray, UVPreviousLOD, LODIndex + 1);
     float4 baseVelocityV = BilinearSamplerTextureArray(_VelocityArray, UVPreviousLOD, LODIndex + 1);
+    float4 baseNormalFoamV = BilinearSamplerTextureArray(_NormalArray, UVPreviousLOD, LODIndex + 1);
 
-
+    //Jacobian Det from "Ocean Wave Rendering with Whitcap in the Visual System of a Maritime Simulaor"
+    //float JacobianDet = (1 + Dxx) * (1 + Dyy) - (Dxy) * (Dyx);
+    //float foam = clamp(1.0f - JacobianDet, 0.0, 1.0);
+    //foam += baseNormalFoamV.w;
     
     Dxx += baseDerivativeV.x;
     Dyy += baseDerivativeV.y;
@@ -200,16 +204,14 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
     //float3 binormal = normalize(float3(0.0f, 0.0f, 1.0f) + float3(Dxy, Dzy, Dyy));
     //float3 normal = normalize(cross(binormal, tangent));
     
-    //Jacobian Det from "Ocean Wave Rendering with Whitcap in the Visual System of a Maritime Simulaor"
-    //float JacobianDet = (1 + Dxx) * (1 + Dyy) - (Dxy) * (Dyx);
-    //float foam = clamp(1.0f - JacobianDet,0.0, 1.0);
+    
 
     GerstnerOut ReturnData;
     ReturnData.dispVector = float4(displace, 0.0);
-    ReturnData.normalVector = float4(0.0,0.0,0.0,0.0);//float4(normal, foam);
+    ReturnData.normalVector = float4(0.0, 0.0, 0.0, 0.0); //float4(normal, foam);
     ReturnData.derivativeVector = float4(Dxx, Dyy, Dzx, Dzy);
     ReturnData.VelocityVector = float4(Dxt,Dyt, Dxy, Dyx);
-
+    
     return ReturnData;
 }
 
@@ -277,7 +279,7 @@ void CSMain(uint3 id : SV_DispatchThreadID)
 
     //assign maps for CPU process
     _DisplaceArray[uint3(id.xy, LODIndex)] = outputWaveVectors.dispVector;;
-    //_NormalArray[uint3(id.xy, LODIndex)] = float4(0.0,0.0,0.0,0.0);
+    //_NormalArray[uint3(id.xy, LODIndex)] = outputWaveVectors.normalVector;
     _DerivativeArray[uint3(id.xy, LODIndex)] = outputWaveVectors.derivativeVector;;
     _VelocityArray[uint3(id.xy, LODIndex)] = outputWaveVectors.VelocityVector;;
     //debug

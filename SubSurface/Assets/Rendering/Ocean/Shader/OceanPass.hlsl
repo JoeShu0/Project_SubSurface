@@ -189,14 +189,16 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	float foamCap = pow(abs(foam + 0.3f), 100.0f);
 	float TailTex = _FoamTrailTexture.Sample(sampler_FoamTrailTexture, input.StaticUV * 0.1f).r * 2.0f;
 	float foamTrail = pow(abs(foam + _FoamFresnelOffsetPow.x), _FoamFresnelOffsetPow.y) * TailTex;
-	float foamMask = clamp(max(foamCap, foamTrail), 0.0f, 1.0f);
+    float foamMask = foam; //clamp(max(foamCap, foamTrail), 0.0f, 1.0f);
 	
 	//Get the detail normal and combine with base normal
 	//detial normal need multi sample for distance fade and 
 	//panning to add dynamic, Also a multiplier to adjust effect 
-	float3 DetailTangentNormal = GetTangentDetailNormal(input.StaticUV * 0.025f);
-	float3 normalWS = DetailTangentNormalToWorld(DetailTangentNormal, baseNormalWS);
-
+	//float3 DetailTangentNormal = GetTangentDetailNormal(input.StaticUV * 0.025f);
+	//float3 normalWS = DetailTangentNormalToWorld(DetailTangentNormal, baseNormalWS);
+    float3 normalWS = baseNormalWS;
+	
+	
 	//Waht do we need
 	//banding color on Water surface with foam(color changes based on sun and other lights
 	//	sun direction indicate Banding, strength&color indicate color tint, other lights uses additive*(1-tranparency)*diffuse? to color) 
