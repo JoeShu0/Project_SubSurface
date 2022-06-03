@@ -40,6 +40,9 @@ CBUFFER_START(_OceanGlobalData)
     
     //LOD related
     float4 _CenterPos;
+
+    //Time
+    float _Time;
     
     //Shading Related
     float4 _BaseColor;
@@ -162,12 +165,34 @@ float4 GetWorldPosUVAndNext(float3 positionWS)
 
 float3 GetTangentDetailNormal(float2 staticUV)
 {
-    float4 map = SAMPLE_TEXTURE2D(_DetailNormalNoise, sampler_DetailNormalNoise, staticUV);
-    float scale = 1;//INPUT_PROP(_NormalScale);
-    float3 normal = DecodeNormal(map, scale);
+    half2 wave01UV = (float2(_Time * 1, _Time * 1) + staticUV) * 2;
+    half2 wave02UV = (float2(_Time * 0.5, -_Time * 0.5) + staticUV) * 1;
+    half2 wave03UV = (float2(-_Time * 0.1, -_Time * 0.1) + staticUV) * 0.5;
+    float3 normal01 = DecodeNormal(SAMPLE_TEXTURE2D(_DetailNormalNoise, sampler_DetailNormalNoise, wave01UV), 1);
+    float3 normal02 = DecodeNormal(SAMPLE_TEXTURE2D(_DetailNormalNoise, sampler_DetailNormalNoise, wave02UV), 1);
+    float3 normal03 = DecodeNormal(SAMPLE_TEXTURE2D(_DetailNormalNoise, sampler_DetailNormalNoise, wave03UV), 1);
+    //float scale = 1;//INPUT_PROP(_NormalScale);
+    float3 normal = normalize(normal01 + normal02 + normal03);
 
     return normal;
 }
+/*
+half3 GetMovingTangnetNormal(half2 uv, half2 MoveDir = half2(1, 1))
+{
+    MoveDir = normalize(MoveDir);
+    half2 wave01UV = (float2(_Time.x * _Wave01Parms.x, _Time.x * _Wave01Parms.y) * MoveDir + uv) * _Wave01Parms.z;
+    half2 wave02UV = (float2(_Time.x * _Wave02Parms.x, _Time.x * _Wave02Parms.y) * MoveDir + uv) * _Wave02Parms.z;
+    half2 wave03UV = (float2(_Time.x * _Wave03Parms.x, _Time.x * _Wave03Parms.y) * MoveDir + uv) * _Wave03Parms.z;
+    half3 tangentNormal01 = UnpackNormal(SAMPLE_TEXTURE2D(_BumpMap, sampler_BumpMap, wave01UV));
+    half3 tangentNormal02 = UnpackNormal(SAMPLE_TEXTURE2D(_BumpMap, sampler_BumpMap, wave02UV));
+    half3 tangentNormal03 = UnpackNormal(SAMPLE_TEXTURE2D(_BumpMap, sampler_BumpMap, wave03UV));
+    half3 tangentNormal = normalize(
+        tangentNormal01 * half3(_Wave01Parms.w, _Wave01Parms.w, 1.0) +
+        tangentNormal02 * half3(_Wave02Parms.w, _Wave02Parms.w, 1.0) +
+        tangentNormal03 * half3(_Wave03Parms.w, _Wave03Parms.w, 1.0)
+        );
+    return tangentNormal;
+}*/
 
 float3 DetailTangentNormalToWorld(float3 tangentDetailNormal, float3 worldBaseNormal)
 {

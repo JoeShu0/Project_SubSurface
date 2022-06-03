@@ -180,7 +180,7 @@ public class OceanRenderSetting : ScriptableObject
         }
         if (!OceanDetailNoise)
         {
-            OceanDetailNoise = (Texture2D)Resources.Load("WaterDetailNormal");
+            OceanDetailNoise = (Texture2D)Resources.Load("WaterDetailNormal01");
         }
 
         InitLODRTs();
@@ -292,7 +292,7 @@ public class OceanRenderSetting : ScriptableObject
         for(int i=0;i< LODCount; i++)
         {
             OceanMats[i] = new Material(oceanShader);
-            string MatPath = string.Format("Assets/Ocean/OceanAssets/Material_LOD{0}.mat", i);
+            string MatPath = string.Format("Assets/Rendering/Ocean/OceanAssets/Material_LOD{0}.mat", i);
             OceanMats[i].enableInstancing = true;
             //OceanMats[i].SetTexture(displaceTexId, LODDisplaceMaps[i]);
             //OceanMats[i].SetTexture(displaceTexNextId, LODDisplaceMaps[Mathf.Min(i+1, LODCount-1)]);
@@ -315,7 +315,7 @@ public class OceanRenderSetting : ScriptableObject
         
         for (int i = 0; i < LODDisplaceMaps.Length; i++)
         {
-            RTPath = string.Format("Assets/Ocean/OceanAssets/DisplacementMap_LOD{0}.renderTexture", i);
+            RTPath = string.Format("Assets/Rendering/Ocean/OceanAssets/DisplacementMap_LOD{0}.renderTexture", i);
             AssetDatabase.DeleteAsset(RTPath);
 
             RenderTexture RT = new RenderTexture(RTSize, RTSize, 0, RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear);
@@ -359,7 +359,7 @@ public class OceanRenderSetting : ScriptableObject
             AssetDatabase.CreateAsset(RT, RTPath);
         }
         */
-        RTPath = string.Format("Assets/Ocean/OceanAssets/LODDisplacementMapArray.renderTexture");
+        RTPath = string.Format("Assets/Rendering/Ocean/OceanAssets/LODDisplacementMapArray.renderTexture");
         AssetDatabase.DeleteAsset(RTPath);
         LODDisplaceMapsArray = new RenderTexture(RTSize, RTSize, 0, 
             RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear);
@@ -372,7 +372,7 @@ public class OceanRenderSetting : ScriptableObject
         LODDisplaceMapsArray.Create();
         AssetDatabase.CreateAsset(LODDisplaceMapsArray, RTPath);
 
-        RTPath = string.Format("Assets/Ocean/OceanAssets/LODNormalMapArray.renderTexture");
+        RTPath = string.Format("Assets/Rendering/Ocean/OceanAssets/LODNormalMapArray.renderTexture");
         AssetDatabase.DeleteAsset(RTPath);
         LODNormalMapsArray = new RenderTexture(RTSize, RTSize, 0,
             RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear);
@@ -385,7 +385,7 @@ public class OceanRenderSetting : ScriptableObject
         LODNormalMapsArray.Create();
         AssetDatabase.CreateAsset(LODNormalMapsArray, RTPath);
 
-        RTPath = string.Format("Assets/Ocean/OceanAssets/LODDerivativeMapArray.renderTexture");
+        RTPath = string.Format("Assets/Rendering/Ocean/OceanAssets/LODDerivativeMapArray.renderTexture");
         AssetDatabase.DeleteAsset(RTPath);
         LODDerivativeMapsArray = new RenderTexture(RTSize, RTSize, 0,
             RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear);
@@ -398,7 +398,7 @@ public class OceanRenderSetting : ScriptableObject
         LODDerivativeMapsArray.Create();
         AssetDatabase.CreateAsset(LODDerivativeMapsArray, RTPath);
 
-        RTPath = string.Format("Assets/Ocean/OceanAssets/LODVelocityMapArray.renderTexture");
+        RTPath = string.Format("Assets/Rendering/Ocean/OceanAssets/LODVelocityMapArray.renderTexture");
         AssetDatabase.DeleteAsset(RTPath);
         LODVelocityMapsArray = new RenderTexture(RTSize, RTSize, 0,
             RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear);
@@ -411,7 +411,7 @@ public class OceanRenderSetting : ScriptableObject
         LODVelocityMapsArray.Create();
         AssetDatabase.CreateAsset(LODVelocityMapsArray, RTPath);
 
-        RTPath = string.Format("Assets/Ocean/OceanAssets/LODWaveParticleMapArray.renderTexture");
+        RTPath = string.Format("Assets/Rendering/Ocean/OceanAssets/LODWaveParticleMapArray.renderTexture");
         AssetDatabase.DeleteAsset(RTPath);
         LODWaveParticleMapsArray = new RenderTexture(RTSize, RTSize, 0,
             RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear);
@@ -434,7 +434,7 @@ public class OceanRenderSetting : ScriptableObject
         for (int i = 0; i < (int)TileType.Count; i++)
         {
             Mesh TileMesh = GenerateTile((OceanRenderSetting.TileType)i, GridSize, GridCountPerTile);
-            string MeshPath = string.Format("Assets/Ocean/OceanAssets/TileMesh_{0}.asset", ((OceanRenderSetting.TileType)i).ToString());
+            string MeshPath = string.Format("Assets/Rendering/Ocean/OceanAssets/TileMesh_{0}.asset", ((OceanRenderSetting.TileType)i).ToString());
             AssetDatabase.DeleteAsset(MeshPath);
             AssetDatabase.CreateAsset(TileMesh, MeshPath);
 

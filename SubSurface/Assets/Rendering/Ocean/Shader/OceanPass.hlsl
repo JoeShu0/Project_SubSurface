@@ -1,7 +1,7 @@
 #ifndef CUSTOM_OCEAN_PASS_INCLUDED
 #define CUSTOM_OCEAN_PASS_INCLUDED
 
-
+// All these shading will be revamped to match URP 12
 #include "../ShaderLib/OceanSurface.hlsl"
 //Shared part
 #include "../../CustomRP/ShaderLib/Shadows.hlsl"
@@ -194,10 +194,11 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	//Get the detail normal and combine with base normal
 	//detial normal need multi sample for distance fade and 
 	//panning to add dynamic, Also a multiplier to adjust effect 
-	//float3 DetailTangentNormal = GetTangentDetailNormal(input.StaticUV * 0.025f);
-	//float3 normalWS = DetailTangentNormalToWorld(DetailTangentNormal, baseNormalWS);
-    float3 normalWS = baseNormalWS;
+	float3 DetailTangentNormal = GetTangentDetailNormal(input.StaticUV * 0.05f);
+	float3 normalWS = DetailTangentNormalToWorld(DetailTangentNormal, baseNormalWS);
+    //float3 normalWS = baseNormalWS;
 	
+    return float4(normalWS, 1.0);
 	
 	//Waht do we need
 	//banding color on Water surface with foam(color changes based on sun and other lights
