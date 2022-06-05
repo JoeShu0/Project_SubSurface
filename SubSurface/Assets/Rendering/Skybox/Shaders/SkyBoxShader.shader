@@ -11,10 +11,19 @@ Shader "Sky/SkyBox"
         #include "../../CustomRP/ShaderLib/Common.hlsl"
         #include "SkyboxInput.hlsl"
         ENDHLSL
-        Tags { "RenderType" = "Opaque" }
+        Tags{"Queue" = "Geometry+1"}
 
         Pass
         {
+            
+            Tags
+            {
+                "LightMode" = "CustomSkyBox"
+            }
+
+            Blend One Zero
+            Cull Front
+            ZWrite On
 
             HLSLPROGRAM
             #pragma target 3.5

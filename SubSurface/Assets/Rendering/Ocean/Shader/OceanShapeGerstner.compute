@@ -120,8 +120,11 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
     float Dzt = 0.0f;
 
     uint wavePerLOD = _WaveCount / LODCount;
-    uint startWave = wavePerLOD * (LODIndex + (int)_CurPastScale);
+    uint startWave = wavePerLOD * (LODIndex); // + (int)_CurPastScale.y
     uint endbeforeWave = min(startWave + wavePerLOD, _WaveCount);
+    
+    //uint startWave =0;
+    //uint endbeforeWave =_WaveCount;
 
     [unroll(10)]
     for (uint i = startWave; i < endbeforeWave; i++)

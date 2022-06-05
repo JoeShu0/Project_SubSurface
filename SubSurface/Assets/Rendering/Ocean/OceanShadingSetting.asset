@@ -23,7 +23,7 @@ MonoBehaviour:
     bandingPower: 250
     MultiPlier: 0
   Dark:
-    color: {r: 0.009300461, g: 0.04079152, b: 0.103773594, a: 0.7882353}
+    color: {r: 0, g: 0.0628931, b: 0.18867922, a: 0.7882353}
     bandingOffset: 0
     bandingPower: 1
     MultiPlier: 0

@@ -1,6 +1,7 @@
 #ifndef CUSTOM_OCEAN_GET_LIGHTING_INCLUDED
 #define CUSTOM_OCEAN_GET_LIGHTING_INCLUDED
 
+//This File need complete redo!!
 
 float3 IncomingLightForOcean(Surface surface, Light light)
 {
@@ -89,7 +90,7 @@ float3 GetOceanLighting(Surface surfaceWS, TRDF trdf, GI gi)
 	Gradient /= (float)GetDirectionalLightCount();
 	float3 color = GetOceanColorBanding(Gradient);
 	//this add makes the foam too stand out....
-	color += surfaceWS.foamMask * clamp(Gradient+0.05f, 0,1);
+	//color += surfaceWS.foamMask * clamp(Gradient+0.05f, 0,1);
 	color += Highlight;
 	color += Subsurface;
 	color *= ColorTint;

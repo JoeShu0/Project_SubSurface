@@ -17,10 +17,11 @@ public partial class CameraRenderer
 
     static ShaderTagId unlitShaderTagId = new ShaderTagId("SRPDefaultUnlit");
     static ShaderTagId LitShaderTagId = new ShaderTagId("CustomLit");
-    static ShaderTagId OceanShaderTagId = new ShaderTagId("OceanShading");
+    static ShaderTagId OceanShaderTagId = new ShaderTagId("OceanShading"); 
     static ShaderTagId OceanBackShaderTagId = new ShaderTagId("OceanShadingBack");
     static ShaderTagId OceanDepthShaderFTagId = new ShaderTagId("OceanDepthShadingFront");
     static ShaderTagId OceanDepthShaderBTagId = new ShaderTagId("OceanDepthShadingBack");
+    static ShaderTagId CustomSkyBoxTagId = new ShaderTagId("CustomSkyBox");
 
     //static int frameBufferId = Shader.PropertyToID("_CameraFrameBuffer");
     static int colorAttachmentId = Shader.PropertyToID("_CameraColorAttachment");
@@ -286,6 +287,7 @@ public partial class CameraRenderer
                 lightPerObjectFlags
         };
         drawingSettings.SetShaderPassName(1, LitShaderTagId);
+        drawingSettings.SetShaderPassName(2, CustomSkyBoxTagId);//Drawing Sky box here
         //drawingSettings.SetShaderPassName(2, OceanShaderTagId);
 
         //filter object queue as well as RenderingLayerMask
@@ -297,7 +299,8 @@ public partial class CameraRenderer
         
 
         //we are drawing in order like opaque->skybox->tranparent
-        context.DrawSkybox(camera);
+        //And we will not draw the default sky box (Instead, we draw it in the Opaque)
+        //context.DrawSkybox(camera);
 
         
 
@@ -328,9 +331,10 @@ public partial class CameraRenderer
         ExecuteBuffer();
     }
 
-    //Draw the depth of the ocean in camera view on to a texture
-    //And draw the back face of water surfa
-    void DrawOceanSurfacePrePass(bool useDynameicBatching, bool useGPUInstancing, bool useLightPerObject,
+
+        //Draw the depth of the ocean in camera view on to a texture
+        //And draw the back face of water surfa
+        void DrawOceanSurfacePrePass(bool useDynameicBatching, bool useGPUInstancing, bool useLightPerObject,
         int renderingLayerMask)
     {
 

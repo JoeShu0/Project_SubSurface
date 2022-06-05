@@ -182,12 +182,16 @@ public class OceanRenderer :MonoBehaviour
 
     private void FixedUpdate()
     {
+
+        //Ocean Basic Shape nad Normal rendering 
         UpdateOceantransform();
         RenderDisAndNormalMapsForLODs();
         if (ORS.DynamicWaveSim)
             OWPR.RenderWaveParticlesForLODs();
         RenderNormalForLODs();
 
+       
+        /*
         OWPR.UpdateWaveParticles();
         if(!OWPR.IsUpdatingWaveParticles && ORS.DynamicWaveSim)
         {
@@ -199,13 +203,13 @@ public class OceanRenderer :MonoBehaviour
         if (!OHS.IsRetrivingGPUData)
         {
             StartCoroutine(OHS.GetRelativeDepth());
-        }
+        }*/
     }
 
     private void LateUpdate()
     {
         
-        //Debug.Log(ORS.CurPastOceanScale[0]);
+        //Debug.Log(new Vector2(ORS.CurPastOceanScale[0].x, ORS.CurPastOceanScale[1].x));
     }
 
     void UpdateOceantransform()//update in fixed update
@@ -276,7 +280,7 @@ public class OceanRenderer :MonoBehaviour
 
     }
 
-    //this function should later be move to ORS, There is nothing depending on the render(beside regen trigger)
+    //this function should later be move to ORS, There is nothing depending on the render(beside regeneration trigger)
     private GameObject BuildLOD(Mesh[] in_TileMeshes, float GridSize, int GridCount,
                                 int LODIndex, ref Material LODMat, GameObject parent,
                                 bool bIsLastLOD = false)
@@ -392,6 +396,9 @@ public class OceanRenderer :MonoBehaviour
         //Shader.SetGlobalFloat("_LODCount", ORS.OceanScaleTransition);
 
         Shader.SetGlobalVector(centerPosId, transform.position);
+        Shader.SetGlobalFloat(timeId, Time.time);
+
+        //////////////////////
         //Ocean shanding stuff
         Shader.SetGlobalVector(hightLightParamId, 
             new Vector4(OSS.highlights.HighLightExp, 
@@ -422,10 +429,11 @@ public class OceanRenderer :MonoBehaviour
             OSS.SSS.bandingPower,
             0.0f,0.0f
             ));
-
+        
+        //////////////////////
+        //Asigning textures 
         Shader.SetGlobalTexture("_DispTexArray", ORS.LODDisplaceMapsArray);
         Shader.SetGlobalTexture("_NormalTexArray", ORS.LODNormalMapsArray);
-        
         Shader.SetGlobalTexture("_FoamTrailTexture", OSS.FoamTrailTex);
 
         //Shader.SetGlobalTexture(detailNormalId, ORS.OceanDetailNoise);
@@ -542,15 +550,6 @@ public class OceanRenderer :MonoBehaviour
 
     void RenderNormalForLODs()
     {
-        if (NormalUpdateCounter >= 10)//Did this save any time??
-        {
-            NormalUpdateCounter = 0;
-            return;
-        }
-        else
-        {
-            NormalUpdateCounter++;
-        }
         
         ORS.shapeNormalShader.SetTexture(0, "_DisplaceArray", ORS.LODDisplaceMapsArray);
         ORS.shapeNormalShader.SetTexture(0, "_NormalArray", ORS.LODNormalMapsArray);
