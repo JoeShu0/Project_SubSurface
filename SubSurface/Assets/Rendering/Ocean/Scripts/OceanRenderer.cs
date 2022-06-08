@@ -209,7 +209,8 @@ public class OceanRenderer :MonoBehaviour
     private void LateUpdate()
     {
         
-        //Debug.Log(new Vector2(ORS.CurPastOceanScale[0].x, ORS.CurPastOceanScale[1].x));
+        
+        Debug.Log(new Vector2(ORS.CurPastOceanScale[0].x, ORS.CurPastOceanScale[0].y));
     }
 
     void UpdateOceantransform()//update in fixed update
@@ -218,9 +219,11 @@ public class OceanRenderer :MonoBehaviour
         Vector3 CameraFacing = OceanCam.transform.forward;
         Vector3 CameraPosition = OceanCam.transform.position;
         Vector3 OceanPostion = CameraPosition + CameraFacing * ORS.OceanCamExtend;
-        int heightStage = Mathf.CeilToInt(Mathf.Max(Mathf.Log(Mathf.Abs(CameraPosition.y) / ORS.OceanCamHeightStage, 2), 0.1f) ) -1;
 
-       
+        float heightScale = Mathf.Max(Mathf.Log(Mathf.Abs(CameraPosition.y) / ORS.OceanCamHeightStage, 2), 0.0f);
+        int heightStage = Mathf.FloorToInt(heightScale);
+        //Debug.Log(heightScale);
+
         //record last frame pos and scale(pay attention to time step(normally in fixed update))
         ORS.CurPastOceanScale[1] = ORS.CurPastOceanScale[0];
         ORS.CurPastOceanScale[0] = new Vector2(heightStage, (int)Mathf.Pow(2, heightStage));
@@ -493,15 +496,18 @@ public class OceanRenderer :MonoBehaviour
             //WaveData[] WaveSubsets = ORS.SpectrumWaves.Skip(WavePerLOD * i).ToArray();
             //shapeWaveBufer.SetData(ORS.SpectrumWaves);
             //int SkipNum = Mathf.Min(WavePerLOD * i + Mathf.CeilToInt(Mathf.Log(ORS.OceanScale, 2)) * WavePerLOD, ORS.WaveCount - WavePerLOD);
-            
 
-            float CurrentLODSize = ORS.GridSize * ORS.GridCountPerTile * 4 * Mathf.Pow(2, i) * ORS.CurPastOceanScale[0].y;//times ocean scale
+
+            float CurrentLODSize = ORS.GridSize * ORS.GridCountPerTile * 4 * Mathf.Pow(2, i) *  ORS.CurPastOceanScale[0].y;//times ocean scale
             //ORS.shapeShader.SetFloat(lodSizeId, CurrentLODSize);
             //ORS.shapeShader.SetInt(lodIndexId, i);
             ORS.shapeGerstnerShader.SetVector(lodParamsId,
                 new Vector4(ORS.LODCount, i, CurrentLODSize, 0.0f));
 
-            ORS.shapeGerstnerShader.SetFloat(lodWaveAmpMulId, ORS.WaveAmplitudeTweak[i]);
+            //Offset the WavAmpTweak 
+            //Since for each Ocean Size, we will discard the smallest Waves on the lowest LOD ,and offset the waves for 2nd small LOD to the 1st small LOD
+            int WaveAmpTweakWithOffset = Mathf.Min(i + (int)ORS.CurPastOceanScale[0].x, ORS.WaveAmplitudeTweak.Length-1);
+            ORS.shapeGerstnerShader.SetFloat(lodWaveAmpMulId, ORS.WaveAmplitudeTweak[WaveAmpTweakWithOffset]);
 
             
 
@@ -517,6 +523,8 @@ public class OceanRenderer :MonoBehaviour
             //ORS.shapeShader.SetTexture(KIndex, "NoiseFoam", WaterFoamNoise);
 
             ORS.shapeGerstnerShader.Dispatch(KIndex, threadGroupX, threadGroupY, 1);
+            //temp break
+            //break;
         }
 
         shapeWaveBufer.Release();

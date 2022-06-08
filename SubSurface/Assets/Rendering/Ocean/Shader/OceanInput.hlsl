@@ -126,7 +126,7 @@ float3 GetOceanDisplacement(float4 UVn)
     float3 col = _DispTexArray.SampleLevel(linearRepeatSampler, float3(UVn.xy,INPUT_PROP(_LODIndex)), 0).rgb;
     float3 col_n =_DispTexArray.SampleLevel(linearRepeatSampler, float3(UVn.zw,min(INPUT_PROP(_LODIndex)+1,8)), 0).rgb;
 
-    float2 LODUVblend = clamp((abs(UVn.xy - 0.5f) / 0.5f - 0.75f)*5.0f, 0, 1);
+    float2 LODUVblend = clamp((abs(UVn.xy - 0.5f) * 2.0f - 0.75f)*5.0f, 0, 1);
     float LODBlendFactor = max(LODUVblend.x, LODUVblend.y);
     //LODBlendFactor = 0.0f;
     col = lerp(col, col_n, LODBlendFactor);

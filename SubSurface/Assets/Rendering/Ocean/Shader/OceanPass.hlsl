@@ -171,6 +171,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 {
 	//Setup the instance ID for Input
 	UNITY_SETUP_INSTANCE_ID(input);
+	
 	//Depth10 for ocean depth(not used in here)
 	float OceanDepth10 = LOAD_TEXTURE2D(_CameraOceanDepthTexture, input.positionCS_SS.xy).a;
 	float OceanDepthDelta = input.depth01 - OceanDepth10;
@@ -198,7 +199,6 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	float3 normalWS = DetailTangentNormalToWorld(DetailTangentNormal, baseNormalWS);
     //float3 normalWS = baseNormalWS;
 	
-    return float4(normalWS, 1.0);
 	
 	//Waht do we need
 	//banding color on Water surface with foam(color changes based on sun and other lights

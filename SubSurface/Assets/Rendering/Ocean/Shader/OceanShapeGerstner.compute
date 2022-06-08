@@ -120,13 +120,15 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
     float Dzt = 0.0f;
 
     uint wavePerLOD = _WaveCount / LODCount;
-    uint startWave = wavePerLOD * (LODIndex); // + (int)_CurPastScale.y
+    //Offset the WavAmpTweak 
+    //Since for each Ocean Size, we will discard the smallest Waves on the lowest LOD ,and offset the waves for 2nd small LOD to the 1st small LOD
+    uint startWave = wavePerLOD * (LODIndex + (int) _CurPastScale.x); 
     uint endbeforeWave = min(startWave + wavePerLOD, _WaveCount);
     
-    //uint startWave =0;
-    //uint endbeforeWave =_WaveCount;
-
-    [unroll(10)]
+    //uint startWave = 0;
+    //uint endbeforeWave = _WaveCount;
+    
+    [unroll(128)]
     for (uint i = startWave; i < endbeforeWave; i++)
     {
 
@@ -189,6 +191,8 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
     //float foam = clamp(1.0f - JacobianDet, 0.0, 1.0);
     //foam += baseNormalFoamV.w;
     
+    //Temp Disable read from lastLOD
+    
     Dxx += baseDerivativeV.x;
     Dyy += baseDerivativeV.y;
     Dxy += baseVelocityV.z;
@@ -235,8 +239,7 @@ void CSMain(uint3 id : SV_DispatchThreadID)
         0.0f,
         (id.y / float(height) - 0.5f) * CurrentLODSize
         ) + _CenterPos;
-    
-    //WPos *= 0.05f;
+   
 
     //get all the in place data
     GerstnerOut outputWaveVectors = GetWaveDDNF(WPos, id.xy, width);//DDBF means Displace/Derivative/Normal/Foammask/Height/Velocity
@@ -281,10 +284,10 @@ void CSMain(uint3 id : SV_DispatchThreadID)
     //_BaseDerivativeMap[id.xy] = outDerivativeV;
 
     //assign maps for CPU process
-    _DisplaceArray[uint3(id.xy, LODIndex)] = outputWaveVectors.dispVector;;
+    _DisplaceArray[uint3(id.xy, LODIndex)] = outputWaveVectors.dispVector;
     //_NormalArray[uint3(id.xy, LODIndex)] = outputWaveVectors.normalVector;
-    _DerivativeArray[uint3(id.xy, LODIndex)] = outputWaveVectors.derivativeVector;;
-    _VelocityArray[uint3(id.xy, LODIndex)] = outputWaveVectors.VelocityVector;;
+    _DerivativeArray[uint3(id.xy, LODIndex)] = outputWaveVectors.derivativeVector;
+    _VelocityArray[uint3(id.xy, LODIndex)] = outputWaveVectors.VelocityVector;
     //debug
     //Displace[id.xy] = _WaveLengths[10];
     //Result[id.xy] = float4(1.0f, 0.0f, 0.0f, 1.0f);
