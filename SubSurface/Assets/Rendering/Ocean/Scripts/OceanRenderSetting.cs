@@ -28,6 +28,8 @@ public class OceanRenderSetting : ScriptableObject
     public float OceanScaleTransition = 0;
     [HideInInspector]
     public Vector2[] CurAndPastPos = new Vector2[2];
+    [HideInInspector]
+    public float HeightTransition = 0;
 
     //the camera ocean always follow
     public float OceanCamExtend = 10.0f;

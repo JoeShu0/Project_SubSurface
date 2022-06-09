@@ -165,8 +165,8 @@ float4 GetWorldPosUVAndNext(float3 positionWS)
 
 float3 GetTangentDetailNormal(float2 staticUV)
 {
-    half2 wave01UV = (float2(_Time * 1, _Time * 1) + staticUV) * 2;
-    half2 wave02UV = (float2(_Time * 0.5, -_Time * 0.5) + staticUV) * 1;
+    half2 wave01UV = (float2(_Time * .4, _Time * 0.4) + staticUV) * 2;
+    half2 wave02UV = (float2(_Time * 0.2, -_Time * 0.2) + staticUV) * 1;
     half2 wave03UV = (float2(-_Time * 0.1, -_Time * 0.1) + staticUV) * 0.5;
     float3 normal01 = DecodeNormal(SAMPLE_TEXTURE2D(_DetailNormalNoise, sampler_DetailNormalNoise, wave01UV), 1);
     float3 normal02 = DecodeNormal(SAMPLE_TEXTURE2D(_DetailNormalNoise, sampler_DetailNormalNoise, wave02UV), 1);

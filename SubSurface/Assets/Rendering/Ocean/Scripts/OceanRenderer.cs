@@ -162,7 +162,7 @@ public class OceanRenderer :MonoBehaviour
         if (!Application.isPlaying)
         {
             UpdateOceantransform();
-            RenderDisAndNormalMapsForLODs();
+            RenderDisplaceMapsForLODs();
             if(ORS.DynamicWaveSim)
                 OWPR.RenderWaveParticlesForLODs();
             RenderNormalForLODs();
@@ -185,7 +185,7 @@ public class OceanRenderer :MonoBehaviour
 
         //Ocean Basic Shape nad Normal rendering 
         UpdateOceantransform();
-        RenderDisAndNormalMapsForLODs();
+        RenderDisplaceMapsForLODs();
         if (ORS.DynamicWaveSim)
             OWPR.RenderWaveParticlesForLODs();
         RenderNormalForLODs();
@@ -222,7 +222,11 @@ public class OceanRenderer :MonoBehaviour
 
         float heightScale = Mathf.Max(Mathf.Log(Mathf.Abs(CameraPosition.y) / ORS.OceanCamHeightStage, 2), 0.0f);
         int heightStage = Mathf.FloorToInt(heightScale);
+        float heightTransition = heightScale - heightStage;
+
+        //Attenuate Waves according to the heightscale
         //Debug.Log(heightScale);
+        ORS.HeightTransition = 1 - heightTransition;
 
         //record last frame pos and scale(pay attention to time step(normally in fixed update))
         ORS.CurPastOceanScale[1] = ORS.CurPastOceanScale[0];
@@ -443,7 +447,7 @@ public class OceanRenderer :MonoBehaviour
     }
 
 
-    void RenderDisAndNormalMapsForLODs()//update in fixed update
+    void RenderDisplaceMapsForLODs()//update in fixed update
     {
         if (!ORS.shapeGerstnerShader)
         {
@@ -487,6 +491,10 @@ public class OceanRenderer :MonoBehaviour
         //this buffer is persistent on GPU and no modification needed
         //should change this to only set and release ONCE
         ORS.shapeGerstnerShader.SetBuffer(KIndex, waveBufferId, shapeWaveBufer);
+
+        //Pass the WaveAmpTweak for each LOD
+        ORS.shapeGerstnerShader.SetFloats(lodWaveAmpMulId, ORS.WaveAmplitudeTweak);
+
         for (int i = ORS.LODCount-1; i>=0; i--)
         {
             //Graphics.CopyTexture(ORS.LODDisplaceMapsArray, Temp);
@@ -499,15 +507,17 @@ public class OceanRenderer :MonoBehaviour
 
 
             float CurrentLODSize = ORS.GridSize * ORS.GridCountPerTile * 4 * Mathf.Pow(2, i) *  ORS.CurPastOceanScale[0].y;//times ocean scale
-            //ORS.shapeShader.SetFloat(lodSizeId, CurrentLODSize);
-            //ORS.shapeShader.SetInt(lodIndexId, i);
+
+            float SmallWaveAttTransition = 1.0f;
+            if (i == 0) SmallWaveAttTransition = ORS.HeightTransition;
+
             ORS.shapeGerstnerShader.SetVector(lodParamsId,
-                new Vector4(ORS.LODCount, i, CurrentLODSize, 0.0f));
+                new Vector4(ORS.LODCount, i, CurrentLODSize, SmallWaveAttTransition));
 
             //Offset the WavAmpTweak 
             //Since for each Ocean Size, we will discard the smallest Waves on the lowest LOD ,and offset the waves for 2nd small LOD to the 1st small LOD
-            int WaveAmpTweakWithOffset = Mathf.Min(i + (int)ORS.CurPastOceanScale[0].x, ORS.WaveAmplitudeTweak.Length-1);
-            ORS.shapeGerstnerShader.SetFloat(lodWaveAmpMulId, ORS.WaveAmplitudeTweak[WaveAmpTweakWithOffset]);
+            //int WaveAmpTweakWithOffset = Mathf.Min(i + (int)ORS.CurPastOceanScale[0].x, ORS.WaveAmplitudeTweak.Length-1);
+            //ORS.shapeGerstnerShader.SetFloat(lodWaveAmpMulId, ORS.WaveAmplitudeTweak[WaveAmpTweakWithOffset]);
 
             
 

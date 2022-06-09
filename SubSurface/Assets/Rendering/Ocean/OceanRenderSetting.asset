@@ -21,11 +21,12 @@ MonoBehaviour:
   getHeight: {fileID: 7200000, guid: 8c2a41e75b72cef4c933ac54d00261e4, type: 3}
   CurPastOceanScale:
   - {x: 0, y: 1}
-  - {x: 0, y: 1}
+  - {x: 3, y: 8}
   OceanScaleTransition: -0.6225
   CurAndPastPos:
   - {x: -2.9311, y: -23.213356}
-  - {x: -2.9311, y: -23.213356}
+  - {x: 58.5213, y: 178.4449}
+  HeightTransition: 1
   OceanCamExtend: 20
   OceanCamHeightStage: 20
   LODCount: 8
@@ -45,14 +46,14 @@ MonoBehaviour:
     BandOffset: 0.481
     BandPower: 7.73
   WaveAmplitudeTweak:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 5
-  - 0
-  - 0
-  - 0
+  - 0.81
+  - 1.3
+  - 1.7
+  - 1.91
+  - 1.82
+  - 1.62
+  - 1.28
+  - 0.91
   debug: 11
   RegenerateWaveDatas: 0
   SpectrumWaves:

@@ -35,15 +35,18 @@ SamplerState linearClampSampler;
 //SamplerState samplerNoiseFoam;
 
 
-float3 _CenterPos;
-float4 _LODParams;//x LODCOUNT ,y LODIndex, z LODSize.
+float3 _CenterPos; 
+float4 _LODParams;//x LODCOUNT ,y LODIndex, z LODSize. w waveAttenuation
 float4 _CurPastPos;//xy curPos ,zw pastPos.
 float4 _CurPastScale;//xy curScale(log2, 1) ,zw pastScale(log2, 1).
 float4 _OceanScale;//x 
 
-float _LODWaveAmpMul;
+
+float4 _LODWaveAmpMul[2];
+
 float _Time;
 float _DeltaTime;
+
 
 float4 _FoamParams;//x is the inverse foam fade time, x is foam banding offset, y is the foam banding power
 
@@ -105,6 +108,7 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
 
     uint LODCount = (uint)_LODParams.x;
     uint LODIndex = (uint)_LODParams.y;
+    float SmallWaveAtt = _LODParams.w;
     
     float3 displace = float3(0.0, 0.0, 0.0);
 
@@ -120,21 +124,28 @@ GerstnerOut GetWaveDDNF(float3 OriginalWPos, int2 coord, float RTSize)
     float Dzt = 0.0f;
 
     uint wavePerLOD = _WaveCount / LODCount;
+    uint OceanScaleLODIndex_WithOffsset = LODIndex + (int) _CurPastScale.x;
+
     //Offset the WavAmpTweak 
     //Since for each Ocean Size, we will discard the smallest Waves on the lowest LOD ,and offset the waves for 2nd small LOD to the 1st small LOD
-    uint startWave = wavePerLOD * (LODIndex + (int) _CurPastScale.x); 
+    uint startWave = wavePerLOD * (OceanScaleLODIndex_WithOffsset);
     uint endbeforeWave = min(startWave + wavePerLOD, _WaveCount);
     
     //uint startWave = 0;
     //uint endbeforeWave = _WaveCount;
     
-    [unroll(128)]
+    float WaveAmpMul[8] = { 
+        _LODWaveAmpMul[0].x, _LODWaveAmpMul[0].y, _LODWaveAmpMul[0].z, _LODWaveAmpMul[0].w,
+        _LODWaveAmpMul[1].x, _LODWaveAmpMul[1].y, _LODWaveAmpMul[1].z, _LODWaveAmpMul[1].w,
+    };
+    
+    [unroll(10)]
     for (uint i = startWave; i < endbeforeWave; i++)
     {
 
         float _WaveLength = _WavesBuffer[i].WaveLength;
         float k = 2 * PI / _WaveLength;
-        float _Amplitude = _WavesBuffer[i].Amplitude * _LODWaveAmpMul;
+        float _Amplitude = _WavesBuffer[i].Amplitude * WaveAmpMul[min(OceanScaleLODIndex_WithOffsset, LODCount - 1)] * SmallWaveAtt;
         float _Steepness = _Amplitude * k;
         float _Speed = _WavesBuffer[i].Speed;
         float2 _Direction = normalize(_WavesBuffer[i].Direction);
