@@ -12,7 +12,7 @@ RWTexture2DArray<float4> _VelocityArray;
 
 SamplerState linearClampSampler;
 
-float4 _LODParams;//x LODCOUNT ,y , z LOD0Size.
+float4 _LODParams;//x LODCOUNT ,y , z LOD0Size, w Heghttransition 0~1
 float4 _FoamParams;
 float4 _CurPastPos;//xy curPos ,zw pastPos.
 float4 _CurPastScale;//xy curScale(log2, 1) ,zw pastScale(log2, 1).
@@ -57,6 +57,7 @@ void CSMain (uint3 id : SV_DispatchThreadID)
     uint LODCount = (uint)_LODParams.x;
     float LODIndex = id.z;
     float CurrentLODSize = _LODParams.z * pow(2, LODIndex);
+    float HeightTransition = _LODParams.w;
     //float LODIndex = _LODParams.y;
     
     //Get dims
@@ -116,7 +117,6 @@ void CSMain (uint3 id : SV_DispatchThreadID)
     float scaleDiff =  _CurPastScale.y/_CurPastScale.w;
     //scaleDiff = 0.5f;
     float scaleOffset = (1-scaleDiff)*0.5f*width;
-    
     float2 UVsample = (float2(id.xy) + posdiff / CurrentLODSize * width) * scaleDiff + scaleOffset;
     float previousFoamMask = BilinearSamplerTextureArray(_NormalArray, UVsample, LODIndex).a;
     //float previousFoamMaskNexrLOD = BilinearSamplerTextureArray(_NormalArray, (float2(id.xy) + posdiff / CurrentLODSize * width), min(LODIndex + 1, LODCount-1)).a;
@@ -125,9 +125,13 @@ void CSMain (uint3 id : SV_DispatchThreadID)
     //{
         //previousFoamMask = 0.0f;
     //}
-    //previousFoamMask = scaleDiff > 1.0 ? previousFoamMaskNexrLOD : previousFoamMask;
-    FoamMask = max(FoamMask+ displace.a * 0.5 , previousFoamMask * (1- _FoamParams.x));
+    
 
+    //fadePreviousFoam = fadePreviousFoam > 0.1 ? 1.0 : 0.0;
+    //previousFoamMask = scaleDiff > 1.0 ? previousFoamMaskNexrLOD : previousFoamMask;
+    FoamMask = max(FoamMask + displace.a * 0.5, previousFoamMask * (1 - _FoamParams.x));
+    //FoamMask = FoamMask * _FoamParams.x + previousFoamMask * (1 - _FoamParams.x); // + displace.a * 0.5;
+    //FoamMask = foam;
 
     float4 NormalData =  _NormalArray[uint3(id.xy, LODIndex)];
     NormalData = float4(normal, FoamMask);

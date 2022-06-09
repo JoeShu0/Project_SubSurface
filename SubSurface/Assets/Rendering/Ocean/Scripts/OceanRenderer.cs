@@ -167,13 +167,13 @@ public class OceanRenderer :MonoBehaviour
                 OWPR.RenderWaveParticlesForLODs();
             RenderNormalForLODs();
 
-            
+            UpdateShaderGlobalParams();
         }
         
 #endif
         //RenderDisAndNormalMapsForLODs();
         
-        UpdateShaderGlobalParams();
+        
 
        
     }
@@ -186,11 +186,13 @@ public class OceanRenderer :MonoBehaviour
         //Ocean Basic Shape nad Normal rendering 
         UpdateOceantransform();
         RenderDisplaceMapsForLODs();
+
         if (ORS.DynamicWaveSim)
             OWPR.RenderWaveParticlesForLODs();
+
         RenderNormalForLODs();
 
-       
+        UpdateShaderGlobalParams();
         /*
         OWPR.UpdateWaveParticles();
         if(!OWPR.IsUpdatingWaveParticles && ORS.DynamicWaveSim)
@@ -210,7 +212,7 @@ public class OceanRenderer :MonoBehaviour
     {
         
         
-        Debug.Log(new Vector2(ORS.CurPastOceanScale[0].x, ORS.CurPastOceanScale[0].y));
+        //Debug.Log(new Vector2(ORS.CurPastOceanScale[0].x, ORS.CurPastOceanScale[0].y));
     }
 
     void UpdateOceantransform()//update in fixed update
@@ -590,7 +592,7 @@ public class OceanRenderer :MonoBehaviour
 
         float CurrentLOD0Size_L = ORS.GridSize * ORS.GridCountPerTile * 4  * ORS.CurPastOceanScale[0].y;
         ORS.shapeNormalShader.SetVector(lodParamsId,
-            new Vector4(ORS.LODCount, 0, CurrentLOD0Size_L, 0.0f));
+            new Vector4(ORS.LODCount, 0, CurrentLOD0Size_L, ORS.HeightTransition));
 
         /*
         for (int i = 0; i < ORS.LODCount; i++)
