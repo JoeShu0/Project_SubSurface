@@ -129,8 +129,8 @@ void CSMain (uint3 id : SV_DispatchThreadID)
 
     //fadePreviousFoam = fadePreviousFoam > 0.1 ? 1.0 : 0.0;
     //previousFoamMask = scaleDiff > 1.0 ? previousFoamMaskNexrLOD : previousFoamMask;
-    FoamMask = max(FoamMask + displace.a * 0.5, previousFoamMask * (1 - _FoamParams.x));
-    //FoamMask = FoamMask * _FoamParams.x + previousFoamMask * (1 - _FoamParams.x); // + displace.a * 0.5;
+    //FoamMask = max(FoamMask + displace.a * 0.5, previousFoamMask * (1 - _FoamParams.x));
+    FoamMask = FoamMask * _FoamParams.x + previousFoamMask * (1 - _FoamParams.x); // + displace.a * 0.5;
     //FoamMask = foam;
 
     float4 NormalData =  _NormalArray[uint3(id.xy, LODIndex)];

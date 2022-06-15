@@ -188,10 +188,10 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 
 	//sample foam cap tex and foam trail tex and cal the final foam MASK
 	float foamCap = pow(abs(foam + 0.3f), 100.0f);
-	float TailTex = _FoamTrailTexture.Sample(sampler_FoamTrailTexture, input.StaticUV * 0.1f).r * 2.0f;
+	float TailTex = _FoamTrailTexture.Sample(sampler_FoamTrailTexture, input.StaticUV * 0.5f).b * 2.0f;
 	float foamTrail = pow(abs(foam + _FoamFresnelOffsetPow.x), _FoamFresnelOffsetPow.y) * TailTex;
-    float foamMask = foam; //clamp(max(foamCap, foamTrail), 0.0f, 1.0f);
-	
+    float foamMask = (1 - TailTex) > (foam * 2.0) ? 0.0 : 1.0; //clamp(max(foamCap, foamTrail), 0.0f, 1.0f);
+    foamMask *= (foam * 2.0);
 	//Get the detail normal and combine with base normal
 	//detial normal need multi sample for distance fade and 
 	//panning to add dynamic, Also a multiplier to adjust effect 

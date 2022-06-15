@@ -91,7 +91,7 @@ float3 GetOceanLighting(Surface surfaceWS, TRDF trdf, GI gi)
 	float3 color = GetOceanColorBanding(Gradient);
 	//this add makes the foam too stand out....
 	color += surfaceWS.foamMask * clamp(Gradient+0.05f, 0,1);
-	color += Highlight;
+	color += Highlight > 0.5 ? 4.0: 0.0;
 	color += Subsurface;
 	color *= ColorTint;
 
