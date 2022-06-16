@@ -21,7 +21,7 @@ struct Attributes
 
 struct Varyings
 {
-	float4 positionCS_SS : SV_POSITION;
+	float4 positionCS : SV_POSITION;
 	float3 positionWS : VAR_POSITION;
 	float depth01 : VAR_DEPTH01;
 	float4 UV : VAR_OCEANUV;
@@ -61,15 +61,19 @@ Varyings OceanPassVertexFunction(Attributes input)
 
 
 	float3 localPos = mul(unity_WorldToObject, float4(positionWS, 1.0)).xyz;
-	//float4 SrcPos = TransformObjectToHClip(localPos);
-	float4 SrcPos = TransformWorldToHClip(positionWS);
+	//float4 positionCS = TransformObjectToHClip(localPos);
+    float4 positionCS = TransformWorldToHClip(positionWS);
 	//#define COMPUTE_DEPTH_01 -(mul( UNITY_MATRIX_MV, v.vertex ).z * _ProjectionParams.w)
-	float depth01 = 1+TransformWorldToView(positionWS).z * _ProjectionParams.w;
-
-	//output.positionCS_SS = TransformWorldToHClip(output.positionWS);
+	//float depth01 = 1+TransformWorldToView(positionWS).z * _ProjectionParams.w;
+	
+	//计算线性深度
+    float Depth = LinearEyeDepth(positionCS.z, _ZBufferParams);
+    float Depth01 = Linear01Depth(positionCS.z, _ZBufferParams);
+	
+	//output.positionCS = TransformWorldToHClip(output.positionWS);
 	output.positionWS = positionWS;
-	output.positionCS_SS = SrcPos;
-	output.depth01 = depth01;
+    output.positionCS = positionCS;
+    output.depth01 = Depth01;
 	output.UV = UVn;
 	output.StaticUV = S_UV;
 	output.DebugColor = float4(Displace, 1.0f);
@@ -94,7 +98,7 @@ Varyings OceanDepthPassVertexBack(Attributes input)
 	ShiftedOut = OceanPassVertexFunction(input);
 	//push the back side of the water face by 1 unit in the depth buffer, this reduce the 
 	//flicking pixel due depth test fail cased by pixels in the same position
-	ShiftedOut.positionCS_SS = TransformWorldToHClip(ShiftedOut.positionWS + float3(0.0,-1.0,0.0));
+	ShiftedOut.positionCS = TransformWorldToHClip(ShiftedOut.positionWS + float3(0.0,-1.0,0.0));
 	return ShiftedOut;
 }
 
@@ -136,7 +140,13 @@ float4 OceanDepthPassFragmentFront(Varyings input, bool IsFront:SV_IsFrontFace) 
 
 	//reconstruct Normal This may be the cause of that seam at horizal!!!
 	float Facing = IsFront ? 1.0 : -1.0;
-	return float4(0.0, Facing, 0.0, input.depth01);
+	
+    float pixelDepth = LinearEyeDepth(input.positionCS.z, _ZBufferParams);
+    float pixelDepth01 = Linear01Depth(input.positionCS.z, _ZBufferParams);
+
+    float pixelDepth10 = 1-Linear01Depth(input.positionCS.z, _ZBufferParams);
+	
+    return float4(0.0, Facing, 0.0, pixelDepth10);
 	//return depth;
 }
 
@@ -145,6 +155,9 @@ float4 OceanDepthPassFragmentBack(Varyings input, bool IsFront:SV_IsFrontFace) :
 	//Setup the instance ID for Input
 	UNITY_SETUP_INSTANCE_ID(input);
 
+    float pixelDepth = LinearEyeDepth(input.positionCS.z, _ZBufferParams);
+    float pixelDepth01 = Linear01Depth(input.positionCS.z, _ZBufferParams);
+	
 	return float4(0.0, -1.0, 0.0, input.depth01);
 
 }
@@ -154,8 +167,8 @@ float4 OceanBackPassFragment(Varyings input) : SV_TARGET
 	//Setup the instance ID for Input
 	UNITY_SETUP_INSTANCE_ID(input);
 	//IsOrthographicCamera() ?
-	//OrthographicDepthBufferToLinear(input.positionCS_SS.z): 
-	//input.positionCS_SS.w;
+	//OrthographicDepthBufferToLinear(input.positionCS.z): 
+	//input.positionCS.w;
 	float3 ToplightDir = float3(0.0,1.0,0.0);
 	float LightGradient = dot( 
 		normalize(ToplightDir + GetOceanNormal(input.UV).xyz),  
@@ -172,8 +185,9 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	//Setup the instance ID for Input
 	UNITY_SETUP_INSTANCE_ID(input);
 	
+	
 	//Depth10 for ocean depth(not used in here)
-	float OceanDepth10 = LOAD_TEXTURE2D(_CameraOceanDepthTexture, input.positionCS_SS.xy).a;
+	float OceanDepth10 = LOAD_TEXTURE2D(_CameraOceanDepthTexture, input.positionCS.xy).a;
 	float OceanDepthDelta = input.depth01 - OceanDepth10;
 	//!!!!this breaks when the render scale changes!!!!
 	//Also water fog should take effect
@@ -220,10 +234,10 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	surface.fresnelStrength = 1;
 	surface.viewDirection = normalize(_WorldSpaceCameraPos - input.positionWS);
 	surface.depth = -TransformWorldToView(input.positionWS).z;
-	surface.dither = InterleavedGradientNoise(input.positionCS_SS.xy, 0);
+	surface.dither = InterleavedGradientNoise(input.positionCS.xy, 0);
 	surface.renderingLayerMask = asuint(unity_RenderingLayer.x);// treat float as uint
 	surface.foamMask = foamMask;
-	surface.transparency = 0.25f;
+	surface.transparency = 1.0f;
 	surface.smoothness = 0.9f;
 
 	TRDF trdf = GetTRDF(surface);
@@ -291,7 +305,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 
 	//return float4(LightNormalGradient, 0.0,0.0,1.0);
 	//max(color.a, 1-ViewNormalGradient)
-	Fragment frag = GetFragment(input.positionCS_SS);
+	Fragment frag = GetFragment(input.positionCS);
 	float3 buffercolor = GetBufferColor(frag).rgb;
 
 	objcolor = lerp(objcolor, buffercolor, surface.transparency);

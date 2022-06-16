@@ -51,4 +51,37 @@ float4 _ProjectionParams;// this input is not supported in SRP batcher
 float4 _ScreenParams;//xy is the screen dimensions
 float4 _ZBufferParams;//conversion factors for depth raw to linear
 
+
+float4 _ScaledScreenParams;
+
+// TODO: all affine matrices should be 3x4.
+// TODO: sort these vars by the frequency of use (descending), and put commonly used vars together.
+// Note: please use UNITY_MATRIX_X macros instead of referencing matrix variables directly.
+float4x4 _PrevViewProjMatrix;
+float4x4 _ViewProjMatrix;
+float4x4 _NonJitteredViewProjMatrix;
+float4x4 _ViewMatrix;
+float4x4 _ProjMatrix;
+float4x4 _InvViewProjMatrix;
+float4x4 _InvViewMatrix;
+float4x4 _InvProjMatrix;
+float4 _InvProjParam;
+float4 _ScreenSize; // {w, h, 1/w, 1/h}
+float4 _FrustumPlanes[6]; // {(a, b, c) = N, d = -dot(N, P)} [L, R, T, B, N, F]
+
+
+float4x4 OptimizeProjectionMatrix(float4x4 M)
+{
+    // Matrix format (x = non-constant value).
+    // Orthographic Perspective  Combined(OR)
+    // | x 0 0 x |  | x 0 x 0 |  | x 0 x x |
+    // | 0 x 0 x |  | 0 x x 0 |  | 0 x x x |
+    // | x x x x |  | x x x x |  | x x x x | <- oblique projection row
+    // | 0 0 0 1 |  | 0 0 x 0 |  | 0 0 x x |
+    // Notice that some values are always 0.
+    // We can avoid loading and doing math with constants.
+    M._21_41 = 0;
+    M._12_42 = 0;
+    return M;
+}
 #endif

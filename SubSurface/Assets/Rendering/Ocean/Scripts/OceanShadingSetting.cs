@@ -41,7 +41,9 @@ public class OceanShadingSetting : ScriptableObject
     { HighLightExp = 1 , HighLightBost  = 0};
 
 
-    public Texture FoamCapTex;
+
 
     public Texture FoamTrailTex;
+
+    public Texture OceanDepthRampTex;
 }

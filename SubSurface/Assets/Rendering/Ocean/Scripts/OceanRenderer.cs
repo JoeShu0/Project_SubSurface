@@ -439,12 +439,14 @@ public class OceanRenderer :MonoBehaviour
             0.0f,0.0f
             ));
         
+
         //////////////////////
         //Asigning textures 
         Shader.SetGlobalTexture("_DispTexArray", ORS.LODDisplaceMapsArray);
         Shader.SetGlobalTexture("_NormalTexArray", ORS.LODNormalMapsArray);
         Shader.SetGlobalTexture("_FoamTrailTexture", OSS.FoamTrailTex);
-
+        //这是给ocean里面的物件使用的
+        Shader.SetGlobalTexture("_OceanDepthRamp", OSS.OceanDepthRampTex);
         //Shader.SetGlobalTexture(detailNormalId, ORS.OceanDetailNoise);
     }
 

@@ -19,7 +19,7 @@ struct Attributes
 
 struct Varyings
 {
-	float4 positionCS_SS : SV_POSITION;
+	float4 positionCS : SV_POSITION;
 	float2 baseUV : VAR_BASE_UV;
 	float2 detailUV : VAR_DETAIL_UV;
 };
@@ -32,7 +32,7 @@ Varyings MetaPassVertex(Attributes input)
 	input.positionOS.xy =
 		input.lightMapUV * unity_LightmapST.xy + unity_LightmapST.zw;
 	input.positionOS.z = input.positionOS.z > 0.0 ? FLT_MIN : 0.0;
-	output.positionCS_SS = TransformWorldToHClip(input.positionOS);
+	output.positionCS = TransformWorldToHClip(input.positionOS);
 
 	//transform UV based on permaterial ST
 	output.baseUV = TransformBaseUV(input.baseUV);
@@ -44,7 +44,7 @@ Varyings MetaPassVertex(Attributes input)
 float4 MetaPassFragment(Varyings input) : SV_TARGET
 {
 	//use the new packed config instead of UV
-	InputConfig config = GetInputConfig(input.positionCS_SS, input.baseUV, input.detailUV);
+	InputConfig config = GetInputConfig(input.positionCS, input.baseUV, input.detailUV);
 
 	//get the basemap * basecolor + Detail color
 	float4 base = GetBase(config);

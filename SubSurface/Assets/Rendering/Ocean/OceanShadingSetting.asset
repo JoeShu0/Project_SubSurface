@@ -45,5 +45,5 @@ MonoBehaviour:
   highlights:
     HighLightExp: 86.8
     HighLightBost: 0
-  FoamCapTex: {fileID: 0}
   FoamTrailTex: {fileID: 2800000, guid: 541cfcc1e6b36144d80a23e8bc729c56, type: 3}
+  OceanDepthRampTex: {fileID: 2800000, guid: d8bcbd3317d990247bffb96dbe0a1559, type: 3}

@@ -6,6 +6,7 @@
 #define INPUT_PROP(name) UNITY_ACCESS_INSTANCED_PROP(UnityPerMaterial, name)
 
 TEXTURE2D(_BaseMap);
+TEXTURE2D(_NormalMap);
 TEXTURE2D(_MaskMap);
 TEXTURE2D(_EmissionMap);
 SAMPLER(sampler_BaseMap);
@@ -15,7 +16,8 @@ TEXTURE2D(_DetailNormalMap);
 SAMPLER(sampler_DetailMap);
 
 
-TEXTURE2D(_NormalMap);
+TEXTURE2D(_OceanDepthRamp);
+SAMPLER(sampler_OceanDepthRamp);
 
 TEXTURE2D(_CameraOceanDepthTexture);
 SAMPLER(sampler_CameraOceanDepthTexture);
@@ -179,6 +181,13 @@ float GetFinalAlpha(float alpha)
 {
 	//if the material write depth, Alpha should be 1
 	return INPUT_PROP(_ZWrite) ? 1.0 : alpha;
+}
+
+float4 GetDepthRampColor(float DepthGap)
+{
+    float2 DepthRampUV = float2(DepthGap, 0.5);
+    float4 map = SAMPLE_TEXTURE2D(_OceanDepthRamp, sampler_OceanDepthRamp, DepthRampUV);
+    return map;
 }
 
 #endif

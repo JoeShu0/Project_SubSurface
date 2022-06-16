@@ -18,7 +18,7 @@ struct Attributes
 
 struct Varyings
 {
-	float4 positionCS_SS : SV_POSITION;
+	float4 positionCS : SV_POSITION;
 #if defined(_VERTEX_COLORS)
 	float4 color : VAR_COLOR;
 #endif
@@ -46,7 +46,7 @@ Varyings UnlitPassVertex(Attributes input)
 #endif
 
 	float3 positionWS = TransformObjectToWorld(input.positionOS);
-	output.positionCS_SS = TransformWorldToHClip(positionWS);//SS = screen space
+	output.positionCS = TransformWorldToHClip(positionWS);//SS = screen space
 	//transfer normal
 	output.normalWS = TransformObjectToWorldNormal(input.normalOS);
 
@@ -62,7 +62,7 @@ float4 UnlitPassFragment(Varyings input) : SV_TARGET
 	UNITY_SETUP_INSTANCE_ID(input);
 
 	//use the new packed config instead of UV
-	InputConfig config = GetInputConfig(input.positionCS_SS, input.baseUV);
+	InputConfig config = GetInputConfig(input.positionCS, input.baseUV);
 
 	//return GetBufferColor(config.fragment, 0.05);
 	//return float4(config.fragment.bufferDepth.xxx / 20.0, 1.0);

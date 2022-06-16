@@ -8,7 +8,7 @@
 #include "../ShaderLib/GI.hlsl"
 #include "../ShaderLib/Lighting.hlsl"
 
-#include "../../Ocean/ShaderLib/Expofog.hlsl"
+//#include "../../Ocean/ShaderLib/Expofog.hlsl"
 
 struct Attributes
 {
@@ -22,7 +22,7 @@ struct Attributes
 
 struct Varyings
 {
-	float4 positionCS_SS : SV_POSITION;
+	float4 positionCS : SV_POSITION;
 	float2 baseUV : VAR_BASE_UV;
 	float2 detailUV : VAR_DETAIL_UV;
 	float3 normalWS : VAR_NORMAL;
@@ -54,7 +54,7 @@ Varyings LitPassVertex(Attributes input)
 	#endif
 
 	output.positionWS = TransformObjectToWorld(input.positionOS);
-	output.positionCS_SS = TransformWorldToHClip(output.positionWS);
+	output.positionCS = TransformWorldToHClip(output.positionWS);
 
 	//transfer normal
 	output.normalWS = TransformObjectToWorldNormal(input.normalOS);
@@ -65,7 +65,7 @@ Varyings LitPassVertex(Attributes input)
 	#endif
 
 	//#define COMPUTE_DEPTH_01 -(mul( UNITY_MATRIX_MV, v.vertex ).z * _ProjectionParams.w)
-	output.depth01 = 1+TransformWorldToView(output.positionWS).z * _ProjectionParams.w;
+	output.depth01 = 1 + TransformWorldToView(output.positionWS).z * _ProjectionParams.w;
 
 	return output;
 }
@@ -75,11 +75,11 @@ float4 LitPassFragment(Varyings input) : SV_TARGET
 	//Setup the instance ID for Input
 	UNITY_SETUP_INSTANCE_ID(input);
 	//ocean depth comparasion
-	float OceanDepth10 = LOAD_TEXTURE2D(_CameraOceanDepthTexture, input.positionCS_SS.xy).a;
-	float OceanDepthDelta = input.depth01 - OceanDepth10;
+	//float OceanDepth10 = LOAD_TEXTURE2D(_CameraOceanDepthTexture, input.positionCS.xy).a;
+	//float OceanDepthDelta = input.depth01 - OceanDepth10;
 
 	//use the new packed config instead of UV
-	InputConfig config = GetInputConfig(input.positionCS_SS, input.baseUV, input.detailUV);
+	InputConfig config = GetInputConfig(input.positionCS, input.baseUV, input.detailUV);
 	#if defined(_MASK_MAP)
 		config.useMask = true;
 	#endif
@@ -143,23 +143,61 @@ float4 LitPassFragment(Varyings input) : SV_TARGET
 */	 
 	
 	
-	//float depth10 = 1 - (input.positionCS_SS.w - _ProjectionParams.y) / (_ProjectionParams.z - _ProjectionParams.y);
+	//float depth10 = 1 - (input.positionCS.w - _ProjectionParams.y) / (_ProjectionParams.z - _ProjectionParams.y);
 	//return float4(-OceanDepthDelta*100000, 0.0, 0.0, 1.0);
 
 	//if (OceanDepthDelta < 0)
 	//{
 		//return float4(1.0, 0.0, 0.0, GetFinalAlpha(surface.alpha));
 	//}
+	
+    float3 viewDirection = surface.viewDirection;
 
+    float4 OceanDepthTexValue = LOAD_TEXTURE2D(_CameraOceanDepthTexture, input.positionCS.xy);
+    float OceanSurfaceDepth10 = OceanDepthTexValue.a;
+    float OceanSurfaceFacing = OceanDepthTexValue.y;
+	
+	
+    float pixelDepth = LinearEyeDepth(input.positionCS.z, _ZBufferParams);
+    float pixelDepth01 = Linear01Depth(input.positionCS.z, _ZBufferParams);
+    float pixelDepth10 = 1 - Linear01Depth(input.positionCS.z, _ZBufferParams);
+	
+    //float depthGap = saturate(-(OceanDepth - pixelDepth) * 0.02); //10米最深
+    //float4 RampValue = GetDepthRampColor(depthGap);
+    //return RampValue;
+	
+	/*
 	float4 OceanDelta01 = 
 		GetWaterTempBlendValue(
-			input.positionCS_SS.xy, 
+			input.positionCS.xy, 
 			input.depth01, 
-			surface.viewDirection);
+			surface.viewDirection);*/
+	
+    
+	
+    float OceanDepthDelta = 0;
+    if (OceanSurfaceDepth10 == 0.0)//BG is inifinte far or sky
+    {
+        OceanDepthDelta = (-viewDirection.y >= 0) ? 0.0 : pixelDepth01;
+		//OceanDepthDelta = 1.0;
+    }
+    else
+    {
+		//float A = viewDirection.y >= 0 ?
+		
+		OceanDepthDelta = (OceanSurfaceFacing > 0.0) ? OceanSurfaceDepth10 - pixelDepth10 : pixelDepth01;
+        //OceanDepthDelta = saturate(-OceanDepthDelta); //10米最深
+
+    }
+	
+    //float FarNearDistance = -(1 / (_ZBufferParams.z + _ZBufferParams.w) - 1 / _ZBufferParams.w);
+	
+    float4 RampValue = GetDepthRampColor(OceanDepthDelta);
+    return OceanDepthDelta * 10000;
 	
 	//float4 OceanDelta01 = clamp(-OceanDepthDelta*2000, 0.0, 1.0);
 	
-	return lerp(float4(color, GetFinalAlpha(surface.alpha)),float4(_DarkColor.rgb, GetFinalAlpha(surface.alpha)), OceanDelta01);
+	//return lerp(float4(color, GetFinalAlpha(surface.alpha)),float4(_DarkColor.rgb, GetFinalAlpha(surface.alpha)), OceanDelta01);
 }
 
 #endif

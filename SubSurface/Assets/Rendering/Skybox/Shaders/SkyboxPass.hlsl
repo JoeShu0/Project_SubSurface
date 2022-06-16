@@ -10,7 +10,7 @@ struct Attributes
 
 struct Varyings
 {
-    float4 positionCS_SS : SV_POSITION;
+    float4 positionCS : SV_POSITION;
     float4 positionLS : VAR_LOCALPOS;
     //float4 DebugColor : VertexDebug;
 	//half facing : VFACE;
@@ -20,7 +20,7 @@ Varyings SkyboxVertex(Attributes input)
 {
     Varyings output;
     float3 positionWS = TransformObjectToWorld(input.positionOS);
-    output.positionCS_SS = TransformWorldToHClip(positionWS);
+    output.positionCS = TransformWorldToHClip(positionWS);
     output.positionLS = float4(input.positionOS, 1.0);
     return output;
 }

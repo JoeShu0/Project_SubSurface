@@ -29,8 +29,10 @@ public partial class CameraRenderer
     static int colorTextureId = Shader.PropertyToID("_CameraColorTexture");
     static int depthTextureId = Shader.PropertyToID("_CameraDepthTexture");
     static int sourceTextureId = Shader.PropertyToID("_SourceTexture");
-
+    
+    //Ocean 相关的贴图
     static int oceanDepthTextureId = Shader.PropertyToID("_CameraOceanDepthTexture");
+    //static int oceanDepthTextureId = Shader.PropertyToID("_CameraOceanDepthTexture");
 
     static int srcBlendId = Shader.PropertyToID("_CameraSrcBlend");
     static int dstBlendId = Shader.PropertyToID("_CameraDstBlend");
