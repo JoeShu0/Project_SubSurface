@@ -28,10 +28,10 @@ Varyings SkyboxVertex(Attributes input)
 float4 SkyboxFragment(Varyings input) : SV_TARGET
 {
     half3 col = normalize(input.positionLS.xyz);
-    /*
+    
     half Upper = step(0, input.positionLS.y);
     col = Upper * col + (1 - Upper) * _DarkColor;
-    
+    /*
     float4 OceanDepthTexValue = LOAD_TEXTURE2D(_CameraOceanDepthTexture, input.positionCS.xy);
     float OceanSurfaceDepth10 = OceanDepthTexValue.a;
     float OceanSurfaceFacing = OceanDepthTexValue.y;
@@ -52,7 +52,9 @@ float4 SkyboxFragment(Varyings input) : SV_TARGET
     float4 RampValue = GetDepthRampColor(OceanDepthDelta * 2000);
     //return float4(RampValue.rgb * col.rgb, 1.0);
     */
-    return half4(col, 1.0);
+    
+    float3 RampValue = GetDepthRampColor(1.0).rgb;
+    return half4(col * RampValue, 1.0);
 }
 
 #endif

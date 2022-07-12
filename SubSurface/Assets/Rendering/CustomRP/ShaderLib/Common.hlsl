@@ -84,4 +84,31 @@ float3 NormalTangentToWorld (float3 normalTS, float3 normalWS, float4 tangentWS)
 	return TransformTangentToWorld(normalTS, tangentToWorld);
 }
 
+bool IsPerspectiveProjection()
+{
+    return (unity_OrthoParams.w == 0);
+}
+
+// Returns the forward (central) direction of the current view in the world space.
+float3 GetViewForwardDir()
+{
+    float4x4 viewMat = UNITY_MATRIX_V;
+    return -viewMat[2].xyz;
+}
+
+half3 GetWorldSpaceNormalizeViewDir(float3 positionWS)
+{
+    if (IsPerspectiveProjection())
+    {
+        // Perspective
+        float3 V = _WorldSpaceCameraPos - positionWS;
+        return half3(normalize(V));
+    }
+    else
+    {
+        // Orthographic
+        return half3(-GetViewForwardDir());
+    }
+}
+
 #endif

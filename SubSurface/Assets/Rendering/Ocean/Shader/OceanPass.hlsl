@@ -213,6 +213,12 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	float3 normalWS = DetailTangentNormalToWorld(DetailTangentNormal, baseNormalWS);
     //float3 normalWS = baseNormalWS;
 	
+	//---Lerp Transparency
+    half3 viewDirWS = normalize(GetWorldSpaceNormalizeViewDir(input.positionWS));
+    half NoV = saturate(dot(normalWS, viewDirWS));
+    half fresnelTerm = pow(1.0 - NoV, 4);
+    //_Translucency * (1 - fresnelTerm));
+	
 	
 	//Waht do we need
 	//banding color on Water surface with foam(color changes based on sun and other lights
@@ -237,7 +243,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	surface.dither = InterleavedGradientNoise(input.positionCS.xy, 0);
 	surface.renderingLayerMask = asuint(unity_RenderingLayer.x);// treat float as uint
 	surface.foamMask = foamMask;
-	surface.transparency = 0.5f;
+    surface.transparency = 0.8f * (1 - fresnelTerm);
 	surface.smoothness = 0.9f;
 
 	TRDF trdf = GetTRDF(surface);
@@ -256,7 +262,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	//return float4(INPUT_PROP(_BaseColor).rgb, 0.5);
 	
 	//Basic lighting
-	float4 color = float4(surface.normal,1- surface.transparency);
+	//float4 color = float4(surface.normal,1- surface.transparency);
 	
 	//return float4(foam,0.0f,0.0f, 1.0f);
 	
