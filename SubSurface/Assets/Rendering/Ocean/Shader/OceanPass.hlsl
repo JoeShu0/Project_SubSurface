@@ -237,7 +237,7 @@ float4 OceanPassFragment(Varyings input) : SV_TARGET
 	surface.dither = InterleavedGradientNoise(input.positionCS.xy, 0);
 	surface.renderingLayerMask = asuint(unity_RenderingLayer.x);// treat float as uint
 	surface.foamMask = foamMask;
-	surface.transparency = 1.0f;
+	surface.transparency = 0.5f;
 	surface.smoothness = 0.9f;
 
 	TRDF trdf = GetTRDF(surface);

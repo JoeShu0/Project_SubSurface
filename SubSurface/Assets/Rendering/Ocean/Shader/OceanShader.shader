@@ -64,8 +64,6 @@
         {
             Tags
             {
-            //make the back face of water surface not transparent
-            //only direct light and Indirect light
             "LightMode" = "OceanShadingBack"
         }
 
@@ -101,7 +99,7 @@
             Blend One Zero
             ZWrite On
             Cull Back
-            ZTest Less//the front and back surface are to close, culling may fail
+            ZTest LEqual//the front and back surface are to close, culling may fail
             //Cull Back
             HLSLPROGRAM
             #pragma target 4.0
@@ -134,7 +132,7 @@
             Blend One Zero
             ZWrite On
             Cull Front
-            ZTest Less//the front and back surface are to close, culling may fail
+            ZTest LEqual//the front and back surface are to close, culling may fail
             //Cull Back
             HLSLPROGRAM
             #pragma target 4.0

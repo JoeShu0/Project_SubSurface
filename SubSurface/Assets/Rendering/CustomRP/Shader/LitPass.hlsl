@@ -158,22 +158,8 @@ float4 LitPassFragment(Varyings input) : SV_TARGET
     float OceanSurfaceFacing = OceanDepthTexValue.y;
 	
 	
-    float pixelDepth = LinearEyeDepth(input.positionCS.z, _ZBufferParams);
     float pixelDepth01 = Linear01Depth(input.positionCS.z, _ZBufferParams);
-    float pixelDepth10 = 1 - Linear01Depth(input.positionCS.z, _ZBufferParams);
-	
-    //float depthGap = saturate(-(OceanDepth - pixelDepth) * 0.02); //10米最深
-    //float4 RampValue = GetDepthRampColor(depthGap);
-    //return RampValue;
-	
-	/*
-	float4 OceanDelta01 = 
-		GetWaterTempBlendValue(
-			input.positionCS.xy, 
-			input.depth01, 
-			surface.viewDirection);*/
-	
-    
+    float pixelDepth10 = 1 - pixelDepth01;
 	
     float OceanDepthDelta = 0;
     if (OceanSurfaceDepth10 == 0.0)//BG is inifinte far or sky
@@ -192,8 +178,8 @@ float4 LitPassFragment(Varyings input) : SV_TARGET
 	
     //float FarNearDistance = -(1 / (_ZBufferParams.z + _ZBufferParams.w) - 1 / _ZBufferParams.w);
 	
-    float4 RampValue = GetDepthRampColor(OceanDepthDelta);
-    return OceanDepthDelta * 10000;
+    float4 RampValue = GetDepthRampColor(OceanDepthDelta * 2000);
+    return float4(RampValue.rgb * color.rgb, 1.0);
 	
 	//float4 OceanDelta01 = clamp(-OceanDepthDelta*2000, 0.0, 1.0);
 	
